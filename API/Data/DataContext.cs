@@ -1,4 +1,5 @@
-﻿using API.Entities;
+﻿using System.Collections.Immutable;
+using API.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
@@ -19,8 +20,7 @@ namespace API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<TeamMember>().HasNoKey();
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Team>().HasData(new Team {Id = 1, Name = "Test Team"});
         }
     }
 }

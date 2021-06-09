@@ -10,6 +10,5 @@ namespace API.Entities
         public DateTime PostTime { get; set; }
         public User Author { get; set; }
         public Status PostStatus { get; set; }
-        
     }
 }

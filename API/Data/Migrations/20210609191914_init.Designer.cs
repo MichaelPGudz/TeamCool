@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace API.Data.Migrations
+namespace API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210609183714_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20210609191914_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -63,7 +63,7 @@ namespace API.Data.Migrations
                     b.Property<DateTime>("PostTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("WallId")
+                    b.Property<int>("WallId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -148,13 +148,17 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.TeamMember", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("RoleId")
                         .HasColumnType("int");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("RoleId");
 
@@ -212,11 +216,15 @@ namespace API.Data.Migrations
                         .WithMany()
                         .HasForeignKey("AuthorId");
 
-                    b.HasOne("API.Entities.Wall", null)
+                    b.HasOne("API.Entities.Wall", "Wall")
                         .WithMany("Posts")
-                        .HasForeignKey("WallId");
+                        .HasForeignKey("WallId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Author");
+
+                    b.Navigation("Wall");
                 });
 
             modelBuilder.Entity("API.Entities.Role", b =>

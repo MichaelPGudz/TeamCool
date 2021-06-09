@@ -9,7 +9,7 @@ namespace API.Entities
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public List<Team> MyTeams { get; set; }
-        public List<Skill> MySkills { get; set; }
+        public ICollection<Team> MyTeams { get; set; }
+        public ICollection<Skill> MySkills { get; set; }
     }
 }
