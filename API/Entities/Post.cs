@@ -1,4 +1,5 @@
 ﻿using System;
+using API.Utils;
 
 namespace API.Entities
 {
@@ -8,7 +9,7 @@ namespace API.Entities
         public string PostContent { get; set; }
         public DateTime PostTime { get; set; }
         public User Author { get; set; }
-        public string PostStatus { get; set; }
+        public Status PostStatus { get; set; }
         
     }
 }
