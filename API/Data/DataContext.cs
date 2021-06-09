@@ -5,9 +5,22 @@ namespace API.Data
 {
     public class DataContext : DbContext
     {
-        public DataContext(DbContextOptions options) : base(options)
+        public DataContext(DbContextOptions options) : base(options)    
         {
         }
-        public DbSet<AppUser> Users { get; set; }
+        public DbSet<Feature> Features { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Skill> Skills { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<TeamMember> TeamMembers { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Wall> Walls { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<TeamMember>().HasNoKey();
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
