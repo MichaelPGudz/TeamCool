@@ -1,7 +1,10 @@
 using System.Linq;
+using System.Threading.Tasks;
 using API.DAOs.Interfaces;
 using API.Data;
 using API.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace API.DAOs
 {
@@ -16,7 +19,11 @@ namespace API.DAOs
 
         public Team GetById(int id) => _dataContext.Teams.FirstOrDefault(team => team.Id == id);
 
-        public void Add(Team newOne) => _dataContext.Teams.Add(newOne);
+        public async Task<int> Add(Team newOne)
+        {
+            await _dataContext.Teams.AddAsync(newOne);
+            return await _dataContext.SaveChangesAsync();
+        }
 
         public void Remove(Team team) => _dataContext.Teams.Remove(team);
     }

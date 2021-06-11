@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using API.DAOs.Interfaces;
 using API.Data;
 using API.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace API.DAOs
 {
@@ -24,7 +26,11 @@ namespace API.DAOs
                 .FirstOrDefault(x => x.Id == id);
         }
 
-        public void Add(User newOne) => _dataContext.Users.Add(newOne);
+        public async Task<int> Add(User newOne)
+        {
+            await _dataContext.Users.AddAsync(newOne);
+            return await _dataContext.SaveChangesAsync();
+        }
 
         public void Remove(User toRemove) => _dataContext.Users.Remove(toRemove);
 

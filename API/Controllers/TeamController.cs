@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using API.DAOs.Interfaces;
 using API.Entities;
@@ -14,10 +15,16 @@ namespace API.Controllers
             _teamDao = teamDao;
         }
 
-        [HttpGet("{id:int}")]
-        public Team GetTeamById(int id) => _teamDao.GetById(id);
-        
-        
+        [HttpGet("{id}")]
+        public Team GetById(int id) => _teamDao.GetById(id);
+
+        [HttpPost("AddNewTeam")]
+        public async Task<IActionResult> AddNewTeam(Team newTeam)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+            var result = await _teamDao.Add(newTeam);
+            return Ok();
+        }
 
     }
 }
