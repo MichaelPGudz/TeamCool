@@ -1,4 +1,5 @@
-﻿using System.Collections.Immutable;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 using API.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,7 +22,12 @@ namespace API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Team>().HasData(new Team {Id = 1, Name = "Test Team"});
+            modelBuilder.Entity<Team>()
+                .HasData(new Team
+                {
+                    Id = 1,
+                    Name = "Test Team"
+                });
         }
     }
 }
