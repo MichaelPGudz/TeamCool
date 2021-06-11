@@ -32,10 +32,16 @@ namespace API.DAOs
         {
             return _dataContext.Users.Where(u => u.Id == id).Select(u => u.MySkills);
         }
-
+        
         public IQueryable<ICollection<Team>> GetUserTeams(int id)
         {
-            return _dataContext.Users.Where(u => u.Id == id).Select(u => u.MyTeams);
+            return _dataContext.Users
+                .Where(x => x.Id == id)
+                .SelectMany(x => x.MyTeams)
+                .GroupBy(x => x.Team)
+                .Select(x => x.Key)
+                .Cast<ICollection<Team>>();
+
         }
     }
 }
