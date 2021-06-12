@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using API.DAOs.Interfaces;
 using API.Data;
 using API.Entities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
@@ -18,12 +19,12 @@ namespace API.DAOs
             _dataContext = dataContext;
         }
 
-        public User GetById(int id)
+        public async Task<ActionResult<User>> GetById(int id)
         {
-            return _dataContext.Users
+            return await _dataContext.Users
                 .Include(x => x.MySkills)
                 .Include(y => y.MyTeams)
-                .FirstOrDefault(x => x.Id == id);
+                .FirstAsync(x => x.Id == id);
         }
 
         public async Task<int> Add(User newOne)

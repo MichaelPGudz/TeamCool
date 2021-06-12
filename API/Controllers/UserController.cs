@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using API.DAOs.Interfaces;
 using API.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ namespace API.Controllers
         }
         
         [HttpGet("GetUserById/{id}")]
-        public User GetUserById(int id) => _userDao.GetById(id);
+        public async Task<ActionResult<User>> GetUserById(int id) => await _userDao.GetById(id);
         
         [HttpGet("GetSkillsForUser/{id}")]
         public IQueryable<ICollection<Skill>> GetSkillsForUser(int id) => _userDao.GetUserSkills(id);

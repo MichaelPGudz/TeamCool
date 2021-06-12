@@ -19,7 +19,16 @@ namespace API.DAOs
             _dataContext = dataContext;
         }
 
-        public Team GetById(int id) => _dataContext.Teams.Include(x => x.ChildTeams).FirstOrDefault(team => team.Id == id);
+        public async Task<ActionResult<Team>> GetById(int id)
+        {
+            var team = await _dataContext.Teams.FindAsync(id);
+            if (team != null)
+            { 
+                await _dataContext.Entry(team).Collection(i => i.ChildTeams).LoadAsync();
+            }
+
+            return team;
+        } 
 
         public async Task<int> Add(Team newOne)
         {
@@ -27,10 +36,8 @@ namespace API.DAOs
             return await _dataContext.SaveChangesAsync();
         }
 
-        public async Task<int> AddChildTeam(Team childTeam, int parentId)
+        public async Task<int> AddChildTeam(Team childTeam, Team parentTeam)
         {
-            var parentTeam = GetById(parentId);
-
             if (parentTeam.ChildTeams == null)
             {
                 parentTeam.ChildTeams = new List<Team> {childTeam};
@@ -45,6 +52,16 @@ namespace API.DAOs
             return await _dataContext.SaveChangesAsync();
         }
 
-        public void Remove(Team team) => _dataContext.Teams.Remove(team);
+        public async Task<int> EditTeam(Team team)
+        {
+            _dataContext.Update(team);
+            return await _dataContext.SaveChangesAsync();
+        }
+
+        public void Remove(Team team)
+        {
+            _dataContext.Teams.Remove(team);
+            _dataContext.SaveChanges();
+        }
     }
 }
