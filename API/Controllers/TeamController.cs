@@ -136,8 +136,6 @@ namespace API.Controllers
                 team.Value.Members.Add(teamMember);
                 
                 await _teamMemberDao.Add(teamMember);
-                await _userDao.Edit(user.Value);
-                await _teamDao.Edit(team.Value);
             }
             catch (Exception)
             {
