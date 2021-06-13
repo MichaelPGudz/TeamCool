@@ -34,6 +34,11 @@ namespace API.DAOs
         }
 
         public void Remove(User toRemove) => _dataContext.Users.Remove(toRemove);
+        public Task<int> Edit(User toEdit)
+        {
+            _dataContext.Users.Update(toEdit);
+             return _dataContext.SaveChangesAsync();
+        }
 
         public IQueryable<ICollection<Skill>> GetUserSkills(int id)
         {

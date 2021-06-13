@@ -14,10 +14,15 @@ namespace API.Controllers
     public class TeamController : BaseApiController
     {
         private readonly ITeamDao _teamDao;
+        private readonly IUserDao _userDao;
+        private readonly ITeamMemberDao _teamMemberDao;
 
-        public TeamController(ITeamDao teamDao)
+        public TeamController(ITeamDao teamDao, IUserDao userDao, ITeamMemberDao teamMemberDao)
         {
             _teamDao = teamDao;
+            _userDao = userDao;
+            _teamMemberDao = teamMemberDao;
+
         }
 
         [HttpGet("{id}")]
@@ -82,7 +87,7 @@ namespace API.Controllers
             {
                 var team = await _teamDao.GetById(id);
                 team.Value.Name = editedTeam.Name;
-                await _teamDao.EditTeam(team.Value);
+                await _teamDao.Edit(team.Value);
                 return Ok();
             }
             catch (Exception)
@@ -108,6 +113,38 @@ namespace API.Controllers
             {
                 return BadRequest();
             }
+        }
+        [HttpPost("{teamId}/AddTeamMember/{userId}")]
+        public async Task<IActionResult> AddTeamMember(int teamId, int userId, Role role)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+                var team = await _teamDao.GetById(teamId);
+                var user = await _userDao.GetById(userId);
+                
+                var teamMember = new TeamMember
+                {
+                    Role = role,
+                    Team = team.Value,
+                    User = user.Value
+                };
+                user.Value.MyTeams.Add(teamMember);
+                team.Value.Members.Add(teamMember);
+                
+                await _teamMemberDao.Add(teamMember);
+                await _userDao.Edit(user.Value);
+                await _teamDao.Edit(team.Value);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
         }
     }
 }

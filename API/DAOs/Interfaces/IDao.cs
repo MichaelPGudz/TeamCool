@@ -12,6 +12,8 @@ namespace API.DAOs.Interfaces
         Task<int> Add(T newOne);
         
         void Remove(T toRemove);
-        
+
+        Task<int> Edit(T toEdit);
+
     }
 }

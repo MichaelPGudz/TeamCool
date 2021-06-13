@@ -28,6 +28,20 @@ namespace API.Data
                     Id = 1,
                     Name = "Test Team"
                 });
+            modelBuilder.Entity<User>()
+                .HasData(new User
+                {
+                    Id = 1,
+                    FirstName = "Admin",
+                    LastName = "Adminowski",
+                });
+            modelBuilder.Entity<User>()
+                .HasData(new User
+                {
+                    Id = 2,
+                    FirstName = "User",
+                    LastName = "Userowski",
+                });
         }
     }
 }

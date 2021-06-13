@@ -22,9 +22,15 @@ namespace API.DAOs
         public async Task<ActionResult<Team>> GetById(int id)
         {
             var team = await _dataContext.Teams.FindAsync(id);
+            
             if (team != null)
-            { 
+            {
                 await _dataContext.Entry(team).Collection(i => i.ChildTeams).LoadAsync();
+                await _dataContext.Entry(team).Collection(i => i.Members)
+                    .Query()
+                    .Include(i => i.User)
+                    .Include(i => i.Role)
+                    .LoadAsync();
             }
 
             return team;
@@ -52,7 +58,7 @@ namespace API.DAOs
             return await _dataContext.SaveChangesAsync();
         }
 
-        public async Task<int> EditTeam(Team team)
+        public async Task<int> Edit(Team team)
         {
             _dataContext.Update(team);
             return await _dataContext.SaveChangesAsync();
