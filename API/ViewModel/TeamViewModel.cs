@@ -7,6 +7,7 @@ namespace API.ViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Path { get; set; }
         public ICollection<TeamViewModel> ChildTeams { get; set; }
     }
 }

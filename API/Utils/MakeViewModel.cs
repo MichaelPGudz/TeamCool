@@ -12,6 +12,7 @@ namespace API.Utils
             {
                 Name = team.Name,
                 Id = team.Id,
+                Path = Consts.TeamPath + team.Id,
                 ChildTeams = new List<TeamViewModel>()
             };
 
