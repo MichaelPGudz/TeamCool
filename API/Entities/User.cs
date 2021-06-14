@@ -10,6 +10,6 @@ namespace API.Entities
         public string Email { get; set; }
         public string Password { get; set; }
         public ICollection<TeamMember> MyTeams { get; set; }
-        public ICollection<Skill> MySkills { get; set; }
+        public ICollection<UserSkill> UserSkills { get; set; }
     }
 }

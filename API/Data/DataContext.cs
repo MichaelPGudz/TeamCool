@@ -17,11 +17,25 @@ namespace API.Data
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<TeamMember> TeamMembers { get; set; }
+        public DbSet<UserSkill> UserSkills { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Wall> Walls { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<UserSkill>()
+                .HasKey(bc => new { bc.UserId, bc.SkillId });  
+            modelBuilder.Entity<UserSkill>()
+                .HasOne(bc => bc.User)
+                .WithMany(b => b.UserSkills)
+                .HasForeignKey(bc => bc.UserId);  
+            modelBuilder.Entity<UserSkill>()
+                .HasOne(bc => bc.Skill)
+                .WithMany(c => c.UserSkills)
+                .HasForeignKey(bc => bc.SkillId);
+            
+            
+            
             modelBuilder.Entity<Team>()
                 .HasData(new Team
                 {

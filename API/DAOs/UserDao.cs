@@ -29,6 +29,10 @@ namespace API.DAOs
                     .Query()
                     .Include(i => i.Team)
                     .LoadAsync();
+                await _dataContext.Entry(user).Collection(i => i.UserSkills)
+                    .Query()
+                    .Include(i => i.Skill)
+                    .LoadAsync();
             }
 
             return user;
@@ -47,11 +51,12 @@ namespace API.DAOs
              return _dataContext.SaveChangesAsync();
         }
 
-        public IQueryable<ICollection<Skill>> GetUserSkills(int id)
+        public List<UserSkill> GetUserSkills(int id)
         {
-            return _dataContext.Users.Where(u => u.Id == id).Select(u => u.MySkills);
+            return _dataContext.UserSkills.Include(x => x.Skill).Where(x => x.UserId == id).ToList();
         }
         
+
         public IQueryable<ICollection<Team>> GetUserTeams(int id)
         {
             return _dataContext.Users
