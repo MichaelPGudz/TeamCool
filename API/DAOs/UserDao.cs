@@ -22,10 +22,10 @@ namespace API.DAOs
 
         public async Task<ActionResult<User>> GetById(int id)
         {
-           return _dataContext.Users
+           return  await _dataContext.Users
                .Include(x => x.MySkills)
                .Include(y => y.MyTeams).ThenInclude(x => x.Team)
-               .FirstOrDefault(x => x.Id == id);
+               .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<int> Add(User newOne)
