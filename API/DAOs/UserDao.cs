@@ -51,20 +51,15 @@ namespace API.DAOs
              return _dataContext.SaveChangesAsync();
         }
 
-        public List<UserSkill> GetUserSkills(int id)
+        public List<Skill> GetUserSkills(int id)
         {
-            return _dataContext.UserSkills.Include(x => x.Skill).Where(x => x.UserId == id).ToList();
+            return _dataContext.UserSkills.Where(user => user.UserId == id).Select(c => c.Skill).ToList();
         }
         
 
-        public IQueryable<ICollection<Team>> GetUserTeams(int id)
+        public List<Team> GetUserTeams(int id)
         {
-            return _dataContext.Users
-                .Where(x => x.Id == id)
-                .SelectMany(x => x.MyTeams)
-                .GroupBy(x => x.Team)
-                .Select(x => x.Key)
-                .Cast<ICollection<Team>>();
+            return _dataContext.TeamMembers.Where(user => user.Id == id).Select(c => c.Team).ToList();
 
         }
     }

@@ -6,7 +6,7 @@ namespace API.DAOs.Interfaces
 {
     public interface IUserDao: IDao<User>
     {
-        public List<UserSkill> GetUserSkills(int id);
-        public IQueryable<ICollection<Team>> GetUserTeams(int id);
+        public List<Skill> GetUserSkills(int id);
+        public List<Team> GetUserTeams(int id);
     }
 }

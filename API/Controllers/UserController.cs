@@ -20,9 +20,9 @@ namespace API.Controllers
         public async Task<ActionResult<User>> GetUserById(int id) => await _userDao.GetById(id);
         
         [HttpGet("GetSkillsForUser/{id}")]
-        public List<UserSkill> GetSkillsForUser(int id) => _userDao.GetUserSkills(id);
+        public List<Skill> GetSkillsForUser(int id) => _userDao.GetUserSkills(id);
         
         [HttpGet("GetTeamsForUser/{id}")]
-        public IQueryable<ICollection<Team>> GetTeamsForUser(int id) => _userDao.GetUserTeams(id);
+        public List<Team> GetTeamsForUser(int id) => _userDao.GetUserTeams(id);
     }
 }
