@@ -1,0 +1,6 @@
+1) Open PostMan.
+2) Enter Collections Tab.
+3) Press Import at the Top of the Right Corner of the Scratch Pad.
+4) At the newly opened window Drag & Drop the Project's postman_collection.json File and Press Orange Import button at the bottom of the window.
+5) Now you can find all Endpoints for the given Controller in one Place. Also don't hesitate to add new ones!
+6) ENJOY! :)
