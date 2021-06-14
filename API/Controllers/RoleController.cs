@@ -16,7 +16,7 @@ namespace API.Controllers
             _roleDao = roleDao;
         }
         
-        [HttpPost("/AddRole")]
+        [HttpPost("AddRole")]
         public async Task<IActionResult> AddRole(Role role)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -24,10 +24,10 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpGet("/GetAll")]
+        [HttpGet("GetAll")]
         public ICollection<Role> GetAll() => _roleDao.GetAll();
 
-        [HttpGet("/{roleId}")]
+        [HttpGet("{roleId}")]
         public Task<ActionResult<Role>> GetById(int roleId)
         {
             return _roleDao.GetById(roleId);
