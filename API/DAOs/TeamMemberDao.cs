@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using API.DAOs.Interfaces;
 using API.Data;
@@ -32,6 +34,11 @@ namespace API.DAOs
         {
             _dataContext.TeamMembers.Update(toEdit);
             return await _dataContext.SaveChangesAsync();
+        }
+
+        public ICollection<TeamMember> GetTeamMembersForTeam(int teamId)
+        {
+            return _dataContext.TeamMembers.Where(t => t.Team.Id == teamId).ToList();
         }
     }
 }

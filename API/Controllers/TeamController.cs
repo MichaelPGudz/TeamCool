@@ -24,7 +24,6 @@ namespace API.Controllers
             _userDao = userDao;
             _teamMemberDao = teamMemberDao;
             _roleDao = roleDao;
-
         }
 
         [HttpGet("{id}")]
@@ -35,8 +34,9 @@ namespace API.Controllers
             {
                 return NotFound();
             }
+
             var teamView = MakeViewModel.MakeTeamViewModel(team.Value);
-            
+
             return teamView;
         }
 
@@ -66,13 +66,14 @@ namespace API.Controllers
                 {
                     return NotFound();
                 }
+
                 await _teamDao.AddChildTeam(childTeam, parentTeam.Value);
             }
             catch (Exception)
             {
                 return BadRequest();
             }
-            
+
 
             return Ok();
         }
@@ -84,7 +85,7 @@ namespace API.Controllers
             {
                 return BadRequest();
             }
-            
+
             try
             {
                 var team = await _teamDao.GetById(id);
@@ -108,6 +109,7 @@ namespace API.Controllers
                 {
                     return NotFound();
                 }
+
                 _teamDao.Remove(team.Value);
                 return Ok();
             }
@@ -116,27 +118,24 @@ namespace API.Controllers
                 return BadRequest();
             }
         }
-        [HttpPost("{teamId}/AddTeamMember/{userId}")]
-        public async Task<IActionResult> AddTeamMember(int teamId, int userId, Role role)
+
+        
+        [HttpPost("{teamId}/AddTeamMember/{userId}/{roleId}")]
+        public async Task<IActionResult> AddTeamMember(int teamId, int userId, int roleId)
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest();
-                }
-                var team = await _teamDao.GetById(teamId);
                 var user = await _userDao.GetById(userId);
-                
+                var role = await _roleDao.GetById(roleId);
+                var team = await _teamDao.GetById(teamId);
+
                 var teamMember = new TeamMember
                 {
-                    Role = role,
+                    Role = role.Value,
                     Team = team.Value,
                     User = user.Value
                 };
-                user.Value.MyTeams.Add(teamMember);
-                team.Value.Members.Add(teamMember);
-                
+
                 await _teamMemberDao.Add(teamMember);
             }
             catch (Exception)
@@ -146,14 +145,6 @@ namespace API.Controllers
 
             return Ok();
         }
-        [HttpPost("/AddRole")]
-        public async Task<IActionResult> AddRole(Role role)
-        {
-            if (!ModelState.IsValid) return BadRequest();
-            await _roleDao.Add(role);
-            return Ok();
-        }
+        
     }
-    
-    
 }

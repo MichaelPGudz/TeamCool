@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using API.DAOs.Interfaces;
 using API.Data;
@@ -35,6 +37,11 @@ namespace API.DAOs
         {
              _dataContext.Roles.Update(toEdit);
              return await _dataContext.SaveChangesAsync();
+        }
+
+        public ICollection<Role> GetAll()
+        {
+            return _dataContext.Roles.ToList();
         }
     }
 }

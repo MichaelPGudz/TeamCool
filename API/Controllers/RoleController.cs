@@ -1,0 +1,36 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using API.DAOs.Interfaces;
+using API.Entities;
+using Microsoft.AspNetCore.Mvc;
+
+namespace API.Controllers
+{
+    public class RoleController: BaseApiController
+    {
+
+        private readonly IRoleDao _roleDao;
+
+        public RoleController(IRoleDao roleDao)
+        {
+            _roleDao = roleDao;
+        }
+        
+        [HttpPost("/AddRole")]
+        public async Task<IActionResult> AddRole(Role role)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+            await _roleDao.Add(role);
+            return Ok();
+        }
+
+        [HttpGet("/GetAll")]
+        public ICollection<Role> GetAll() => _roleDao.GetAll();
+
+        [HttpGet("/{roleId}")]
+        public Task<ActionResult<Role>> GetById(int roleId)
+        {
+            return _roleDao.GetById(roleId);
+        }
+    }
+}
