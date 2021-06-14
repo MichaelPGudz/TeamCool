@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.DAOs.Interfaces;
@@ -15,6 +16,22 @@ namespace API.Controllers
         {
             _userDao = userDao;
         }
+
+        [HttpPost("AddUser")]
+        public async Task<ActionResult<User>> AddNewUser(User user)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+            try
+            {
+                await _userDao.Add(user);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+        
         
         [HttpGet("GetUserById/{id}")]
         public async Task<ActionResult<User>> GetUserById(int id) => await _userDao.GetById(id);
