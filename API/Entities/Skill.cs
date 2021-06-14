@@ -6,6 +6,6 @@ namespace API.Entities
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
-        public ICollection<UserSkill> UserSkills { get; set; }
+        public ICollection<User> Users { get; set; }
     }
 }

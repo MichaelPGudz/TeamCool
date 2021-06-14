@@ -7,6 +7,7 @@ using API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace API.DAOs
 {
@@ -21,21 +22,10 @@ namespace API.DAOs
 
         public async Task<ActionResult<User>> GetById(int id)
         {
-            var user = await _dataContext.Users.FindAsync(id);
-
-            if (user != null)
-            {
-                await _dataContext.Entry(user).Collection(i => i.MyTeams)
-                    .Query()
-                    .Include(i => i.Team)
-                    .LoadAsync();
-                await _dataContext.Entry(user).Collection(i => i.UserSkills)
-                    .Query()
-                    .Include(i => i.Skill)
-                    .LoadAsync();
-            }
-
-            return user;
+           return _dataContext.Users
+               .Include(x => x.MySkills)
+               .Include(y => y.MyTeams).ThenInclude(x => x.Team)
+               .FirstOrDefault(x => x.Id == id);
         }
 
         public async Task<int> Add(User newOne)
@@ -55,15 +45,17 @@ namespace API.DAOs
              return _dataContext.SaveChangesAsync();
         }
 
-        public List<Skill> GetUserSkills(int id)
+        public IQueryable<ICollection<Skill>> GetUserSkills(int id)
         {
-            return _dataContext.UserSkills.Where(user => user.UserId == id).Select(c => c.Skill).ToList();
+            return _dataContext.Users.Where(user => user.Id == id).Select(c => c.MySkills);
         }
         
 
-        public List<Team> GetUserTeams(int id)
+        public IIncludableQueryable<TeamMember, Team> GetUserTeams(int id)
         {
-            return _dataContext.TeamMembers.Where(user => user.Id == id).Select(c => c.Team).ToList();
+            return _dataContext.Users
+                .Where(x => x.Id == id)
+                .SelectMany(x => x.MyTeams).Include(x => x.Team);
 
         }
     }

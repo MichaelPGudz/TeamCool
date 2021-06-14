@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using API.DAOs.Interfaces;
 using API.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace API.Controllers
 {
@@ -56,9 +57,9 @@ namespace API.Controllers
         public async Task<ActionResult<User>> GetUserById(int id) => await _userDao.GetById(id);
         
         [HttpGet("GetSkillsForUser/{id}")]
-        public List<Skill> GetSkillsForUser(int id) => _userDao.GetUserSkills(id);
+        public IQueryable<ICollection<Skill>> GetSkillsForUser(int id) => _userDao.GetUserSkills(id);
         
         [HttpGet("GetTeamsForUser/{id}")]
-        public List<Team> GetTeamsForUser(int id) => _userDao.GetUserTeams(id);
+        public IIncludableQueryable<TeamMember, Team> GetTeamsForUser(int id) => _userDao.GetUserTeams(id);
     }
 }
