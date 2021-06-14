@@ -32,6 +32,25 @@ namespace API.Controllers
             }
         }
         
+        [HttpDelete("{id}/Delete")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            try
+            {
+                var user = await _userDao.GetById(id);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+                _userDao.Remove(user.Value);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+        
         
         [HttpGet("GetUserById/{id}")]
         public async Task<ActionResult<User>> GetUserById(int id) => await _userDao.GetById(id);

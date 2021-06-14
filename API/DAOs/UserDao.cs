@@ -44,7 +44,11 @@ namespace API.DAOs
             return await _dataContext.SaveChangesAsync();
         }
 
-        public void Remove(User toRemove) => _dataContext.Users.Remove(toRemove);
+        public void Remove(User toRemove)
+        {
+            _dataContext.Users.Remove(toRemove);
+            _dataContext.SaveChanges();
+        }
         public Task<int> Edit(User toEdit)
         {
             _dataContext.Users.Update(toEdit);
