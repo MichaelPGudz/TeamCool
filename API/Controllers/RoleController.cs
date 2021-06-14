@@ -32,5 +32,19 @@ namespace API.Controllers
         {
             return _roleDao.GetById(roleId);
         }
+
+        [HttpDelete("{roleId}/Delete")]
+        public async Task<IActionResult> Delete(int roleId)
+        {
+            var role = await _roleDao.GetById(roleId);
+            if (role == null)
+            {
+                return NotFound();
+            }
+            _roleDao.Remove(role.Value);
+            return Ok();
+
+        }
+        
     }
 }
