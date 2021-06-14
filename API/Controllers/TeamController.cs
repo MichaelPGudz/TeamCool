@@ -16,12 +16,14 @@ namespace API.Controllers
         private readonly ITeamDao _teamDao;
         private readonly IUserDao _userDao;
         private readonly ITeamMemberDao _teamMemberDao;
+        private readonly IRoleDao _roleDao;
 
-        public TeamController(ITeamDao teamDao, IUserDao userDao, ITeamMemberDao teamMemberDao)
+        public TeamController(ITeamDao teamDao, IUserDao userDao, ITeamMemberDao teamMemberDao, IRoleDao roleDao)
         {
             _teamDao = teamDao;
             _userDao = userDao;
             _teamMemberDao = teamMemberDao;
+            _roleDao = roleDao;
 
         }
 
@@ -144,5 +146,14 @@ namespace API.Controllers
 
             return Ok();
         }
+        [HttpPost("/AddRole")]
+        public async Task<IActionResult> AddRole(Role role)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+            await _roleDao.Add(role);
+            return Ok();
+        }
     }
+    
+    
 }
