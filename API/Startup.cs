@@ -43,6 +43,7 @@ namespace API
             services.AddScoped<IUserDao, UserDao>();
             services.AddScoped<ITeamMemberDao, TeamMemberDao>();
             services.AddScoped<IRoleDao, RoleDao>();
+            services.AddScoped<IWallDao, WallDao>();
             
             
         }
