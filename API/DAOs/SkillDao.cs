@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using API.DAOs.Interfaces;
 using API.Data;
@@ -39,5 +40,7 @@ namespace API.DAOs
             _dataContext.Skills.Update(toEdit);
             return _dataContext.SaveChangesAsync();
         }
+
+        public ICollection<Skill> GetAll() => _dataContext.Skills.ToList();
     }
 }
