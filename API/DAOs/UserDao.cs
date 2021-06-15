@@ -58,6 +58,15 @@ namespace API.DAOs
             skill.Users.Add(user);
             return _dataContext.SaveChanges();
         }
+
+
+        public int RemoveUserSkill(int userId, Skill skill)
+        {
+            var user = this.GetById(userId);
+            user.Result.Value.MySkills.Remove(skill);
+            skill.Users.Remove(user.Result.Value);
+            return _dataContext.SaveChanges();
+        }
         
 
         public IIncludableQueryable<TeamMember, Team> GetUserTeams(int id)

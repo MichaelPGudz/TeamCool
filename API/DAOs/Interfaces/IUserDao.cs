@@ -8,6 +8,8 @@ namespace API.DAOs.Interfaces
     public interface IUserDao: IDao<User>
     {
         public int AddUserSkill(int userId, Skill skill);
+
+        public int RemoveUserSkill(int userId, Skill skill);
         public IQueryable<ICollection<Skill>> GetUserSkills(int id);
         public IIncludableQueryable<TeamMember, Team> GetUserTeams(int id);
     }

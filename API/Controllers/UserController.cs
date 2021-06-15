@@ -76,6 +76,22 @@ namespace API.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpDelete("RemoveSkillFromUser/{userId}/{skillId}")]
+        public IActionResult RemoveSkillFromUser(int userId, int skillId)
+        {
+            var skill = _skillDao.GetById(skillId);
+            if (skill.Result.Value == null) return BadRequest();
+            try
+            {
+                _userDao.RemoveUserSkill(userId, skill.Result.Value);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
         
         [HttpGet("GetTeamsForUser/{id}")]
         public IIncludableQueryable<TeamMember, Team> GetTeamsForUser(int id) => _userDao.GetUserTeams(id);
