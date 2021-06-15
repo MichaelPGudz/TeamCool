@@ -36,6 +36,11 @@ namespace API.DAOs
             return await _dataContext.SaveChangesAsync();
         }
 
+        public ICollection<TeamMember> GetAll()
+        {
+            return _dataContext.TeamMembers.ToList();
+        }
+
         public ICollection<TeamMember> GetTeamMembersForTeam(int teamId)
         {
             return _dataContext.TeamMembers.Where(t => t.Team.Id == teamId).ToList();

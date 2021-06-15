@@ -5,7 +5,6 @@ namespace API.DAOs.Interfaces
 {
     public interface IRoleDao: IDao<Role>
     {
-        public ICollection<Role> GetAll();
-
+        
     }
 }

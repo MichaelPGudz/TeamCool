@@ -64,6 +64,9 @@ namespace API.DAOs
             return await _dataContext.SaveChangesAsync();
         }
 
+        public ICollection<Team> GetAll() => _dataContext.Teams.ToList();
+       
+
         public void Remove(Team team)
         {
             _dataContext.Teams.Remove(team);

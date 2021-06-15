@@ -45,6 +45,11 @@ namespace API.DAOs
              return _dataContext.SaveChangesAsync();
         }
 
+        public ICollection<User> GetAll()
+        {
+            return _dataContext.Users.ToList();
+        }
+
         public IQueryable<ICollection<Skill>> GetUserSkills(int id)
         {
             return _dataContext.Users.Where(user => user.Id == id).Select(c => c.MySkills);
