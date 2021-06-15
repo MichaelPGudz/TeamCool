@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using API.DAOs;
 using API.DAOs.Interfaces;
 using API.Data;
+using API.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -43,8 +44,9 @@ namespace API
             services.AddScoped<IUserDao, UserDao>();
             services.AddScoped<ITeamMemberDao, TeamMemberDao>();
             services.AddScoped<IRoleDao, RoleDao>();
-            
-            
+            services.AddScoped<IDao<Skill>, SkillDao>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
