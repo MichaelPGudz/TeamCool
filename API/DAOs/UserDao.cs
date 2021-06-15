@@ -49,6 +49,15 @@ namespace API.DAOs
         {
             return _dataContext.Users.Where(user => user.Id == id).Select(c => c.MySkills);
         }
+
+
+        public int AddUserSkill(int userId, Skill skill)
+        {
+            var user = _dataContext.Users.Include(x => x.MySkills).FirstOrDefault(x => x.Id == userId);
+            user.MySkills.Add(skill);
+            skill.Users.Add(user);
+            return _dataContext.SaveChanges();
+        }
         
 
         public IIncludableQueryable<TeamMember, Team> GetUserTeams(int id)

@@ -12,10 +12,12 @@ namespace API.Controllers
     public class UserController : BaseApiController
     {
         private readonly IUserDao _userDao;
+        private readonly IDao<Skill> _skillDao;
 
-        public UserController(IUserDao userDao)
+        public UserController(IUserDao userDao, IDao<Skill> skillDao)
         {
             _userDao = userDao;
+            _skillDao = skillDao;
         }
 
         [HttpPost("AddUser")]
@@ -58,6 +60,16 @@ namespace API.Controllers
         
         [HttpGet("GetSkillsForUser/{id}")]
         public IQueryable<ICollection<Skill>> GetSkillsForUser(int id) => _userDao.GetUserSkills(id);
+
+        [HttpGet("AddSkillForUser/{userId}/{skillId}")]
+        public IActionResult AddSkillForUser(int userId, int skillId)
+        {
+            var skill = _skillDao.GetById(skillId);
+            if (skill.Result.Value == null) return BadRequest();
+            
+            _userDao.AddUserSkill(userId, skill.Result.Value);
+            return Ok();
+        }
         
         [HttpGet("GetTeamsForUser/{id}")]
         public IIncludableQueryable<TeamMember, Team> GetTeamsForUser(int id) => _userDao.GetUserTeams(id);

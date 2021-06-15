@@ -19,7 +19,7 @@ namespace API.DAOs
         
         public async Task<ActionResult<Skill>> GetById(int id)
         {
-            return await _dataContext.Skills.FirstOrDefaultAsync(x => x.Id == id);
+            return await _dataContext.Skills.Include(x => x.Users).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<int> Add(Skill newOne)
