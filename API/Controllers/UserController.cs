@@ -66,9 +66,15 @@ namespace API.Controllers
         {
             var skill = _skillDao.GetById(skillId);
             if (skill.Result.Value == null) return BadRequest();
-            
-            _userDao.AddUserSkill(userId, skill.Result.Value);
-            return Ok();
+            try
+            {
+                _userDao.AddUserSkill(userId, skill.Result.Value);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
         
         [HttpGet("GetTeamsForUser/{id}")]
