@@ -174,7 +174,6 @@ namespace API.Controllers
             try
             {
                 var team = await _teamDao.GetById(teamId);
-                var teamFeatures = team.Value.Features;
                 if (team.Value.Features.Any(x => x.Id == featureId))
                 {
                     var featureToRemove = team.Value.Features.FirstOrDefault(x => x.Id == featureId);
@@ -182,6 +181,20 @@ namespace API.Controllers
                     await _teamDao.Edit(team.Value);
 
                 }
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPatch("{teamId}/EditFeature/{featureId}")]
+        public async Task<IActionResult> EditFeature(int teamId, int featureId, Feature feature)
+        {
+            try
+            {
+                await _featureDao.Edit(feature);
                 return Ok();
             }
             catch (Exception)
