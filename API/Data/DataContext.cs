@@ -52,6 +52,10 @@ namespace API.Data
             //     });
             modelBuilder.Entity<User>().HasData(Seed.GenerateUsers());
             modelBuilder.Entity<Team>().HasData(Seed.GenerateTeams());
+            modelBuilder.Entity<Skill>().HasData(Seed.GenerateSkills());
+            modelBuilder.Entity<Feature>().HasData(Seed.GenerateFeatures());
+            modelBuilder.Entity<Role>().HasData(Seed.GenerateRoles());
+            // modelBuilder.Entity<Wall>().HasData(Seed.GenerateWalls());
         }
     }
 }
