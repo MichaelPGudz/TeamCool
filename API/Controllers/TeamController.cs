@@ -37,6 +37,7 @@ namespace API.Controllers
             if (!ModelState.IsValid) return BadRequest();
             try
             {
+                newTeam.Wall = new Wall();
                 await _teamDao.Add(newTeam);
                 return Ok();
             }
@@ -52,6 +53,7 @@ namespace API.Controllers
             if (!ModelState.IsValid) return BadRequest();
             try
             {
+                childTeam.Wall = new Wall();
                 var parentTeam = await _teamDao.GetById(parentId);
                 if (parentTeam == null)
                 {

@@ -5,6 +5,7 @@ using API.DAOs.Interfaces;
 using API.Data;
 using API.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.DAOs
 {
@@ -16,10 +17,12 @@ namespace API.DAOs
         {
             _dataContext = dataContext;
         }
-        
+
         public async Task<ActionResult<Wall>> GetById(int id)
         {
-            return await _dataContext.Walls.FindAsync(id);
+            return await _dataContext.Walls
+                .Include(w => w.Posts)
+                .FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<int> Add(Wall newOne)

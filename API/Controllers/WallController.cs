@@ -47,9 +47,11 @@ namespace API.Controllers
         [HttpPost("{wallId}/AddPost")]
         public async Task<IActionResult> AddPostToWall(int wallId, Post post)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            var wall = await _wallDao.GetById(wallId);
+            if (wall.Value == null || post.WallId != wallId) return BadRequest();
             try
             {
+                post.PostTime = DateTime.UtcNow;
                 await _postDao.Add(post);
                 return Ok();
             }
