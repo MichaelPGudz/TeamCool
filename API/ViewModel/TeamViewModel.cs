@@ -10,5 +10,6 @@ namespace API.ViewModel
         public string Path { get; set; }
         public ICollection<TeamViewModel> ChildTeams { get; set; }
         public ICollection<TeamMemberViewModel> Members { get; set; }
+        public ICollection<Feature> Features { get; set; }
     }
 }

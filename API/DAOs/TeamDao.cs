@@ -31,6 +31,7 @@ namespace API.DAOs
                     .Include(i => i.User)
                     .Include(i => i.Role)
                     .LoadAsync();
+                await _dataContext.Entry(team).Collection(i => i.Features).LoadAsync();
             }
 
             return team;
@@ -70,6 +71,7 @@ namespace API.DAOs
         public void Remove(Team team)
         {
             _dataContext.Teams.Remove(team);
+            _dataContext.Teams.RemoveRange(_dataContext.Teams.Where(c => c.ParentTeam.Id == team.Id));
             _dataContext.SaveChanges();
         }
     }

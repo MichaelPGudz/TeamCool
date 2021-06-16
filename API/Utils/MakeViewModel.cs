@@ -15,6 +15,7 @@ namespace API.Utils
                 Path = Consts.TeamPath + team.Id,
                 ChildTeams = new List<TeamViewModel>(),
                 Members = new List<TeamMemberViewModel>(),
+                Features = new List<Feature>()
             };
 
             if (team.ChildTeams != null)
@@ -30,6 +31,14 @@ namespace API.Utils
                 foreach (var teamMember in team.Members)
                 {
                     viewModel.Members.Add(MakeTeamMemberViewModel(teamMember));
+                }
+            }
+
+            if (team.Features != null)
+            {
+                foreach (var teamFeature in team.Features)
+                {
+                    viewModel.Features.Add(teamFeature);
                 }
             }
 
