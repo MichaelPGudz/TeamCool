@@ -71,7 +71,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpGet("GetSkillById/{id}")]
+        [HttpGet("{id}")]
         public Task<ActionResult<Skill>> GetSkillById(int id)
         {
             return _skillDao.GetById(id);
