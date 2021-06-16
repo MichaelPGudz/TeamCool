@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using API.Entities;
+using FizzWare.NBuilder;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
@@ -22,32 +24,34 @@ namespace API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Wall>()
-                .HasData(new Wall
-                {
-                    Id = 1
-                });
-            modelBuilder.Entity<Team>()
-                .HasData(new 
-                {
-                    Id = 1,
-                    Name = "Test Team",
-                    WallId = 1
-                });
-            modelBuilder.Entity<User>()
-                .HasData(new User
-                {
-                    Id = 1, 
-                    FirstName = "Admin",
-                    LastName = "Adminowski",
-                });
-            modelBuilder.Entity<User>()
-                .HasData(new User
-                {
-                    Id = 2,
-                    FirstName = "User",
-                    LastName = "Userowski",
-                });
+            // modelBuilder.Entity<Wall>()
+            //     .HasData(new Wall
+            //     {
+            //         Id = 1
+            //     });
+            // modelBuilder.Entity<Team>()
+            //     .HasData(new 
+            //     {
+            //         Id = 1,
+            //         Name = "Test Team",
+            //         WallId = 1
+            //     });
+            // modelBuilder.Entity<User>()
+            //     .HasData(new User
+            //     {
+            //         Id = 1, 
+            //         FirstName = "Admin",
+            //         LastName = "Adminowski",
+            //     });
+            // modelBuilder.Entity<User>()
+            //     .HasData(new User
+            //     {
+            //         Id = 2,
+            //         FirstName = "User",
+            //         LastName = "Userowski",
+            //     });
+            modelBuilder.Entity<User>().HasData(Seed.GenerateUsers());
+            modelBuilder.Entity<Team>().HasData(Seed.GenerateTeams());
         }
     }
 }
