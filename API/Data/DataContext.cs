@@ -22,16 +22,22 @@ namespace API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Wall>()
+                .HasData(new Wall
+                {
+                    Id = 1
+                });
             modelBuilder.Entity<Team>()
-                .HasData(new Team
+                .HasData(new 
                 {
                     Id = 1,
-                    Name = "Test Team"
+                    Name = "Test Team",
+                    WallId = 1
                 });
             modelBuilder.Entity<User>()
                 .HasData(new User
                 {
-                    Id = 1,
+                    Id = 1, 
                     FirstName = "Admin",
                     LastName = "Adminowski",
                 });

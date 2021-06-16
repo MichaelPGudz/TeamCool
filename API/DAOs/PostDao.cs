@@ -1,8 +1,7 @@
-﻿using API.DAOs.Interfaces;
+using API.DAOs.Interfaces;
 using API.Data;
 using API.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -37,7 +36,7 @@ namespace API.DAOs
 
         public async Task<ActionResult<Post>> GetById(int id)
         {
-            return await _dataContext.Posts.FirstOrDefaultAsync(x => x.Id == id);
+            return await _dataContext.Posts.FindAsync(id);
         }
 
         public void Remove(Post toRemove)

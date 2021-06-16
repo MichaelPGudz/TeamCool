@@ -29,18 +29,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<TeamViewModel>> GetById(int id)
-        {
-            var team = await _teamDao.GetById(id);
-            if (team.Value == null)
-            {
-                return NotFound();
-            }
-
-            var teamView = MakeViewModel.MakeTeamViewModel(team.Value);
-
-            return teamView;
-        }
+        public async Task<ActionResult<Team>> GetById(int id) => await _teamDao.GetById(id);
 
         [HttpPost("AddNewTeam")]
         public async Task<IActionResult> AddNewTeam(Team newTeam)
@@ -48,6 +37,7 @@ namespace API.Controllers
             if (!ModelState.IsValid) return BadRequest();
             try
             {
+                newTeam.Wall = new Wall();
                 await _teamDao.Add(newTeam);
                 return Ok();
             }
@@ -63,6 +53,7 @@ namespace API.Controllers
             if (!ModelState.IsValid) return BadRequest();
             try
             {
+                childTeam.Wall = new Wall();
                 var parentTeam = await _teamDao.GetById(parentId);
                 if (parentTeam == null)
                 {
