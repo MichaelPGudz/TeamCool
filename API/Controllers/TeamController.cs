@@ -29,18 +29,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<TeamViewModel>> GetById(int id)
-        {
-            var team = await _teamDao.GetById(id);
-            if (team.Value == null)
-            {
-                return NotFound();
-            }
-
-            var teamView = MakeViewModel.MakeTeamViewModel(team.Value);
-
-            return teamView;
-        }
+        public async Task<ActionResult<Team>> GetById(int id) => await _teamDao.GetById(id);
 
         [HttpPost("AddNewTeam")]
         public async Task<IActionResult> AddNewTeam(Team newTeam)

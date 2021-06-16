@@ -47,6 +47,7 @@ namespace API
             services.AddScoped<IWallDao, WallDao>();
             services.AddScoped<ISkillDao, SkillDao>();
             services.AddScoped<IFeatureDao, FeatureDao>();
+            services.AddScoped<IPostDao, PostDao>();
 
 
         }
