@@ -17,13 +17,15 @@ namespace API.Controllers
         private readonly IUserDao _userDao;
         private readonly ITeamMemberDao _teamMemberDao;
         private readonly IRoleDao _roleDao;
+        private readonly IFeatureDao _featureDao;
 
-        public TeamController(ITeamDao teamDao, IUserDao userDao, ITeamMemberDao teamMemberDao, IRoleDao roleDao)
+        public TeamController(ITeamDao teamDao, IUserDao userDao, ITeamMemberDao teamMemberDao, IRoleDao roleDao, IFeatureDao featureDao)
         {
             _teamDao = teamDao;
             _userDao = userDao;
             _teamMemberDao = teamMemberDao;
             _roleDao = roleDao;
+            _featureDao = featureDao;
         }
 
         [HttpGet("{id}")]
@@ -144,6 +146,48 @@ namespace API.Controllers
             }
 
             return Ok();
+        }
+
+        [HttpGet("{teamId}/AddFeature/{featureId}")]
+        public async Task<IActionResult> AddFeature(int teamId, int featureId)
+        {
+            try
+            {
+                var team = await _teamDao.GetById(teamId);
+                var feature = await _featureDao.GetById(featureId);
+
+                team.Value.Features.Add(feature.Value);
+                await _teamDao.Edit(team.Value);
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+
+        [HttpDelete("{teamId}/DeleteFeature/{featureId}")]
+        public async Task<IActionResult> DeleteFeature(int teamId, int featureId)
+        {
+            try
+            {
+                var team = await _teamDao.GetById(teamId);
+                var teamFeatures = team.Value.Features;
+                if (team.Value.Features.Any(x => x.Id == featureId))
+                {
+                    var featureToRemove = team.Value.Features.FirstOrDefault(x => x.Id == featureId);
+                    team.Value.Features.Remove(featureToRemove);
+                    await _teamDao.Edit(team.Value);
+
+                }
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
         
     }

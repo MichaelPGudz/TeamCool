@@ -31,6 +31,7 @@ namespace API.DAOs
                     .Include(i => i.User)
                     .Include(i => i.Role)
                     .LoadAsync();
+                await _dataContext.Entry(team).Collection(i => i.Features).LoadAsync();
             }
 
             return team;
