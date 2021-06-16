@@ -148,7 +148,7 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpGet("{teamId}/AddFeature/{featureId}")]
+        [HttpPost("{teamId}/AddFeature/{featureId}")]
         public async Task<IActionResult> AddFeature(int teamId, int featureId)
         {
             try

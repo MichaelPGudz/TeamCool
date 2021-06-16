@@ -61,7 +61,7 @@ namespace API.Controllers
         [HttpGet("{id}/GetSkillsForUser")]
         public IQueryable<ICollection<Skill>> GetSkillsForUser(int id) => _userDao.GetUserSkills(id);
 
-        [HttpGet("{userId}/AddSkillForUser/{skillId}")]
+        [HttpPost("{userId}/AddSkillForUser/{skillId}")]
         public IActionResult AddSkillForUser(int userId, int skillId)
         {
             var skill = _skillDao.GetById(skillId);

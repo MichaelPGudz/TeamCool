@@ -245,6 +245,78 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "AddFeature",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/team/1/addFeature/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"team",
+								"1",
+								"addFeature",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteFeature",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/team/1/DeleteFeature/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"team",
+								"1",
+								"DeleteFeature",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditFeature",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"Id\": \"1\", \r\n  \"Name\": \"Edited Feature Name\",\r\n    \"URL\": \"DefaultURL\",\r\n  \"TeamId\": \"1\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/team/1/EditFeature/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"team",
+								"1",
+								"EditFeature",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -257,14 +329,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/user/GetUserById/1",
+							"raw": "{{url}}/api/user/1",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"user",
-								"GetUserById",
 								"1"
 							]
 						}
@@ -277,14 +348,56 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/user/GetSkillsForUser/1",
+							"raw": "{{url}}/api/user/1/GetSkillsForUser",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"user",
-								"GetSkillsForUser",
+								"1",
+								"GetSkillsForUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddSkillsForUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/1/AddSkillForUser/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"1",
+								"AddSkillForUser",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RemoveSkillFromUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/1/RemoveSkillFromUser/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"1",
+								"RemoveSkillFromUser",
 								"1"
 							]
 						}
@@ -297,15 +410,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/user/GetTeamsForUser/1",
+							"raw": "{{url}}/api/user/1/GetTeamsForUser",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"user",
-								"GetTeamsForUser",
-								"1"
+								"1",
+								"GetTeamsForUser"
 							]
 						}
 					},
@@ -340,7 +453,7 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "Delete User",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -354,6 +467,107 @@
 								"user",
 								"1",
 								"Delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Skill",
+			"item": [
+				{
+					"name": "GetSkillById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/skill/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"skill",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddSkill",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"FirstName\": \"NewSkill\",\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/skill/AddSkill",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"skill",
+								"AddSkill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteSkill",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/skill/1/Delete",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"skill",
+								"1",
+								"Delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "EditSkill",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"Id\": \"1\", \r\n  \"FirstName\": \"EditedSkillName\",\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/skill/1/Edit",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"skill",
+								"1",
+								"Edit"
 							]
 						}
 					},
