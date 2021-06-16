@@ -30,6 +30,7 @@ namespace API.DAOs
         public void Remove(Post toRemove)
         {
             _dataContext.Posts.Remove(toRemove);
+            _dataContext.SaveChanges();
         }
 
         public async Task<int> Edit(Post toEdit)

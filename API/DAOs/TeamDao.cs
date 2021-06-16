@@ -21,18 +21,23 @@ namespace API.DAOs
 
         public async Task<ActionResult<Team>> GetById(int id)
         {
-            var team = await _dataContext.Teams.FindAsync(id);
+            var team = await _dataContext.Teams
+                .Include(t => t.Wall)
+                .Include(m => m.Members)
+                .Include(f => f.Features)
+                .Include(c => c.ChildTeams)
+                .FirstOrDefaultAsync(i => i.Id == id);
             
-            if (team != null)
-            {
-                await _dataContext.Entry(team).Collection(i => i.ChildTeams).LoadAsync();
-                await _dataContext.Entry(team).Collection(i => i.Members)
-                    .Query()
-                    .Include(i => i.User)
-                    .Include(i => i.Role)
-                    .LoadAsync();
-                await _dataContext.Entry(team).Collection(i => i.Features).LoadAsync();
-            }
+            // if (team != null)
+            // {
+            //     await _dataContext.Entry(team).Collection(i => i.ChildTeams).LoadAsync();
+            //     await _dataContext.Entry(team).Collection(i => i.Members)
+            //         .Query()
+            //         .Include(i => i.User)
+            //         .Include(i => i.Role)
+            //         .LoadAsync();
+            //     await _dataContext.Entry(team).Collection(i => i.Features).LoadAsync();
+            // }
 
             return team;
         } 

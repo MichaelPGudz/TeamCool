@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    public class WallController: BaseApiController
+    public class WallController : BaseApiController
     {
         private readonly IWallDao _wallDao;
         private readonly IPostDao _postDao;
@@ -24,25 +24,25 @@ namespace API.Controllers
             return await _wallDao.GetById(id);
         }
 
-        [HttpDelete("{id}/Delete")]
-        public async Task<IActionResult> DeleteWall(int id)
-        {
-            try
-            {
-                var team = await _wallDao.GetById(id);
-                if (team == null)
-                {
-                    return NotFound();
-                }
-
-                _wallDao.Remove(team.Value);
-                return Ok();
-            }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
-        }
+        // [HttpDelete("{id}/Delete")]
+        // public async Task<IActionResult> DeleteWall(int id)
+        // {
+        //     try
+        //     {
+        //         var team = await _wallDao.GetById(id);
+        //         if (team == null)
+        //         {
+        //             return NotFound();
+        //         }
+        //
+        //         _wallDao.Remove(team.Value);
+        //         return Ok();
+        //     }
+        //     catch (Exception)
+        //     {
+        //         return BadRequest();
+        //     }
+        // }
 
         [HttpPost("{wallId}/AddPost")]
         public async Task<IActionResult> AddPostToWall(int wallId, Post post)
@@ -60,7 +60,5 @@ namespace API.Controllers
                 return BadRequest();
             }
         }
-        
-        
     }
 }

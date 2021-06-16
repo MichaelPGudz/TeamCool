@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "7fcbba15-40b1-404b-a73c-ef4399718f20",
+		"_postman_id": "cdd5737b-c69c-45f6-8a14-d34cc08f18e1",
 		"name": "TeamCool",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -568,6 +568,113 @@
 								"skill",
 								"1",
 								"Edit"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Wall",
+			"item": [
+				{
+					"name": "GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/Wall/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Wall",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddPost",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"WallId\": 1,\r\n    \"PostContent\": \"Lorem ... asdasdc \"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/Wall/1/AddPost",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Wall",
+								"1",
+								"AddPost"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "EditPost",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Id\": 1,\r\n    \"WallId\": 1,\r\n    \"PostContent\": \"Edited post 1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/Post/1/Edit",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Post",
+								"1",
+								"Edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletePost",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/Post/2/Delete",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"Post",
+								"2",
+								"Delete"
 							]
 						}
 					},
