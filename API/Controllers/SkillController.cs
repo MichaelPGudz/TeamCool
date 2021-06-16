@@ -9,9 +9,9 @@ namespace API.Controllers
 {
     public class SkillController : BaseApiController
     {
-        private readonly IDao<Skill> _skillDao;
+        private readonly ISkillDao _skillDao;
 
-        public SkillController(IDao<Skill> skillDao)
+        public SkillController(ISkillDao skillDao)
         {
             _skillDao = skillDao;
         }

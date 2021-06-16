@@ -12,9 +12,9 @@ namespace API.Controllers
     public class UserController : BaseApiController
     {
         private readonly IUserDao _userDao;
-        private readonly IDao<Skill> _skillDao;
+        private readonly ISkillDao _skillDao;
 
-        public UserController(IUserDao userDao, IDao<Skill> skillDao)
+        public UserController(IUserDao userDao, ISkillDao skillDao)
         {
             _userDao = userDao;
             _skillDao = skillDao;

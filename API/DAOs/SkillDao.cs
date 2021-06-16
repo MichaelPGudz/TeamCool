@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.DAOs
 {
-    public class SkillDao: IDao<Skill>
+    public class SkillDao: ISkillDao
     {
         private readonly DataContext _dataContext;
 
