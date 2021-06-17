@@ -139,6 +139,33 @@ namespace API.Controllers
             return Ok();
         }
 
+        [HttpDelete("{teamId}/DeleteTeamMember/{userId}")]
+        public async Task<IActionResult> DeleteTeamMember(int teamId, int userId)
+        {
+            //TODO Figure why it doesn't work
+            try
+            {
+                var team = await _teamDao.GetById(teamId);
+                if (team.Value.Members.Any(member => member.Id == userId))
+                {
+                    var userToRemove = team.Value.Members.FirstOrDefault(member => member.Id == userId);
+                    team.Value.Members.Remove(userToRemove);
+                }             
+                // var members = _teamMemberDao.GetTeamMembersForTeam(teamId);
+                // if (members.Any(member => member.Id == userId))
+                // {
+                //     var userToRemove = members.FirstOrDefault(member => member.Id == userId);
+                //     members.Remove(userToRemove);
+                // }
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
         [HttpPost("{teamId}/AddFeature/{featureId}")]
         public async Task<IActionResult> AddFeature(int teamId, int featureId)
         {

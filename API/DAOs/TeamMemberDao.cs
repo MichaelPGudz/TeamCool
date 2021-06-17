@@ -28,6 +28,7 @@ namespace API.DAOs
         public void Remove(TeamMember toRemove)
         {
             _dataContext.TeamMembers.Remove(toRemove);
+             _dataContext.SaveChanges();
         }
 
         public async Task<int> Edit(TeamMember toEdit)
