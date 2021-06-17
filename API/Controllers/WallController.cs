@@ -48,7 +48,7 @@ namespace API.Controllers
         public async Task<IActionResult> AddPostToWall(int wallId, Post post)
         {
             var wall = await _wallDao.GetById(wallId);
-            if (wall.Value == null || post.WallId != wallId) return BadRequest();
+            if (wall.Value == null) return BadRequest();
             try
             {
                 post.PostTime = DateTime.UtcNow;

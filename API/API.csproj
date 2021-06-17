@@ -16,4 +16,13 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20210616172517_wall.cs" />
+    <Compile Remove="Data\Migrations\20210616172517_wall.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210616175221_wallId.cs" />
+    <Compile Remove="Data\Migrations\20210616175221_wallId.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210617130608_data.cs" />
+    <Compile Remove="Data\Migrations\20210617130608_data.Designer.cs" />
+  </ItemGroup>
+
 </Project>
