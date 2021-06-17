@@ -101,6 +101,56 @@
 			"item": [
 				{
 					"name": "GetById",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var template = `\r",
+									"    <style type=\"text/css\">\r",
+									"        .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+									"        .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+									"        .tftable tr {background-color:#ffffff;}\r",
+									"        .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+									"        .tftable tr:hover {background-color:#e0ffff;}\r",
+									"    </style>\r",
+									"    \r",
+									"    <table class=\"tftable\" border=\"1\">\r",
+									"        <tr>\r",
+									"            <th>id</th>\r",
+									"            <th>name</th>\r",
+									"            <th>members</th>\r",
+									"            <th>wall</th>\r",
+									"            <th>features</th>\r",
+									"            <th>parentTeam</th>\r",
+									"            <th>childTeams</th>\r",
+									"        </tr>\r",
+									"        \r",
+									"            <tr id=row_{{@key}} onClick=\"handleClick(this.id)\">\r",
+									"                <td id={{@key}}>{{id}}</td>\r",
+									"                <td>{{name}}</td>\r",
+									"                <td>{{members}}</td>\r",
+									"        {{#each response.members}}\r",
+									"             <td>{{id}}</td>\r",
+									"             <td>{{user}}</td>\r",
+									"                <td>{{name}}</td>\r",
+									"                <td>{{wall}}</td>\r",
+									"                <td>{{features}}</td>\r",
+									"                <td>{{parentTeam}}</td>\r",
+									"                <td>{{childTeams}}</td>\r",
+									"            </tr>\r",
+									"        {{/each}}\r",
+									"    </table>\r",
+									"`;\r",
+									"\r",
+									"pm.visualizer.set(template, {\r",
+									"    response: pm.response.json()\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -221,7 +271,7 @@
 				{
 					"name": "EditTeamName",
 					"request": {
-						"method": "PUT",
+						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -336,15 +386,6 @@
 								"1"
 							]
 						}
-					},
-					"response": []
-				},
-				{
-					"name": "New Request",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": null
 					},
 					"response": []
 				}
