@@ -87,13 +87,14 @@ namespace API.Data
         public static ICollection<Object> GeneratePosts()
         {
             var list = new List<Object>();
+            var counter = 0;
             for (int i = 0; i < wallAmount; i++)
             {
                 for (int j = 0; j < postInWallAmount; j++)
                 {
                     list.Add(new
                     {
-                        Id = Faker.RandomNumber.Next(),
+                        Id = ++counter,
                         WallId = i + 1,
                         PostContent = Faker.Lorem.Sentence(5),
                         PostTime = DateTime.UtcNow,
