@@ -82,5 +82,6 @@ namespace API.DAOs
             _dataContext.Teams.RemoveRange(_dataContext.Teams.Where(c => c.ParentTeam.Id == team.Id));
             _dataContext.SaveChanges();
         }
+        
     }
 }

@@ -19,7 +19,8 @@ namespace API.Controllers
         private readonly IRoleDao _roleDao;
         private readonly IFeatureDao _featureDao;
 
-        public TeamController(ITeamDao teamDao, IUserDao userDao, ITeamMemberDao teamMemberDao, IRoleDao roleDao, IFeatureDao featureDao)
+        public TeamController(ITeamDao teamDao, IUserDao userDao, ITeamMemberDao teamMemberDao, IRoleDao roleDao,
+            IFeatureDao featureDao)
         {
             _teamDao = teamDao;
             _userDao = userDao;
@@ -71,7 +72,7 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpPut("{id}/Edit")]
+        [HttpPatch("{id}/Edit")]
         public async Task<IActionResult> EditTeamName(Team editedTeam, int id)
         {
             if (id != editedTeam.Id || !ModelState.IsValid)
@@ -111,7 +112,6 @@ namespace API.Controllers
                 return BadRequest();
             }
         }
-
         
         [HttpPost("{teamId}/AddTeamMember/{userId}/{roleId}")]
         public async Task<IActionResult> AddTeamMember(int teamId, int userId, int roleId)
@@ -142,21 +142,11 @@ namespace API.Controllers
         [HttpDelete("{teamId}/DeleteTeamMember/{userId}")]
         public async Task<IActionResult> DeleteTeamMember(int teamId, int userId)
         {
-            //TODO Figure why it doesn't work
             try
             {
-                var team = await _teamDao.GetById(teamId);
-                if (team.Value.Members.Any(member => member.Id == userId))
-                {
-                    var userToRemove = team.Value.Members.FirstOrDefault(member => member.Id == userId);
-                    team.Value.Members.Remove(userToRemove);
-                }             
-                // var members = _teamMemberDao.GetTeamMembersForTeam(teamId);
-                // if (members.Any(member => member.Id == userId))
-                // {
-                //     var userToRemove = members.FirstOrDefault(member => member.Id == userId);
-                //     members.Remove(userToRemove);
-                // }
+                var members = _teamMemberDao.GetTeamMembersForTeam(teamId);
+                var memberToRemove = members.FirstOrDefault(member => member.Id == userId);
+                _teamMemberDao.Remove(memberToRemove);
             }
             catch (Exception)
             {
@@ -197,7 +187,6 @@ namespace API.Controllers
                     var featureToRemove = team.Value.Features.FirstOrDefault(x => x.Id == featureId);
                     team.Value.Features.Remove(featureToRemove);
                     await _teamDao.Edit(team.Value);
-
                 }
                 return Ok();
             }
@@ -220,6 +209,5 @@ namespace API.Controllers
                 return BadRequest();
             }
         }
-        
     }
 }
