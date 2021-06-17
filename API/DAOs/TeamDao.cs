@@ -24,6 +24,9 @@ namespace API.DAOs
             var team = await _dataContext.Teams
                 .Include(t => t.Wall)
                 .Include(m => m.Members)
+                .ThenInclude(m => m.User)
+                .Include(m => m.Members)
+                .ThenInclude(m => m.Role)
                 .Include(f => f.Features)
                 .Include(c => c.ChildTeams)
                 .FirstOrDefaultAsync(i => i.Id == id);

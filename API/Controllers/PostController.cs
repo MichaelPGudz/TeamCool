@@ -21,7 +21,7 @@ namespace API.Controllers
             try
             {
                 var post = await _postDao.GetById(postId);
-                if (postId != editedPost.Id || !ModelState.IsValid || editedPost.WallId != post.Value.WallId)
+                if (postId != editedPost.Id || !ModelState.IsValid)
                 {
                     BadRequest();
                 }
