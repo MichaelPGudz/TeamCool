@@ -30,7 +30,7 @@ namespace API.DAOs
                 .Include(f => f.Features)
                 .Include(c => c.ChildTeams)
                 .FirstOrDefaultAsync(i => i.Id == id);
-            
+
             // if (team != null)
             // {
             //     await _dataContext.Entry(team).Collection(i => i.ChildTeams).LoadAsync();
@@ -43,7 +43,7 @@ namespace API.DAOs
             // }
 
             return team;
-        } 
+        }
 
         public async Task<int> Add(Team newOne)
         {
@@ -74,7 +74,7 @@ namespace API.DAOs
         }
 
         public ICollection<Team> GetAll() => _dataContext.Teams.ToList();
-       
+
 
         public void Remove(Team team)
         {

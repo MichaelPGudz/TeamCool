@@ -10,12 +10,10 @@ namespace API.Controllers
     public class WallController : BaseApiController
     {
         private readonly IWallDao _wallDao;
-        private readonly IPostDao _postDao;
 
         public WallController(IWallDao wallDao, IPostDao postDao)
         {
             _wallDao = wallDao;
-            _postDao = postDao;
         }
 
         [HttpGet("{id}")]
@@ -52,7 +50,8 @@ namespace API.Controllers
             try
             {
                 post.PostTime = DateTime.UtcNow;
-                await _postDao.Add(post);
+                wall.Value.Posts.Add(post);
+                await _wallDao.Edit(wall.Value);
                 return Ok();
             }
             catch (Exception)

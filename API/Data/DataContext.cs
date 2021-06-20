@@ -58,6 +58,7 @@ namespace API.Data
             modelBuilder.Entity<Wall>().HasData(Seed.GenerateWalls());
             modelBuilder.Entity<Post>().HasData(Seed.GeneratePosts());
             modelBuilder.Entity<TeamMember>().HasData(Seed.GenerateTeamMembers());
+            
         }
     }
 }

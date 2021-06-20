@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2ebbda0e-5a9b-4cb3-a29e-792a13c796da",
+		"_postman_id": "17554f0c-5b76-4555-8d43-0fb0659c7ee9",
 		"name": "TeamCool",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -101,68 +101,18 @@
 			"item": [
 				{
 					"name": "GetById",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var template = `\r",
-									"    <style type=\"text/css\">\r",
-									"        .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
-									"        .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
-									"        .tftable tr {background-color:#ffffff;}\r",
-									"        .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
-									"        .tftable tr:hover {background-color:#e0ffff;}\r",
-									"    </style>\r",
-									"    \r",
-									"    <table class=\"tftable\" border=\"1\">\r",
-									"        <tr>\r",
-									"            <th>id</th>\r",
-									"            <th>name</th>\r",
-									"            <th>members</th>\r",
-									"            <th>wall</th>\r",
-									"            <th>features</th>\r",
-									"            <th>parentTeam</th>\r",
-									"            <th>childTeams</th>\r",
-									"        </tr>\r",
-									"        \r",
-									"            <tr id=row_{{@key}} onClick=\"handleClick(this.id)\">\r",
-									"                <td id={{@key}}>{{id}}</td>\r",
-									"                <td>{{name}}</td>\r",
-									"                <td>{{members}}</td>\r",
-									"        {{#each response.members}}\r",
-									"             <td>{{id}}</td>\r",
-									"             <td>{{user}}</td>\r",
-									"                <td>{{name}}</td>\r",
-									"                <td>{{wall}}</td>\r",
-									"                <td>{{features}}</td>\r",
-									"                <td>{{parentTeam}}</td>\r",
-									"                <td>{{childTeams}}</td>\r",
-									"            </tr>\r",
-									"        {{/each}}\r",
-									"    </table>\r",
-									"`;\r",
-									"\r",
-									"pm.visualizer.set(template, {\r",
-									"    response: pm.response.json()\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/team/3",
+							"raw": "{{url}}/api/team/1",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"team",
-								"3"
+								"1"
 							]
 						}
 					},
@@ -248,34 +198,13 @@
 					"response": []
 				},
 				{
-					"name": "DeleteTeamMember",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/team/3/DeleteTeamMember/28",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"team",
-								"3",
-								"DeleteTeamMember",
-								"28"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "EditTeamName",
 					"request": {
-						"method": "PATCH",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Id\": 3,\r\n    \"Name\": \"New Name\"\r\n}",
+							"raw": "{\r\n    \"Id\": 1,\r\n    \"Name\": \"New Name\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -675,7 +604,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"WallId\": 1,\r\n    \"PostContent\": \"Lorem ... asdasdc \"\r\n}",
+							"raw": "{\r\n    \"PostContent\": \"Test id post 4\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
