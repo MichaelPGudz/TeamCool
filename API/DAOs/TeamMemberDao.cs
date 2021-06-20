@@ -5,6 +5,8 @@ using API.DAOs.Interfaces;
 using API.Data;
 using API.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace API.DAOs
 {
@@ -44,7 +46,9 @@ namespace API.DAOs
 
         public ICollection<TeamMember> GetTeamMembersForTeam(int teamId)
         {
-            return _dataContext.TeamMembers.Where(t => t.Team.Id == teamId).ToList();
+            return _dataContext.TeamMembers
+                .Include(tm => tm.User)
+                .Where(t => t.Team.Id == teamId).ToList();
         }
     }
 }

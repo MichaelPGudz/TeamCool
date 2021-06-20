@@ -24,7 +24,7 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpGet]
+        [HttpGet("~/api/roles")]
         public ICollection<Role> GetAll() => _roleDao.GetAll();
 
         [HttpGet("{roleId}")]
