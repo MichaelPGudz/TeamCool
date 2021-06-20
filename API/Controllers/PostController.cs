@@ -15,7 +15,7 @@ namespace API.Controllers
             _postDao = postDao;
         }
 
-        [HttpPatch("{postId}/Edit")]
+        [HttpPatch("{postId}")]
         public async Task<IActionResult> EditPost(int postId, Post editedPost)
         {
             try
@@ -36,7 +36,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpDelete("{id}/Delete")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePost(int id)
         {
             var post = await _postDao.GetById(id);

@@ -23,14 +23,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/Role/AddRole",
+							"raw": "{{url}}/api/role",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"Role",
-								"AddRole"
+								"role"
 							]
 						}
 					},
@@ -42,14 +41,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/Role/GetAll",
+							"raw": "{{url}}/api/roles",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"Role",
-								"GetAll"
+								"roles"
 							]
 						}
 					},
@@ -61,13 +59,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/Role/1",
+							"raw": "{{url}}/api/role/1",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"Role",
+								"role",
 								"1"
 							]
 						}
@@ -80,15 +78,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/Role/1/Delete",
+							"raw": "{{url}}/api/role/6",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"Role",
-								"1",
-								"Delete"
+								"role",
+								"6"
 							]
 						}
 					},
@@ -175,7 +172,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Name\": \"Lorem Ipsum\",\r\n    \"Members\": [],\r\n    \"Wall\": {},\r\n    \"Features\": [],\r\n    \"ParentTeam\": {\"Name\": \"Test Team\"},\r\n    \"ChildTeams\": []\r\n}",
+							"raw": "{\r\n    \"Name\": \"Lorem Ipsum\",\r\n    \"Members\": [],\r\n    \"Wall\": {},\r\n    \"Features\": [],\r\n    \"ParentTeam\": {},\r\n    \"ChildTeams\": []\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -183,14 +180,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/team/AddNewTeam",
+							"raw": "{{url}}/api/team",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"team",
-								"AddNewTeam"
+								"team"
 							]
 						}
 					},
@@ -211,58 +207,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/team/1/AddChildTeam",
+							"raw": "{{url}}/api/team/1",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"team",
-								"1",
-								"AddChildTeam"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "AddTeamMember",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/team/1/AddTeamMember/1/1",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"team",
-								"1",
-								"AddTeamMember",
-								"1",
 								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DeleteTeamMember",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/team/3/DeleteTeamMember/28",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"team",
-								"3",
-								"DeleteTeamMember",
-								"28"
 							]
 						}
 					},
@@ -275,7 +227,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Id\": 3,\r\n    \"Name\": \"New Name\"\r\n}",
+							"raw": "{\r\n    \"Id\": 24,\r\n    \"Name\": \"Hell yeah\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -283,15 +235,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/team/3/Edit",
+							"raw": "{{url}}/api/team/24",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"team",
-								"3",
-								"Edit"
+								"24"
 							]
 						}
 					},
@@ -303,7 +254,26 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/team/1/Delete",
+							"raw": "{{url}}/api/team/24",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"team",
+								"24"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddTeamMember",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/team/1/user/25/role/2",
 							"host": [
 								"{{url}}"
 							],
@@ -311,7 +281,31 @@
 								"api",
 								"team",
 								"1",
-								"Delete"
+								"user",
+								"25",
+								"role",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteTeamMember",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/team/1/user/25",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"team",
+								"1",
+								"user",
+								"25"
 							]
 						}
 					},
@@ -322,8 +316,17 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\": \"Github\",\r\n    \"URL\": \"https://wwww.github.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{url}}/api/team/1/addFeature/1",
+							"raw": "{{url}}/api/team/1/feature/1",
 							"host": [
 								"{{url}}"
 							],
@@ -331,28 +334,7 @@
 								"api",
 								"team",
 								"1",
-								"addFeature",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DeleteFeature",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{url}}/api/team/1/DeleteFeature/1",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"team",
-								"1",
-								"DeleteFeature",
+								"feature",
 								"1"
 							]
 						}
@@ -366,7 +348,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n \"Id\": \"1\", \r\n  \"Name\": \"Edited Feature Name\",\r\n    \"URL\": \"DefaultURL\",\r\n  \"TeamId\": \"1\"}",
+							"raw": "{\r\n    \"Id\": \"1\",\r\n    \"Name\": \"Edited Feature Name\",\r\n    \"URL\": \"DefaultURL\",\r\n    \"TeamId\": \"1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -374,7 +356,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/team/1/EditFeature/1",
+							"raw": "{{url}}/api/team/1/feature/1",
 							"host": [
 								"{{url}}"
 							],
@@ -382,8 +364,29 @@
 								"api",
 								"team",
 								"1",
-								"EditFeature",
+								"feature",
 								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteFeature",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/team/14/feature/10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"team",
+								"14",
+								"feature",
+								"10"
 							]
 						}
 					},
@@ -419,7 +422,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/user/1/GetSkillsForUser",
+							"raw": "{{url}}/api/user/1/skills",
 							"host": [
 								"{{url}}"
 							],
@@ -427,7 +430,7 @@
 								"api",
 								"user",
 								"1",
-								"GetSkillsForUser"
+								"skills"
 							]
 						}
 					},
@@ -439,7 +442,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/user/1/AddSkillForUser/1",
+							"raw": "{{url}}/api/user/1/skill/1",
 							"host": [
 								"{{url}}"
 							],
@@ -447,7 +450,7 @@
 								"api",
 								"user",
 								"1",
-								"AddSkillForUser",
+								"skill",
 								"1"
 							]
 						}
@@ -460,7 +463,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/user/1/RemoveSkillFromUser/1",
+							"raw": "{{url}}/api/user/1/skill/1",
 							"host": [
 								"{{url}}"
 							],
@@ -468,7 +471,7 @@
 								"api",
 								"user",
 								"1",
-								"RemoveSkillFromUser",
+								"skill",
 								"1"
 							]
 						}
@@ -481,7 +484,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/user/1/GetTeamsForUser",
+							"raw": "{{url}}/api/user/1/teams",
 							"host": [
 								"{{url}}"
 							],
@@ -489,7 +492,7 @@
 								"api",
 								"user",
 								"1",
-								"GetTeamsForUser"
+								"teams"
 							]
 						}
 					},
@@ -510,14 +513,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/user/AddUser",
+							"raw": "{{url}}/api/user",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"user",
-								"AddUser"
+								"user"
 							]
 						}
 					},
@@ -529,15 +531,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/user/1/Delete",
+							"raw": "{{url}}/api/user/1",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"user",
-								"1",
-								"Delete"
+								"1"
 							]
 						}
 					},
@@ -574,7 +575,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"FirstName\": \"NewSkill\",\r\n}",
+							"raw": "{\r\n  \"FirstName\": \"NewSkill\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -582,14 +583,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/skill/AddSkill",
+							"raw": "{{url}}/api/skill",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"skill",
-								"AddSkill"
+								"skill"
 							]
 						}
 					},
@@ -601,15 +601,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/skill/1/Delete",
+							"raw": "{{url}}/api/skill/1",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"skill",
-								"1",
-								"Delete"
+								"1"
 							]
 						}
 					},
@@ -622,7 +621,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n \"Id\": \"1\", \r\n  \"FirstName\": \"EditedSkillName\",\r\n}",
+							"raw": "{\r\n    \"Id\": \"1\",\r\n    \"FirstName\": \"EditedSkillName\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -630,15 +629,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/skill/1/Edit",
+							"raw": "{{url}}/api/skill/1",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"skill",
-								"1",
-								"Edit"
+								"1"
 							]
 						}
 					},
@@ -655,13 +653,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/Wall/1",
+							"raw": "{{url}}/api/wall/1",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"Wall",
+								"wall",
 								"1"
 							]
 						}
@@ -675,7 +673,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"WallId\": 1,\r\n    \"PostContent\": \"Lorem ... asdasdc \"\r\n}",
+							"raw": "{\r\n    \"WallId\": 1,\r\n    \"PostContent\": \"Just random text to check if added. \"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -683,15 +681,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/Wall/1/AddPost",
+							"raw": "{{url}}/api/wall/1",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"Wall",
-								"1",
-								"AddPost"
+								"wall",
+								"1"
 							]
 						}
 					},
@@ -717,15 +714,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/Post/1/Edit",
+							"raw": "{{url}}/api/Post/1",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"Post",
-								"1",
-								"Edit"
+								"1"
 							]
 						}
 					},
@@ -737,15 +733,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/Post/2/Delete",
+							"raw": "{{url}}/api/Post/2",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
 								"Post",
-								"2",
-								"Delete"
+								"2"
 							]
 						}
 					},
