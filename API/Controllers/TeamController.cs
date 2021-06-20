@@ -32,7 +32,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Team>> GetById(int id) => await _teamDao.GetById(id);
 
-        [HttpPost("AddNewTeam")]
+        [HttpPost]
         public async Task<IActionResult> AddNewTeam(Team newTeam)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -48,7 +48,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpPost("{parentId}/AddChildTeam")]
+        [HttpPost("{parentId}")]
         public async Task<IActionResult> AddChildTeam(Team childTeam, int parentId)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -72,7 +72,7 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpPatch("{id}/Edit")]
+        [HttpPatch("{id}")]
         public async Task<IActionResult> EditTeamName(Team editedTeam, int id)
         {
             if (id != editedTeam.Id || !ModelState.IsValid)
@@ -93,7 +93,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpDelete("{id}/Delete")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTeam(int id)
         {
             try
@@ -113,7 +113,7 @@ namespace API.Controllers
             }
         }
         
-        [HttpPost("{teamId}/AddTeamMember/{userId}/{roleId}")]
+        [HttpPost("{teamId}/user/{userId}/role/{roleId}")]
         public async Task<IActionResult> AddTeamMember(int teamId, int userId, int roleId)
         {
             try
@@ -139,13 +139,13 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpDelete("{teamId}/DeleteTeamMember/{userId}")]
+        [HttpDelete("{teamId}/user/{userId}")]
         public async Task<IActionResult> DeleteTeamMember(int teamId, int userId)
         {
             try
             {
                 var members = _teamMemberDao.GetTeamMembersForTeam(teamId);
-                var memberToRemove = members.FirstOrDefault(member => member.Id == userId);
+                var memberToRemove = members.FirstOrDefault(member => member.User.Id == userId);
                 _teamMemberDao.Remove(memberToRemove);
             }
             catch (Exception)
@@ -156,7 +156,7 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpPost("{teamId}/AddFeature/{featureId}")]
+        [HttpPost("{teamId}/feature/{featureId}")]
         public async Task<IActionResult> AddFeature(int teamId, int featureId)
         {
             try
@@ -176,7 +176,7 @@ namespace API.Controllers
         }
 
 
-        [HttpDelete("{teamId}/DeleteFeature/{featureId}")]
+        [HttpDelete("{teamId}/feature/{featureId}")]
         public async Task<IActionResult> DeleteFeature(int teamId, int featureId)
         {
             try
@@ -196,7 +196,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpPatch("{teamId}/EditFeature/{featureId}")]
+        [HttpPatch("{teamId}/feature/{featureId}")]
         public async Task<IActionResult> EditFeature(int teamId, int featureId, Feature feature)
         {
             try

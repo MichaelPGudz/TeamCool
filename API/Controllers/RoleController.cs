@@ -16,7 +16,7 @@ namespace API.Controllers
             _roleDao = roleDao;
         }
         
-        [HttpPost("AddRole")]
+        [HttpPost]
         public async Task<IActionResult> AddRole(Role role)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -24,7 +24,7 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet("~/api/roles")]
         public ICollection<Role> GetAll() => _roleDao.GetAll();
 
         [HttpGet("{roleId}")]
@@ -33,7 +33,7 @@ namespace API.Controllers
             return _roleDao.GetById(roleId);
         }
 
-        [HttpDelete("{roleId}/Delete")]
+        [HttpDelete("{roleId}")]
         public async Task<IActionResult> Delete(int roleId)
         {
             var role = await _roleDao.GetById(roleId);

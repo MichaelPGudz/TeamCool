@@ -20,7 +20,7 @@ namespace API.Controllers
             _skillDao = skillDao;
         }
 
-        [HttpPost("AddUser")]
+        [HttpPost]
         public async Task<ActionResult<User>> AddNewUser(User user)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -35,7 +35,7 @@ namespace API.Controllers
             }
         }
         
-        [HttpDelete("{id}/Delete")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
             try
@@ -58,10 +58,10 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUserById(int id) => await _userDao.GetById(id);
         
-        [HttpGet("{id}/GetSkillsForUser")]
+        [HttpGet("{id}/skills")]
         public IQueryable<ICollection<Skill>> GetSkillsForUser(int id) => _userDao.GetUserSkills(id);
 
-        [HttpPost("{userId}/AddSkillForUser/{skillId}")]
+        [HttpPost("{userId}/skill/{skillId}")]
         public IActionResult AddSkillForUser(int userId, int skillId)
         {
             var skill = _skillDao.GetById(skillId);
@@ -77,7 +77,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpDelete("{userId}/RemoveSkillFromUser/{skillId}")]
+        [HttpDelete("{userId}/skill/{skillId}")]
         public IActionResult RemoveSkillFromUser(int userId, int skillId)
         {
             var skill = _skillDao.GetById(skillId);
@@ -93,7 +93,7 @@ namespace API.Controllers
             }
         }
         
-        [HttpGet("{id}/GetTeamsForUser")]
+        [HttpGet("{id}/teams")]
         public IIncludableQueryable<TeamMember, Team> GetTeamsForUser(int id) => _userDao.GetUserTeams(id);
     }
 }

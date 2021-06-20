@@ -42,7 +42,7 @@ namespace API.Controllers
         //     }
         // }
 
-        [HttpPost("{wallId}/AddPost")]
+        [HttpPost("{wallId}")]
         public async Task<IActionResult> AddPostToWall(int wallId, Post post)
         {
             var wall = await _wallDao.GetById(wallId);

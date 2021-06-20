@@ -16,7 +16,7 @@ namespace API.Controllers
             _skillDao = skillDao;
         }
 
-        [HttpPost("AddSkill")]
+        [HttpPost]
         public async Task<ActionResult<Skill>> AddNewSkill(Skill skill)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -31,7 +31,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpDelete("{id}/Delete")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteSkill(int id)
         {
             try
@@ -50,7 +50,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpPatch("{id}/Edit")]
+        [HttpPatch("{id}")]
         public IActionResult EditSkill(int id, Skill editedSkill)
         {
             if (id != editedSkill.Id || !ModelState.IsValid)
