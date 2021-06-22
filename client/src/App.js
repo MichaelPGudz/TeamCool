@@ -1,7 +1,14 @@
+import Icon from '@material-ui/core/Icon';
+import { AccessAlarm, ThreeDRotation } from '@material-ui/icons';
+
+
 function App() {
-  return <div>
+  return (<div>
+    <Icon>home</Icon>
+    <AccessAlarm/>
+    <ThreeDRotation/>
     <h1>TeamCool</h1>
-  </div>;
+  </div>)
 }
 
 export default App;
