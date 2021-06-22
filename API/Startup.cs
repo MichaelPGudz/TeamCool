@@ -48,6 +48,7 @@ namespace API
             services.AddScoped<ISkillDao, SkillDao>();
             services.AddScoped<IFeatureDao, FeatureDao>();
             services.AddScoped<IPostDao, PostDao>();
+            services.AddCors();
 
 
         }
@@ -65,6 +66,7 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:3000"));
 
             app.UseAuthorization();
 
