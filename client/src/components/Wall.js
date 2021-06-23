@@ -6,6 +6,7 @@ const Wall = () => {
 
     const [isLoading, setIsLoading] = useState(true);
     const [loadedWalls, setLoadedWalls] = useState([]);
+    const [loadedPosts, setLoadedPosts] = useState([]);
 
 
     useEffect(() => {
@@ -13,7 +14,8 @@ const Wall = () => {
             .then(reponse => reponse.json())
             .then(data => {
                 setIsLoading(false);
-                setLoadedWalls(data);
+                setLoadedWalls(data)
+                setLoadedPosts(data.posts);
             });
     }, []);
 
@@ -25,19 +27,19 @@ const Wall = () => {
         );
     }
 
-    var posts = loadedWalls.posts;
+    // var posts = loadedWalls.posts;
     return (
         <div>
             {console.log(loadedWalls)}
-            {console.log(posts)}
+            {console.log(loadedPosts)}
             <h1>Walls</h1>
             <h2>
                 id: {loadedWalls.id}
-                {/* {posts.map(post => (
+                {loadedPosts.map(post => (
                     <h2>
                         id: {post.id} <br /> content: {post.postContent}
                     </h2>
-                ))} */}
+                ))}
             </h2>
         </div>
     )
