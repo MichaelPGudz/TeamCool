@@ -13,10 +13,15 @@ import IconButton from '@material-ui/core/IconButton';
 
 
 const useStyles = makeStyles((theme) => ({
-    size: {
-        width: "40%",
+    size: { 
+        paddingLeft: "30%",
+        paddingRight: "20%",
+        paddingTop: "10%" 
+    },
+
+    shape: {
         borderRadius: 30,
-        },
+    },
     text: {
         padding: theme.spacing(2, 2, 0),
         color: "dodgerblue",
@@ -61,15 +66,15 @@ const Wall = (props) => {
     }
 
     return (
-        <div>
+        <div className={classes.size}>
             {console.log(loadedPosts)}
             <CssBaseline />
-            <Paper elevation={5} className={classes.paper, classes.size} >
+            <Paper elevation={5} className={classes.paper, classes.shape} >
                 <Typography className={classes.text} variant="h4" gutterBottom>
                     Wall
                 </Typography>
                 <List className={classes.list}>
-                    {loadedPosts.map(({ id, postContent, author}) => (
+                    {loadedPosts.map(({ id, postContent, author }) => (
                         <React.Fragment key={id}>
                             <ListItem button>
                                 <ListItemText primary={id + " " + author.firstName} secondary={postContent} />
@@ -79,7 +84,7 @@ const Wall = (props) => {
                 </List>
                 <IconButton>
                     <AddIcon className={classes.addIcon}>Add</AddIcon>
-                </IconButton>  
+                </IconButton>
             </Paper>
         </div>
     );
