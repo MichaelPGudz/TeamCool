@@ -83,6 +83,7 @@ const Wall = (props) => {
                     ))}
                 </List>
                 <IconButton>
+                    <Typography className={classes.text} variant="h5" gutterBottom>Add Post</Typography>
                     <AddIcon className={classes.addIcon}>Add</AddIcon>
                 </IconButton>
             </Paper>
