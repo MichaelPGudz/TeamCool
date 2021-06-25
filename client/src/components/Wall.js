@@ -13,10 +13,10 @@ import IconButton from '@material-ui/core/IconButton';
 
 
 const useStyles = makeStyles((theme) => ({
-    size: { 
+    size: {
         paddingLeft: "30%",
         paddingRight: "20%",
-        paddingTop: "10%" 
+        paddingTop: "10%",
     },
 
     shape: {
@@ -59,9 +59,14 @@ const Wall = (props) => {
 
     if (isLoading) {
         return (
-            <section>
-                <p>Loading...</p>
-            </section>
+            <div className = {classes.size}>
+            <Paper elevation={5} className={classes.paper, classes.shape}>
+                <Typography className={classes.text} variant="h4" gutterBottom>
+                    Chat Loading...
+                </Typography>
+            </Paper>
+            </div>
+
         );
     }
 
