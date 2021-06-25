@@ -22,6 +22,7 @@ namespace API.DAOs
         {
             return await _dataContext.Walls
                 .Include(w => w.Posts)
+                .ThenInclude(x => x.Author)
                 .FirstOrDefaultAsync(u => u.Id == id);
         }
 

@@ -2,6 +2,7 @@ import Icon from '@material-ui/core/Icon';
 import { AccessAlarm, ThreeDRotation } from '@material-ui/icons';
 import FetchExample from './components/FetchExample';
 import Wall from './components/Wall'
+import BottomAppBar from './components/BottomAppBar'
 
 
 function App() {
@@ -10,8 +11,10 @@ function App() {
     <AccessAlarm/>
     <ThreeDRotation/>
     <h1>TeamCool</h1>
-    <FetchExample/>
-    <Wall />
+    {/* <FetchExample/> */}
+    <Wall id = "3"/>
+    {/* <BottomAppBar/> */}
+
   </div>)
 }
 
