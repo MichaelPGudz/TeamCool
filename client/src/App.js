@@ -7,18 +7,11 @@ import Wall from './components/Wall'
 import Home from './components/Home/Home.js'
 import BottomAppBar from './components/BottomAppBar'
 import Footer from './components/Navs/Footer/Footer.js'
-
+import Sidebar from "./components/Navs/Sidebar/Sidebar";
 
 function App() {
   return (<div>
-    <Icon>home</Icon>
-    <AccessAlarm/>
-    <ThreeDRotation/>
-    <h1>TeamCool</h1>
-    {/* <FetchExample/> */}
-    {/* <Wall id = "3"/> */}
-    {/* <BottomAppBar/> */}
-
+    <Sidebar/>
     <Router>
         <Switch>
           <Route path="/" exact component={() => <Home />} />
