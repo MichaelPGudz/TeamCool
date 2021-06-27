@@ -113,7 +113,7 @@ namespace API.Controllers
             }
         }
         
-        [HttpPost("{teamId}/user/{userId}/role/{roleId}")]
+        [HttpPost("{teamId}/AddTeamMember/{userId}/{roleId}")]
         public async Task<IActionResult> AddTeamMember(int teamId, int userId, int roleId)
         {
             try
