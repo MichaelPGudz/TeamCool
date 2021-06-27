@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import clsx from 'clsx';
 import {makeStyles, useTheme} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -15,7 +15,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Footer from "../Footer/Footer";
-import {PeopleAlt, Settings} from "@material-ui/icons";
+import {ExpandLess, ExpandMore, PeopleAlt, PeopleAltOutlined, Settings, StarBorder} from "@material-ui/icons";
+import {CircularProgress, Collapse} from "@material-ui/core";
 
 const drawerWidth = 240;
 
@@ -79,20 +80,40 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         padding: theme.spacing(3),
     },
+    nested: {
+        paddingLeft: theme.spacing(4),
+    },
 }));
 
 export default function Sidebar() {
     const classes = useStyles();
     const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
+    const [openDrawer, setOpenDrawer] = React.useState(true);
+    const [openMyTeams, setOpenMyTeams] = React.useState(false);
+    const [userTeams, setUserTeams] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
+
+    useEffect(() => {
+        fetch('https://localhost:5001/api/user/1')
+            .then(reponse => reponse.json())
+            .then(data => {
+                setUserTeams(data.myTeams);
+                setLoading(false)
+            });
+    }, []);
 
     const handleDrawerOpen = () => {
-        setOpen(true);
+        setOpenDrawer(true);
     };
 
     const handleDrawerClose = () => {
-        setOpen(false);
+        setOpenDrawer(false);
+        setOpenMyTeams(false);
     };
+
+    const handleMyTeamsClick = () => {
+        setOpenMyTeams(!openMyTeams);
+    }
 
     return (
         <div className={classes.root}>
@@ -100,7 +121,7 @@ export default function Sidebar() {
             <AppBar
                 position="fixed"
                 className={clsx(classes.appBar, {
-                    [classes.appBarShift]: open,
+                    [classes.appBarShift]: openDrawer,
                 })}
             >
                 <Toolbar>
@@ -110,7 +131,7 @@ export default function Sidebar() {
                         onClick={handleDrawerOpen}
                         edge="start"
                         className={clsx(classes.menuButton, {
-                            [classes.hide]: open,
+                            [classes.hide]: openDrawer,
                         })}
                     >
                         <MenuIcon/>
@@ -120,13 +141,13 @@ export default function Sidebar() {
             <Drawer
                 variant="permanent"
                 className={clsx(classes.drawer, {
-                    [classes.drawerOpen]: open,
-                    [classes.drawerClose]: !open,
+                    [classes.drawerOpen]: openDrawer,
+                    [classes.drawerClose]: !openDrawer,
                 })}
                 classes={{
                     paper: clsx({
-                        [classes.drawerOpen]: open,
-                        [classes.drawerClose]: !open,
+                        [classes.drawerOpen]: openDrawer,
+                        [classes.drawerClose]: !openDrawer,
                     }),
                 }}
             >
@@ -137,11 +158,28 @@ export default function Sidebar() {
                 </div>
                 <Divider/>
                 <List>
-                    <ListItem button key={"My Teams"}>
+                    <ListItem button key={"My Teams"} onClick={handleMyTeamsClick}>
                         <ListItemIcon><PeopleAlt/></ListItemIcon>
                         <ListItemText primary={"My Teams"}/>
+                        {openMyTeams ? <ExpandLess/> : <ExpandMore/>}
                     </ListItem>
-
+                    <Collapse in={openMyTeams} timeout={"auto"} unmountOnExit>
+                        <List>
+                            {loading ?
+                                <ListItem button className={classes.nested}>
+                                <CircularProgress/>
+                                </ListItem>
+                                :
+                                userTeams.map(({id, role, team}) => (
+                                    <ListItem button className={classes.nested}>
+                                        <ListItemIcon>
+                                            <PeopleAltOutlined/>
+                                        </ListItemIcon>
+                                        <ListItemText primary={team.name} secondary={role.name}/>
+                                    </ListItem>
+                                ))}
+                        </List>
+                    </Collapse>
                 </List>
                 <Divider/>
                 <List>
@@ -152,7 +190,7 @@ export default function Sidebar() {
                 </List>
             </Drawer>
             <Footer additionalClasses={clsx(classes.appBar, {
-                [classes.appBarShift]: open,
+                [classes.appBarShift]: openDrawer,
             })}/>
         </div>
     );
