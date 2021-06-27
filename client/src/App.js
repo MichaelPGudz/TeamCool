@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { AccessAlarm, ThreeDRotation } from '@material-ui/icons';
 
 import FetchExample from './components/FetchExample';
+import Layout from './components/Navs/Layout';
 import Navbar from './components/Navs/Navbar/Navbar';
 import Wall from './components/Wall';
 import Home from './pages/Home/Home.js';
@@ -18,7 +19,13 @@ function App() {
       {/* <BottomAppBar/> */}
 
       <Router>
-        <Navbar />
+
+        {/* Option 1 */}
+        {/* <Navbar /> */}
+
+        {/* Option 2 */}
+        <Layout>
+          
         <Icon>home</Icon>
         <AccessAlarm />
         <ThreeDRotation />
@@ -27,14 +34,15 @@ function App() {
           <Route path="/" exact>
             <Home />
           </Route>
-          <Route path="/about">
+          <Route path="/about" exact>
             <Wall id="2" />
           </Route>
-          <Route path="/contact">
+          <Route path="/contact" exact>
             <Wall id="3" />
           </Route>
         </Switch>
         <Footer />
+        </Layout>
       </Router>
     </div>
   );
