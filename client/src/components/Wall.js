@@ -16,9 +16,8 @@ const useStyles = makeStyles((theme) => ({
     size: {
         paddingLeft: "30%",
         paddingRight: "20%",
-        paddingTop: "5%",
+        paddingTop: "5%"
     },
-
     shape: {
         borderRadius: 30,
     },
