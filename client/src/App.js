@@ -8,9 +8,11 @@ import Home from './components/Home/Home.js'
 import BottomAppBar from './components/BottomAppBar'
 import Footer from './components/Navs/Footer/Footer.js'
 import Sidebar from "./components/Navs/Sidebar/Sidebar";
+import MenuAppBar from "./components/Navs/Navbar/Navbar";
 
 function App() {
   return (<div>
+    {/*<MenuAppBar/>*/}
     <Sidebar/>
     <Router>
         <Switch>
@@ -20,7 +22,6 @@ function App() {
         </Switch>
       </Router>
 
-      <Footer />
 
   </div>)
 }

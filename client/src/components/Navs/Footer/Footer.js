@@ -4,18 +4,18 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-    appBar: {
+    footer: {
       top: 'auto',
-      bottom: 0,
+      bottom: 0
     },
   }));
 
 
-const Footer = (() => {
+const Footer = ((props) => {
     const classes = useStyles();
 
     return (
-    <AppBar position="fixed" color="primary" className={classes.appBar}>
+    <AppBar position="fixed" color="primary" className={classes.footer +" "+ props.additionalClasses}>
         <Toolbar>
             Made by RD, MG, JL
         </Toolbar>

@@ -17,6 +17,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import Footer from "../Footer/Footer";
 
 const drawerWidth = 240;
 
@@ -116,9 +117,6 @@ export default function Sidebar() {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap>
-                        Mini variant drawer
-                    </Typography>
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -158,6 +156,9 @@ export default function Sidebar() {
                     ))}
                 </List>
             </Drawer>
+            <Footer additionalClasses={clsx(classes.appBar, {
+                [classes.appBarShift]: open,
+            })} />
         </div>
     );
 }
