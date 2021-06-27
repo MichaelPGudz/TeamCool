@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.DAOs
 {
@@ -31,12 +32,12 @@ namespace API.DAOs
 
         public ICollection<Post> GetAll()
         {
-            return _dataContext.Posts.ToList();
+            return _dataContext.Posts.Include(t => t.Author).ToList();
         }
 
         public async Task<ActionResult<Post>> GetById(int id)
         {
-            return await _dataContext.Posts.FindAsync(id);
+            return await _dataContext.Posts.Include(t => t.Author).FirstOrDefaultAsync(i => i.Id == id);
         }
 
         public void Remove(Post toRemove)
