@@ -10,6 +10,8 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
+import cssClasses from './Navbar.module.css';
+
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
@@ -24,7 +26,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function MenuAppBar() {
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(false);
+  const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -51,8 +53,24 @@ export default function MenuAppBar() {
             </IconButton>
           )}
           <Typography variant="h6" className={classes.title}>
-            TeamCool
+            <Link to='/'>TeamCool</Link>
           </Typography>
+            <div className={cssClasses.links}>
+            <ul>
+              <li>
+                <Link to="/teams">My Teams</Link>
+              </li>
+              <li>
+                <Link to="/user">My Profile</Link>
+              </li>
+              <li>
+                <Link to="/contact">Contact</Link>
+              </li>
+              <li>
+                <Link to="/about">About</Link>
+              </li>
+            </ul>
+            </div>
           {auth && (
             <div>
               <IconButton
