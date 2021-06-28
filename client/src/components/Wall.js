@@ -59,7 +59,7 @@ const Wall = (props) => {
     if (isLoading) {
         return (
             <div className = {classes.size}>
-            <Paper elevation={5} className={classes.paper, classes.shape}>
+            <Paper elevation={5} className={classes.paper +" " + classes.shape}>
                 <Typography className={classes.text} variant="h4" gutterBottom>
                     Chat Loading...
                 </Typography>
@@ -73,7 +73,7 @@ const Wall = (props) => {
         <div className={classes.size}>
             {console.log(loadedPosts)}
             <CssBaseline />
-            <Paper elevation={5} className={classes.paper, classes.shape} >
+            <Paper elevation={5} className={classes.paper +" " + classes.shape} >
                 <Typography className={classes.text} variant="h4" gutterBottom>
                     Wall
                 </Typography>

@@ -81,7 +81,6 @@ function Layout(props) {
 
     return (
         <div>
-
             <Navbar addedClasses={addedClasses} menuClick={handleMenuClick} openDrawer={openDrawer}/>
             <Sidebar addedClasses={addedClasses} menuClick={handleMenuClick} openDrawer={openDrawer}/>
             <main className={classes.main}>{props.children}</main>

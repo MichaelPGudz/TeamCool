@@ -71,7 +71,7 @@ export default function Sidebar({addedClasses, openDrawer, menuClick}) {
                                 </ListItem>
                                 :
                                 userTeams.map(({id, role, team}) => (
-                                    <ListItem button className={classes.nested}>
+                                    <ListItem button className={classes.nested} key={id}>
                                         <ListItemIcon>
                                             <PeopleAltOutlined/>
                                         </ListItemIcon>
