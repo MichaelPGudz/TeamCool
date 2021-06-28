@@ -11,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
 import cssClasses from './Navbar.module.css';
+import clsx from "clsx";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function MenuAppBar() {
+export default function MenuAppBar({addedClasses, openDrawer, menuClick}) {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -40,14 +41,19 @@ export default function MenuAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed">
+      <AppBar position="fixed" className={clsx(addedClasses.appBar, {
+        [addedClasses.appBarShift]: openDrawer,
+      })}>
         <Toolbar>
           {auth && (
             <IconButton
               edge="start"
-              className={classes.menuButton}
+              className={clsx(classes.menuButton, {
+                [addedClasses.hide]: openDrawer,
+              })}
               color="inherit"
               aria-label="menu"
+              onClick={menuClick}
             >
               <MenuIcon />
             </IconButton>
