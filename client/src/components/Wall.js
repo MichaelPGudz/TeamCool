@@ -54,7 +54,7 @@ const Wall = (props) => {
                 setLoadedWalls(data)
                 setLoadedPosts(data.posts);
             });
-    }, []);
+    }, [props]);
 
     if (isLoading) {
         return (
