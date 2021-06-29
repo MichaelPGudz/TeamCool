@@ -30,7 +30,8 @@ export default function TeamPage() {
                 setFeatures(data.features);
                 setWallId(data.wall.id);
                 setLoading(false);
-    }, [])});
+            }, [])
+    });
 
     return (
         <div>
@@ -40,12 +41,23 @@ export default function TeamPage() {
                 </Grid>
                 <Grid item xs={8}>
                     {loading ?
-                        <CircularProgress />
-                    :
+                        <CircularProgress/>
+                        :
                         <Wall id={wallId}/>}
                 </Grid>
                 <Grid item xs={4}>
-                    <FeaturesList features={features}/>
+                    <Grid
+                        container
+                        direction="column"
+                        spacing={2}
+                    >
+                        <Grid item>
+                        <FeaturesList features={features}/>
+                        </Grid>
+                        <Grid item>
+                            <Paper className={classes.paper}>ADD FEATURE</Paper>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
         </div>

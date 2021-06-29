@@ -6,7 +6,6 @@ import {GitHub} from "@material-ui/icons";
 
 export default function FeaturesList({features}) {
 
-
     return (
         <div>
             <Paper>
