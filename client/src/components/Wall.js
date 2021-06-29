@@ -9,6 +9,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import AddIcon from '@material-ui/icons/Add';
 import IconButton from '@material-ui/core/IconButton';
+import {CircularProgress } from "@material-ui/core";
+
 
 
 
@@ -62,6 +64,7 @@ const Wall = (props) => {
                 <Paper elevation={5} className={classes.paper + " " + classes.shape}>
                     <Typography className={classes.text} variant="h4" gutterBottom>
                         Chat Loading...
+                    <CircularProgress />
                     </Typography>
                 </Paper>
             </div>

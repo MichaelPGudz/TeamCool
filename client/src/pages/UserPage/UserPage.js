@@ -12,6 +12,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { CircularProgress } from "@material-ui/core";
+import Button from '@material-ui/core/Button';
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -36,6 +38,9 @@ const useStyles = makeStyles({
     table: {
         minWidth: 500,
     },
+    button: {
+        margin: "1%"
+    }
 });
 
 const UserPage = (props) => {
@@ -57,9 +62,9 @@ const UserPage = (props) => {
 
 
     function createData(name, property) {
-        return {name, property};
+        return { name, property };
     }
-    
+
     const rows = [
         createData("Your id", loadedUser.id),
         createData("Your name", loadedUser.firstName),
@@ -67,10 +72,22 @@ const UserPage = (props) => {
         createData("Your e-mail", loadedUser.email)
     ];
 
+    if (isLoading) {
+        return (
+            <div>
+                <Typography variant="h4" gutterBottom>
+                    User Page Loading...
+                    <CircularProgress />
+                </Typography>
+            </div>
+        );
+    }
+
     return (
+
         <div>
             {console.log(loadedUser)}
-            
+
             <Typography variant="h3">
                 User Page
             </Typography>
@@ -79,7 +96,7 @@ const UserPage = (props) => {
                 <Table className={classes.table} aria-label="customized table">
                     <TableHead>
                         <StyledTableRow>
-                        <StyledTableCell>Your user data</StyledTableCell>
+                            <StyledTableCell>Your user data</StyledTableCell>
                             <StyledTableCell></StyledTableCell>
                         </StyledTableRow>
                     </TableHead>
@@ -95,22 +112,23 @@ const UserPage = (props) => {
                     </TableBody>
                 </Table>
             </TableContainer>
+
+            <Typography variant="h4">
+                Your skills
+            </Typography>
+            
             <List>
                 <React.Fragment key={loadedUser.id}>
                     <ListItem>
                         {loadedSkills.map(({ id, firstName }) =>
                             <React.Fragment key={id}>
-                                <ListItem>
-                                    <Typography variant="h5">
-                                        {firstName}
-                                    </Typography>
-                                </ListItem>
+                                <Button variant="contained" color="secondary" className = {classes.button}>{firstName}</Button>
                             </React.Fragment>
                         )}
                     </ListItem>
                 </React.Fragment>
             </List>
-        </div>
+        </div >
     )
 }
 
