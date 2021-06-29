@@ -1,12 +1,10 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { CircularProgress } from "@material-ui/core";
-import Button from '@material-ui/core/Button';
 import UserDataTable from "./UserDataTable";
+import UserSkills from "./UserSkills";
 
 const useStyles = makeStyles({
     table: {
@@ -67,22 +65,13 @@ const UserPage = (props) => {
             </Typography>
 
             <UserDataTable rows={rows} classes={classes} />
-            
+
             <Typography variant="h4">
                 Your skills
             </Typography>
-            
-            <List>
-                <React.Fragment key={loadedUser.id}>
-                    <ListItem>
-                        {loadedSkills.map(({ id, firstName }) =>
-                            <React.Fragment key={id}>
-                                <Button variant="contained" color="secondary" className = {classes.button}>{firstName}</Button>
-                            </React.Fragment>
-                        )}
-                    </ListItem>
-                </React.Fragment>
-            </List>
+
+            <UserSkills loadedUser={loadedUser} loadedSkills={loadedSkills} classes={classes} />
+
         </div >
     )
 }
