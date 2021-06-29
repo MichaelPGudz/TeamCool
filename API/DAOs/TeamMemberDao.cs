@@ -55,6 +55,10 @@ namespace API.DAOs
         public IOrderedEnumerable<ICollection<Post>> GetPostsForTeamMember(int userId)
         {
             return _dataContext.TeamMembers
+                .Include(x => x.Team)
+                .ThenInclude(y => y.Wall)
+                .ThenInclude(z => z.Posts)
+                .ThenInclude(z => z.Author)
                 .Where(t => t.User.Id == userId)
                 .Select(tm => tm.Team)
                 .Select(t => t.Wall)
