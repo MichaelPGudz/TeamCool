@@ -26,7 +26,7 @@ function App() {
                         <Route path="/user" exact>
                             <UserPage id="1"/>
                         </Route>
-                        <Route path="/team/:id" exact>
+                        <Route path="/team/:teamId" exact>
                             <TeamPage/>
                         </Route>
                     </Switch>
