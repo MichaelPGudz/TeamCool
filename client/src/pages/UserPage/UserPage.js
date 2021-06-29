@@ -1,80 +1,82 @@
 import React from 'react';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { CircularProgress } from "@material-ui/core";
-import UserDataTable from "./UserDataTable";
-import UserSkills from "./UserSkills";
+import { CircularProgress } from '@material-ui/core';
+import UserDataTable from './UserDataTable';
+import UserSkills from './UserSkills';
+import MyTeams from '../MyTeams/MyTeams';
 
 const useStyles = makeStyles({
-    table: {
-        minWidth: 500,
-    },
-    button: {
-        margin: "1%"
-    }
+  table: {
+    minWidth: 500,
+  },
+  button: {
+    margin: '1%',
+  },
 });
 
-const UserPage = (props) => {
+const UserPage = props => {
+  const classes = useStyles();
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadedUser, setLoadedUser] = useState([]);
+  const [loadedSkills, setLoadedSkills] = useState([]);
+  let { path, url } = useRouteMatch();
 
-    const classes = useStyles();
-    const [isLoading, setIsLoading] = useState(true);
-    const [loadedUser, setLoadedUser] = useState([]);
-    const [loadedSkills, setLoadedSkills] = useState([]);
+  useEffect(() => {
+    fetch(`https://localhost:5001/api/user/${props.id}`)
+      .then(reponse => reponse.json())
+      .then(data => {
+        setIsLoading(false);
+        setLoadedUser(data);
+        setLoadedSkills(data.mySkills);
+      });
+  }, [props]);
 
-    useEffect(() => {
-        fetch(`https://localhost:5001/api/user/${props.id}`)
-            .then(reponse => reponse.json())
-            .then(data => {
-                setIsLoading(false);
-                setLoadedUser(data);
-                setLoadedSkills(data.mySkills);
-            });
-    }, [props]);
+  function createData(name, property) {
+    return { name, property };
+  }
 
+  const rows = [
+    createData('Your id', loadedUser.id),
+    createData('Your name', loadedUser.firstName),
+    createData('Your lastname', loadedUser.lastName),
+    createData('Your e-mail', loadedUser.email),
+  ];
 
-    function createData(name, property) {
-        return { name, property };
-    }
-
-    const rows = [
-        createData("Your id", loadedUser.id),
-        createData("Your name", loadedUser.firstName),
-        createData("Your lastname", loadedUser.lastName),
-        createData("Your e-mail", loadedUser.email)
-    ];
-
-    if (isLoading) {
-        return (
-            <div>
-                <Typography variant="h4" gutterBottom>
-                    User Page Loading...
-                    <CircularProgress />
-                </Typography>
-            </div>
-        );
-    }
-
+  if (isLoading) {
     return (
+      <div>
+        <Typography variant="h4" gutterBottom>
+          User Page Loading...
+          <CircularProgress />
+        </Typography>
+      </div>
+    );
+  }
 
-        <div>
-            {console.log(loadedUser)}
+  return (
+    <div>
+      {console.log(loadedUser)}
+      <Typography variant="h3">User Page</Typography>
 
-            <Typography variant="h3">
-                User Page
-            </Typography>
+      <UserDataTable rows={rows} classes={classes} />
 
-            <UserDataTable rows={rows} classes={classes} />
+      <Typography variant="h4">Your skills</Typography>
 
-            <Typography variant="h4">
-                Your skills
-            </Typography>
-
-            <UserSkills loadedUser={loadedUser} loadedSkills={loadedSkills} classes={classes} />
-
-        </div >
-    )
-}
-
+      <UserSkills
+        loadedUser={loadedUser}
+        loadedSkills={loadedSkills}
+        classes={classes}
+      />
+      <Switch>
+        <Route exact path='user/myteams'>
+          <MyTeams id={props.id} />
+        </Route>
+      </Switch>
+    </div>
+  );
+};
 
 export default UserPage;

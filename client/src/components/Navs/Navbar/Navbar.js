@@ -11,7 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
 import cssClasses from './Navbar.module.css';
-import clsx from "clsx";
+import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function MenuAppBar({addedClasses, openDrawer, menuClick}) {
+export default function MenuAppBar({ addedClasses, openDrawer, menuClick }) {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -41,9 +41,12 @@ export default function MenuAppBar({addedClasses, openDrawer, menuClick}) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed" className={clsx(addedClasses.appBar, {
-        [addedClasses.appBarShift]: openDrawer,
-      })}>
+      <AppBar
+        position="fixed"
+        className={clsx(addedClasses.appBar, {
+          [addedClasses.appBarShift]: openDrawer,
+        })}
+      >
         <Toolbar>
           {auth && (
             <IconButton
@@ -59,12 +62,12 @@ export default function MenuAppBar({addedClasses, openDrawer, menuClick}) {
             </IconButton>
           )}
           <Typography variant="h6" className={classes.title}>
-            <Link to='/'>TeamCool</Link>
+            <Link to="/">TeamCool</Link>
           </Typography>
-            <div className={cssClasses.links}>
+          <div className={cssClasses.links}>
             <ul>
               <li>
-                <Link to="/teams">My Teams</Link>
+                <Link to="user/myteams">My Teams</Link>
               </li>
               <li>
                 <Link to="/user">My Profile</Link>
@@ -76,7 +79,7 @@ export default function MenuAppBar({addedClasses, openDrawer, menuClick}) {
                 <Link to="/about">About</Link>
               </li>
             </ul>
-            </div>
+          </div>
           {auth && (
             <div>
               <IconButton
