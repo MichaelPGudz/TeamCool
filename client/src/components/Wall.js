@@ -13,13 +13,13 @@ import IconButton from '@material-ui/core/IconButton';
 
 
 const useStyles = makeStyles((theme) => ({
-    size: {
-        paddingLeft: "30%",
-        paddingRight: "20%",
-        paddingTop: "5%"
-    },
     shape: {
         borderRadius: 30,
+        minHeight: 400,
+        maxHeight: 500,
+        minWidth: 700,
+        maxWidth: 800,
+        overflow: "auto"
     },
     text: {
         padding: theme.spacing(2, 2, 0),
@@ -58,22 +58,22 @@ const Wall = (props) => {
 
     if (isLoading) {
         return (
-            <div className = {classes.size}>
-            <Paper elevation={5} className={classes.paper +" " + classes.shape}>
-                <Typography className={classes.text} variant="h4" gutterBottom>
-                    Chat Loading...
-                </Typography>
-            </Paper>
+            <div>
+                <Paper elevation={5} className={classes.paper + " " + classes.shape}>
+                    <Typography className={classes.text} variant="h4" gutterBottom>
+                        Chat Loading...
+                    </Typography>
+                </Paper>
             </div>
 
         );
     }
 
     return (
-        <div className={classes.size}>
+        <div>
             {console.log(loadedPosts)}
             <CssBaseline />
-            <Paper elevation={5} className={classes.paper +" " + classes.shape} >
+            <Paper elevation={5} className={classes.paper + " " + classes.shape} >
                 <Typography className={classes.text} variant="h4" gutterBottom>
                     Wall
                 </Typography>
@@ -86,11 +86,11 @@ const Wall = (props) => {
                         </React.Fragment>
                     ))}
                 </List>
-                <IconButton>
-                    <Typography className={classes.text} variant="h5" gutterBottom>Add Post</Typography>
-                    <AddIcon className={classes.addIcon}>Add</AddIcon>
-                </IconButton>
             </Paper>
+            <IconButton>
+                <Typography className={classes.text} variant="h5" gutterBottom>Add Post</Typography>
+                <AddIcon className={classes.addIcon}>Add</AddIcon>
+            </IconButton>
         </div>
     );
 }
