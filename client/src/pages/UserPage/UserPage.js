@@ -10,6 +10,7 @@ const UserPage = (props) => {
 
     const [isLoading, setIsLoading] = useState(true);
     const [loadedUser, setLoadedUser] = useState([]);
+    const [loadedSkills, setLoadedSkills] = useState([]);
 
     useEffect(() => {
         fetch(`https://localhost:5001/api/user/${props.id}`)
@@ -17,6 +18,7 @@ const UserPage = (props) => {
             .then(data => {
                 setIsLoading(false);
                 setLoadedUser(data);
+                setLoadedSkills(data.mySkills);
             });
     }, [props]);
 
@@ -26,7 +28,14 @@ const UserPage = (props) => {
             <List>
                 <React.Fragment key={loadedUser.id}>
                     <ListItem button>
-                        <ListItemText primary={loadedUser.id + " " + loadedUser.firstName + " " + loadedUser.lastName} secondary={loadedUser.email} />
+                        <ListItemText primary={loadedUser.id + " " + loadedUser.firstName + " " + loadedUser.lastName}
+                         secondary={loadedSkills.map(({id, firstName}) => 
+                         <React.Fragment key={id}>
+                             <ListItem>
+                                 {firstName}
+                             </ListItem>
+                         </React.Fragment>
+                         )} />
                     </ListItem>
                 </React.Fragment>
             </List>
