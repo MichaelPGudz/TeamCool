@@ -1,35 +1,39 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Layout from './components/Navs/Layout';
 import Wall from './components/Wall';
 import Home from './pages/Home/Home.js';
 import UserPage from './pages/UserPage/UserPage';
+import TeamPage from "./pages/TeamPage/TeamPage";
 
 
 function App() {
-  return (
-    <div>
-      <Router>
-        <Layout>
-        <h1>TeamCool</h1>
-        <Switch>
-          <Route path="/" exact>
-            <Home />
-          </Route>
-          <Route path="/about" exact>
-            <Wall id="2" />
-          </Route>
-          <Route path="/contact" exact>
-            <Wall id="3" />
-          </Route>
-          <Route path="/user" exact>
-            <UserPage id = "1"/>
-          </Route>
-        </Switch>
-        </Layout>
-      </Router>
-    </div>
-  );
+    return (
+        <div>
+            <Router>
+                <Layout>
+                    <h1>TeamCool</h1>
+                    <Switch>
+                        <Route path="/" exact>
+                            <Home/>
+                        </Route>
+                        <Route path="/about" exact>
+                            <Wall id="2"/>
+                        </Route>
+                        <Route path="/contact" exact>
+                            <Wall id="3"/>
+                        </Route>
+                        <Route path="/user" exact>
+                            <UserPage id="1"/>
+                        </Route>
+                        <Route path="/team/:id" exact>
+                            <TeamPage/>
+                        </Route>
+                    </Switch>
+                </Layout>
+            </Router>
+        </div>
+    );
 }
 
 export default App;
