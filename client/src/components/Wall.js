@@ -86,11 +86,11 @@ const Wall = (props) => {
                         </React.Fragment>
                     ))}
                 </List>
-            </Paper>
-            <IconButton>
+                <IconButton>
                 <Typography className={classes.text} variant="h5" gutterBottom>Add Post</Typography>
                 <AddIcon className={classes.addIcon}>Add</AddIcon>
             </IconButton>
+            </Paper>
         </div>
     );
 }

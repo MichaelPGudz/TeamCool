@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Layout from './components/Navs/Layout';
 import Wall from './components/Wall';
 import Home from './pages/Home/Home.js';
+import UserPage from './pages/UserPage/UserPage';
 
 
 function App() {
@@ -20,6 +21,9 @@ function App() {
           </Route>
           <Route path="/contact" exact>
             <Wall id="3" />
+          </Route>
+          <Route path="/user" exact>
+            <UserPage id = "1"/>
           </Route>
         </Switch>
         </Layout>
