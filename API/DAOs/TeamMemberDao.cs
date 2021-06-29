@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -49,6 +50,16 @@ namespace API.DAOs
             return _dataContext.TeamMembers
                 .Include(tm => tm.User)
                 .Where(t => t.Team.Id == teamId).ToList();
+        }
+        
+        public IOrderedEnumerable<ICollection<Post>> GetPostsForTeamMember(int userId)
+        {
+            return _dataContext.TeamMembers
+                .Where(t => t.User.Id == userId)
+                .Select(tm => tm.Team)
+                .Select(t => t.Wall)
+                .Select(w => w.Posts).ToList().OrderBy(x => x.Select(y => y.PostTime));
+
         }
     }
 }
