@@ -73,7 +73,7 @@ function Sidebar({addedClasses, openDrawer, menuClick}) {
                                 </ListItem>
                                 :
                                 userTeams.map(({id, role, team}) => (
-                                    <ListItem button className={classes.nested} key={id} component={Link} to={`/team/${id}`}>
+                                    <ListItem button className={classes.nested} key={id} component={Link} to={`/team/${team.id}`}>
                                         <ListItemIcon>
                                             <PeopleAltOutlined/>
                                         </ListItemIcon>

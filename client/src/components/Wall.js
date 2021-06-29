@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     shape: {
         borderRadius: 30,
         // minHeight: 400,
-        // maxHeight: 500,
+        maxHeight: 500,
         // minWidth: 700,
         // maxWidth: 800,
         overflow: "auto"
