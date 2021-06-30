@@ -41,7 +41,7 @@ const UserDataTable = (props) => {
                 </TableHead>
                 <TableBody>
                     {props.rows.map((row) => (
-                        <StyledTableRow>
+                        <StyledTableRow key={row.name}>
                             <StyledTableCell component="th" scope="row">
                                 {row.name}
                             </StyledTableCell>

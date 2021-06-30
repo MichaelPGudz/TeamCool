@@ -6,6 +6,6 @@ namespace API.DAOs.Interfaces
 {
     public interface ISkillDao: IDao<Skill>
     {
-        public IQueryable<ICollection<User>> GetUsersForSkill(int id);
+        public IQueryable<User> GetUsersForSkill(int id);
     }
 }

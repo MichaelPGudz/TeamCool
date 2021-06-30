@@ -81,7 +81,7 @@ namespace API.Controllers
         
         
         [HttpGet("{id}/users")]
-        public IQueryable<ICollection<User>> GetUsersForSkills(int id)
+        public IQueryable<User> GetUsersForSkills(int id)
         {
             return _skillDao.GetUsersForSkill(id);
         }

@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { CircularProgress } from "@material-ui/core";
 import UserDataTable from "./UserDataTable";
 import UserSkills from "./UserSkills";
+import SkillUsersModal from "./SkillUsersModal";
 
 const useStyles = makeStyles({
     table: {
@@ -16,6 +17,7 @@ const useStyles = makeStyles({
 });
 
 const UserPage = (props) => {
+
 
     const classes = useStyles();
     const [isLoading, setIsLoading] = useState(true);
@@ -71,6 +73,8 @@ const UserPage = (props) => {
             </Typography>
 
             <UserSkills loadedUser={loadedUser} loadedSkills={loadedSkills} classes={classes} />
+
+            <SkillUsersModal id="1" />
 
         </div >
     )
