@@ -31,7 +31,7 @@ export default function TeamPage() {
                 setWallId(data.wall.id);
                 setLoading(false);
             })
-    }, []);
+    }, [teamId]);
 
     return (
         <div>
