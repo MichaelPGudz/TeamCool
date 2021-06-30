@@ -35,7 +35,7 @@ export default function TeamPage() {
 
     return (
         <div>
-            <Grid container spacing={2}>
+            <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <Paper className={classes.paper}>TEAM MENU BAR</Paper>
                 </Grid>
