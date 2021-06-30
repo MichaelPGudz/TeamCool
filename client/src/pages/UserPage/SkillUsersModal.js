@@ -4,7 +4,12 @@ import Modal from '@material-ui/core/Modal';
 import { useState, useEffect } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 function getModalStyle() {
     const top = 50;
@@ -57,16 +62,28 @@ export default function SimpleModal(props) {
 
     const body = (
         <div style={modalStyle} className={classes.paper}>
-            <h2 id="simple-modal-title">Users below has the same skill</h2>
-            <List>
-                {loadedUsers.map(({ id, firstName, lastName }) => (
-                    <React.Fragment key={id}>
-                        <ListItem button>
-                            <ListItemText primary={id + " " + firstName} secondary={lastName} />
-                        </ListItem>
-                    </React.Fragment>
-                ))}
-            </List>
+            <TableContainer>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            Users below has the same skill
+                        </TableRow>
+                    </TableHead>
+                    {loadedUsers.map(({ id, firstName, lastName, email }) => (
+                        <TableRow key={id}>
+                            <TableCell>
+                                {firstName}
+                            </TableCell>
+                            <TableCell>
+                                {lastName}
+                            </TableCell>
+                            <TableCell>
+                                {email}
+                            </TableCell>
+                        </TableRow>
+                    ))}
+                </Table>
+            </TableContainer>
             <button type="button" onClick={handleClose}>
                 Close Modal
             </button>
