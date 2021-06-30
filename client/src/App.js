@@ -22,7 +22,7 @@ function App() {
           <Route path="/contact" exact>
             <Wall id="3" />
           </Route>
-          <Route path="/user" exact>
+          <Route path="/user/:id" exact>
             <UserPage id = "1"/>
           </Route>
         </Switch>

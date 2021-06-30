@@ -2,14 +2,13 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { useState, useEffect } from 'react';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+import { Link } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button';
 
 function getModalStyle() {
     const top = 50;
@@ -71,15 +70,22 @@ export default function SimpleModal(props) {
                     </TableHead>
                     {loadedUsers.map(({ id, firstName, lastName, email }) => (
                         <TableRow key={id}>
-                            <TableCell>
-                                {firstName}
-                            </TableCell>
-                            <TableCell>
-                                {lastName}
-                            </TableCell>
-                            <TableCell>
-                                {email}
-                            </TableCell>
+                                <TableCell>
+                                    {firstName}
+                                </TableCell>
+                                <TableCell>
+                                    {lastName}
+                                </TableCell>
+                                <TableCell>
+                                    {email}
+                                </TableCell>
+                                <TableCell>
+                                    <Button>
+                                        <Link to = '/about'>
+                                            Go to profile
+                                        </Link>
+                                    </Button>
+                                </TableCell>
                         </TableRow>
                     ))}
                 </Table>
