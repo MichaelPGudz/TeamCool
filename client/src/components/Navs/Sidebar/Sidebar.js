@@ -11,8 +11,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import {ExpandLess, ExpandMore, PeopleAlt, PeopleAltOutlined, Settings} from "@material-ui/icons";
-import {CircularProgress, Collapse} from "@material-ui/core";
+import {Collapse} from "@material-ui/core";
 import {Link} from "react-router-dom";
+import Skeleton from '@material-ui/lab/Skeleton'
 
 
 
@@ -69,7 +70,7 @@ function Sidebar({addedClasses, openDrawer, menuClick}) {
                         <List>
                             {loading ?
                                 <ListItem button className={classes.nested}>
-                                <CircularProgress/>
+                                    <Skeleton  width={240} height={48} animation={'wave'}/>
                                 </ListItem>
                                 :
                                 userTeams.map(({id, role, team}) => (

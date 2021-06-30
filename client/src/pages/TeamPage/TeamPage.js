@@ -4,6 +4,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import {CircularProgress, Grid, Paper} from "@material-ui/core";
 import Wall from "../../components/Wall";
 import FeaturesList from "./FeaturesList";
+import AddFeature from "./AddFeature";
 
 const useStyles = makeStyles((theme) => ({
     main: {
@@ -13,6 +14,9 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2),
         textAlign: 'center',
         color: theme.palette.text.secondary,
+    },
+    addBtn: {
+        textAlign: "center"
     }
 }));
 
@@ -54,8 +58,8 @@ export default function TeamPage() {
                         <Grid item>
                         <FeaturesList features={features}/>
                         </Grid>
-                        <Grid item>
-                            <Paper className={classes.paper}>ADD FEATURE</Paper>
+                        <Grid item className={classes.addBtn}>
+                            <AddFeature />
                         </Grid>
                     </Grid>
                 </Grid>
