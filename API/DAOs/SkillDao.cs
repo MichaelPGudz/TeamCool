@@ -42,5 +42,11 @@ namespace API.DAOs
         }
 
         public ICollection<Skill> GetAll() => _dataContext.Skills.ToList();
+        
+        
+        public IQueryable<User> GetUsersForSkill(int id)
+                {
+                    return _dataContext.Skills.Where(skill => skill.Id == id).SelectMany(x => x.Users);
+                }
     }
 }

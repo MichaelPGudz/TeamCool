@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using API.DAOs.Interfaces;
 using API.Entities;
@@ -75,6 +77,13 @@ namespace API.Controllers
         public Task<ActionResult<Skill>> GetSkillById(int id)
         {
             return _skillDao.GetById(id);
+        }
+        
+        
+        [HttpGet("{id}/users")]
+        public IQueryable<User> GetUsersForSkills(int id)
+        {
+            return _skillDao.GetUsersForSkill(id);
         }
     }
 }

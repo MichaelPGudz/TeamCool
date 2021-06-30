@@ -18,7 +18,7 @@ const Home = () => {
       <Button variant="contained" color="primary" className={classes.btn}>
         Add New Team
       </Button>
-      <Wall id="1" />
+      <Wall id="1" WallForUser/>
     </div>
   );
 };

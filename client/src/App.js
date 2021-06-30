@@ -23,8 +23,8 @@ function App() {
                         <Route path="/contact" exact>
                             <Wall id="3"/>
                         </Route>
-                        <Route path="/user" exact>
-                            <UserPage id="1"/>
+                        <Route path="/user/:id" exact>
+                            <UserPage />
                         </Route>
                         <Route path="/team/:teamId" exact>
                             <TeamPage/>

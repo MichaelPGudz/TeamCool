@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -49,6 +50,21 @@ namespace API.DAOs
             return _dataContext.TeamMembers
                 .Include(tm => tm.User)
                 .Where(t => t.Team.Id == teamId).ToList();
+        }
+        
+        public IOrderedQueryable<Post> GetPostsForTeamMember(int userId)
+        {
+            return _dataContext.TeamMembers
+                .Include(x => x.Team)
+                .ThenInclude(y => y.Wall)
+                .ThenInclude(z => z.Posts)
+                .ThenInclude(z => z.Author)
+                .Where(t => t.User.Id == userId)
+                .Select(tm => tm.Team)
+                .Select(t => t.Wall)
+                .SelectMany(w => w.Posts)
+                .OrderBy(x => x.PostTime);
+
         }
     }
 }

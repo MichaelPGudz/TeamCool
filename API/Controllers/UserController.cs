@@ -13,11 +13,13 @@ namespace API.Controllers
     {
         private readonly IUserDao _userDao;
         private readonly ISkillDao _skillDao;
+        private readonly ITeamMemberDao _teamMemberDao;
 
-        public UserController(IUserDao userDao, ISkillDao skillDao)
+        public UserController(IUserDao userDao, ISkillDao skillDao, ITeamMemberDao teamMemberDao)
         {
             _userDao = userDao;
             _skillDao = skillDao;
+            _teamMemberDao = teamMemberDao;
         }
 
         [HttpPost]
@@ -95,5 +97,9 @@ namespace API.Controllers
         
         [HttpGet("{id}/teams")]
         public IIncludableQueryable<TeamMember, Team> GetTeamsForUser(int id) => _userDao.GetUserTeams(id);
+        
+        
+        [HttpGet("{id}/posts")]
+        public IOrderedQueryable<Post> GetPostsForUser(int id) => _teamMemberDao.GetPostsForTeamMember(id);
     }
 }

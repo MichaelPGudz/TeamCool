@@ -42,20 +42,31 @@ const useStyles = makeStyles((theme) => ({
 
 const Wall = (props) => {
 
-
     const [isLoading, setIsLoading] = useState(true);
     const [loadedWalls, setLoadedWalls] = useState([]);
     const [loadedPosts, setLoadedPosts] = useState([]);
     const classes = useStyles();
 
     useEffect(() => {
-        fetch(`https://localhost:5001/api/wall/${props.id}`)
+        if (props.WallForUser){
+            fetch(`https://localhost:5001/api/user/${props.id}/posts`)
+            .then(reponse => reponse.json())
+            .then(data => {
+                setIsLoading(false);
+                setLoadedPosts(data);
+            });
+
+        }
+        if (!props.WallForUser) {
+            fetch(`https://localhost:5001/api/wall/${props.id}`)
             .then(reponse => reponse.json())
             .then(data => {
                 setIsLoading(false);
                 setLoadedWalls(data)
                 setLoadedPosts(data.posts);
             });
+
+        }
     }, [props]);
 
     if (isLoading) {

@@ -9,5 +9,7 @@ namespace API.DAOs.Interfaces
     public interface ITeamMemberDao: IDao<TeamMember>
     {
         public ICollection<TeamMember> GetTeamMembersForTeam(int teamId);
+
+        public IOrderedQueryable<Post> GetPostsForTeamMember(int userId);
     }
 }
