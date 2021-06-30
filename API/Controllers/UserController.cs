@@ -100,6 +100,6 @@ namespace API.Controllers
         
         
         [HttpGet("{id}/posts")]
-        public IOrderedEnumerable<ICollection<Post>> GetPostsForUser(int id) => _teamMemberDao.GetPostsForTeamMember(id);
+        public IOrderedQueryable<Post> GetPostsForUser(int id) => _teamMemberDao.GetPostsForTeamMember(id);
     }
 }

@@ -10,6 +10,6 @@ namespace API.DAOs.Interfaces
     {
         public ICollection<TeamMember> GetTeamMembersForTeam(int teamId);
 
-        public IOrderedEnumerable<ICollection<Post>> GetPostsForTeamMember(int userId);
+        public IOrderedQueryable<Post> GetPostsForTeamMember(int userId);
     }
 }

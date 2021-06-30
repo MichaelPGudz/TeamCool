@@ -52,7 +52,7 @@ namespace API.DAOs
                 .Where(t => t.Team.Id == teamId).ToList();
         }
         
-        public IOrderedEnumerable<ICollection<Post>> GetPostsForTeamMember(int userId)
+        public IOrderedQueryable<Post> GetPostsForTeamMember(int userId)
         {
             return _dataContext.TeamMembers
                 .Include(x => x.Team)
@@ -62,7 +62,8 @@ namespace API.DAOs
                 .Where(t => t.User.Id == userId)
                 .Select(tm => tm.Team)
                 .Select(t => t.Wall)
-                .Select(w => w.Posts).ToList().OrderBy(x => x.Select(y => y.PostTime));
+                .SelectMany(w => w.Posts)
+                .OrderBy(x => x.PostTime);
 
         }
     }
