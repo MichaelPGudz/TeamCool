@@ -34,7 +34,7 @@ const UserPage = () => {
                 setLoadedUser(data);
                 setLoadedSkills(data.mySkills);
             });
-    },);
+    },[]);
 
 
     function createData(name, property) {

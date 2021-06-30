@@ -30,8 +30,8 @@ export default function TeamPage() {
                 setFeatures(data.features);
                 setWallId(data.wall.id);
                 setLoading(false);
-            }, [])
-    });
+            })
+    }, []);
 
     return (
         <div>
