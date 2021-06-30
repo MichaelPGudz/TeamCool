@@ -67,7 +67,7 @@ export default function MenuAppBar({addedClasses, openDrawer, menuClick}) {
                 <Link to="/teams">My Teams</Link>
               </li>
               <li>
-                <Link to="/user">My Profile</Link>
+                <Link to="/user/1">My Profile</Link>
               </li>
               <li>
                 <Link to="/contact">Contact</Link>
