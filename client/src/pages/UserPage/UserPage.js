@@ -6,6 +6,7 @@ import { CircularProgress } from "@material-ui/core";
 import UserDataTable from "./UserDataTable";
 import UserSkills from "./UserSkills";
 import SkillUsersModal from "./SkillUsersModal";
+import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles({
     table: {
@@ -16,23 +17,24 @@ const useStyles = makeStyles({
     }
 });
 
-const UserPage = (props) => {
+const UserPage = () => {
 
 
     const classes = useStyles();
+    const {id} = useParams();
     const [isLoading, setIsLoading] = useState(true);
     const [loadedUser, setLoadedUser] = useState([]);
     const [loadedSkills, setLoadedSkills] = useState([]);
 
     useEffect(() => {
-        fetch(`https://localhost:5001/api/user/${props.id}`)
+        fetch(`https://localhost:5001/api/user/${id}`)
             .then(reponse => reponse.json())
             .then(data => {
                 setIsLoading(false);
                 setLoadedUser(data);
                 setLoadedSkills(data.mySkills);
             });
-    }, [props]);
+    },);
 
 
     function createData(name, property) {
