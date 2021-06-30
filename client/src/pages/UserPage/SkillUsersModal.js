@@ -80,8 +80,8 @@ export default function SimpleModal(props) {
                                     {email}
                                 </TableCell>
                                 <TableCell>
-                                    <Button>
-                                        <Link to = '/about'>
+                                    <Button onClick={handleClose}>
+                                        <Link to ={`/user/${id}`} >
                                             Go to profile
                                         </Link>
                                     </Button>

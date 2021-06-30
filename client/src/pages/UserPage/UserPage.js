@@ -34,7 +34,7 @@ const UserPage = () => {
                 setLoadedUser(data);
                 setLoadedSkills(data.mySkills);
             });
-    },);
+    },[id]);
 
 
     function createData(name, property) {
@@ -62,8 +62,6 @@ const UserPage = () => {
     return (
 
         <div>
-            {console.log(loadedUser)}
-
             <Typography variant="h3">
                 User Page
             </Typography>
@@ -76,7 +74,7 @@ const UserPage = () => {
 
             <UserSkills loadedUser={loadedUser} loadedSkills={loadedSkills} classes={classes} />
 
-            <SkillUsersModal id="1" />
+            <SkillUsersModal id='1' />
 
         </div >
     )
