@@ -10,10 +10,9 @@ import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 
 function getModalStyle() {
-    const top = 50;
+    const top = 20;
     const left = 20;
 
     return {
@@ -31,6 +30,10 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
     },
+
+    button: {
+        margin: "1%"
+    }
 }));
 
 export default function SimpleModal(props) {
@@ -67,7 +70,7 @@ export default function SimpleModal(props) {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Users below has the same skill</TableCell>
+                            <TableCell>Users below have the same skill</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -94,17 +97,17 @@ export default function SimpleModal(props) {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <button type="button" onClick={handleClose}>
-                Close Modal
-            </button>
+            <Button className={classes.button} variant="contained" color="secondary" onClick={handleClose}>
+                Close
+            </Button>
         </div>
     );
 
     return (
         <div>
-            <button type="button" onClick={handleOpen}>
-                Open Modal
-            </button>
+            <Button className={classes.button} variant="contained" color="secondary" onClick={handleOpen}>
+                {props.skillName}
+            </Button>
             <Modal
                 open={open}
                 onClose={handleClose}

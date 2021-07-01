@@ -5,16 +5,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import { CircularProgress } from "@material-ui/core";
 import UserDataTable from "./UserDataTable";
 import UserSkills from "./UserSkills";
-import SkillUsersModal from "./SkillUsersModal";
 import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles({
     table: {
         minWidth: 500,
     },
-    button: {
-        margin: "1%"
-    }
 });
 
 const UserPage = () => {
@@ -27,6 +23,7 @@ const UserPage = () => {
     const [loadedSkills, setLoadedSkills] = useState([]);
 
     useEffect(() => {
+        setIsLoading(true);
         fetch(`https://localhost:5001/api/user/${id}`)
             .then(reponse => reponse.json())
             .then(data => {
@@ -73,8 +70,6 @@ const UserPage = () => {
             </Typography>
 
             <UserSkills loadedUser={loadedUser} loadedSkills={loadedSkills} classes={classes} />
-
-            <SkillUsersModal id='1' />
 
         </div >
     )
