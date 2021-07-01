@@ -6,9 +6,11 @@ import { Link } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
+import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 function getModalStyle() {
     const top = 50;
@@ -65,9 +67,10 @@ export default function SimpleModal(props) {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            Users below has the same skill
+                            <TableCell>Users below has the same skill</TableCell>
                         </TableRow>
                     </TableHead>
+                    <TableBody>
                     {loadedUsers.map(({ id, firstName, lastName, email }) => (
                         <TableRow key={id}>
                                 <TableCell>
@@ -88,6 +91,7 @@ export default function SimpleModal(props) {
                                 </TableCell>
                         </TableRow>
                     ))}
+                    </TableBody>
                 </Table>
             </TableContainer>
             <button type="button" onClick={handleClose}>
