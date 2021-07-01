@@ -6,12 +6,19 @@ import { CircularProgress } from "@material-ui/core";
 import UserDataTable from "./UserDataTable";
 import UserSkills from "./UserSkills";
 import { useParams } from 'react-router-dom';
+import Avatar from "@material-ui/core/Avatar";
+import image from '../../static/images/avatar.jpg'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     table: {
         minWidth: 500,
     },
-});
+
+    avatarSize: {
+        width: theme.spacing(25),
+        height: theme.spacing(25)
+    }
+}));
 
 const UserPage = () => {
 
@@ -62,6 +69,8 @@ const UserPage = () => {
             <Typography variant="h3">
                 User Page
             </Typography>
+
+            <Avatar src={image} className={classes.avatarSize} />
 
             <UserDataTable rows={rows} classes={classes} />
 
