@@ -46,10 +46,10 @@ const UserPage = () => {
     }
 
     const rows = [
-        createData("Your id", loadedUser.id),
-        createData("Your name", loadedUser.firstName),
-        createData("Your lastname", loadedUser.lastName),
-        createData("Your e-mail", loadedUser.email)
+        createData("Id", loadedUser.id),
+        createData("Name", loadedUser.firstName),
+        createData("Lastname", loadedUser.lastName),
+        createData("e-mail", loadedUser.email)
     ];
 
     if (isLoading) {
@@ -75,7 +75,7 @@ const UserPage = () => {
             <UserDataTable rows={rows} classes={classes} />
 
             <Typography variant="h4">
-                Your skills
+                Skills
             </Typography>
 
             <UserSkills loadedUser={loadedUser} loadedSkills={loadedSkills} classes={classes} />
