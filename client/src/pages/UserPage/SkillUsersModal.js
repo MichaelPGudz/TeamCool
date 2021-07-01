@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
         padding: theme.spacing(2, 4, 3),
     },
 
-    button: {
+    margin: {
         margin: "1%"
     }
 }));
@@ -97,15 +97,15 @@ export default function SimpleModal(props) {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <Button className={classes.button} variant="contained" color="secondary" onClick={handleClose}>
+            <Button className={classes.margin} variant="contained" color="secondary" onClick={handleClose}>
                 Close
             </Button>
         </div>
     );
 
     return (
-        <div>
-            <Button className={classes.button} variant="contained" color="secondary" onClick={handleOpen}>
+        <div  className={classes.margin}>
+            <Button variant="contained" color="secondary" onClick={handleOpen}>
                 {props.skillName}
             </Button>
             <Modal
