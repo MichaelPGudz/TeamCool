@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         color: theme.palette.text.secondary,
     },
-    addBtn: {
+    center: {
         textAlign: "center"
     }
 }));
@@ -43,25 +43,29 @@ export default function TeamPage() {
                 <Grid item xs={12}>
                     <Paper className={classes.paper}>TEAM MENU BAR</Paper>
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={8} className={classes.center}>
                     {loading ?
                         <CircularProgress/>
                         :
                         <Wall id={wallId}/>}
                 </Grid>
                 <Grid item xs={4}>
-                    <Grid
-                        container
-                        direction="column"
-                        spacing={2}
-                    >
-                        <Grid item>
-                        <FeaturesList features={features}/>
+                    {loading ?
+                        <CircularProgress/>
+                        :
+                        <Grid
+                            container
+                            direction="column"
+                            spacing={2}
+                        >
+                            <Grid item>
+                                <FeaturesList features={features}/>
+                            </Grid>
+                            <Grid item className={classes.center}>
+                                <AddFeature updateFeatures={setFeatures()} features={features}/>
+                            </Grid>
                         </Grid>
-                        <Grid item className={classes.addBtn}>
-                            <AddFeature />
-                        </Grid>
-                    </Grid>
+                    }
                 </Grid>
             </Grid>
         </div>

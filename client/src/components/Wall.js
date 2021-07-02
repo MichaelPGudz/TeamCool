@@ -85,7 +85,6 @@ const Wall = (props) => {
 
     return (
         <div>
-            {console.log(loadedPosts)}
             <CssBaseline />
             <Paper elevation={5} className={classes.paper + " " + classes.shape} >
                 <Typography className={classes.text} variant="h4" gutterBottom>

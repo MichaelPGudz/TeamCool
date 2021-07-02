@@ -6,7 +6,8 @@ import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles( () => ({
     shape: {
-        maxHeight: 450
+        maxHeight: 450,
+        overflow: "auto"
     }
 }))
 
