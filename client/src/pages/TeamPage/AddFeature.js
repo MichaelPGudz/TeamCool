@@ -6,7 +6,7 @@ import {Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField} from
 
 
 
-export default function AddFeature({updateFeatures, features}) {
+export default function AddFeature({updateFeatures, features, teamId}) {
 
     const [openDialog, setOpenDialog] = React.useState(false);
     const [name, setName] = React.useState();
@@ -23,9 +23,10 @@ export default function AddFeature({updateFeatures, features}) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const newFeature = {id: 1, name: name, url: getValidUrl(url)};
-        updateFeatures([...features, newFeature]);
+        const newFeature = {name: name, url: getValidUrl(url)};
+        addFeature(newFeature);
     }
+
     const getValidUrl = (url = "") => {
         let newUrl = window.decodeURIComponent(url);
         newUrl = newUrl.trim().replace(/\s/g, "");
@@ -36,9 +37,19 @@ export default function AddFeature({updateFeatures, features}) {
         if(!/^(f|ht)tps?:\/\//i.test(newUrl)){
             return `https://${newUrl}`;
         }
-
         return newUrl;
     };
+
+    const addFeature = (newFeature) => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newFeature)
+        };
+        fetch(`https://localhost:5001/api/team/${teamId}/addFeature`, requestOptions)
+            .then(response => response.json())
+            .then(data => updateFeatures([...features, data]))
+    }
 
 
     return (

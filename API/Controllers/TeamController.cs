@@ -156,18 +156,18 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpPost("{teamId}/feature/{featureId}")]
-        public async Task<IActionResult> AddFeature(int teamId, int featureId)
+        // Return added feature 
+        [HttpPost("{teamId}/addFeature")]
+        public async Task<IActionResult> AddFeature(int teamId, Feature feature)
         {
+            if (!ModelState.IsValid) return BadRequest();
             try
             {
                 var team = await _teamDao.GetById(teamId);
-                var feature = await _featureDao.GetById(featureId);
-
-                team.Value.Features.Add(feature.Value);
+                team.Value.Features.Add(feature);
                 await _teamDao.Edit(team.Value);
-
-                return Ok();
+                
+                return Ok(feature);
             }
             catch (Exception)
             {
