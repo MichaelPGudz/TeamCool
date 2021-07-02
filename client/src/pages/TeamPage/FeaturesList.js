@@ -1,18 +1,21 @@
 import React from "react";
-import {List, ListItem, ListItemAvatar, ListItemText, Paper} from "@material-ui/core";
+import {List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText, Paper} from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import {GitHub} from "@material-ui/icons";
 import {makeStyles} from "@material-ui/core/styles";
+import DeleteBtn from "./DeleteBtn";
 
-const useStyles = makeStyles( () => ({
+const useStyles = makeStyles(() => ({
     shape: {
         maxHeight: 450,
         overflow: "auto"
     }
 }))
 
-export default function FeaturesList({features}) {
+export default function FeaturesList({features, updateFeatures, teamId}) {
     const classes = useStyles();
+
+
     return (
         <div>
             <Paper className={classes.shape}>
@@ -25,6 +28,9 @@ export default function FeaturesList({features}) {
                                 </Avatar>
                             </ListItemAvatar>
                             <ListItemText primary={name} secondary="Test"/>
+                            <ListItemSecondaryAction>
+                                <DeleteBtn teamId={teamId} updateFeatures={updateFeatures} features={features} featureId={id}/>
+                            </ListItemSecondaryAction>
                         </ListItem>
                     ))}
                 </List>
