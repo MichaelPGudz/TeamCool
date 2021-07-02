@@ -3,7 +3,7 @@ import {List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText, P
 import Avatar from "@material-ui/core/Avatar";
 import {GitHub} from "@material-ui/icons";
 import {makeStyles} from "@material-ui/core/styles";
-import DeleteBtn from "./DeleteBtn";
+import DeleteFeatureBtn from "./DeleteFeatureBtn";
 
 const useStyles = makeStyles(() => ({
     shape: {
@@ -29,7 +29,7 @@ export default function FeaturesList({features, updateFeatures, teamId}) {
                             </ListItemAvatar>
                             <ListItemText primary={name} secondary="Test"/>
                             <ListItemSecondaryAction>
-                                <DeleteBtn teamId={teamId} updateFeatures={updateFeatures} features={features} featureId={id}/>
+                                <DeleteFeatureBtn teamId={teamId} updateFeatures={updateFeatures} features={features} featureId={id}/>
                             </ListItemSecondaryAction>
                         </ListItem>
                     ))}

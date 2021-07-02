@@ -4,7 +4,7 @@ import {Delete} from "@material-ui/icons";
 
 
 
-export default function DeleteBtn({updateFeatures, features, teamId, featureId}) {
+export default function DeleteFeatureBtn({updateFeatures, features, teamId, featureId}) {
 
     const handleDelete = () => {
         deleteFromServer(featureId);

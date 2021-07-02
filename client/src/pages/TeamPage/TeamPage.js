@@ -5,15 +5,11 @@ import {CircularProgress, Grid, Paper} from "@material-ui/core";
 import Wall from "../../components/Wall";
 import FeaturesList from "./FeaturesList";
 import AddFeature from "./AddFeature";
+import Bar from "./Bar";
 
 const useStyles = makeStyles((theme) => ({
     main: {
         display: "flex"
-    },
-    paper: {
-        padding: theme.spacing(2),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
     },
     center: {
         textAlign: "center"
@@ -26,6 +22,7 @@ export default function TeamPage() {
     const [features, setFeatures] = React.useState([]);
     const [wallId, setWallId] = React.useState(-1);
     const [loading, setLoading] = React.useState(true);
+    const [teamMembers, setTeamMembers] = React.useState([]);
 
     useEffect(() => {
         fetch(`https://localhost:5001/api/team/${teamId}`)
@@ -33,6 +30,7 @@ export default function TeamPage() {
             .then(data => {
                 setFeatures(data.features);
                 setWallId(data.wall.id);
+                setTeamMembers(data.members)
                 setLoading(false);
             })
     }, [teamId]);
@@ -41,7 +39,7 @@ export default function TeamPage() {
         <div>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <Paper className={classes.paper}>TEAM MENU BAR</Paper>
+                    <Bar teamMembers={teamMembers} />
                 </Grid>
                 <Grid item xs={8} className={classes.center}>
                     {loading ?
