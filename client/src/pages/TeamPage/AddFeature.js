@@ -23,9 +23,22 @@ export default function AddFeature({updateFeatures, features}) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const newFeature = {id: 1, name: name, url: url};
+        const newFeature = {id: 1, name: name, url: getValidUrl(url)};
         updateFeatures([...features, newFeature]);
     }
+    const getValidUrl = (url = "") => {
+        let newUrl = window.decodeURIComponent(url);
+        newUrl = newUrl.trim().replace(/\s/g, "");
+
+        if(/^(:\/\/)/.test(newUrl)){
+            return `https${newUrl}`;
+        }
+        if(!/^(f|ht)tps?:\/\//i.test(newUrl)){
+            return `https://${newUrl}`;
+        }
+
+        return newUrl;
+    };
 
 
     return (
