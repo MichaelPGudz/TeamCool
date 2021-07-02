@@ -5,17 +5,20 @@ import { makeStyles } from '@material-ui/core/styles';
 import { CircularProgress } from "@material-ui/core";
 import UserDataTable from "./UserDataTable";
 import UserSkills from "./UserSkills";
-import SkillUsersModal from "./SkillUsersModal";
 import { useParams } from 'react-router-dom';
+import Avatar from "@material-ui/core/Avatar";
+import image from '../../static/images/avatar.jpg'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
     table: {
         minWidth: 500,
     },
-    button: {
-        margin: "1%"
+
+    avatarSize: {
+        width: theme.spacing(25),
+        height: theme.spacing(25)
     }
-});
+}));
 
 const UserPage = () => {
 
@@ -27,6 +30,7 @@ const UserPage = () => {
     const [loadedSkills, setLoadedSkills] = useState([]);
 
     useEffect(() => {
+        setIsLoading(true);
         fetch(`https://localhost:5001/api/user/${id}`)
             .then(reponse => reponse.json())
             .then(data => {
@@ -42,10 +46,10 @@ const UserPage = () => {
     }
 
     const rows = [
-        createData("Your id", loadedUser.id),
-        createData("Your name", loadedUser.firstName),
-        createData("Your lastname", loadedUser.lastName),
-        createData("Your e-mail", loadedUser.email)
+        createData("Id", loadedUser.id),
+        createData("Name", loadedUser.firstName),
+        createData("Lastname", loadedUser.lastName),
+        createData("e-mail", loadedUser.email)
     ];
 
     if (isLoading) {
@@ -66,15 +70,15 @@ const UserPage = () => {
                 User Page
             </Typography>
 
+            <Avatar src={image} className={classes.avatarSize} />
+
             <UserDataTable rows={rows} classes={classes} />
 
             <Typography variant="h4">
-                Your skills
+                Skills
             </Typography>
 
             <UserSkills loadedUser={loadedUser} loadedSkills={loadedSkills} classes={classes} />
-
-            <SkillUsersModal id='1' />
 
         </div >
     )

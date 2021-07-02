@@ -35,7 +35,7 @@ const UserDataTable = (props) => {
             <Table className={props.classes.table} aria-label="customized table">
                 <TableHead>
                     <StyledTableRow>
-                        <StyledTableCell>Your user data</StyledTableCell>
+                        <StyledTableCell>User data</StyledTableCell>
                         <StyledTableCell></StyledTableCell>
                     </StyledTableRow>
                 </TableHead>

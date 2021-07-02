@@ -12,7 +12,6 @@ function App() {
         <div>
             <Router>
                 <Layout>
-                    <h1>TeamCool</h1>
                     <Switch>
                         <Route path="/" exact>
                             <Home/>
