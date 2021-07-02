@@ -1,13 +1,13 @@
 import React, {useEffect} from "react";
 import {useParams} from "react-router-dom"
 import {makeStyles} from "@material-ui/core/styles";
-import {CircularProgress, Grid, Paper} from "@material-ui/core";
+import {CircularProgress, Grid} from "@material-ui/core";
 import Wall from "../../components/Wall";
 import FeaturesList from "./FeaturesList";
 import AddFeature from "./AddFeature";
 import Bar from "./Bar";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     main: {
         display: "flex"
     },
@@ -23,6 +23,7 @@ export default function TeamPage() {
     const [wallId, setWallId] = React.useState(-1);
     const [loading, setLoading] = React.useState(true);
     const [teamMembers, setTeamMembers] = React.useState([]);
+    const [childTeams, setChildTeams] = React.useState([]);
 
     useEffect(() => {
         fetch(`https://localhost:5001/api/team/${teamId}`)
@@ -30,7 +31,8 @@ export default function TeamPage() {
             .then(data => {
                 setFeatures(data.features);
                 setWallId(data.wall.id);
-                setTeamMembers(data.members)
+                setTeamMembers(data.members);
+                setChildTeams(data.childTeams);
                 setLoading(false);
             })
     }, [teamId]);
@@ -39,7 +41,7 @@ export default function TeamPage() {
         <div>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <Bar teamMembers={teamMembers} />
+                    <Bar teamMembers={teamMembers} childTeams={childTeams}/>
                 </Grid>
                 <Grid item xs={8} className={classes.center}>
                     {loading ?

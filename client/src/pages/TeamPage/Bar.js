@@ -1,26 +1,11 @@
 import React from "react";
 import {Button, Grid, Paper} from "@material-ui/core";
-import {AccountTree, Settings, SupervisorAccount} from "@material-ui/icons";
-import TeamMemberMenu from "./TeamMemberMenu";
+import {Settings} from "@material-ui/icons";
+import TeamMemberMenu from "./BarComponents/TeamMemberMenu";
+import ChildTeamsMenu from "./BarComponents/ChildTeamsMenu";
 
 
-export default function Bar({teamMembers}) {
-    const [teamMemberMenu, setTeamMemberMenu] = React.useState(null);
-    const [childTeamsMenu, setChildTeamsMenu] = React.useState(null);
-    const [settingsMenu, setSettingsMenu] = React.useState(null);
-
-    const handleTeamMemberMenu = (event) => {
-        setTeamMemberMenu(event.currentTarget);
-    };
-
-    const handleChildTeamMenu = (event) => {
-        setChildTeamsMenu(event.currentTarget);
-    };
-
-    const handleSettingsMenu= (event) => {
-        setSettingsMenu(event.currentTarget);
-    };
-
+export default function Bar({teamMembers, childTeams}) {
 
     return (
         <div>
@@ -34,11 +19,7 @@ export default function Bar({teamMembers}) {
                         <TeamMemberMenu teamMembers={teamMembers} />
                     </Grid>
                     <Grid item>
-                        <Button
-                            size={"large"}
-                            startIcon={<AccountTree/>}>
-                            Child Teams
-                        </Button>
+                        <ChildTeamsMenu childTeams={childTeams}/>
                     </Grid>
                     <Grid item>
                         <Button

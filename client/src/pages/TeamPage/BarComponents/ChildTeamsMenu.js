@@ -1,10 +1,11 @@
 import React from "react";
-import {Button, Grid, List, ListItem, ListItemAvatar, ListItemText, Menu, Paper} from "@material-ui/core";
-import {AccountTree, PermIdentity, Settings, SupervisorAccount} from "@material-ui/icons";
+import {Button, ListItem, ListItemAvatar, ListItemText, Menu} from "@material-ui/core";
+import {GroupWork, SupervisorAccount} from "@material-ui/icons";
 import Avatar from "@material-ui/core/Avatar";
+import {Link} from "react-router-dom";
 
 
-export default function TeamMemberMenu({teamMembers}) {
+export default function ChildTeamsMenu({childTeams}) {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
@@ -24,7 +25,7 @@ export default function TeamMemberMenu({teamMembers}) {
                 size={"large"}
                 startIcon={<SupervisorAccount/>}
                 onClick={handleClick}>
-                Team Members
+                Child Teams
             </Button>
             <Menu
                 id="team-members-menu"
@@ -36,14 +37,14 @@ export default function TeamMemberMenu({teamMembers}) {
                 anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                 transformOrigin={{ vertical: "top", horizontal: "center" }}
             >
-                {teamMembers.map( ({id, user, role}) => (
-                    <ListItem key={id} button>
+                {childTeams.map( ({id, name}) => (
+                    <ListItem key={id} button component={Link} to={`/team/${id}`} >
                         <ListItemAvatar>
                             <Avatar>
-                                <PermIdentity />
+                                <GroupWork/>
                             </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary={`${user.firstName} ${user.lastName} `} secondary={`${role.name}`}/>
+                        <ListItemText primary={`${name}`}/>
                     </ListItem>
                 ))}
             </Menu>
