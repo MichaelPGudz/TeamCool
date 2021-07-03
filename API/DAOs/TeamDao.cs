@@ -31,17 +31,6 @@ namespace API.DAOs
                 .Include(c => c.ChildTeams)
                 .FirstOrDefaultAsync(i => i.Id == id);
 
-            // if (team != null)
-            // {
-            //     await _dataContext.Entry(team).Collection(i => i.ChildTeams).LoadAsync();
-            //     await _dataContext.Entry(team).Collection(i => i.Members)
-            //         .Query()
-            //         .Include(i => i.User)
-            //         .Include(i => i.Role)
-            //         .LoadAsync();
-            //     await _dataContext.Entry(team).Collection(i => i.Features).LoadAsync();
-            // }
-
             return team;
         }
 
