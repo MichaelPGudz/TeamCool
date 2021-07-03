@@ -20,7 +20,7 @@ export default function ChildTeamsMenu({childTeams}) {
     return (
         <div>
             <Button
-                aria-controls="team-members-menu"
+                aria-controls="child-team-menu"
                 aria-haspopup="true"
                 size={"large"}
                 startIcon={<SupervisorAccount/>}
@@ -28,7 +28,7 @@ export default function ChildTeamsMenu({childTeams}) {
                 Child Teams
             </Button>
             <Menu
-                id="team-members-menu"
+                id="child-team-menu"
                 anchorEl={anchorEl}
                 keepMounted
                 open={Boolean(anchorEl)}

@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, ListItem, ListItemAvatar, ListItemText, Menu} from "@material-ui/core";
-import {PermIdentity, SupervisorAccount} from "@material-ui/icons";
+import {PermIdentity, Person} from "@material-ui/icons";
 import Avatar from "@material-ui/core/Avatar";
 import {Link} from "react-router-dom";
 
@@ -23,7 +23,7 @@ export default function TeamMemberMenu({teamMembers}) {
                 aria-controls="team-members-menu"
                 aria-haspopup="true"
                 size={"large"}
-                startIcon={<SupervisorAccount/>}
+                startIcon={<Person/>}
                 onClick={handleClick}>
                 Team Members
             </Button>

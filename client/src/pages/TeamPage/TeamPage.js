@@ -24,11 +24,13 @@ export default function TeamPage() {
     const [loading, setLoading] = React.useState(true);
     const [teamMembers, setTeamMembers] = React.useState([]);
     const [childTeams, setChildTeams] = React.useState([]);
+    const [team, setTeam] = React.useState({});
 
     useEffect(() => {
         fetch(`https://localhost:5001/api/team/${teamId}`)
             .then(response => response.json())
             .then(data => {
+                setTeam(data);
                 setFeatures(data.features);
                 setWallId(data.wall.id);
                 setTeamMembers(data.members);
@@ -39,9 +41,10 @@ export default function TeamPage() {
 
     return (
         <div>
+            <h1> {team.name}</h1>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <Bar teamMembers={teamMembers} childTeams={childTeams}/>
+                    <Bar teamMembers={teamMembers} childTeams={childTeams} team={team} setTeam={setTeam}/>
                 </Grid>
                 <Grid item xs={8} className={classes.center}>
                     {loading ?

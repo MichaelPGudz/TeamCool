@@ -1,11 +1,11 @@
 import React from "react";
-import {Button, Grid, Paper} from "@material-ui/core";
-import {Settings} from "@material-ui/icons";
+import { Grid, Paper} from "@material-ui/core";
 import TeamMemberMenu from "./BarComponents/TeamMemberMenu";
 import ChildTeamsMenu from "./BarComponents/ChildTeamsMenu";
+import SettingsMenu from "./BarComponents/SettingsMenu";
 
 
-export default function Bar({teamMembers, childTeams}) {
+export default function Bar({teamMembers, childTeams, team, setTeam}) {
 
     return (
         <div>
@@ -22,11 +22,7 @@ export default function Bar({teamMembers, childTeams}) {
                         <ChildTeamsMenu childTeams={childTeams}/>
                     </Grid>
                     <Grid item>
-                        <Button
-                            size={"large"}
-                        startIcon={<Settings/>}>
-                            Options
-                        </Button>
+                        <SettingsMenu team={team} setTeam={setTeam}/>
                     </Grid>
                 </Grid>
             </Paper>
