@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Menu} from "@material-ui/core";
+import {Button, Menu, MenuList} from "@material-ui/core";
 import { Settings} from "@material-ui/icons";
 import EditTeamName from "./EditTeamName";
 
@@ -35,7 +35,9 @@ export default function SettingsMenu({team, setTeam}) {
                 anchorOrigin={{vertical: "bottom", horizontal: "center"}}
                 transformOrigin={{vertical: "top", horizontal: "center"}}
             >
+                <MenuList>
                 <EditTeamName team={team} setTeam={setTeam}/>
+                </MenuList>
             </Menu>
         </div>
     )

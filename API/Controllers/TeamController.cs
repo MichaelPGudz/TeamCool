@@ -68,7 +68,7 @@ namespace API.Controllers
 
             team.Value.Name = editedTeam.Name;
             await _teamDao.Edit(team.Value);
-            return Ok(team);
+            return Ok(team.Value);
         }
 
         [HttpDelete("{id}")]
