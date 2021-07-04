@@ -19,7 +19,7 @@ export default function EditTeamName({team, setTeam}) {
     const [openDialog, setOpenDialog] = React.useState(false);
     const [name, setName] = React.useState();
 
-    const handleAddBtnClick = () => {
+    const handleBtnClick = () => {
         setOpenDialog(true)
     }
 
@@ -46,7 +46,7 @@ export default function EditTeamName({team, setTeam}) {
     return (
         <div>
             <ListItem button
-                      onClick={handleAddBtnClick}>
+                      onClick={handleBtnClick}>
                 <ListItemAvatar>
                     <Avatar>
                         <Edit/>
@@ -58,7 +58,7 @@ export default function EditTeamName({team, setTeam}) {
                 open={openDialog}
                 onClose={handleClose}
                 aria-labelledby={"edit-name-form"}>
-                <DialogTitle id={"edit-name-form"}>Add feature</DialogTitle>
+                <DialogTitle id={"edit-name-form"}>Edit name</DialogTitle>
                 <form onSubmit={handleSubmit}>
                     <DialogContent>
                         <Grid container spacing={2} direction={"column"}>
