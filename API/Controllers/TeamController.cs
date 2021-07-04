@@ -58,7 +58,7 @@ namespace API.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> EditTeamName(Team editedTeam, int id)
+        public async Task<ActionResult<Team>> EditTeamName(Team editedTeam, int id)
         {
             if (!ModelState.IsValid) return BadRequest();
             
@@ -68,7 +68,7 @@ namespace API.Controllers
 
             team.Value.Name = editedTeam.Name;
             await _teamDao.Edit(team.Value);
-            return Ok(team.Value);
+            return team;
         }
 
         [HttpDelete("{id}")]
