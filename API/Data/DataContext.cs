@@ -3,11 +3,12 @@ using System.Collections.Immutable;
 using System.Linq;
 using API.Entities;
 using FizzWare.NBuilder;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<User>
     {
         public DataContext(DbContextOptions options) : base(options)
         {
@@ -58,6 +59,8 @@ namespace API.Data
             modelBuilder.Entity<Wall>().HasData(Seed.GenerateWalls());
             modelBuilder.Entity<Post>().HasData(Seed.GeneratePosts());
             modelBuilder.Entity<TeamMember>().HasData(Seed.GenerateTeamMembers());
+            
+            base.OnModelCreating(modelBuilder);
             
         }
     }

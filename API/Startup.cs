@@ -9,6 +9,7 @@ using API.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -49,6 +50,8 @@ namespace API
             services.AddScoped<IFeatureDao, FeatureDao>();
             services.AddScoped<IPostDao, PostDao>();
             services.AddCors();
+            services.AddIdentity<User, IdentityRole>() 
+                .AddEntityFrameworkStores<DataContext>(); 
 
 
         }
