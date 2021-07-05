@@ -1,7 +1,7 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import SkillUsersModal from "./SkillUsersModal";
 
 
 const UserSkills = (props) => {
@@ -11,7 +11,7 @@ const UserSkills = (props) => {
                 <ListItem>
                     {props.loadedSkills.map(({ id, firstName }) =>
                         <React.Fragment key={id}>
-                            <Button variant="contained" color="secondary" className={props.classes.button}>{firstName}</Button>
+                            <SkillUsersModal id={id} skillName={firstName} />
                         </React.Fragment>
                     )}
                 </ListItem>

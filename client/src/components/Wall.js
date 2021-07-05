@@ -17,10 +17,10 @@ import {CircularProgress } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
     shape: {
         borderRadius: 30,
-        minHeight: 400,
+        // minHeight: 400,
         maxHeight: 500,
-        minWidth: 700,
-        maxWidth: 800,
+        // minWidth: 700,
+        // maxWidth: 800,
         overflow: "auto"
     },
     text: {
@@ -42,20 +42,31 @@ const useStyles = makeStyles((theme) => ({
 
 const Wall = (props) => {
 
-
     const [isLoading, setIsLoading] = useState(true);
     const [loadedWalls, setLoadedWalls] = useState([]);
     const [loadedPosts, setLoadedPosts] = useState([]);
     const classes = useStyles();
 
     useEffect(() => {
-        fetch(`https://localhost:5001/api/wall/${props.id}`)
+        if (props.WallForUser){
+            fetch(`https://localhost:5001/api/user/${props.id}/posts`)
+            .then(reponse => reponse.json())
+            .then(data => {
+                setIsLoading(false);
+                setLoadedPosts(data);
+            });
+
+        }
+        if (!props.WallForUser) {
+            fetch(`https://localhost:5001/api/wall/${props.id}`)
             .then(reponse => reponse.json())
             .then(data => {
                 setIsLoading(false);
                 setLoadedWalls(data)
                 setLoadedPosts(data.posts);
             });
+
+        }
     }, [props]);
 
     if (isLoading) {
@@ -74,7 +85,6 @@ const Wall = (props) => {
 
     return (
         <div>
-            {console.log(loadedPosts)}
             <CssBaseline />
             <Paper elevation={5} className={classes.paper + " " + classes.shape} >
                 <Typography className={classes.text} variant="h4" gutterBottom>

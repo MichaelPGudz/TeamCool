@@ -8,8 +8,9 @@ import React from "react";
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
+    root:{
+        display: "flex",
+        margin: "2%"
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
@@ -80,7 +81,7 @@ function Layout(props) {
     };
 
     return (
-        <div>
+        <div className={addedClasses.root}>
             <Navbar addedClasses={addedClasses} menuClick={handleMenuClick} openDrawer={openDrawer}/>
             <Sidebar addedClasses={addedClasses} menuClick={handleMenuClick} openDrawer={openDrawer}/>
             <main className={classes.main}>{props.children}</main>

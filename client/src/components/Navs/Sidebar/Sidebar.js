@@ -11,11 +11,14 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import {ExpandLess, ExpandMore, PeopleAlt, PeopleAltOutlined, Settings} from "@material-ui/icons";
-import {CircularProgress, Collapse} from "@material-ui/core";
+import {Collapse} from "@material-ui/core";
+import {Link} from "react-router-dom";
+import Skeleton from '@material-ui/lab/Skeleton'
 
 
 
-export default function Sidebar({addedClasses, openDrawer, menuClick}) {
+
+function Sidebar({addedClasses, openDrawer, menuClick}) {
     const classes = addedClasses;
     const theme = useTheme();
     const [openMyTeams, setOpenMyTeams] = React.useState(false);
@@ -67,11 +70,11 @@ export default function Sidebar({addedClasses, openDrawer, menuClick}) {
                         <List>
                             {loading ?
                                 <ListItem button className={classes.nested}>
-                                <CircularProgress/>
+                                    <Skeleton  width={240} height={48} animation={'wave'}/>
                                 </ListItem>
                                 :
                                 userTeams.map(({id, role, team}) => (
-                                    <ListItem button className={classes.nested} key={id}>
+                                    <ListItem button className={classes.nested} key={id} component={Link} to={`/team/${team.id}`}>
                                         <ListItemIcon>
                                             <PeopleAltOutlined/>
                                         </ListItemIcon>
@@ -92,3 +95,4 @@ export default function Sidebar({addedClasses, openDrawer, menuClick}) {
         </div>
     );
 }
+export default Sidebar;

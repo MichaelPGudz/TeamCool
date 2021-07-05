@@ -31,7 +31,8 @@ namespace API.DAOs
         public async Task<int> Add(Feature newOne)
         {
             await _dataContext.Features.AddAsync(newOne);
-            return await _dataContext.SaveChangesAsync();
+            await _dataContext.SaveChangesAsync();
+            return newOne.Id;
         }
 
         public void Remove(Feature toRemove)

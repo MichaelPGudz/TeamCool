@@ -35,13 +35,13 @@ const UserDataTable = (props) => {
             <Table className={props.classes.table} aria-label="customized table">
                 <TableHead>
                     <StyledTableRow>
-                        <StyledTableCell>Your user data</StyledTableCell>
+                        <StyledTableCell>User data</StyledTableCell>
                         <StyledTableCell></StyledTableCell>
                     </StyledTableRow>
                 </TableHead>
                 <TableBody>
                     {props.rows.map((row) => (
-                        <StyledTableRow>
+                        <StyledTableRow key={row.name}>
                             <StyledTableCell component="th" scope="row">
                                 {row.name}
                             </StyledTableCell>

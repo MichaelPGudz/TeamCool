@@ -15,7 +15,7 @@ import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
+    // flexGrow: 1,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -70,7 +70,7 @@ export default function MenuAppBar({ addedClasses, openDrawer, menuClick }) {
                 <Link to="user/myteams">My Teams</Link>
               </li>
               <li>
-                <Link to="/user">My Profile</Link>
+                <Link to="/user/1">My Profile</Link>
               </li>
               <li>
                 <Link to="/contact">Contact</Link>

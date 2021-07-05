@@ -1,82 +1,88 @@
 import React from 'react';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import { CircularProgress } from '@material-ui/core';
-import UserDataTable from './UserDataTable';
-import UserSkills from './UserSkills';
-import MyTeams from '../MyTeams/MyTeams';
+import {makeStyles} from '@material-ui/core/styles';
+import {CircularProgress} from "@material-ui/core";
+import UserDataTable from "./UserDataTable";
+import UserSkills from "./UserSkills";
+import {useParams} from 'react-router-dom';
+import Avatar from "@material-ui/core/Avatar";
+import image from '../../static/images/avatar.jpg'
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 500,
-  },
-  button: {
-    margin: '1%',
-  },
-});
+const useStyles = makeStyles((theme) => ({
+    table: {
+        minWidth: 500,
+    },
 
-const UserPage = props => {
-  const classes = useStyles();
-  const [isLoading, setIsLoading] = useState(true);
-  const [loadedUser, setLoadedUser] = useState([]);
-  const [loadedSkills, setLoadedSkills] = useState([]);
-  let { path, url } = useRouteMatch();
+    avatarSize: {
+        width: theme.spacing(25),
+        height: theme.spacing(25)
+    }
+}));
 
-  useEffect(() => {
-    fetch(`https://localhost:5001/api/user/${props.id}`)
-      .then(reponse => reponse.json())
-      .then(data => {
-        setIsLoading(false);
-        setLoadedUser(data);
-        setLoadedSkills(data.mySkills);
-      });
-  }, [props]);
+const UserPage = () => {
 
-  function createData(name, property) {
-    return { name, property };
-  }
 
-  const rows = [
-    createData('Your id', loadedUser.id),
-    createData('Your name', loadedUser.firstName),
-    createData('Your lastname', loadedUser.lastName),
-    createData('Your e-mail', loadedUser.email),
-  ];
+    const classes = useStyles();
+    const {id} = useParams();
+    const [isLoading, setIsLoading] = useState(true);
+    const [loadedUser, setLoadedUser] = useState([]);
+    const [loadedSkills, setLoadedSkills] = useState([]);
 
-  if (isLoading) {
+    useEffect(() => {
+        setIsLoading(true);
+        fetch(`https://localhost:5001/api/user/${id}`)
+            .then(reponse => reponse.json())
+            .then(data => {
+                setIsLoading(false);
+                setLoadedUser(data);
+                setLoadedSkills(data.mySkills);
+            });
+    }, [id]);
+
+
+    function createData(name, property) {
+        return {name, property};
+    }
+
+    const rows = [
+        createData("Id", loadedUser.id),
+        createData("Name", loadedUser.firstName),
+        createData("Lastname", loadedUser.lastName),
+        createData("e-mail", loadedUser.email)
+    ];
+
+    if (isLoading) {
+        return (
+            <div>
+                <Typography variant="h4" gutterBottom>
+                    User Page Loading...
+                    <CircularProgress/>
+                </Typography>
+            </div>
+        );
+    }
+
     return (
-      <div>
-        <Typography variant="h4" gutterBottom>
-          User Page Loading...
-          <CircularProgress />
-        </Typography>
-      </div>
-    );
-  }
 
-  return (
-    <div>
-      {console.log(loadedUser)}
-      <Typography variant="h3">User Page</Typography>
+        <div>
+            <Typography variant="h3">
+                User Page
+            </Typography>
 
-      <UserDataTable rows={rows} classes={classes} />
+            <Avatar src={image} className={classes.avatarSize}/>
 
-      <Typography variant="h4">Your skills</Typography>
+            <UserDataTable rows={rows} classes={classes}/>
 
-      <UserSkills
-        loadedUser={loadedUser}
-        loadedSkills={loadedSkills}
-        classes={classes}
-      />
-      <Switch>
-        <Route exact path='user/myteams'>
-          <MyTeams id={props.id} />
-        </Route>
-      </Switch>
-    </div>
-  );
-};
+            <Typography variant="h4">
+                Skills
+            </Typography>
+
+            <UserSkills loadedUser={loadedUser} loadedSkills={loadedSkills} classes={classes}/>
+
+        </div>
+    )
+}
+
 
 export default UserPage;
