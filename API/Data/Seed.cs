@@ -99,7 +99,7 @@ namespace API.Data
                         PostContent = Faker.Lorem.Sentence(5),
                         PostTime = DateTime.UtcNow,
                         PostStatus = Status.Basic,
-                        AuthorId = Faker.RandomNumber.Next(1, userAmount)
+                        AuthorId = Faker.RandomNumber.Next(1, userAmount).ToString()
                     });
                 }
             }
@@ -116,7 +116,7 @@ namespace API.Data
                 {
                     Id = i + 1,
                     TeamId = Faker.RandomNumber.Next(1, 20),
-                    UserId = i + 1,
+                    UserId = i + 1.ToString(),
                     RoleId = Faker.RandomNumber.Next(1, 5)
                 });
             }

@@ -23,6 +23,14 @@ namespace API.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Wall> Walls { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder
+                .EnableSensitiveDataLogging();
+            base.OnConfiguring(optionsBuilder);
+        }
+        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // modelBuilder.Entity<Wall>()
@@ -57,11 +65,11 @@ namespace API.Data
             modelBuilder.Entity<Feature>().HasData(Seed.GenerateFeatures());
             modelBuilder.Entity<Role>().HasData(Seed.GenerateRoles());
             modelBuilder.Entity<Wall>().HasData(Seed.GenerateWalls());
-            modelBuilder.Entity<Post>().HasData(Seed.GeneratePosts());
-            modelBuilder.Entity<TeamMember>().HasData(Seed.GenerateTeamMembers());
+            // modelBuilder.Entity<Post>().HasData(Seed.GeneratePosts());
+            // modelBuilder.Entity<TeamMember>().HasData(Seed.GenerateTeamMembers());
             
             base.OnModelCreating(modelBuilder);
-            
+
         }
     }
 }
