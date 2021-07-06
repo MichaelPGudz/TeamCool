@@ -21,6 +21,22 @@ export default function Register() {
         setOpenDialog(false);
     };
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const newUser = {firstName: firstName, lastName: lastName, email: email, password: password};
+        RegisterUser(newUser);
+    }
+
+
+    const RegisterUser = (newUser) => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newUser)
+        };
+        fetch(`https://localhost:5001/api/authenticate/register`, requestOptions);
+    }
+
     return (
         <div>
             <Button
@@ -36,7 +52,7 @@ export default function Register() {
                 onClose={handleClose}
                 aria-labelledby={"register-form"}>
                 <DialogTitle id={"register-form"}>Register new user</DialogTitle>
-                <form onSubmit={handleClose}>
+                <form onSubmit={handleSubmit}>
                     <DialogContent>
                         <Grid container spacing={2} direction={"column"}>
                             <Grid item>
