@@ -67,7 +67,7 @@ export default function MenuAppBar({ addedClasses, openDrawer, menuClick }) {
           <div className={cssClasses.links}>
             <ul>
               <li>
-                <Link to="user/myteams">My Teams</Link>
+                <Link to="/user/1/myteams">My Teams</Link>
               </li>
               <li>
                 <Link to="/user/1">My Profile</Link>
