@@ -8,7 +8,7 @@ namespace API.Entities
 {
     public class User: IdentityUser
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         [Required]
         public string FirstName { get; set; }
         [Required]

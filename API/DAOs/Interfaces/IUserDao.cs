@@ -1,16 +1,28 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using API.Entities;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Query;
 
 namespace API.DAOs.Interfaces
 {
-    public interface IUserDao: IDao<User>
+    public interface IUserDao
     {
-        public int AddUserSkill(int userId, Skill skill);
+        public Task<ActionResult<User>> GetById(string id);
+        
+        Task<int> Add(User newOne);
+        
+        void Remove(User toRemove);
 
-        public int RemoveUserSkill(int userId, Skill skill);
-        public IQueryable<ICollection<Skill>> GetUserSkills(int id);
-        public IIncludableQueryable<TeamMember, Team> GetUserTeams(int id);
+        Task<int> Edit(User toEdit);
+        
+        public ICollection<User> GetAll();
+        
+        public int AddUserSkill(string userId, Skill skill);
+
+        public int RemoveUserSkill(string userId, Skill skill);
+        public IQueryable<ICollection<Skill>> GetUserSkills(string id);
+        public IIncludableQueryable<TeamMember, Team> GetUserTeams(string id);
     }
 }

@@ -84,7 +84,7 @@ namespace API.Controllers
         }
 
         [HttpPost("{teamId}/AddTeamMember/{userId}/{roleId}")]
-        public async Task<IActionResult> AddTeamMember(int teamId, int userId, int roleId)
+        public async Task<IActionResult> AddTeamMember(int teamId, string userId, int roleId)
         {
             var user = await _userDao.GetById(userId);
             var role = await _roleDao.GetById(roleId);

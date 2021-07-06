@@ -52,7 +52,7 @@ namespace API.DAOs
                 .Where(t => t.Team.Id == teamId).ToList();
         }
         
-        public IOrderedQueryable<Post> GetPostsForTeamMember(int userId)
+        public IOrderedQueryable<Post> GetPostsForTeamMember(string userId)
         {
             return _dataContext.TeamMembers
                 .Include(x => x.Team)

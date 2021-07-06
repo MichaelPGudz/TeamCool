@@ -8,7 +8,7 @@ namespace API.DAOs.Interfaces
 {
     public interface IDao<T> where T : class
     {
-        Task<ActionResult<T>> GetById(int id);
+        public abstract Task<ActionResult<T>> GetById(int id);
         
         Task<int> Add(T newOne);
         
