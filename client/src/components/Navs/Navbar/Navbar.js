@@ -9,6 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import Register from "../../../components/authentication/Register.js";
 
 import cssClasses from './Navbar.module.css';
 import clsx from "clsx";
@@ -74,6 +75,12 @@ export default function MenuAppBar({addedClasses, openDrawer, menuClick}) {
               </li>
               <li>
                 <Link to="/about">About</Link>
+              </li>
+              <li>
+                <Register/>
+              </li>
+              <li>
+                <Link to="/login">Login</Link>
               </li>
             </ul>
             </div>
