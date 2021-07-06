@@ -1,11 +1,11 @@
 import React, {useEffect} from "react";
 import {useParams} from "react-router-dom"
 import {makeStyles} from "@material-ui/core/styles";
-import {CircularProgress, Grid} from "@material-ui/core";
+import {CircularProgress, Grid, Typography} from "@material-ui/core";
 import Wall from "../../components/Wall";
 import FeaturesList from "./FeaturesList";
 import AddFeature from "./AddFeature";
-import Bar from "./Bar";
+import TeamMembers from "./TeamMembers";
 
 const useStyles = makeStyles(() => ({
     main: {
@@ -13,7 +13,7 @@ const useStyles = makeStyles(() => ({
     },
     center: {
         textAlign: "center"
-    }
+    },
 }));
 
 export default function TeamPage() {
@@ -41,18 +41,27 @@ export default function TeamPage() {
 
     return (
         <div>
-            <h1> {team.name}</h1>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <Bar teamMembers={teamMembers} childTeams={childTeams} team={team} setTeam={setTeam}/>
+                    <Typography variant={"h3"}
+                                display={"block"}
+                    noWrap={true}>
+                        {team.name}
+                    </Typography>
                 </Grid>
-                <Grid item xs={8} className={classes.center}>
+                <Grid item xs={3} className={`${classes.center}`}>
+                    {loading ?
+                        <CircularProgress/>
+                        :
+                        <TeamMembers members={teamMembers} setMembers={setTeamMembers}/> }
+                </Grid>
+                <Grid item xs={6} className={classes.center}>
                     {loading ?
                         <CircularProgress/>
                         :
                         <Wall id={wallId}/>}
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={3}>
                     {loading ?
                         <CircularProgress/>
                         :

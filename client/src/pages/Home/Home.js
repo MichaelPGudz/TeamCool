@@ -1,26 +1,28 @@
 import React from 'react';
 import Wall from '../../components/Wall';
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+import {Grid} from "@material-ui/core";
 
-const useStyles = makeStyles(theme => ({
-  btn: {
-    float: 'right',
-    marginRight: '20%',
-  },
-}));
+// const useStyles = makeStyles(theme => ({}));
 
 const Home = () => {
-  const classes = useStyles();
+    // const classes = useStyles();
 
-  return (
-    <div>
-      <Button variant="contained" color="primary" className={classes.btn}>
-        Add New Team
-      </Button>
-      <Wall id="1" WallForUser/>
-    </div>
-  );
+    return (
+        <div>
+            <Grid container
+            >
+                <Grid item xs={3}>
+
+                </Grid>
+                <Grid item xs={6}>
+                    <Wall id="1" WallForUser/>
+                </Grid>
+                <Grid item xs={3}>
+
+                </Grid>
+            </Grid>
+        </div>
+    );
 };
 
 export default Home;

@@ -25,6 +25,7 @@ export default function AddFeature({updateFeatures, features, teamId}) {
         event.preventDefault();
         const newFeature = {name: name, url: getValidUrl(url)};
         addFeature(newFeature);
+
     }
 
     const getValidUrl = (url = "") => {
