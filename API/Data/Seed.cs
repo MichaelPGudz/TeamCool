@@ -26,7 +26,6 @@ namespace API.Data
                 .With(user => user.FirstName = Faker.Name.First())
                 .With(user => user.LastName = Faker.Name.Last())
                 .With(user => user.Email = Faker.Internet.Email())
-                .With(user => user.Password = Faker.Identification.SocialSecurityNumber())
                 .Build();
         }
 
