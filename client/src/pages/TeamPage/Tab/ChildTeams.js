@@ -13,21 +13,20 @@ const useStyles = makeStyles((theme) => ({
 
 }))
 
-export default function TeamMembers({members, setMembers}) {
+export default function ChildTeams({childTeams, setChildTeams}) {
     const classes = useStyles();
-
 
     return (
         <div>
                 <List className={classes.shape}>
-                    {members.map(({id, user, role}) => (
+                    {childTeams.map(({id, name}) => (
                         <ListItem button key={id}>
                             <ListItemAvatar>
                                 <Avatar>
                                     <Person/>
                                 </Avatar>
                             </ListItemAvatar>
-                            <ListItemText primary={`${user.firstName} ${user.lastName} `} secondary={`${role.name}`}/>
+                            <ListItemText primary={name} />
                         </ListItem>
                     ))}
                 </List>

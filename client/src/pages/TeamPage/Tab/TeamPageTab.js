@@ -1,46 +1,16 @@
 import React from "react";
-import {AppBar, Box, Paper, Tab, Tabs} from "@material-ui/core";
+import {Paper, Tab, Tabs} from "@material-ui/core";
 import {AccountTree, People,} from "@material-ui/icons";
 import {makeStyles} from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-
-
-
-function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`scrollable-force-tabpanel-${index}`}
-            aria-labelledby={`scrollable-force-tab-${index}`}
-            {...other}
-        >
-            {value === index && (
-                <Box p={3}>
-                    <Typography>{children}</Typography>
-                </Box>
-            )}
-        </div>
-    );
-}
-
-
-
-function a11yProps(index) {
-    return {
-        id: `scrollable-force-tab-${index}`,
-        'aria-controls': `scrollable-force-tabpanel-${index}`,
-    };
-}
+import TeamMembers from "./TeamMembers";
+import ChildTeams from "./ChildTeams";
+import SwipeableViews from "react-swipeable-views";
 
 const useStyles = makeStyles((theme) => ({
     shape: {
         maxHeight: "75vh",
-        // overflow: "auto",
-        // overflowX: "hidden",
-        // width: "100%"
+        overflow: "auto",
+        overflowX: "hidden",
     },
 
 }))
@@ -52,28 +22,32 @@ export default function TeamPageTab({members, setMembers, childTeams, setChildTe
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
+    const handleChangeIndex = (index) => {
+        setValue(index)
+    }
     return (
         <div>
             <Paper className={classes.shape}>
                 <Tabs
                     value={value}
                     onChange={handleChange}
-                    variant="fullWidth"
+                    variant="scrollable"
                     indicatorColor="primary"
                     textColor="primary"
                     aria-label="team-tab"
-                    scrollButtons={'on'}
+                    scrollButtons={'auto'}
                 >
-                    <Tab icon={<People />} aria-label="members" />
-                    <Tab icon={<AccountTree />} aria-label="child-teams" />
+                    <Tab icon={<People/>}
+                         style={{minWidth:"50%"}}
+                         aria-label="members"/>
+                    <Tab icon={<AccountTree/>}
+                         style={{minWidth:"50%"}}
+                         aria-label="child-teams"/>
                 </Tabs>
-                <TabPanel value={value} index={0}>
-                    Item One
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                    Item Two
-                </TabPanel>
+                <SwipeableViews onChangeIndex={handleChangeIndex} index={value}>
+                <TeamMembers index={0} members={members} setMembers={setMembers}/>
+                <ChildTeams index={1} childTeams={childTeams} setChildTeams={setChildTeams}/>
+                </SwipeableViews>
             </Paper>
         </div>
     )

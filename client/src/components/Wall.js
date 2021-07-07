@@ -63,7 +63,7 @@ const Wall = (props) => {
             >
                 {posts.map( (post) => (
                     <Grid item>
-                    <Post post={post}/>
+                    <Post  post={post}/>
                     </Grid>
                 ))}
             </Grid>

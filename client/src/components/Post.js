@@ -14,7 +14,7 @@ const useStyles = makeStyles(() => ({
 
 export default function Post({post}) {
     const classes = useStyles();
-    console.log(post)
+
     return (
         <div>
             <Card id={post.id} className={classes.shape}>
