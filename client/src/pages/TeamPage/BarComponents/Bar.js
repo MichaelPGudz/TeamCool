@@ -1,8 +1,8 @@
 import React from "react";
 import { Grid, Paper} from "@material-ui/core";
-import TeamMemberMenu from "./BarComponents/TeamMemberMenu";
-import ChildTeamsMenu from "./BarComponents/ChildTeamsMenu";
-import SettingsMenu from "./BarComponents/SettingsMenu";
+import TeamMemberMenu from "./TeamMemberMenu";
+import ChildTeamsMenu from "./ChildTeamsMenu";
+import SettingsMenu from "./SettingsMenu";
 
 
 export default function Bar({teamMembers, childTeams, team, setTeam}) {

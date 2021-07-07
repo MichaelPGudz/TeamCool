@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
     shape: {
         maxHeight: "75vh",
         overflow: "auto",
+        overflowX: "hidden"
     },
 
 }))

@@ -5,7 +5,8 @@ import {CircularProgress, Grid, Typography} from "@material-ui/core";
 import Wall from "../../components/Wall";
 import FeaturesList from "./FeaturesList";
 import AddFeature from "./AddFeature";
-import TeamMembers from "./TeamMembers";
+import TeamMembers from "./Tab/TeamMembers";
+import TeamPageTab from "./Tab/TeamPageTab";
 
 const useStyles = makeStyles(() => ({
     main: {
@@ -53,7 +54,10 @@ export default function TeamPage() {
                     {loading ?
                         <CircularProgress/>
                         :
-                        <TeamMembers members={teamMembers} setMembers={setTeamMembers}/> }
+                        <TeamPageTab setMembers={setTeamMembers}
+                                     members={teamMembers}
+                                     childTeams={childTeams}
+                                     setChildTeams={setChildTeams} />}
                 </Grid>
                 <Grid item xs={6} className={classes.center}>
                     {loading ?
