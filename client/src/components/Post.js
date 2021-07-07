@@ -17,7 +17,7 @@ export default function Post({post}) {
 
     return (
         <div>
-            <Card id={post.id} className={classes.shape}>
+            <Card key={post.id} className={classes.shape}>
                 <CardHeader
                     avatar={
                         <Avatar >

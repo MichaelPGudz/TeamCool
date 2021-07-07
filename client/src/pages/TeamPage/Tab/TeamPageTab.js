@@ -31,11 +31,11 @@ export default function TeamPageTab({members, setMembers, childTeams, setChildTe
                 <Tabs
                     value={value}
                     onChange={handleChange}
-                    variant="scrollable"
+                    variant="fullWidth"
                     indicatorColor="primary"
                     textColor="primary"
                     aria-label="team-tab"
-                    scrollButtons={'auto'}
+                    // scrollButtons={'auto'}
                 >
                     <Tab icon={<People/>}
                          style={{minWidth:"50%"}}

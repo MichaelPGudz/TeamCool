@@ -1,8 +1,9 @@
 import React from "react";
-import {List, ListItem, ListItemAvatar, ListItemText, Paper} from "@material-ui/core";
+import {List, ListItem, ListItemAvatar, ListItemText} from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import { Person} from "@material-ui/icons";
 import {makeStyles} from "@material-ui/core/styles";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     shape: {
@@ -21,7 +22,7 @@ export default function TeamMembers({members, setMembers}) {
         <div>
                 <List className={classes.shape}>
                     {members.map(({id, user, role}) => (
-                        <ListItem button key={id}>
+                        <ListItem button key={id} component={Link} to={`/user/${user.id}`} >
                             <ListItemAvatar>
                                 <Avatar>
                                     <Person/>

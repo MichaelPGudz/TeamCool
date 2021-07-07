@@ -1,10 +1,11 @@
 import React from "react";
-import {List, ListItem, ListItemAvatar, ListItemText, Paper} from "@material-ui/core";
+import {List, ListItem, ListItemAvatar, ListItemText} from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import { Person} from "@material-ui/icons";
 import {makeStyles} from "@material-ui/core/styles";
+import {Link} from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     shape: {
         maxHeight: "75vh",
         overflow: "auto",
@@ -20,7 +21,7 @@ export default function ChildTeams({childTeams, setChildTeams}) {
         <div>
                 <List className={classes.shape}>
                     {childTeams.map(({id, name}) => (
-                        <ListItem button key={id}>
+                        <ListItem button key={id} component={Link} to={`/team/${id}`}>
                             <ListItemAvatar>
                                 <Avatar>
                                     <Person/>

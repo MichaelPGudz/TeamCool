@@ -58,11 +58,10 @@ const Wall = (props) => {
         <div className={classes.shape}>
             <Grid container
                   direction={"column"}
-                  spacing={2}
-
+                  spacing={1}
             >
                 {posts.map( (post) => (
-                    <Grid item>
+                    <Grid item key={post.id}>
                     <Post  post={post}/>
                     </Grid>
                 ))}
