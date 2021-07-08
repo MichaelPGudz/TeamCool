@@ -34,12 +34,18 @@ export default function Login() {
         };
         fetch(`https://localhost:5001/api/authenticate/login`, requestOptions)
             .then(response => response.json())
-            .then(data => window.localStorage.setItem('token', data.token))
+            .then(data => {
+                window.localStorage.setItem('token', data.token);
+                window.localStorage.setItem('id', data.id);
+                window.localStorage.setItem('firstName', data.firstName);
+                window.localStorage.setItem('lastName', data.lastName);
+            })
         
     }
 
     return (
         <div>
+            {window.localStorage.getItem('lastName')}
             <Button
                 variant="contained"
                 size={'large'}

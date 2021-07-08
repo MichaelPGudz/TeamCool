@@ -8,7 +8,10 @@ export default function Logout() {
 
 
     const handleLogout = () => {
-        window.localStorage.setItem('token', null);
+        window.localStorage.removeItem('token');
+        window.localStorage.removeItem('id');
+        window.localStorage.removeItem('firstName');
+        window.localStorage.removeItem('lastName');
     }
 
 
