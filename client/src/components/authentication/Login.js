@@ -34,7 +34,7 @@ export default function Login() {
         };
         fetch(`https://localhost:5001/api/authenticate/login`, requestOptions)
             .then(response => response.json())
-            .then(data => console.log(data))
+            .then(data => window.localStorage.setItem('token', data.token))
         
     }
 

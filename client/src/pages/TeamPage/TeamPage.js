@@ -25,9 +25,17 @@ export default function TeamPage() {
     const [teamMembers, setTeamMembers] = React.useState([]);
     const [childTeams, setChildTeams] = React.useState([]);
     const [team, setTeam] = React.useState({});
+    const token = window.localStorage.getItem('token');
 
     useEffect(() => {
-        fetch(`https://localhost:5001/api/team/${teamId}`)
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' ,
+            'Authorization': 'Bearer ' + window.localStorage.getItem('token')},
+
+        };
+        
+        fetch(`https://localhost:5001/api/team/${teamId}`, requestOptions)
             .then(response => response.json())
             .then(data => {
                 setTeam(data);
