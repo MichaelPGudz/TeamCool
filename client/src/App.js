@@ -16,7 +16,7 @@ function App() {
     return (
         <div>
             <Router>
-                <Layout>
+                <Layout token={token}>
                     <Switch>
                         <Route path="/" exact>
                             <Home firstName = {firstName} lastName = {lastName}/>

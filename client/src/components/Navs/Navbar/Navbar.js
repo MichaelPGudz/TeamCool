@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function MenuAppBar({addedClasses, openDrawer, menuClick}) {
+export default function MenuAppBar({ addedClasses, openDrawer, menuClick, token }) {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -41,6 +41,25 @@ export default function MenuAppBar({addedClasses, openDrawer, menuClick}) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  if (!token) {
+    var authorizationModule = (
+      <ul>
+        <li>
+          <Register />
+        </li>
+        <li>
+          <Login />
+        </li>
+      </ul>)
+  } else {
+    var authorizationModule = (
+      <ul>
+        <li>
+          <Logout />
+        </li>
+      </ul>)
+  }
 
   return (
     <div className={classes.root}>
@@ -64,7 +83,7 @@ export default function MenuAppBar({addedClasses, openDrawer, menuClick}) {
           <Typography variant="h6" className={classes.title}>
             <Link to='/'>TeamCool</Link>
           </Typography>
-            <div className={cssClasses.links}>
+          <div className={cssClasses.links}>
             <ul>
               <li>
                 <Link to="/teams">My Teams</Link>
@@ -78,17 +97,9 @@ export default function MenuAppBar({addedClasses, openDrawer, menuClick}) {
               <li>
                 <Link to="/about">About</Link>
               </li>
-              <li>
-                <Register/>
-              </li>
-              <li>
-                <Login/>
-              </li>
-              <li>
-                <Logout/>
-              </li>
+              {authorizationModule}
             </ul>
-            </div>
+          </div>
           {auth && (
             <div>
               <IconButton
