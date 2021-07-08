@@ -11,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Register from "../../../components/authentication/Register.js";
 import Login from "../../../components/authentication/Login.js";
+import Logout from "../../../components/authentication/Logout.js";
 
 import cssClasses from './Navbar.module.css';
 import clsx from "clsx";
@@ -82,6 +83,9 @@ export default function MenuAppBar({addedClasses, openDrawer, menuClick}) {
               </li>
               <li>
                 <Login/>
+              </li>
+              <li>
+                <Logout/>
               </li>
             </ul>
             </div>
