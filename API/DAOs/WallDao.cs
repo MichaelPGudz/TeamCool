@@ -21,7 +21,7 @@ namespace API.DAOs
         public async Task<ActionResult<Wall>> GetById(int id)
         {
             return await _dataContext.Walls
-                .Include(w => w.Posts)
+                .Include(w => w.Posts.OrderByDescending(x => x.PostTime))
                 .ThenInclude(x => x.Author)
                 .FirstOrDefaultAsync(u => u.Id == id);
         }
