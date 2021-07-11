@@ -95,7 +95,7 @@ function Layout(props) {
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
             <Navbar addedClasses={addedClasses} menuClick={handleMenuClick} openDrawer={openDrawer} token={props.token} id = {props.id}/>
-            <Sidebar addedClasses={addedClasses} menuClick={handleMenuClick} openDrawer={openDrawer}/>
+            <Sidebar addedClasses={addedClasses} menuClick={handleMenuClick} openDrawer={openDrawer} userId={props.id}/>
             <main className={classes.main}>{props.children}</main>
             </ThemeProvider>
         </div>

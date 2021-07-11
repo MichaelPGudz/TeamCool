@@ -1,11 +1,11 @@
 import React from 'react';
-import Wall from '../../components/Wall/Wall';
+import Wall from '../../components/Wall';
 import Typography from '@material-ui/core/Typography';
 import {Grid} from "@material-ui/core";
 
 
 const Home = (props) => {
-  const classes = useStyles();
+
 
   const userGreeting = (
     <Typography variant="h3">
@@ -29,7 +29,7 @@ const Home = (props) => {
 
               </Grid>
               <Grid item xs={6}>
-                  <Wall id="1" WallForUser/>
+                  <Wall id={props.userId} WallForUser/>
               </Grid>
               <Grid item xs={3}>
 

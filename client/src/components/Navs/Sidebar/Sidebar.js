@@ -18,7 +18,7 @@ import Skeleton from '@material-ui/lab/Skeleton'
 
 
 
-function Sidebar({addedClasses, openDrawer, menuClick}) {
+function Sidebar({addedClasses, openDrawer, menuClick, userId}) {
     const classes = addedClasses;
     const theme = useTheme();
     const [openMyTeams, setOpenMyTeams] = React.useState(false);
@@ -26,7 +26,7 @@ function Sidebar({addedClasses, openDrawer, menuClick}) {
     const [loading, setLoading] = React.useState(true);
 
     useEffect(() => {
-        fetch('https://localhost:5001/api/user/1')
+        fetch(`https://localhost:5001/api/user/${userId}`)
             .then(response => response.json())
             .then(data => {
                 setUserTeams(data.myTeams);

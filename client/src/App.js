@@ -19,7 +19,7 @@ function App() {
                 <Layout token={token} id = {userId}>
                     <Switch>
                         <Route path="/" exact>
-                            <Home firstName = {firstName} lastName = {lastName}/>
+                            <Home firstName = {firstName} lastName = {lastName} userId={userId}/>
                         </Route>
                         <Route path="/about" exact>
                             <Wall id="2"/>

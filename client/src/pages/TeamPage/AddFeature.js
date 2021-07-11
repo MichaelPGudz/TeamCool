@@ -4,8 +4,6 @@ import {AddCircle} from "@material-ui/icons";
 import {Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField} from "@material-ui/core";
 
 
-
-
 export default function AddFeature({updateFeatures, features, teamId}) {
 
     const [openDialog, setOpenDialog] = React.useState(false);
@@ -32,10 +30,10 @@ export default function AddFeature({updateFeatures, features, teamId}) {
         let newUrl = window.decodeURIComponent(url);
         newUrl = newUrl.trim().replace(/\s/g, "");
 
-        if(/^(:\/\/)/.test(newUrl)){
+        if (/^(:\/\/)/.test(newUrl)) {
             return `https${newUrl}`;
         }
-        if(!/^(f|ht)tps?:\/\//i.test(newUrl)){
+        if (!/^(f|ht)tps?:\/\//i.test(newUrl)) {
             return `https://${newUrl}`;
         }
         return newUrl;
@@ -44,7 +42,10 @@ export default function AddFeature({updateFeatures, features, teamId}) {
     const addFeature = (newFeature) => {
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': window.localStorage.getItem('token')
+            },
             body: JSON.stringify(newFeature)
         };
         fetch(`https://localhost:5001/api/team/${teamId}/addFeature`, requestOptions)

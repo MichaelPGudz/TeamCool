@@ -63,9 +63,11 @@ export default function MenuAppBar({ addedClasses, openDrawer, menuClick, token,
 
   return (
     <div className={classes.root}>
-      <AppBar position="fixed" className={clsx(addedClasses.appBar, {
+      <AppBar position="fixed"
+              className={clsx(addedClasses.appBar, {
         [addedClasses.appBarShift]: openDrawer,
-      })}>
+      })}
+      color={"inherit"}>
         <Toolbar>
           {auth && (
             <IconButton
