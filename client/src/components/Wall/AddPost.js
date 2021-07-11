@@ -45,7 +45,7 @@ export default function AddPost({wallId, posts, setPosts}) {
         };
         fetch(`https://localhost:5001/api/wall/${wallId}`, requestOptions)
             .then(response => response.json())
-            .then(data => setPosts([...posts, data]))
+            .then(data => setPosts([data, ...posts]))
     }
 
     return (
@@ -80,7 +80,8 @@ export default function AddPost({wallId, posts, setPosts}) {
                 </CardContent>
                 <CardActions>
                     <Button size="medium"
-                    type={'submit'}>
+                    type={'submit'}
+                    fullWidth>
                         Post
                     </Button>
                 </CardActions>
