@@ -44,7 +44,7 @@ export default function AddFeature({updateFeatures, features, teamId}) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': window.localStorage.getItem('token')
+                'Authorization': 'Bearer ' + window.localStorage.getItem('token')
             },
             body: JSON.stringify(newFeature)
         };

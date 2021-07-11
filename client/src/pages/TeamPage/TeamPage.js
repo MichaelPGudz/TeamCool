@@ -5,7 +5,6 @@ import {CircularProgress, Grid, Typography} from "@material-ui/core";
 import Wall from "../../components/Wall";
 import FeaturesList from "./FeaturesList";
 import AddFeature from "./AddFeature";
-import TeamMembers from "./Tab/TeamMembers";
 import TeamPageTab from "./Tab/TeamPageTab";
 
 const useStyles = makeStyles(() => ({
@@ -31,11 +30,12 @@ export default function TeamPage() {
     useEffect(() => {
         const requestOptions = {
             method: 'GET',
-            headers: { 'Content-Type': 'application/json' ,
-            'Authorization': 'Bearer ' + window.localStorage.getItem('token')},
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
 
         };
-        
         fetch(`https://localhost:5001/api/team/${teamId}`, requestOptions)
             .then(response => response.json())
             .then(data => {
@@ -46,7 +46,7 @@ export default function TeamPage() {
                 setChildTeams(data.childTeams);
                 setLoading(false);
             })
-    }, [teamId]);
+    }, [teamId, token]);
 
     return (
         <div>
@@ -54,7 +54,7 @@ export default function TeamPage() {
                 <Grid item xs={12}>
                     <Typography variant={"h3"}
                                 display={"block"}
-                    noWrap={true}>
+                                noWrap={true}>
                         {team.name}
                     </Typography>
                 </Grid>
@@ -65,7 +65,7 @@ export default function TeamPage() {
                         <TeamPageTab setMembers={setTeamMembers}
                                      members={teamMembers}
                                      childTeams={childTeams}
-                                     setChildTeams={setChildTeams} />}
+                                     setChildTeams={setChildTeams}/>}
                 </Grid>
                 <Grid item xs={6} className={classes.center}>
                     {loading ?

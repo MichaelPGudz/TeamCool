@@ -32,7 +32,7 @@ function Sidebar({addedClasses, openDrawer, menuClick, userId}) {
                 setUserTeams(data.myTeams);
                 setLoading(false)
             });
-    }, []);
+    }, [userId]);
 
 
     const handleMyTeamsClick = () => {
