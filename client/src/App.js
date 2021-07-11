@@ -5,6 +5,8 @@ import Wall from './components/Wall/Wall';
 import Home from './pages/Home/Home.js';
 import UserPage from './pages/UserPage/UserPage';
 import TeamPage from "./pages/TeamPage/TeamPage";
+import Store from "./components/Store/Store";
+
 
 var token = window.localStorage.getItem('token');
 var userId = window.localStorage.getItem('id');
@@ -16,10 +18,11 @@ function App() {
     return (
         <div>
             <Router>
+                <Store>
                 <Layout token={token} id = {userId}>
                     <Switch>
                         <Route path="/" exact>
-                            <Home firstName = {firstName} lastName = {lastName} userId={userId}/>
+                            <Home/>
                         </Route>
                         <Route path="/about" exact>
                             <Wall id="2"/>
@@ -35,6 +38,7 @@ function App() {
                         </Route>
                     </Switch>
                 </Layout>
+                </Store>
             </Router>
         </div>
     );

@@ -14,25 +14,14 @@ import {ExpandLess, ExpandMore, PeopleAlt, PeopleAltOutlined, Settings} from "@m
 import {Collapse} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import Skeleton from '@material-ui/lab/Skeleton'
-
-
+import {UserContext} from "../../Store/Store";
 
 
 function Sidebar({addedClasses, openDrawer, menuClick, userId}) {
     const classes = addedClasses;
     const theme = useTheme();
     const [openMyTeams, setOpenMyTeams] = React.useState(false);
-    const [userTeams, setUserTeams] = React.useState([]);
-    const [loading, setLoading] = React.useState(true);
-
-    useEffect(() => {
-        fetch(`https://localhost:5001/api/user/${userId}`)
-            .then(response => response.json())
-            .then(data => {
-                setUserTeams(data.myTeams);
-                setLoading(false)
-            });
-    }, [userId]);
+    const [state, dispatch] = React.useContext(UserContext);
 
 
     const handleMyTeamsClick = () => {
@@ -68,13 +57,14 @@ function Sidebar({addedClasses, openDrawer, menuClick, userId}) {
                     </ListItem>
                     <Collapse in={openMyTeams} timeout={"auto"} unmountOnExit>
                         <List>
-                            {loading ?
+                            {!state.active ?
                                 <ListItem button className={classes.nested}>
-                                    <Skeleton  width={240} height={48} animation={'wave'}/>
+                                    <Skeleton width={240} height={48} animation={'wave'}/>
                                 </ListItem>
                                 :
-                                userTeams.map(({id, role, team}) => (
-                                    <ListItem button className={classes.nested} key={id} component={Link} to={`/team/${team.id}`}>
+                                state.user.myTeams.map(({id, role, team}) => (
+                                    <ListItem button className={classes.nested} key={id} component={Link}
+                                              to={`/team/${team.id}`}>
                                         <ListItemIcon>
                                             <PeopleAltOutlined/>
                                         </ListItemIcon>
@@ -95,4 +85,5 @@ function Sidebar({addedClasses, openDrawer, menuClick, userId}) {
         </div>
     );
 }
+
 export default Sidebar;

@@ -3,6 +3,7 @@ import {Card, CardActions, CardContent, CardHeader, TextField, Typography} from 
 import Avatar from "@material-ui/core/Avatar";
 import {makeStyles} from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import {UserContext} from "../Store/Store";
 
 
 
@@ -18,14 +19,12 @@ const useStyles = makeStyles(() => ({
 export default function AddPost({wallId, posts, setPosts}) {
     const classes = useStyles();
     const token = window.localStorage.getItem('token');
-    const userId = window.localStorage.getItem('id');
-    const firstName = window.localStorage.getItem('firstName');
-    const lastName = window.localStorage.getItem('lastName');
+    const [state, dispatch] = React.useContext(UserContext);
     const [postContent, setPostContent] = React.useState('');
     const user = {
-        id: userId,
-        firstName: firstName,
-        lastName: lastName,
+        id: state.user.id,
+        firstName: state.user.firstName,
+        lastName: state.user.lastName,
     }
 
     const handleSubmit = (event) => {
@@ -46,6 +45,9 @@ export default function AddPost({wallId, posts, setPosts}) {
         fetch(`https://localhost:5001/api/wall/${wallId}`, requestOptions)
             .then(response => response.json())
             .then(data => setPosts([data, ...posts]))
+            .catch((error) => {
+                console.log(error)
+            })
     }
 
     return (
@@ -54,10 +56,10 @@ export default function AddPost({wallId, posts, setPosts}) {
                 <CardHeader
                     avatar={
                         <Avatar >
-                            {firstName[0]}
+                            {state.user.firstName[0]}
                         </Avatar>
                     }
-                    title={`${firstName} ${lastName}`}
+                    title={`${state.user.firstName} ${state.user.lastName}`}
                     subheader={new Intl.DateTimeFormat("en-GB", {
                         year: "numeric",
                         month: "long",

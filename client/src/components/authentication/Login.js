@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useContext} from "react";
 import Button from "@material-ui/core/Button";
 import { AddCircle } from "@material-ui/icons";
 import { Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField } from "@material-ui/core";
+import {UserContext} from "../Store/Store";
 
 
 
@@ -37,11 +38,9 @@ export default function Login() {
             .then(data => {
                 window.localStorage.setItem('token', data.token);
                 window.localStorage.setItem('id', data.id);
-                window.localStorage.setItem('firstName', data.firstName);
-                window.localStorage.setItem('lastName', data.lastName);
             })
-        
     }
+
 
     return (
         <div>

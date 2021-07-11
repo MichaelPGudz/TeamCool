@@ -1,10 +1,8 @@
 using System;
 using System.Threading.Tasks;
-using API.DAOs;
 using API.DAOs.Interfaces;
 using API.Entities;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -12,13 +10,13 @@ namespace API.Controllers
     public class WallController : BaseApiController
     {
         private readonly IWallDao _wallDao;
-        private readonly UserManager<User> _userManager;
+      
         private readonly IUserDao _userDao;
 
-        public WallController(IWallDao wallDao, IUserDao userDao, UserManager<User> userManager)
+        public WallController(IWallDao wallDao, IUserDao userDao)
         {
             _wallDao = wallDao;
-            _userManager = userManager;
+         
             _userDao = userDao;
         }
 

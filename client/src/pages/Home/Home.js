@@ -2,48 +2,50 @@ import React from 'react';
 import Wall from '../../components/Wall/Wall';
 import Typography from '@material-ui/core/Typography';
 import {Grid} from "@material-ui/core";
+import {UserContext} from "../../components/Store/Store";
 
 
 const Home = (props) => {
+    const [state, dispatch] = React.useContext(UserContext)
+    console.log(state)
+    const
+    userGreeting = (
+        <Typography variant="h3">
+            Welcome {props.firstName} {props.lastName}!
+        </Typography>
+    )
 
+    const guestGreeting = (
+        <Typography variant="h3">
+            Welcome dear guest! Please login to see your team! :D
+        </Typography>
+    )
 
-  const userGreeting = (
-    <Typography variant="h3">
-      Welcome {props.firstName} {props.lastName}!
-    </Typography>
-  )
+    if (state.active) {
+        return (
+            <div>
+                {console.log(state.active)}
+                <Grid container
+                >
+                    <Grid item xs={3}>
 
-  const guestGreeting = (
-    <Typography variant="h3">
-      Welcome dear guest! Please login to see your team! :D
-    </Typography>
-  )
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Wall id={props.userId} WallForUser/>
+                    </Grid>
+                    <Grid item xs={3}>
 
-  if (props.firstName !== null || props.lastName !== null){
+                    </Grid>
+                </Grid>
+            </div>
+        );
+    }
+
     return (
-      <div>
-        {userGreeting}
-          <Grid container
-          >
-              <Grid item xs={3}>
-
-              </Grid>
-              <Grid item xs={6}>
-                  <Wall id={props.userId} WallForUser/>
-              </Grid>
-              <Grid item xs={3}>
-
-              </Grid>
-          </Grid>
-      </div>
-    );
-  }
-
-  return (
-    <div>
-      {guestGreeting}
-    </div>
-  )
+        <div>
+            {guestGreeting}
+        </div>
+    )
 
 };
 
