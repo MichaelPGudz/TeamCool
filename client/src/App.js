@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Layout from './components/Navs/Layout';
-import Wall from './components/Wall';
+import Wall from './components/Wall/Wall';
 import Home from './pages/Home/Home.js';
 import UserPage from './pages/UserPage/UserPage';
 import TeamPage from "./pages/TeamPage/TeamPage";

@@ -1,5 +1,5 @@
 import React from 'react';
-import Wall from '../../components/Wall';
+import Wall from '../../components/Wall/Wall';
 import Typography from '@material-ui/core/Typography';
 import {Grid} from "@material-ui/core";
 

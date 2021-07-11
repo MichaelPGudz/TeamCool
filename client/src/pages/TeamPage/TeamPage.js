@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {useParams} from "react-router-dom"
 import {makeStyles} from "@material-ui/core/styles";
 import {CircularProgress, Grid, Typography} from "@material-ui/core";
-import Wall from "../../components/Wall";
+import Wall from "../../components/Wall/Wall";
 import FeaturesList from "./FeaturesList";
 import AddFeature from "./AddFeature";
 import TeamPageTab from "./Tab/TeamPageTab";
