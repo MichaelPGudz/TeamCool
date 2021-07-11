@@ -6,11 +6,15 @@ using API.DAOs.Interfaces;
 using API.Entities;
 using API.Utils;
 using API.ViewModel;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace API.Controllers
 {
+    [Authorize]
     public class TeamController : BaseApiController
     {
         private readonly ITeamDao _teamDao;
@@ -82,7 +86,7 @@ namespace API.Controllers
         }
 
         [HttpPost("{teamId}/AddTeamMember/{userId}/{roleId}")]
-        public async Task<IActionResult> AddTeamMember(int teamId, int userId, int roleId)
+        public async Task<IActionResult> AddTeamMember(int teamId, string userId, int roleId)
         {
             var user = await _userDao.GetById(userId);
             var role = await _roleDao.GetById(roleId);

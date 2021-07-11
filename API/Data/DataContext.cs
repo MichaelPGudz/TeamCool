@@ -3,11 +3,12 @@ using System.Collections.Immutable;
 using System.Linq;
 using API.Entities;
 using FizzWare.NBuilder;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<User>
     {
         public DataContext(DbContextOptions options) : base(options)
         {
@@ -21,6 +22,14 @@ namespace API.Data
         public DbSet<TeamMember> TeamMembers { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Wall> Walls { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder
+                .EnableSensitiveDataLogging();
+            base.OnConfiguring(optionsBuilder);
+        }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -56,9 +65,11 @@ namespace API.Data
             modelBuilder.Entity<Feature>().HasData(Seed.GenerateFeatures());
             modelBuilder.Entity<Role>().HasData(Seed.GenerateRoles());
             modelBuilder.Entity<Wall>().HasData(Seed.GenerateWalls());
-            modelBuilder.Entity<Post>().HasData(Seed.GeneratePosts());
-            modelBuilder.Entity<TeamMember>().HasData(Seed.GenerateTeamMembers());
+            // modelBuilder.Entity<Post>().HasData(Seed.GeneratePosts());
+            // modelBuilder.Entity<TeamMember>().HasData(Seed.GenerateTeamMembers());
             
+            base.OnModelCreating(modelBuilder);
+
         }
     }
 }

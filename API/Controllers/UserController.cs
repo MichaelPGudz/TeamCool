@@ -38,7 +38,7 @@ namespace API.Controllers
         }
         
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> DeleteUser(string id)
         {
             try
             {
@@ -58,13 +58,13 @@ namespace API.Controllers
         
         
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUserById(int id) => await _userDao.GetById(id);
+        public async Task<ActionResult<User>> GetUserById(string id) => await _userDao.GetById(id);
         
         [HttpGet("{id}/skills")]
-        public IQueryable<ICollection<Skill>> GetSkillsForUser(int id) => _userDao.GetUserSkills(id);
+        public IQueryable<ICollection<Skill>> GetSkillsForUser(string id) => _userDao.GetUserSkills(id);
 
         [HttpPost("{userId}/skill/{skillId}")]
-        public IActionResult AddSkillForUser(int userId, int skillId)
+        public IActionResult AddSkillForUser(string userId, int skillId)
         {
             var skill = _skillDao.GetById(skillId);
             if (skill.Result.Value == null) return BadRequest();
@@ -80,7 +80,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("{userId}/skill/{skillId}")]
-        public IActionResult RemoveSkillFromUser(int userId, int skillId)
+        public IActionResult RemoveSkillFromUser(string userId, int skillId)
         {
             var skill = _skillDao.GetById(skillId);
             if (skill.Result.Value == null) return BadRequest();
@@ -96,10 +96,10 @@ namespace API.Controllers
         }
         
         [HttpGet("{id}/teams")]
-        public IIncludableQueryable<TeamMember, Team> GetTeamsForUser(int id) => _userDao.GetUserTeams(id);
+        public IIncludableQueryable<TeamMember, Team> GetTeamsForUser(string id) => _userDao.GetUserTeams(id);
         
         
         [HttpGet("{id}/posts")]
-        public IOrderedQueryable<Post> GetPostsForUser(int id) => _teamMemberDao.GetPostsForTeamMember(id);
+        public IOrderedQueryable<Post> GetPostsForUser(string id) => _teamMemberDao.GetPostsForTeamMember(id);
     }
 }

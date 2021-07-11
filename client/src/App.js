@@ -6,15 +6,20 @@ import Home from './pages/Home/Home.js';
 import UserPage from './pages/UserPage/UserPage';
 import TeamPage from "./pages/TeamPage/TeamPage";
 
+var token = window.localStorage.getItem('token');
+var userId = window.localStorage.getItem('id');
+var firstName = window.localStorage.getItem('firstName');
+var lastName = window.localStorage.getItem('lastName');
+
 
 function App() {
     return (
         <div>
             <Router>
-                <Layout>
+                <Layout token={token} id = {userId}>
                     <Switch>
                         <Route path="/" exact>
-                            <Home/>
+                            <Home firstName = {firstName} lastName = {lastName}/>
                         </Route>
                         <Route path="/about" exact>
                             <Wall id="2"/>
