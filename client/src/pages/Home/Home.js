@@ -5,15 +5,10 @@ import {Grid} from "@material-ui/core";
 import {UserContext} from "../../components/Store/Store";
 
 
-const Home = (props) => {
+const Home = () => {
     const [state, dispatch] = React.useContext(UserContext)
     console.log(state)
-    const
-    userGreeting = (
-        <Typography variant="h3">
-            Welcome {props.firstName} {props.lastName}!
-        </Typography>
-    )
+
 
     const guestGreeting = (
         <Typography variant="h3">
@@ -23,15 +18,18 @@ const Home = (props) => {
 
     if (state.active) {
         return (
+
             <div>
-                {console.log(state.active)}
+                <Typography variant="h3">
+                    Welcome {state.user.firstName} {state.user.lastName}!
+                </Typography>
                 <Grid container
                 >
                     <Grid item xs={3}>
 
                     </Grid>
                     <Grid item xs={6}>
-                        <Wall id={props.userId} WallForUser/>
+                        <Wall id={state.user.id} WallForUser/>
                     </Grid>
                     <Grid item xs={3}>
 

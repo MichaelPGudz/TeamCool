@@ -3,15 +3,13 @@ import Button from "@material-ui/core/Button";
 import { AddCircle } from "@material-ui/icons";
 
 
-
 export default function Logout() {
 
 
     const handleLogout = () => {
         window.localStorage.removeItem('token');
         window.localStorage.removeItem('id');
-        window.localStorage.removeItem('firstName');
-        window.localStorage.removeItem('lastName');
+        window.location.reload();
     }
 
 

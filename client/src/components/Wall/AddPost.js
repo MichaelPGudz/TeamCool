@@ -1,5 +1,5 @@
 import React from "react";
-import {Card, CardActions, CardContent, CardHeader, TextField, Typography} from "@material-ui/core";
+import {Card, CardActions, CardContent, CardHeader, TextField} from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import {makeStyles} from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -21,6 +21,7 @@ export default function AddPost({wallId, posts, setPosts}) {
     const token = window.localStorage.getItem('token');
     const [state, dispatch] = React.useContext(UserContext);
     const [postContent, setPostContent] = React.useState('');
+    if (state.active){}
     const user = {
         id: state.user.id,
         firstName: state.user.firstName,

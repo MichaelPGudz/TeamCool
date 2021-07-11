@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import {useTheme} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -17,7 +17,7 @@ import Skeleton from '@material-ui/lab/Skeleton'
 import {UserContext} from "../../Store/Store";
 
 
-function Sidebar({addedClasses, openDrawer, menuClick, userId}) {
+function Sidebar({addedClasses, openDrawer, menuClick}) {
     const classes = addedClasses;
     const theme = useTheme();
     const [openMyTeams, setOpenMyTeams] = React.useState(false);

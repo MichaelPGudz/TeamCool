@@ -10,8 +10,8 @@ import Store from "./components/Store/Store";
 
 var token = window.localStorage.getItem('token');
 var userId = window.localStorage.getItem('id');
-var firstName = window.localStorage.getItem('firstName');
-var lastName = window.localStorage.getItem('lastName');
+// var firstName = window.localStorage.getItem('firstName');
+// var lastName = window.localStorage.getItem('lastName');
 
 
 function App() {

@@ -19,7 +19,6 @@ const useStyles = makeStyles(() => ({
 const Wall = (props) => {
 
     const [isLoading, setIsLoading] = useState(true);
-    const [walls, setWalls] = useState([]);
     const [posts, setPosts] = useState([]);
     const classes = useStyles();
 
@@ -38,7 +37,6 @@ const Wall = (props) => {
                 .then(response => response.json())
                 .then(data => {
                     setIsLoading(false);
-                    setWalls(data)
                     setPosts(data.posts);
                 });
 

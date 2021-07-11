@@ -1,4 +1,3 @@
-
 export const userReducer = (state, action) => {
     switch (action.type) {
         case 'SET_USER':
@@ -6,7 +5,19 @@ export const userReducer = (state, action) => {
                 ...state,
                 user: action.payload,
                 active: true
-            };
+            }
+        case 'LOGOUT':
+            return {
+                ...state,
+                user: null,
+                active: false
+            }
+        case 'activate':
+            return {
+                ...state,
+                active: true
+            }
+                ;
         default:
             return state;
     }
