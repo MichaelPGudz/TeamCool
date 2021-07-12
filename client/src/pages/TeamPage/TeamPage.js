@@ -6,6 +6,7 @@ import Wall from "../../components/Wall/Wall";
 import FeaturesList from "./FeaturesList";
 import AddFeature from "./AddFeature";
 import TeamPageTab from "./Tab/TeamPageTab";
+import Bar from "./BarComponents/Bar";
 
 const useStyles = makeStyles(() => ({
     main: {
@@ -52,11 +53,7 @@ export default function TeamPage() {
         <div>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <Typography variant={"h3"}
-                                display={"block"}
-                                noWrap={true}>
-                        {team.name}
-                    </Typography>
+                    <Bar team={team} setTeam={setTeam}/>
                 </Grid>
                 <Grid item xs={3} className={`${classes.center}`}>
                     {loading ?

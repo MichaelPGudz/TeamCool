@@ -1,11 +1,9 @@
 import React from "react";
-import { Grid, Paper} from "@material-ui/core";
-import TeamMemberMenu from "./TeamMemberMenu";
-import ChildTeamsMenu from "./ChildTeamsMenu";
+import {Grid, Paper, Typography} from "@material-ui/core";
 import SettingsMenu from "./SettingsMenu";
 
 
-export default function Bar({teamMembers, childTeams, team, setTeam}) {
+export default function Bar({team, setTeam}) {
 
     return (
         <div>
@@ -13,13 +11,13 @@ export default function Bar({teamMembers, childTeams, team, setTeam}) {
                 <Grid container
                       spacing={1}
                       direction="row"
-                      justify="flex-start"
+                      justify="space-between"
                       alignItems="center">
                     <Grid item>
-                        <TeamMemberMenu teamMembers={teamMembers} />
-                    </Grid>
-                    <Grid item>
-                        <ChildTeamsMenu childTeams={childTeams}/>
+                        <Typography variant={"h5"}
+                                    style={{marginLeft: 10}}>
+                            {team.name}
+                        </Typography>
                     </Grid>
                     <Grid item>
                         <SettingsMenu team={team} setTeam={setTeam}/>

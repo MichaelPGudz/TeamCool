@@ -17,6 +17,14 @@ export const userReducer = (state, action) => {
                 ...state,
                 active: true
             }
+        case 'editTeamName':
+             return {...state,
+             user: {...state.user, myTeams: state.user.myTeams.map( (member) => {
+                if (action.payload.id === member.team.id){
+                    member.team.name = action.payload.name
+                }
+                return member;
+             })}}
                 ;
         default:
             return state;
