@@ -6,12 +6,11 @@ import Home from './pages/Home/Home.js';
 import UserPage from './pages/UserPage/UserPage';
 import TeamPage from "./pages/TeamPage/TeamPage";
 import Store from "./components/Store/Store";
+import {CloudinaryContext} from "cloudinary-react";
 
 
-var token = window.localStorage.getItem('token');
-var userId = window.localStorage.getItem('id');
-// var firstName = window.localStorage.getItem('firstName');
-// var lastName = window.localStorage.getItem('lastName');
+let token = window.localStorage.getItem('token');
+let userId = window.localStorage.getItem('id');
 
 
 function App() {
@@ -19,25 +18,27 @@ function App() {
         <div>
             <Router>
                 <Store>
-                <Layout token={token} id = {userId}>
-                    <Switch>
-                        <Route path="/" exact>
-                            <Home/>
-                        </Route>
-                        <Route path="/about" exact>
-                            <Wall id="2"/>
-                        </Route>
-                        <Route path="/contact" exact>
-                            <Wall id="3"/>
-                        </Route>
-                        <Route path="/user/:id" exact>
-                            <UserPage />
-                        </Route>
-                        <Route path="/team/:teamId" exact>
-                            <TeamPage/>
-                        </Route>
-                    </Switch>
-                </Layout>
+                    <CloudinaryContext cloudName="teamcool" secure="true" upload_preset="teamlogo">
+                        <Layout token={token} id={userId}>
+                            <Switch>
+                                <Route path="/" exact>
+                                    <Home/>
+                                </Route>
+                                <Route path="/about" exact>
+                                    <Wall id="2"/>
+                                </Route>
+                                <Route path="/contact" exact>
+                                    <Wall id="3"/>
+                                </Route>
+                                <Route path="/user/:id" exact>
+                                    <UserPage/>
+                                </Route>
+                                <Route path="/team/:teamId" exact>
+                                    <TeamPage/>
+                                </Route>
+                            </Switch>
+                        </Layout>
+                    </CloudinaryContext>
                 </Store>
             </Router>
         </div>

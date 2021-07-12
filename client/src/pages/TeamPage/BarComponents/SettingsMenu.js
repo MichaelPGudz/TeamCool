@@ -3,6 +3,7 @@ import {Button, Menu, MenuList} from "@material-ui/core";
 import { Settings} from "@material-ui/icons";
 import EditTeamName from "./EditTeamName";
 import DeleteTeam from "./DeleteTeam";
+import EditTeamLogo from "./EditTeamLogo";
 
 
 export default function SettingsMenu({team, setTeam}) {
@@ -38,6 +39,9 @@ export default function SettingsMenu({team, setTeam}) {
             >
                 <MenuList>
                 <EditTeamName team={team} setTeam={setTeam}/>
+                </MenuList>
+                <MenuList>
+                    <EditTeamLogo team={team} setTeam={setTeam}/>
                 </MenuList>
                 <MenuList>
                     <DeleteTeam team={team}/>

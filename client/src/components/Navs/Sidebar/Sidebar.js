@@ -15,6 +15,7 @@ import {Collapse} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import Skeleton from '@material-ui/lab/Skeleton'
 import {UserContext} from "../../Store/Store";
+import {Image, Transformation} from "cloudinary-react";
 
 
 function Sidebar({addedClasses, openDrawer, menuClick}) {
@@ -65,9 +66,17 @@ function Sidebar({addedClasses, openDrawer, menuClick}) {
                                 state.user.myTeams.map(({id, role, team}) => (
                                     <ListItem button className={classes.nested} key={id} component={Link}
                                               to={`/team/${team.id}`}>
-                                        <ListItemIcon>
-                                            <PeopleAltOutlined/>
-                                        </ListItemIcon>
+                                        {team.logo ?
+                                            <ListItemIcon>
+                                                <Image publicId={team.logo}>
+                                                    <Transformation width="30" height="30" radius="max" crop="fill"  border="2px_solid_rgb:544f4f" effect="vectorize"/>
+                                                </Image>
+                                            </ListItemIcon>
+                                            :
+                                            <ListItemIcon>
+                                                <PeopleAltOutlined/>
+                                            </ListItemIcon>
+                                        }
                                         <ListItemText primary={team.name} secondary={role.name}/>
                                     </ListItem>
                                 ))}

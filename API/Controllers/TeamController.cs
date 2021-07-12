@@ -156,5 +156,19 @@ namespace API.Controllers
             await _featureDao.Edit(oldFeature.Value);
             return Ok();
         }
+        
+        [HttpPost("{id}/logo")]
+        public async Task<ActionResult<Team>> AddLogo(Team teamWithLogo, int id)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+            
+            var team = await _teamDao.GetById(id);
+            
+            if (team.Value == null) return NotFound();
+
+            team.Value.Logo = teamWithLogo.Logo;
+            await _teamDao.Edit(team.Value);
+            return team;
+        }
     }
 }
