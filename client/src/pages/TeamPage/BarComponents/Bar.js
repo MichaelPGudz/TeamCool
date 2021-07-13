@@ -23,14 +23,15 @@ export default function Bar({team, setTeam}) {
                             {team.logo ?
                                 <Grid item style={{marginLeft: 10}}>
                                     <Avatar>
-                                    <Image publicId={team.logo}>
-                                        <Transformation width="50" height="50"  crop="fill"/>
-                                    </Image>
+                                        <Image publicId={team.logo}>
+                                            <Transformation width="45" height="45" crop="fill"/>
+                                        </Image>
                                     </Avatar>
                                 </Grid>
-                                : null}
-                            <Grid item>
-                                <Typography variant={"h5"}>
+                                :
+                                null}
+                            <Grid item style={{marginLeft: 10}}>
+                                <Typography variant={"h4"}>
                                     {team.name}
                                 </Typography>
                             </Grid>

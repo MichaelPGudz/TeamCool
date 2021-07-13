@@ -1,5 +1,6 @@
 import React from "react";
 import {
+    CircularProgress,
     Dialog, DialogActions,
     DialogContent,
     DialogTitle,
@@ -21,6 +22,7 @@ export default function EditTeamLogo({team, setTeam}) {
     const [logo, setLogo] = React.useState("");
     const [logoPreview, setLogoPreview] = React.useState("");
     const [logoAdded, setlogoAdded] = React.useState(false);
+    const [sending, setSending] = React.useState(false);
 
 
     const handleBtnClick = () => {
@@ -33,6 +35,7 @@ export default function EditTeamLogo({team, setTeam}) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setSending(true);
         const data = new FormData();
         data.append('file', logo);
         data.append('cloud_name', 'teamcool');
@@ -44,6 +47,10 @@ export default function EditTeamLogo({team, setTeam}) {
             .then(resp => resp.json())
             .then(data => {
                 addLogoOnServer(data.public_id);
+                setSending(false);
+                setLogo("");
+                setLogoPreview("");
+                setOpenDialog(false);
             })
             .catch(err => console.log(err))
     }
@@ -108,6 +115,10 @@ export default function EditTeamLogo({team, setTeam}) {
                                 </label>
                             </div>
                         }
+                        { sending ?
+                        <CircularProgress/>
+                        :
+                        null}
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose}

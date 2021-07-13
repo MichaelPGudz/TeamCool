@@ -68,9 +68,12 @@ function Sidebar({addedClasses, openDrawer, menuClick}) {
                                               to={`/team/${team.id}`}>
                                         {team.logo ?
                                             <ListItemIcon>
-                                                <Avatar>
+                                                <Avatar style={{
+                                                    width: theme.spacing(3),
+                                                    height: theme.spacing(3),
+                                                }}>
                                                     <Image publicId={team.logo}>
-                                                        <Transformation width="50" height="50"  crop="fill"/>
+                                                        <Transformation width="24" height="24" crop="fill"/>
                                                     </Image>
                                                 </Avatar>
                                             </ListItemIcon>

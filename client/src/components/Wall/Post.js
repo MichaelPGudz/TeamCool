@@ -4,12 +4,16 @@ import Avatar from "@material-ui/core/Avatar";
 import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
-    cardHeader : {
+    cardHeader: {
         textAlign: "left"
     },
     shape: {
-        width: "99%"
-    }
+        width: "99%",
+    },
+    important: {
+        boxShadow:
+            "0px 3px 1px -2px red,0px 2px 2px 0px rgba(100,0,0,0.9),0px 1px 5px 0px rgba(0,0,0,0.12)"
+    },
 }));
 
 export default function Post({post}) {
@@ -17,10 +21,10 @@ export default function Post({post}) {
 
     return (
         <div>
-            <Card key={post.id} className={classes.shape}>
+            <Card key={post.id} className={`${classes.shape} ${post.postStatus === 2 ? classes.important : ''}`}>
                 <CardHeader
                     avatar={
-                        <Avatar >
+                        <Avatar>
                             {post.author.firstName[0]}
                         </Avatar>
                     }
