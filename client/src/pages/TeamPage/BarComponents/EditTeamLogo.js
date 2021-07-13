@@ -61,6 +61,7 @@ export default function EditTeamLogo({team, setTeam}) {
             .then(response => response.json())
             .then(data => {
                 setTeam(data);
+                dispatch({type: "editTeamLogo", payload: {id: data.id, logo: data.logo}})
             })
             .catch(err => console.log(err))
     }

@@ -25,6 +25,14 @@ export const userReducer = (state, action) => {
                 }
                 return member;
              })}}
+        case 'editTeamLogo':
+            return {...state,
+                user: {...state.user, myTeams: state.user.myTeams.map( (member) => {
+                        if (action.payload.id === member.team.id){
+                            member.team.logo = action.payload.logo
+                        }
+                        return member;
+                    })}}
                 ;
         default:
             return state;

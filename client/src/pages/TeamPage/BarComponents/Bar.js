@@ -1,5 +1,5 @@
 import React from "react";
-import {Grid, Paper, Typography} from "@material-ui/core";
+import {Avatar, Grid, Paper, Typography} from "@material-ui/core";
 import SettingsMenu from "./SettingsMenu";
 import {Image, Transformation} from "cloudinary-react";
 
@@ -22,9 +22,11 @@ export default function Bar({team, setTeam}) {
                               alignItems="center">
                             {team.logo ?
                                 <Grid item style={{marginLeft: 10}}>
+                                    <Avatar>
                                     <Image publicId={team.logo}>
-                                        <Transformation width="30" height="30" radius="max" crop="fill"  border="2px_solid_rgb:544f4f" effect="vectorize"/>
+                                        <Transformation width="50" height="50"  crop="fill"/>
                                     </Image>
+                                    </Avatar>
                                 </Grid>
                                 : null}
                             <Grid item>

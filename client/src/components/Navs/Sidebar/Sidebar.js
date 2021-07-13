@@ -11,7 +11,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import {ExpandLess, ExpandMore, PeopleAlt, PeopleAltOutlined, Settings} from "@material-ui/icons";
-import {Collapse} from "@material-ui/core";
+import {Avatar, Collapse} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import Skeleton from '@material-ui/lab/Skeleton'
 import {UserContext} from "../../Store/Store";
@@ -68,9 +68,11 @@ function Sidebar({addedClasses, openDrawer, menuClick}) {
                                               to={`/team/${team.id}`}>
                                         {team.logo ?
                                             <ListItemIcon>
-                                                <Image publicId={team.logo}>
-                                                    <Transformation width="30" height="30" radius="max" crop="fill"  border="2px_solid_rgb:544f4f" effect="vectorize"/>
-                                                </Image>
+                                                <Avatar>
+                                                    <Image publicId={team.logo}>
+                                                        <Transformation width="50" height="50"  crop="fill"/>
+                                                    </Image>
+                                                </Avatar>
                                             </ListItemIcon>
                                             :
                                             <ListItemIcon>
