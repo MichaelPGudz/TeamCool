@@ -50,8 +50,7 @@ namespace API.Controllers
   
                 var token = new JwtSecurityToken(  
                     issuer: _configuration["JWT:ValidIssuer"],  
-                    audience: _configuration["JWT:ValidAudience"],  
-                    expires: DateTime.Now.AddHours(3),  
+                    audience: _configuration["JWT:ValidAudience"],   
                     claims: authClaims,  
                     signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)  
                     );  
@@ -59,11 +58,9 @@ namespace API.Controllers
                 return Ok(new  
                 {  
                     token = new JwtSecurityTokenHandler().WriteToken(token),  
-                    expiration = token.ValidTo,
-                    expiresIn = (token.ValidTo - DateTime.Now).TotalSeconds,
-                    id = user.Id,
                     firstName = user.FirstName,
                     lastName = user.LastName
+                    id = user.Id,
                 });  
             }  
             return Unauthorized();  
