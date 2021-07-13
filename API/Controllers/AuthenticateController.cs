@@ -59,7 +59,7 @@ namespace API.Controllers
                 {  
                     token = new JwtSecurityTokenHandler().WriteToken(token),  
                     firstName = user.FirstName,
-                    lastName = user.LastName
+                    lastName = user.LastName,
                     id = user.Id,
                 });  
             }  
