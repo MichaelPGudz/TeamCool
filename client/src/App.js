@@ -25,10 +25,10 @@ function App() {
                                     <Home/>
                                 </Route>
                                 <Route path="/about" exact>
-                                    <Wall id="2"/>
+                                    <Home/>
                                 </Route>
                                 <Route path="/contact" exact>
-                                    <Wall id="3"/>
+                                    <Home/>
                                 </Route>
                                 <Route path="/user/:id" exact>
                                     <UserPage/>
