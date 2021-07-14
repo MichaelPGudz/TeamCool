@@ -12,7 +12,8 @@ export default function Logout() {
     const handleLogout = () => {
         window.localStorage.removeItem('token');
         window.localStorage.removeItem('id');
-        dispatch({type: 'LOGOUT'})
+        dispatch({type: 'LOGOUT'});
+        window.location.reload();
     }
 
 
