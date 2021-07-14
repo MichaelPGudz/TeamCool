@@ -124,7 +124,7 @@ namespace API.Controllers
                 await userManager.AddToRoleAsync(user, AdminRole);  
             }  
   
-            return Ok(new Response { Status = "Success", Message = "User created successfully!" });  
+            return Ok(new Response { Status = "Success", Message = "Admin created successfully!" });  
         }  
     }
 }
