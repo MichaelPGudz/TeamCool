@@ -40,7 +40,6 @@ export default function Login() {
             .then(data => {
                 window.localStorage.setItem('token', data.token);
                 window.localStorage.setItem('id', data.id);
-                window.localStorage.setItem('expiration', data.expiration);
                 dispatch({type: 'LOGIN'});
             })
             .then(console.log(state))
