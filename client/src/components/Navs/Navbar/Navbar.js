@@ -12,6 +12,7 @@ import Menu from '@material-ui/core/Menu';
 import Register from "../../../components/authentication/Register.js";
 import Login from "../../../components/authentication/Login.js";
 import Logout from "../../../components/authentication/Logout.js";
+import {UserContext} from "../../../components/Store/Store";
 
 import cssClasses from './Navbar.module.css';
 import clsx from "clsx";
@@ -28,10 +29,11 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function MenuAppBar({ addedClasses, openDrawer, menuClick, token, id }) {
+export default function MenuAppBar({ addedClasses, openDrawer, menuClick, id}) {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [state, dispatch] = React.useContext(UserContext);
   const open = Boolean(anchorEl);
 
     const handleMenu = event => {
@@ -42,7 +44,7 @@ export default function MenuAppBar({ addedClasses, openDrawer, menuClick, token,
         setAnchorEl(null);
     };
 
-  if (!token) {
+  if (!state.logged) {
     var authorizationModule = (
       <ul>
         <li>

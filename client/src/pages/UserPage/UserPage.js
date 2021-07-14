@@ -8,6 +8,7 @@ import UserSkills from "./UserSkills";
 import { useParams } from 'react-router-dom';
 import Avatar from "@material-ui/core/Avatar";
 import image from '../../static/images/avatar.jpg'
+import {UserContext} from "../../components/Store/Store";
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -24,10 +25,11 @@ const UserPage = () => {
 
 
     const classes = useStyles();
-    const {id} = useParams();
     const [isLoading, setIsLoading] = useState(true);
     const [loadedUser, setLoadedUser] = useState([]);
     const [loadedSkills, setLoadedSkills] = useState([]);
+    const [state, dispatch] = React.useContext(UserContext);
+    var id = state.user?.id ?? null;
 
     useEffect(() => {
         setIsLoading(true);

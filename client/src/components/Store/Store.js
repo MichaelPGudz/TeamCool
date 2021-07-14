@@ -7,8 +7,6 @@ export const UserContext = React.createContext({
 })
 
 
-
-
 const Store = ({children}) => {
     const [state, dispatch] = useReducer(userReducer, initialUserState)
     const userId = window.localStorage.getItem('id');
