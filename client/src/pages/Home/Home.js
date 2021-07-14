@@ -1,26 +1,50 @@
 import React from 'react';
-import Wall from '../../components/Wall';
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+import Wall from '../../components/Wall/Wall';
+import Typography from '@material-ui/core/Typography';
+import {Grid} from "@material-ui/core";
+import {UserContext} from "../../components/Store/Store";
 
-const useStyles = makeStyles(theme => ({
-  btn: {
-    float: 'right',
-    marginRight: '20%',
-  },
-}));
 
 const Home = () => {
-  const classes = useStyles();
+    const [state, dispatch] = React.useContext(UserContext)
+    console.log(state)
 
-  return (
-    <div>
-      <Button variant="contained" color="primary" className={classes.btn}>
-        Add New Team
-      </Button>
-      <Wall id="1" WallForUser/>
-    </div>
-  );
+
+    const guestGreeting = (
+        <Typography variant="h3">
+            Welcome dear guest! Please login to see your team! :D
+        </Typography>
+    )
+
+    if (state.active) {
+        return (
+
+            <div>
+                <Typography variant="h3">
+                    Welcome {state.user.firstName} {state.user.lastName}!
+                </Typography>
+                <Grid container
+                >
+                    <Grid item xs={3}>
+
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Wall id={state.user.id} WallForUser/>
+                    </Grid>
+                    <Grid item xs={3}>
+
+                    </Grid>
+                </Grid>
+            </div>
+        );
+    }
+
+    return (
+        <div>
+            {guestGreeting}
+        </div>
+    )
+
 };
 
 export default Home;

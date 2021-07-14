@@ -14,6 +14,6 @@ namespace API.Entities
         public ICollection<Feature> Features { get; set; }
         public Team ParentTeam { get; set; }
         public ICollection<Team> ChildTeams { get; set; }
-        
+        public string Logo { get; set; }
     }
 }

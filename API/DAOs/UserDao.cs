@@ -20,7 +20,7 @@ namespace API.DAOs
             _dataContext = dataContext;
         }
 
-        public async Task<ActionResult<User>> GetById(int id)
+        public async Task<ActionResult<User>> GetById(string id)
         {
            return  await _dataContext.Users
                .Include(x => x.MySkills)
@@ -51,13 +51,13 @@ namespace API.DAOs
             return _dataContext.Users.ToList();
         }
 
-        public IQueryable<ICollection<Skill>> GetUserSkills(int id)
+        public IQueryable<ICollection<Skill>> GetUserSkills(string id)
         {
             return _dataContext.Users.Where(user => user.Id == id).Select(c => c.MySkills);
         }
 
 
-        public int AddUserSkill(int userId, Skill skill)
+        public int AddUserSkill(string userId, Skill skill)
         {
             var user = _dataContext.Users.Include(x => x.MySkills).FirstOrDefault(x => x.Id == userId);
             user.MySkills.Add(skill);
@@ -66,7 +66,7 @@ namespace API.DAOs
         }
 
 
-        public int RemoveUserSkill(int userId, Skill skill)
+        public int RemoveUserSkill(string userId, Skill skill)
         {
             var user = this.GetById(userId);
             user.Result.Value.MySkills.Remove(skill);
@@ -75,7 +75,7 @@ namespace API.DAOs
         }
         
 
-        public IIncludableQueryable<TeamMember, Team> GetUserTeams(int id)
+        public IIncludableQueryable<TeamMember, Team> GetUserTeams(string id)
         {
             return _dataContext.Users
                 .Where(x => x.Id == id)

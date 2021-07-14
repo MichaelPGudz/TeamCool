@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import {useTheme} from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -11,28 +11,18 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import {ExpandLess, ExpandMore, PeopleAlt, PeopleAltOutlined, Settings} from "@material-ui/icons";
-import {Collapse} from "@material-ui/core";
+import {Avatar, Collapse} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import Skeleton from '@material-ui/lab/Skeleton'
-
-
+import {UserContext} from "../../Store/Store";
+import {Image, Transformation} from "cloudinary-react";
 
 
 function Sidebar({addedClasses, openDrawer, menuClick}) {
     const classes = addedClasses;
     const theme = useTheme();
     const [openMyTeams, setOpenMyTeams] = React.useState(false);
-    const [userTeams, setUserTeams] = React.useState([]);
-    const [loading, setLoading] = React.useState(true);
-
-    useEffect(() => {
-        fetch('https://localhost:5001/api/user/1')
-            .then(response => response.json())
-            .then(data => {
-                setUserTeams(data.myTeams);
-                setLoading(false)
-            });
-    }, []);
+    const [state, dispatch] = React.useContext(UserContext);
 
 
     const handleMyTeamsClick = () => {
@@ -68,16 +58,30 @@ function Sidebar({addedClasses, openDrawer, menuClick}) {
                     </ListItem>
                     <Collapse in={openMyTeams} timeout={"auto"} unmountOnExit>
                         <List>
-                            {loading ?
+                            {!state.active ?
                                 <ListItem button className={classes.nested}>
-                                    <Skeleton  width={240} height={48} animation={'wave'}/>
+                                    <Skeleton width={240} height={48} animation={'wave'}/>
                                 </ListItem>
                                 :
-                                userTeams.map(({id, role, team}) => (
-                                    <ListItem button className={classes.nested} key={id} component={Link} to={`/team/${team.id}`}>
-                                        <ListItemIcon>
-                                            <PeopleAltOutlined/>
-                                        </ListItemIcon>
+                                state.user.myTeams.map(({id, role, team}) => (
+                                    <ListItem button className={classes.nested} key={id} component={Link}
+                                              to={`/team/${team.id}`}>
+                                        {team.logo ?
+                                            <ListItemIcon>
+                                                <Avatar style={{
+                                                    width: theme.spacing(3),
+                                                    height: theme.spacing(3),
+                                                }}>
+                                                    <Image publicId={team.logo}>
+                                                        <Transformation width="24" height="24" crop="fill"/>
+                                                    </Image>
+                                                </Avatar>
+                                            </ListItemIcon>
+                                            :
+                                            <ListItemIcon>
+                                                <PeopleAltOutlined/>
+                                            </ListItemIcon>
+                                        }
                                         <ListItemText primary={team.name} secondary={role.name}/>
                                     </ListItem>
                                 ))}
@@ -95,4 +99,5 @@ function Sidebar({addedClasses, openDrawer, menuClick}) {
         </div>
     );
 }
+
 export default Sidebar;

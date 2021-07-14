@@ -9,14 +9,15 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import Register from '../../../components/authentication/Register.js';
+import Login from '../../../components/authentication/Login.js';
+import Logout from '../../../components/authentication/Logout.js';
 
 import cssClasses from './Navbar.module.css';
 import clsx from 'clsx';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    // flexGrow: 1,
-  },
+  root: {},
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -25,7 +26,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function MenuAppBar({ addedClasses, openDrawer, menuClick }) {
+export default function MenuAppBar({
+  addedClasses,
+  openDrawer,
+  menuClick,
+  token,
+  id,
+}) {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -39,6 +46,27 @@ export default function MenuAppBar({ addedClasses, openDrawer, menuClick }) {
     setAnchorEl(null);
   };
 
+  if (!token) {
+    var authorizationModule = (
+      <ul>
+        <li>
+          <Register />
+        </li>
+        <li>
+          <Login />
+        </li>
+      </ul>
+    );
+  } else {
+    var authorizationModule = (
+      <ul>
+        <li>
+          <Logout />
+        </li>
+      </ul>
+    );
+  }
+
   return (
     <div className={classes.root}>
       <AppBar
@@ -46,6 +74,7 @@ export default function MenuAppBar({ addedClasses, openDrawer, menuClick }) {
         className={clsx(addedClasses.appBar, {
           [addedClasses.appBarShift]: openDrawer,
         })}
+        color={'inherit'}
       >
         <Toolbar>
           {auth && (
@@ -70,7 +99,7 @@ export default function MenuAppBar({ addedClasses, openDrawer, menuClick }) {
                 <Link to="/user/1/myteams">My Teams</Link>
               </li>
               <li>
-                <Link to="/user/1">My Profile</Link>
+                <Link to={`/user/${id}`}>My Profile</Link>
               </li>
               <li>
                 <Link to="/contact">Contact</Link>
@@ -78,6 +107,7 @@ export default function MenuAppBar({ addedClasses, openDrawer, menuClick }) {
               <li>
                 <Link to="/about">About</Link>
               </li>
+              {authorizationModule}
             </ul>
           </div>
           {auth && (

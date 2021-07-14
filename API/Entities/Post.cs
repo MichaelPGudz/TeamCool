@@ -10,6 +10,7 @@ namespace API.Entities
         public int Id { get; set; }
         public string PostContent { get; set; }
         public DateTime PostTime { get; set; }
+        [Required]
         public User Author { get; set; }
         public Status PostStatus { get; set; }
     } 

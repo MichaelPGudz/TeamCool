@@ -12,12 +12,14 @@ import {
 import {Edit} from "@material-ui/icons";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
+import {UserContext} from "../../../components/Store/Store";
 
 
 export default function EditTeamName({team, setTeam}) {
 
     const [openDialog, setOpenDialog] = React.useState(false);
     const [name, setName] = React.useState();
+    const [state, dispatch] = React.useContext(UserContext);
 
     const handleBtnClick = () => {
         setOpenDialog(true)
@@ -35,12 +37,16 @@ export default function EditTeamName({team, setTeam}) {
     const editTeamName = (name) => {
         const requestOptions = {
             method: "PATCH",
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + window.localStorage.getItem('token')},
             body: JSON.stringify({name})
         };
         fetch(`https://localhost:5001/api/team/${team.id}`, requestOptions)
             .then(response => response.json())
-            .then(data => setTeam(data))
+            .then(data => {
+                setTeam(data);
+                dispatch({type: 'editTeamName', payload: {id: data.id, name: data.name}});
+            })
     }
 
     return (

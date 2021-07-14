@@ -1,16 +1,15 @@
 import Navbar from './Navbar/Navbar';
 import classes from './Layout.module.css';
 import Sidebar from "./Sidebar/Sidebar";
-import Footer from "./Footer/Footer";
-import {makeStyles} from "@material-ui/core/styles";
+import {makeStyles, ThemeProvider, createMuiTheme} from "@material-ui/core/styles";
 import React from "react";
+import {CssBaseline, useMediaQuery} from "@material-ui/core";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
     root:{
         display: "flex",
-        margin: "2%"
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
@@ -79,13 +78,26 @@ function Layout(props) {
     const handleMenuClick = () => {
         setOpenDrawer(!openDrawer);
     };
+    const prefersDarkMode = useMediaQuery('(prefers-color-scheme: light)');
+
+    const theme = React.useMemo(
+        () =>
+            createMuiTheme({
+                palette: {
+                    type: prefersDarkMode ? 'dark' : 'light',
+                },
+            }),
+        [prefersDarkMode],
+    );
 
     return (
         <div className={addedClasses.root}>
-            <Navbar addedClasses={addedClasses} menuClick={handleMenuClick} openDrawer={openDrawer}/>
-            <Sidebar addedClasses={addedClasses} menuClick={handleMenuClick} openDrawer={openDrawer}/>
+            <ThemeProvider theme={theme}>
+                <CssBaseline/>
+            <Navbar addedClasses={addedClasses} menuClick={handleMenuClick} openDrawer={openDrawer} token={props.token} id = {props.id}/>
+            <Sidebar addedClasses={addedClasses} menuClick={handleMenuClick} openDrawer={openDrawer} userId={props.id}/>
             <main className={classes.main}>{props.children}</main>
-            <Footer addedClasses={addedClasses} openDrawer={openDrawer}/>
+            </ThemeProvider>
         </div>
     );
 }

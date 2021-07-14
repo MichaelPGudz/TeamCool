@@ -1,11 +1,12 @@
 import React, {useEffect} from "react";
 import {useParams} from "react-router-dom"
 import {makeStyles} from "@material-ui/core/styles";
-import {CircularProgress, Grid} from "@material-ui/core";
-import Wall from "../../components/Wall";
+import {CircularProgress, Grid, Typography} from "@material-ui/core";
+import Wall from "../../components/Wall/Wall";
 import FeaturesList from "./FeaturesList";
 import AddFeature from "./AddFeature";
-import Bar from "./Bar";
+import TeamPageTab from "./Tab/TeamPageTab";
+import Bar from "./BarComponents/Bar";
 
 const useStyles = makeStyles(() => ({
     main: {
@@ -13,7 +14,7 @@ const useStyles = makeStyles(() => ({
     },
     center: {
         textAlign: "center"
-    }
+    },
 }));
 
 export default function TeamPage() {
@@ -25,9 +26,18 @@ export default function TeamPage() {
     const [teamMembers, setTeamMembers] = React.useState([]);
     const [childTeams, setChildTeams] = React.useState([]);
     const [team, setTeam] = React.useState({});
+    const token = window.localStorage.getItem('token');
 
     useEffect(() => {
-        fetch(`https://localhost:5001/api/team/${teamId}`)
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+
+        };
+        fetch(`https://localhost:5001/api/team/${teamId}`, requestOptions)
             .then(response => response.json())
             .then(data => {
                 setTeam(data);
@@ -37,22 +47,30 @@ export default function TeamPage() {
                 setChildTeams(data.childTeams);
                 setLoading(false);
             })
-    }, [teamId]);
+    }, [teamId, token]);
 
     return (
         <div>
-            <h1> {team.name}</h1>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                    <Bar teamMembers={teamMembers} childTeams={childTeams} team={team} setTeam={setTeam}/>
+                    <Bar team={team} setTeam={setTeam}/>
                 </Grid>
-                <Grid item xs={8} className={classes.center}>
+                <Grid item xs={3} className={`${classes.center}`}>
+                    {loading ?
+                        <CircularProgress/>
+                        :
+                        <TeamPageTab setMembers={setTeamMembers}
+                                     members={teamMembers}
+                                     childTeams={childTeams}
+                                     setChildTeams={setChildTeams}/>}
+                </Grid>
+                <Grid item xs={6} className={classes.center}>
                     {loading ?
                         <CircularProgress/>
                         :
                         <Wall id={wallId}/>}
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={3}>
                     {loading ?
                         <CircularProgress/>
                         :
