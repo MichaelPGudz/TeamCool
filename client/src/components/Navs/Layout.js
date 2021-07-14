@@ -77,13 +77,7 @@ function Layout(props) {
     const addedClasses = useStyles();
     const [openDrawer, setOpenDrawer] = React.useState(false);
     const [state, dispatch] = React.useContext(UserContext);
-    var user = state.user ?? null;
-    console.log(user);
-    if (user != null){
-        var id = user.id;
-    }
-    else {var id = null;}
-    console.log(id)
+    var id = state.user?.id ?? null;
 
     const handleMenuClick = () => {
         setOpenDrawer(!openDrawer);
