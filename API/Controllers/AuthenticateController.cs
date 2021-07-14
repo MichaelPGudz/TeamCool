@@ -116,7 +116,7 @@ namespace API.Controllers
   
             if (!await roleManager.RoleExistsAsync(AdminRole))  
                 await roleManager.CreateAsync(new IdentityRole(AdminRole));  
-            if (!await roleManager.RoleExistsAsync(AdminRole))  
+            if (!await roleManager.RoleExistsAsync(UserRole))  
                 await roleManager.CreateAsync(new IdentityRole(UserRole));  
   
             if (await roleManager.RoleExistsAsync(AdminRole))  
