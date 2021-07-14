@@ -2,6 +2,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import { AddCircle } from "@material-ui/icons";
 import { Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField } from "@material-ui/core";
+import {UserContext} from "../../components/Store/Store";
 
 
 
@@ -11,6 +12,7 @@ export default function Login() {
     const [openDialog, setOpenDialog] = React.useState(false);
     const [email, setEmail] = React.useState();
     const [password, setPassword] = React.useState();
+    const [state, dispatch] = React.useContext(UserContext);
 
     const handleOpen = () => {
         setOpenDialog(true)
@@ -39,8 +41,9 @@ export default function Login() {
                 window.localStorage.setItem('token', data.token);
                 window.localStorage.setItem('id', data.id);
                 window.localStorage.setItem('expiration', data.expiration);
-                window.location.reload();
             })
+            .then(dispatch({type: 'LOGIN'}))
+            .then(console.log(state))
     }
 
 
