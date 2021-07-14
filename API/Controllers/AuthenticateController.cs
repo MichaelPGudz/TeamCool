@@ -64,6 +64,7 @@ namespace API.Controllers
                     firstName = user.FirstName,
                     lastName = user.LastName,
                     id = user.Id,
+                    globalRole = userRoles[0]
                 });  
             }  
             return Unauthorized();  

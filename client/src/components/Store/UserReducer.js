@@ -3,7 +3,8 @@ export const userReducer = (state, action) => {
         case 'LOGIN':
             return {
                 ...state,
-                logged: true
+                logged: true,
+                globalRole: action.payload
             }
         case 'SET_USER':
             return {
@@ -57,5 +58,6 @@ export const userReducer = (state, action) => {
 export const initialUserState = {
     active: false,
     user: null,
-    logged: false
+    logged: false,
+    globalRole: null
 }
