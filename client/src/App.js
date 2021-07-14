@@ -9,8 +9,8 @@ import Store from "./components/Store/Store";
 import {CloudinaryContext} from "cloudinary-react";
 
 
-let token = window.localStorage.getItem('token');
-let userId = window.localStorage.getItem('id');
+//let token = window.localStorage.getItem('token');
+//let userId = window.localStorage.getItem('id');
 
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
             <Router>
                 <Store>
                     <CloudinaryContext cloudName="teamcool" secure="true" upload_preset="teamlogo">
-                        <Layout token={token} id={userId}>
+                        <Layout>
                             <Switch>
                                 <Route path="/" exact>
                                     <Home/>

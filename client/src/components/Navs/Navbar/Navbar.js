@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function MenuAppBar({ addedClasses, openDrawer, menuClick, token, id }) {
+export default function MenuAppBar({ addedClasses, openDrawer, menuClick, id}) {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);

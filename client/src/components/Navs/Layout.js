@@ -4,6 +4,7 @@ import Sidebar from "./Sidebar/Sidebar";
 import {makeStyles, ThemeProvider, createMuiTheme} from "@material-ui/core/styles";
 import React from "react";
 import {CssBaseline, useMediaQuery} from "@material-ui/core";
+import {UserContext} from "../../components/Store/Store";
 
 const drawerWidth = 240;
 
@@ -75,6 +76,15 @@ const useStyles = makeStyles((theme) => ({
 function Layout(props) {
     const addedClasses = useStyles();
     const [openDrawer, setOpenDrawer] = React.useState(false);
+    const [state, dispatch] = React.useContext(UserContext);
+    var user = state.user ?? null;
+    console.log(user);
+    if (user != null){
+        var id = user.id;
+    }
+    else {var id = null;}
+    console.log(id)
+
     const handleMenuClick = () => {
         setOpenDrawer(!openDrawer);
     };
@@ -94,8 +104,8 @@ function Layout(props) {
         <div className={addedClasses.root}>
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
-            <Navbar addedClasses={addedClasses} menuClick={handleMenuClick} openDrawer={openDrawer} token={props.token} id = {props.id}/>
-            <Sidebar addedClasses={addedClasses} menuClick={handleMenuClick} openDrawer={openDrawer} userId={props.id}/>
+            <Navbar addedClasses={addedClasses} menuClick={handleMenuClick} openDrawer={openDrawer} id={id}/>
+            <Sidebar addedClasses={addedClasses} menuClick={handleMenuClick} openDrawer={openDrawer} userId={id}/>
             <main className={classes.main}>{props.children}</main>
             </ThemeProvider>
         </div>
