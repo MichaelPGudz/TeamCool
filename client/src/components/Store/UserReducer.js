@@ -1,15 +1,15 @@
 export const userReducer = (state, action) => {
     switch (action.type) {
+        case 'LOGIN':
+            return {
+                ...state,
+                logged: true
+            }
         case 'SET_USER':
             return {
                 ...state,
                 user: action.payload,
                 active: true,
-                logged: false
-            }
-        case 'LOGIN':
-            return {
-                ...state,
                 logged: true
             }
         case 'LOGOUT':
@@ -23,7 +23,6 @@ export const userReducer = (state, action) => {
             return {
                 ...state,
                 active: true,
-                logged: false
             }
         case 'editTeamName':
             return {

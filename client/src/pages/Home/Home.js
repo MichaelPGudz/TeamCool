@@ -1,8 +1,9 @@
 import React from 'react';
 import Wall from '../../components/Wall/Wall';
 import Typography from '@material-ui/core/Typography';
-import {Grid} from "@material-ui/core";
-import {UserContext} from "../../components/Store/Store";
+import { Grid } from "@material-ui/core";
+import { UserContext } from "../../components/Store/Store";
+import { CircularProgress } from "@material-ui/core";
 
 
 const Home = () => {
@@ -15,6 +16,17 @@ const Home = () => {
             Welcome dear guest! Please login to see your team! :D
         </Typography>
     )
+
+    if (state.logged && !state.active) {
+        return (
+            <div>
+                <Typography variant="h3">
+                    Your user is loading...
+                    <CircularProgress />
+                </Typography>
+            </div>
+        )
+    }
 
     if (state.active) {
         return (
@@ -29,7 +41,7 @@ const Home = () => {
 
                     </Grid>
                     <Grid item xs={6}>
-                        <Wall id={state.user.id} WallForUser/>
+                        <Wall id={state.user.id} WallForUser />
                     </Grid>
                     <Grid item xs={3}>
 
