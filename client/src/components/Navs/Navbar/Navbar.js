@@ -44,7 +44,7 @@ export default function MenuAppBar({ addedClasses, openDrawer, menuClick, id}) {
         setAnchorEl(null);
     };
 
-  if (!state.logged) {
+  if (!state.active) {
     var authorizationModule = (
       <ul>
         <li>

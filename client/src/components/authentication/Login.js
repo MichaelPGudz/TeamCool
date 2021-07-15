@@ -40,7 +40,7 @@ export default function Login() {
             .then(data => {
                 window.localStorage.setItem('token', data.token);
                 window.localStorage.setItem('id', data.id);
-                dispatch({type: 'LOGIN', payload: data.globalRole});
+                dispatch({type: 'SET_ROLE', payload: data.globalRole});
             })
             .then(console.log(state))
     }

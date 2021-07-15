@@ -1,9 +1,8 @@
 export const userReducer = (state, action) => {
     switch (action.type) {
-        case 'LOGIN':
+        case 'SET_ROLE':
             return {
                 ...state,
-                logged: true,
                 globalRole: action.payload
             }
         case 'SET_USER':

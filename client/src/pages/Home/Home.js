@@ -17,17 +17,6 @@ const Home = () => {
         </Typography>
     )
 
-    if (state.logged && !state.active) {
-        return (
-            <div>
-                <Typography variant="h3">
-                    Your user is loading...
-                    <CircularProgress />
-                </Typography>
-            </div>
-        )
-    }
-
     if (state.active) {
         return (
 
