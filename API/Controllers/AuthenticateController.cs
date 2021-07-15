@@ -89,7 +89,7 @@ namespace API.Controllers
             };
             var result = await userManager.CreateAsync(user, model.Password);  
             if (!result.Succeeded)  
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });  
+                return StatusCode(StatusCodes.Status406NotAcceptable, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });  
             
             if (!await roleManager.RoleExistsAsync(UserRole))  
                 await roleManager.CreateAsync(new IdentityRole(UserRole)); 
@@ -121,7 +121,7 @@ namespace API.Controllers
             };
             var result = await userManager.CreateAsync(user, model.Password);  
             if (!result.Succeeded)  
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });  
+                return StatusCode(StatusCodes.Status406NotAcceptable, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });  
   
             if (!await roleManager.RoleExistsAsync(AdminRole))  
                 await roleManager.CreateAsync(new IdentityRole(AdminRole));
