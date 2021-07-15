@@ -2,9 +2,8 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import { AddCircle } from "@material-ui/icons";
 import { Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField } from "@material-ui/core";
-import {UserContext} from "../../components/Store/Store";
-
-
+import { UserContext } from "../../components/Store/Store";
+import Alert from '@material-ui/lab/Alert';
 
 
 export default function Login() {
@@ -13,8 +12,15 @@ export default function Login() {
     const [email, setEmail] = React.useState();
     const [password, setPassword] = React.useState();
     const [state, dispatch] = React.useContext(UserContext);
+    const [wrongLogin, setWrongLogin] = React.useState(false);
 
     const handleOpen = () => {
+        setWrongLogin(false)
+        setOpenDialog(true)
+    }
+
+    const handleWrongLogin = () => {
+        setWrongLogin(true)
         setOpenDialog(true)
     }
 
@@ -36,13 +42,17 @@ export default function Login() {
             body: JSON.stringify(user)
         };
         fetch(`https://localhost:5001/api/authenticate/login`, requestOptions)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) { throw new Error("Invalida Data") };
+                return response.json()
+            })
             .then(data => {
                 window.localStorage.setItem('token', data.token);
                 window.localStorage.setItem('id', data.id);
-                dispatch({type: 'SET_ROLE', payload: data.globalRole});
+                dispatch({ type: 'SET_ROLE', payload: data.globalRole });
             })
             .then(console.log(state))
+            .catch((error) => { console.log(error); handleWrongLogin() })
     }
 
 
@@ -65,6 +75,8 @@ export default function Login() {
                 <form onSubmit={handleSubmit}>
                     <DialogContent>
                         <Grid container spacing={2} direction={"column"}>
+                            {wrongLogin ?
+                                <Alert severity="error">Wrong data, try again!<br></br></Alert> : null}
                             <Grid item>
                                 <TextField
                                     id={'email'}
