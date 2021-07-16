@@ -48,6 +48,22 @@ export const userReducer = (state, action) => {
                     })
                 }
             }
+        case 'addPost':
+            return {
+                ...state,
+                posts: ([...state.posts, ...action.payload.post]).sort((a,b) => {
+                    return b.postTime - a.postTime;
+                } )
+                ,
+            }
+                ;
+        case 'deleteTeamPosts':
+            return {
+                ...state,
+                posts: state.posts.filter( (post) => {
+                    return post.teamId !== action.payload.teamId;
+                } )
+            }
                 ;
         default:
             return state;
@@ -57,5 +73,6 @@ export const userReducer = (state, action) => {
 export const initialUserState = {
     active: false,
     user: null,
-    logged: false
+    logged: false,
+    posts: []
 }

@@ -1,7 +1,8 @@
 import React from "react";
-import {Card, CardContent, CardHeader, Typography} from "@material-ui/core";
+import {Card, CardContent, CardHeader, Chip, Typography} from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import {makeStyles} from "@material-ui/core/styles";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
     cardHeader: {
@@ -10,10 +11,7 @@ const useStyles = makeStyles(() => ({
     shape: {
         margin: '1%',
     },
-    important: {
-        boxShadow:
-            "3px 6px 4px -2px darkred,0px 2px 2px 0px rgba(100,0,0,0.9),0px 1px 5px 0px rgba(0,0,0,0.12)"
-    },
+
 }));
 
 export default function Post({post}) {
@@ -21,7 +19,9 @@ export default function Post({post}) {
 
     return (
         <div>
-            <Card key={post.id} className={`${classes.shape} ${post.postStatus === 2 ? classes.important : ''}`}>
+
+            <Card key={post.id} className={`${classes.shape}`}
+                  elevation={post.postStatus === 2 ? 3 : 1}>
                 <CardHeader
                     avatar={
                         <Avatar>
@@ -35,11 +35,17 @@ export default function Post({post}) {
                         day: "2-digit",
                         hour: "2-digit",
                         minute: "2-digit"
-                    }).format(Date.parse(post.postTime))}
+                    }).format(post.postTime)}
                     className={classes.cardHeader}
+                    action={post.teamId ? <Chip label={post.teamName}
+                                                component={Link}
+                                                to={`/team/${post.teamId}`}
+                                                clickable
+                                                color={"primary"}/> : null}
                 />
                 <CardContent>
-                    <Typography variant={"body1"} align={"left"}>
+                    <Typography variant={"body1"} align={"left"}
+                                style={post.postStatus === 2 ? {fontWeight: 500} : null}>
                         {post.postContent}
                     </Typography>
                 </CardContent>

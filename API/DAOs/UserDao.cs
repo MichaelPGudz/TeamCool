@@ -25,6 +25,7 @@ namespace API.DAOs
            return  await _dataContext.Users
                .Include(x => x.MySkills)
                .Include(y => y.MyTeams).ThenInclude(x => x.Team)
+               .ThenInclude(x => x.Wall)
                .Include(y => y.MyTeams).ThenInclude(x => x.Role)
                .FirstOrDefaultAsync(x => x.Id == id);
         }

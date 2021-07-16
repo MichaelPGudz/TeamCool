@@ -1,17 +1,11 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import Layout from './components/Navs/Layout';
-import Wall from './components/Wall/Wall';
 import Home from './pages/Home/Home.js';
 import UserPage from './pages/UserPage/UserPage';
 import TeamPage from "./pages/TeamPage/TeamPage";
 import Store from "./components/Store/Store";
 import {CloudinaryContext} from "cloudinary-react";
-
-
-//let token = window.localStorage.getItem('token');
-//let userId = window.localStorage.getItem('id');
-
 
 function App() {
     return (
@@ -28,7 +22,7 @@ function App() {
                                     <Home/>
                                 </Route>
                                 <Route path="/contact" exact>
-                                    <Home/>
+                                        <Home/>
                                 </Route>
                                 <Route path="/user/:id" exact>
                                     <UserPage/>

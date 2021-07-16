@@ -13,10 +13,6 @@ const useStyles = makeStyles(() => ({
     shape: {
         margin: "1%"
     },
-    important: {
-        boxShadow:
-            "3px 6px 4px -2px darkred,0px 2px 2px 0px rgba(100,0,0,0.9),0px 1px 5px 0px rgba(0,0,0,0.12)"
-    }
 }));
 
 export default function AddPost({wallId, posts, setPosts}) {
@@ -63,7 +59,7 @@ export default function AddPost({wallId, posts, setPosts}) {
 
     return (
         <div>
-            <Card className={`${classes.shape} ${postStatus ? classes.important : null}`}>
+            <Card className={`${classes.shape}`}>
                 <CardHeader
                     avatar={
                         <Avatar>
