@@ -25,11 +25,12 @@ const UserPage = () => {
 
 
     const classes = useStyles();
+    var {id} = useParams();
     const [isLoading, setIsLoading] = useState(true);
     const [loadedUser, setLoadedUser] = useState([]);
     const [loadedSkills, setLoadedSkills] = useState([]);
     const [state, dispatch] = React.useContext(UserContext);
-    var id = state.user?.id ?? null;
+
 
     useEffect(() => {
         setIsLoading(true);
@@ -54,7 +55,7 @@ const UserPage = () => {
         createData("e-mail", loadedUser.email)
     ];
 
-    if (isLoading) {
+    if (isLoading || state.active === false) {
         return (
             <div>
                 <Typography variant="h4" gutterBottom>
