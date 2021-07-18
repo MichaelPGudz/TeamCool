@@ -1,6 +1,6 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import {makeStyles} from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -12,39 +12,39 @@ import Menu from '@material-ui/core/Menu';
 import Register from "../../../components/authentication/Register.js";
 import Login from "../../../components/authentication/Login.js";
 import Logout from "../../../components/authentication/Logout.js";
-import {UserContext} from "../../../components/Store/Store";
+import { UserContext } from "../../../components/Store/Store";
 
 import cssClasses from './Navbar.module.css';
 import clsx from "clsx";
 
 const useStyles = makeStyles(theme => ({
-    root: {
+  root: {
 
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    title: {
-        flexGrow: 1,
-    },
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
 }));
 
-export default function MenuAppBar({ addedClasses, openDrawer, menuClick, id}) {
+export default function MenuAppBar({ addedClasses, openDrawer, menuClick, id }) {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [state, dispatch] = React.useContext(UserContext);
   const open = Boolean(anchorEl);
 
-    const handleMenu = event => {
-        setAnchorEl(event.currentTarget);
-    };
+  const handleMenu = event => {
+    setAnchorEl(event.currentTarget);
+  };
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
-  if (!state.logged) {
+  if (!state.active) {
     var authorizationModule = (
       <ul>
         <li>
@@ -66,10 +66,10 @@ export default function MenuAppBar({ addedClasses, openDrawer, menuClick, id}) {
   return (
     <div className={classes.root}>
       <AppBar position="fixed"
-              className={clsx(addedClasses.appBar, {
-        [addedClasses.appBarShift]: openDrawer,
-      })}
-      color={"inherit"}>
+        className={clsx(addedClasses.appBar, {
+          [addedClasses.appBarShift]: openDrawer,
+        })}
+        color={"inherit"}>
         <Toolbar>
           {auth && (
             <IconButton
@@ -89,12 +89,15 @@ export default function MenuAppBar({ addedClasses, openDrawer, menuClick, id}) {
           </Typography>
           <div className={cssClasses.links}>
             <ul>
-              <li>
-                <Link to="/teams">My Teams</Link>
-              </li>
-              <li>
-                <Link to={`/user/${id}`}>My Profile</Link>
-              </li>
+              {state.active ?
+                <ul>
+                  <li>
+                    <Link to="/teams">My Teams</Link>
+                  </li>
+                  <li>
+                    <Link to={`/user/${id}`}>My Profile</Link>
+                  </li>
+                </ul> : null}
               <li>
                 <Link to="/contact">Contact</Link>
               </li>
