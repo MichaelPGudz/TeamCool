@@ -13,6 +13,10 @@ const useStyles = makeStyles(() => ({
     shape: {
         margin: "1%"
     },
+    important: {
+        boxShadow:
+            "3px 6px 4px -2px darkred,0px 2px 2px 0px rgba(100,0,0,0.9),0px 1px 5px 0px rgba(0,0,0,0.12)"
+    },
 }));
 
 export default function AddPost({wallId, posts, setPosts}) {
@@ -48,18 +52,24 @@ export default function AddPost({wallId, posts, setPosts}) {
         };
         fetch(`https://localhost:5001/api/wall/${wallId}`, requestOptions)
             .then(response => response.json())
-            .then(data => setPosts([data, ...posts]))
+            .then(data => addPostInClient(data))
             .catch((error) => {
                 console.log(error)
             })
     }
+    const addPostInClient = (post) => {
+        post.postTime = Date.parse(post.postTime);
+        setPosts([post, ...posts])
+
+    }
+
     const handlePostStatusSwitch = () => {
         setPostStatus(!postStatus);
     }
 
     return (
         <div>
-            <Card className={`${classes.shape}`}>
+            <Card className={`${classes.shape} ${postStatus ? classes.important : null}`}>
                 <CardHeader
                     avatar={
                         <Avatar>
