@@ -27,7 +27,7 @@ export default function FeaturesList({features, updateFeatures, teamId}) {
                                     <GitHub/>
                                 </Avatar>
                             </ListItemAvatar>
-                            <ListItemText primary={name} secondary="Test"/>
+                            <ListItemText primary={name}/>
                             <ListItemSecondaryAction>
                                 <DeleteFeatureBtn teamId={teamId} updateFeatures={updateFeatures} features={features} featureId={id}/>
                             </ListItemSecondaryAction>
