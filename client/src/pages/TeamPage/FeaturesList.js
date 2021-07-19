@@ -24,7 +24,7 @@ export default function FeaturesList({ features, updateFeatures, teamId }) {
         <div>
             <Paper className={classes.shape}>
                 <List>
-                    {features.map(({ id, name, url }) => (
+                    {features.filter(feature => feature.type !== 'calendar').map(({ id, name, url }) => (
                         <ListItem button key={id} component="a" href={url} target="_blank" rel="noopener noreferrer">
                             <ListItemAvatar>
                                 <Avatar>

@@ -21,7 +21,7 @@ export default function AddFeature({updateFeatures, features, teamId}) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const newFeature = {name: name, url: getValidUrl(url)};
+        const newFeature = {name: name, url: url};
         addFeature(newFeature);
 
     }
