@@ -17,8 +17,10 @@ export default function DeleteFeatureBtn({updateFeatures, features, teamId, feat
         const requestOptions = {
             method: 'DELETE',
             headers: {
-                'Content-type': 'application/json'
+                'Content-type': 'application/json',
+                'Authorization': 'Bearer ' + window.localStorage.getItem('token')
             },
+            
             body: null
         };
         fetch(`https://localhost:5001/api/team/${teamId}/feature/${featureId}`, requestOptions)
