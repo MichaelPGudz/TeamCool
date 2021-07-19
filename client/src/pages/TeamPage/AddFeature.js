@@ -21,13 +21,12 @@ export default function AddFeature({updateFeatures, features, teamId}) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const newFeature = {name: name, url: url};
+        const newFeature = {name: name, url: getValidUrl(url)};
         addFeature(newFeature);
 
     }
 
-    const getValidUrl = (url = "") => {
-        let newUrl = window.decodeURIComponent(url);
+    const getValidUrl = (newUrl = "") => {
         newUrl = newUrl.trim().replace(/\s/g, "");
 
         if (/^(:\/\/)/.test(newUrl)) {
