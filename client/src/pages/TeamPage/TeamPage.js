@@ -89,8 +89,11 @@ export default function TeamPage() {
                     }
                 </Grid>
             </Grid>
-            <Grid>
+            <Grid item className={classes.center}>
             <AddFeature updateFeatures={setFeatures} features={features} teamId={teamId}/>
+                <Grid item>
+                    <FeaturesList features={features} updateFeatures={setFeatures} teamId={teamId}/>
+                </Grid>
             </Grid>
         </div>
     )
