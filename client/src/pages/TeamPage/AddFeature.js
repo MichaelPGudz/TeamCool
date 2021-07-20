@@ -4,7 +4,7 @@ import {AddCircle} from "@material-ui/icons";
 import {Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField} from "@material-ui/core";
 
 
-export default function AddFeature({updateFeatures, features, teamId}) {
+export default function AddFeature({btnName, updateFeatures, features, teamId}) {
 
     const [openDialog, setOpenDialog] = React.useState(false);
     const [name, setName] = React.useState();
@@ -61,7 +61,7 @@ export default function AddFeature({updateFeatures, features, teamId}) {
                 endIcon={<AddCircle/>}
                 onClick={handleAddBtnClick}
             >
-                Add feature
+                {btnName}
             </Button>
             <Dialog
                 open={openDialog}

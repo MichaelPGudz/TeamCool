@@ -15,6 +15,9 @@ const useStyles = makeStyles(() => ({
     center: {
         textAlign: "center"
     },
+    shape: {
+        margin: '3%',
+    },
 }));
 
 export default function TeamPage() {
@@ -83,16 +86,16 @@ export default function TeamPage() {
                                 <FeaturesList features={features} updateFeatures={setFeatures} teamId={teamId}/>
                             </Grid>
                             <Grid item className={classes.center}>
-                                <AddFeature updateFeatures={setFeatures} features={features} teamId={teamId}/>
+                                <AddFeature btnName="Add Feature" updateFeatures={setFeatures} features={features} teamId={teamId}/>
                             </Grid>
                         </Grid>
                     }
                 </Grid>
             </Grid>
-            <Grid item className={classes.center}>
-            <AddFeature updateFeatures={setFeatures} features={features} teamId={teamId}/>
-                <Grid item>
-                    <FeaturesList features={features} updateFeatures={setFeatures} teamId={teamId}/>
+            <Grid item className={`${classes.center} ${classes.shape}`}>
+                <AddFeature btnName="Add Calendar" updateFeatures={setFeatures} features={features} teamId={teamId}/>
+                <Grid item className={classes.shape}>
+                        <FeaturesList features={features} updateFeatures={setFeatures} teamId={teamId}/>
                 </Grid>
             </Grid>
         </div>
