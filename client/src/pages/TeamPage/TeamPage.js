@@ -7,6 +7,7 @@ import FeaturesList from "./FeaturesList";
 import AddFeature from "./AddFeature";
 import TeamPageTab from "./Tab/TeamPageTab";
 import Bar from "./BarComponents/Bar";
+import Calendar from './Calendar'
 
 const useStyles = makeStyles(() => ({
     main: {
@@ -30,6 +31,7 @@ export default function TeamPage() {
     const [childTeams, setChildTeams] = React.useState([]);
     const [team, setTeam] = React.useState({});
     const token = window.localStorage.getItem('token');
+    const [calendar, setCalendar] = React.useState([]);
 
     useEffect(() => {
         const requestOptions = {
@@ -44,7 +46,8 @@ export default function TeamPage() {
             .then(response => response.json())
             .then(data => {
                 setTeam(data);
-                setFeatures(data.features);
+                setFeatures(data.features.filter(feature => feature.type !== 'calendar'));
+                setCalendar(data.features.filter(feature => feature.type === 'calendar'));
                 setWallId(data.wall.id);
                 setTeamMembers(data.members);
                 setChildTeams(data.childTeams);
@@ -83,19 +86,21 @@ export default function TeamPage() {
                             spacing={2}
                         >
                             <Grid item>
+                                {console.log(calendar)}
+                                {console.log(features)}
                                 <FeaturesList features={features} updateFeatures={setFeatures} teamId={teamId}/>
                             </Grid>
                             <Grid item className={classes.center}>
-                                <AddFeature btnName="Add Feature" updateFeatures={setFeatures} features={features} teamId={teamId}/>
+                                <AddFeature btnName="Add Feature" type="feature" updateFeatures={setFeatures} features={features} teamId={teamId}/>
                             </Grid>
                         </Grid>
                     }
                 </Grid>
             </Grid>
             <Grid item className={`${classes.center} ${classes.shape}`}>
-                <AddFeature btnName="Add Calendar" updateFeatures={setFeatures} features={features} teamId={teamId}/>
+                <AddFeature btnName="Add Calendar" type="calendar" updateFeatures={setFeatures} updateCalendar={setCalendar} features={features} teamId={teamId}/>
                 <Grid item className={classes.shape}>
-                        <FeaturesList features={features} updateFeatures={setFeatures} teamId={teamId}/>
+                        <Calendar calendar={calendar} updateFeatures={setFeatures} teamId={teamId}/>
                 </Grid>
             </Grid>
         </div>

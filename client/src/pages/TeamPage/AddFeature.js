@@ -4,7 +4,7 @@ import {AddCircle} from "@material-ui/icons";
 import {Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField} from "@material-ui/core";
 
 
-export default function AddFeature({btnName, updateFeatures, features, teamId}) {
+export default function AddFeature({btnName, type, updateFeatures, updateCalendar, features, teamId}) {
 
     const [openDialog, setOpenDialog] = React.useState(false);
     const [name, setName] = React.useState();
@@ -21,7 +21,7 @@ export default function AddFeature({btnName, updateFeatures, features, teamId}) 
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const newFeature = {name: name, url: getValidUrl(url)};
+        const newFeature = {name: name, url: getValidUrl(url), type: type};
         addFeature(newFeature);
 
     }
@@ -49,7 +49,7 @@ export default function AddFeature({btnName, updateFeatures, features, teamId}) 
         };
         fetch(`https://localhost:5001/api/team/${teamId}/addFeature`, requestOptions)
             .then(response => response.json())
-            .then(data => updateFeatures([...features, data]))
+            .then(data => type === 'calendar' ? updateCalendar([...features, data]) : updateFeatures([...features, data]))
     }
 
 
