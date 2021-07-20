@@ -15,8 +15,16 @@ import {UserContext} from "../../../components/Store/Store";
 export default function Filter({team}) {
 
     const theme = useTheme();
-    const [switchOn, setSwitchOn] = React.useState(true)
+    const [switchOn, setSwitchOn] = React.useState(false)
     const [state, dispatch] = React.useContext(UserContext);
+
+    useEffect(() => {
+        setSwitchOn(JSON.parse(window.localStorage.getItem(`showTeamPosts${team.id}`)));
+    }, []);
+
+    useEffect(() => {
+        window.localStorage.setItem(`showTeamPosts${team.id}`, `${switchOn}`);
+    }, [switchOn]);
 
     const getPostsFromTeam = (team) => {
         fetch(`https://localhost:5001/api/wall/${team.wall.id}`)
