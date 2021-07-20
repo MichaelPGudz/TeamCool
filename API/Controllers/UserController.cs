@@ -101,5 +101,11 @@ namespace API.Controllers
         
         [HttpGet("{id}/posts")]
         public IOrderedQueryable<Post> GetPostsForUser(string id) => _teamMemberDao.GetPostsForTeamMember(id);
+
+        [HttpPost("search")]
+        public ICollection<User> SearchUsers([FromBody]string name)
+        {
+            return _userDao.SearchUserByName(name);
+        }
     }
 }

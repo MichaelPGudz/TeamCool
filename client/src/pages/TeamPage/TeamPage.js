@@ -1,12 +1,14 @@
 import React, {useEffect} from "react";
 import {useParams} from "react-router-dom"
 import {makeStyles} from "@material-ui/core/styles";
-import {CircularProgress, Grid, Typography} from "@material-ui/core";
+import {CircularProgress, Grid} from "@material-ui/core";
 import Wall from "../../components/Wall/Wall";
 import FeaturesList from "./FeaturesList";
 import AddFeature from "./AddFeature";
 import TeamPageTab from "./Tab/TeamPageTab";
 import Bar from "./BarComponents/Bar";
+import AddMember from "./AddMember";
+import AddChildTeam from "./AddChildTeam";
 
 const useStyles = makeStyles(() => ({
     main: {
@@ -27,6 +29,7 @@ export default function TeamPage() {
     const [childTeams, setChildTeams] = React.useState([]);
     const [team, setTeam] = React.useState({});
     const token = window.localStorage.getItem('token');
+    const [addBtnOption, setAddBtnOption] = React.useState(0);
 
     useEffect(() => {
         const requestOptions = {
@@ -56,13 +59,26 @@ export default function TeamPage() {
                     <Bar team={team} setTeam={setTeam}/>
                 </Grid>
                 <Grid item xs={3} className={`${classes.center}`}>
-                    {loading ?
-                        <CircularProgress/>
-                        :
-                        <TeamPageTab setMembers={setTeamMembers}
-                                     members={teamMembers}
-                                     childTeams={childTeams}
-                                     setChildTeams={setChildTeams}/>}
+                    <Grid container
+                          direction="column"
+                          spacing={2}>
+                        <Grid item xs={12}>
+                            {loading ?
+                                <CircularProgress/>
+                                :
+                                <TeamPageTab setMembers={setTeamMembers}
+                                             members={teamMembers}
+                                             childTeams={childTeams}
+                                             setChildTeams={setChildTeams}
+                                             setAddBtnOption={setAddBtnOption}/>}
+                        </Grid>
+                        <Grid item className={`${classes.center}`} xs={12}>
+                            {addBtnOption === 0 ?
+                                <AddMember team={team} setTeamMembers={setTeamMembers}/>
+                                :
+                                <AddChildTeam/>}
+                        </Grid>
+                    </Grid>
                 </Grid>
                 <Grid item xs={6} className={classes.center}>
                     {loading ?

@@ -6,24 +6,27 @@ import TeamMembers from "./TeamMembers";
 import ChildTeams from "./ChildTeams";
 import SwipeableViews from "react-swipeable-views";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     shape: {
         maxHeight: "75vh",
         overflow: "auto",
         overflowX: "hidden",
+        overflowY: "hidden",
     },
 
 }))
 
-export default function TeamPageTab({members, setMembers, childTeams, setChildTeams}) {
+export default function TeamPageTab({members, setMembers, childTeams, setChildTeams, setAddBtnOption}) {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+        setAddBtnOption(newValue);
     };
     const handleChangeIndex = (index) => {
-        setValue(index)
+        setValue(index);
+        setAddBtnOption(index);
     }
     return (
         <div>

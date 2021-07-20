@@ -83,5 +83,11 @@ namespace API.DAOs
                 .SelectMany(x => x.MyTeams).Include(x => x.Team);
 
         }
+
+        public ICollection<User> SearchUserByName(string name)
+        {
+            return _dataContext.Users
+                .Where(x => x.FirstName.Contains(name) || x.LastName.Contains(name)).ToList();
+        }
     }
 }

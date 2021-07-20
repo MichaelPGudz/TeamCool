@@ -24,5 +24,7 @@ namespace API.DAOs.Interfaces
         public int RemoveUserSkill(string userId, Skill skill);
         public IQueryable<ICollection<Skill>> GetUserSkills(string id);
         public IIncludableQueryable<TeamMember, Team> GetUserTeams(string id);
+
+        public ICollection<User> SearchUserByName(string name);
     }
 }
