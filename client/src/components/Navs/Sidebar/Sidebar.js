@@ -108,10 +108,10 @@ function Sidebar({ addedClasses, openDrawer, menuClick }) {
                                 <ListItem button className={classes.nested}>
                                     <Skeleton width={240} height={48} animation={'wave'} />
                                 </ListItem> :
-                                state.user.globalRole === {AdminRole} ?
+                                (state.globalRole === AdminRole ?
                                 <ListItem button className={classes.nested}>
                                 <RoleManager />
-                            </ListItem> : null
+                            </ListItem> : null)
                             }
                         </List>
                     </Collapse>
