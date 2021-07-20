@@ -16,12 +16,12 @@ namespace API.Controllers
             _roleDao = roleDao;
         }
         
-        [HttpPost]
+        [HttpPost("add")]
         public async Task<IActionResult> AddRole(Role role)
         {
             if (!ModelState.IsValid) return BadRequest();
             await _roleDao.Add(role);
-            return Ok();
+            return Ok(role);
         }
 
         [HttpGet("~/api/roles")]
