@@ -15,7 +15,6 @@ import Logout from "../../../components/authentication/Logout.js";
 import { UserContext } from "../../../components/Store/Store";
 import cssClasses from './Navbar.module.css';
 import clsx from "clsx";
-import RoleManager from './RoleManager/RoleManager.js';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -91,9 +90,6 @@ export default function MenuAppBar({ addedClasses, openDrawer, menuClick, id }) 
             <ul>
               {state.active ?
                 <ul>
-                  <li>
-                    <RoleManager/>
-                  </li>
                   <li>
                     <Link to="/teams">My Teams</Link>
                   </li>

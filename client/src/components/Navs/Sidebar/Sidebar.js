@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import {useTheme} from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -10,23 +10,29 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import {ExpandLess, ExpandMore, PeopleAlt, PeopleAltOutlined, Settings} from "@material-ui/icons";
-import {Avatar, Collapse} from "@material-ui/core";
-import {Link} from "react-router-dom";
+import { ExpandLess, ExpandMore, PeopleAlt, PeopleAltOutlined, Settings } from "@material-ui/icons";
+import { Avatar, Collapse } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import Skeleton from '@material-ui/lab/Skeleton'
-import {UserContext} from "../../Store/Store";
-import {Image, Transformation} from "cloudinary-react";
+import { UserContext } from "../../Store/Store";
+import { Image, Transformation } from "cloudinary-react";
+import RoleManager from '../Navbar/RoleManager/RoleManager';
 
 
-function Sidebar({addedClasses, openDrawer, menuClick}) {
+function Sidebar({ addedClasses, openDrawer, menuClick }) {
     const classes = addedClasses;
     const theme = useTheme();
     const [openMyTeams, setOpenMyTeams] = React.useState(false);
+    const [openMySettings, setOpenMySettings] = React.useState(false);
     const [state, dispatch] = React.useContext(UserContext);
 
 
     const handleMyTeamsClick = () => {
         setOpenMyTeams(!openMyTeams);
+    }
+
+    const handleMySettingsClick = () => {
+        setOpenMySettings(!openMySettings);
     }
 
     return (
@@ -46,26 +52,26 @@ function Sidebar({addedClasses, openDrawer, menuClick}) {
             >
                 <div className={classes.toolbar}>
                     <IconButton onClick={menuClick}>
-                        {theme.direction === 'rtl' ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
+                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                     </IconButton>
                 </div>
-                <Divider/>
+                <Divider />
                 <List>
                     <ListItem button key={"My Teams"} onClick={handleMyTeamsClick}>
-                        <ListItemIcon><PeopleAlt/></ListItemIcon>
-                        <ListItemText primary={"My Teams"}/>
-                        {openMyTeams ? <ExpandLess/> : <ExpandMore/>}
+                        <ListItemIcon><PeopleAlt /></ListItemIcon>
+                        <ListItemText primary={"My Teams"} />
+                        {openMyTeams ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
                     <Collapse in={openMyTeams} timeout={"auto"} unmountOnExit>
                         <List>
                             {!state.active ?
                                 <ListItem button className={classes.nested}>
-                                    <Skeleton width={240} height={48} animation={'wave'}/>
+                                    <Skeleton width={240} height={48} animation={'wave'} />
                                 </ListItem>
                                 :
-                                state.user.myTeams.map(({id, role, team}) => (
+                                state.user.myTeams.map(({ id, role, team }) => (
                                     <ListItem button className={classes.nested} key={id} component={Link}
-                                              to={`/team/${team.id}`}>
+                                        to={`/team/${team.id}`}>
                                         {team.logo ?
                                             <ListItemIcon>
                                                 <Avatar style={{
@@ -73,27 +79,35 @@ function Sidebar({addedClasses, openDrawer, menuClick}) {
                                                     height: theme.spacing(3),
                                                 }}>
                                                     <Image publicId={team.logo}>
-                                                        <Transformation width="24" height="24" crop="fill"/>
+                                                        <Transformation width="24" height="24" crop="fill" />
                                                     </Image>
                                                 </Avatar>
                                             </ListItemIcon>
                                             :
                                             <ListItemIcon>
-                                                <PeopleAltOutlined/>
+                                                <PeopleAltOutlined />
                                             </ListItemIcon>
                                         }
-                                        <ListItemText primary={team.name} secondary={role.name}/>
+                                        <ListItemText primary={team.name} secondary={role.name} />
                                     </ListItem>
                                 ))}
                         </List>
                     </Collapse>
                 </List>
-                <Divider/>
+                <Divider />
                 <List>
-                    <ListItem button key={"Settings"}>
-                        <ListItemIcon><Settings/></ListItemIcon>
-                        <ListItemText primary={"Settings"}/>
+                    <ListItem button key={"Settings"} onClick={handleMySettingsClick}>
+                        <ListItemIcon><Settings /></ListItemIcon>
+                        <ListItemText primary={"Settings"} />
+                        {openMySettings ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
+                    <Collapse in={openMySettings} timeout={"auto"} unmountOnExit>
+                        <List>
+                            <ListItem button className={classes.nested}>
+                                <RoleManager />
+                            </ListItem>
+                        </List>
+                    </Collapse>
                 </List>
             </Drawer>
         </div>
