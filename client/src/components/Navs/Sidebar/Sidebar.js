@@ -25,6 +25,7 @@ function Sidebar({ addedClasses, openDrawer, menuClick }) {
     const [openMyTeams, setOpenMyTeams] = React.useState(false);
     const [openMySettings, setOpenMySettings] = React.useState(false);
     const [state, dispatch] = React.useContext(UserContext);
+    const AdminRole = "Admin";
 
 
     const handleMyTeamsClick = () => {
@@ -103,9 +104,15 @@ function Sidebar({ addedClasses, openDrawer, menuClick }) {
                     </ListItem>
                     <Collapse in={openMySettings} timeout={"auto"} unmountOnExit>
                         <List>
-                            <ListItem button className={classes.nested}>
+                        {!state.active ?
+                                <ListItem button className={classes.nested}>
+                                    <Skeleton width={240} height={48} animation={'wave'} />
+                                </ListItem> :
+                                state.user.globalRole === {AdminRole} ?
+                                <ListItem button className={classes.nested}>
                                 <RoleManager />
-                            </ListItem>
+                            </ListItem> : null
+                            }
                         </List>
                     </Collapse>
                 </List>
