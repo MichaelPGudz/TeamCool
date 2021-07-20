@@ -17,6 +17,7 @@ import Skeleton from '@material-ui/lab/Skeleton'
 import { UserContext } from "../../Store/Store";
 import { Image, Transformation } from "cloudinary-react";
 import RoleManager from './RoleManager/RoleManager';
+import DeleteUserManager from './DeleteUserManager/DeleteUserManager';
 
 
 function Sidebar({ addedClasses, openDrawer, menuClick }) {
@@ -104,14 +105,19 @@ function Sidebar({ addedClasses, openDrawer, menuClick }) {
                     </ListItem>
                     <Collapse in={openMySettings} timeout={"auto"} unmountOnExit>
                         <List>
-                        {!state.active ?
+                            {!state.active ?
                                 <ListItem button className={classes.nested}>
                                     <Skeleton width={240} height={48} animation={'wave'} />
                                 </ListItem> :
                                 (state.globalRole === AdminRole ?
-                                <ListItem button className={classes.nested}>
-                                <RoleManager />
-                            </ListItem> : null)
+                                    <List>
+                                    <ListItem button className={classes.nested}>
+                                        <RoleManager />
+                                    </ListItem>
+                                    <ListItem button className={classes.nested}>
+                                        <DeleteUserManager/>
+                                    </ListItem>
+                                    </List> : null)
                             }
                         </List>
                     </Collapse>

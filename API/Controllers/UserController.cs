@@ -101,5 +101,8 @@ namespace API.Controllers
         
         [HttpGet("{id}/posts")]
         public IOrderedQueryable<Post> GetPostsForUser(string id) => _teamMemberDao.GetPostsForTeamMember(id);
+
+        [HttpGet("~/api/users")]
+        public ICollection<User> GetAllUsers() => _userDao.GetAll();
     }
 }
