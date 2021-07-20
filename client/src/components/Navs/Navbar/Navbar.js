@@ -13,7 +13,6 @@ import Register from "../../../components/authentication/Register.js";
 import Login from "../../../components/authentication/Login.js";
 import Logout from "../../../components/authentication/Logout.js";
 import { UserContext } from "../../../components/Store/Store";
-
 import cssClasses from './Navbar.module.css';
 import clsx from "clsx";
 

@@ -32,7 +32,7 @@ export default function FeaturesList({ features, updateFeatures, teamId }) {
                                 </Avatar>
                             </ListItemAvatar>
                             {name == "Calendar" ?
-                                <iframe src={url} className = {classes.calendar}></iframe> :
+                                <iframe src={url} className = {classes.calendar} title={id}></iframe> :
                                 <ListItemText primary={name} />}
                             <ListItemSecondaryAction>
                                 <DeleteFeatureBtn teamId={teamId} updateFeatures={updateFeatures} features={features} featureId={id} />
