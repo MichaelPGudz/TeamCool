@@ -3,10 +3,9 @@ import Button from "@material-ui/core/Button";
 import { AddCircle } from "@material-ui/icons";
 import { Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField } from "@material-ui/core";
 import { UserContext } from "../../../Store/Store";
-import { List, ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText, Paper } from "@material-ui/core";
+import { List, ListItem, ListItemSecondaryAction, ListItemText, Paper } from "@material-ui/core";
 import AddRole from "./AddRole.js";
 import DeleteRoleBtn from "./DeleteRoleBtn.js";
-import Alert from '@material-ui/lab/Alert';
 
 
 export default function RoleManager() {
@@ -51,6 +50,7 @@ export default function RoleManager() {
                 open={openDialog}
                 onClose={handleClose}
                 aria-labelledby={"roles-list"}>
+                <DialogTitle>Here you can manage roles</DialogTitle>
                 <List>
                     {roles.map(({ id, name }) =>
                         <ListItem key={id}>
