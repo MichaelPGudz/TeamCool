@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 import Skeleton from '@material-ui/lab/Skeleton'
 import { UserContext } from "../../Store/Store";
 import { Image, Transformation } from "cloudinary-react";
-import RoleManager from '../Navbar/RoleManager/RoleManager';
+import RoleManager from './RoleManager/RoleManager';
 
 
 function Sidebar({ addedClasses, openDrawer, menuClick }) {
