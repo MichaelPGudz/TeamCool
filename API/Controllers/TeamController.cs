@@ -52,9 +52,9 @@ namespace API.Controllers
             if (!ModelState.IsValid) return BadRequest();
 
             var parentTeam = await _teamDao.GetById(parentId);
-            
+
             if (parentTeam.Value == null) return NotFound();
-            
+
             childTeam.Wall = new Wall();
             await _teamDao.AddChildTeam(childTeam, parentTeam.Value);
 
@@ -65,9 +65,9 @@ namespace API.Controllers
         public async Task<ActionResult<Team>> EditTeamName(Team editedTeam, int id)
         {
             if (!ModelState.IsValid) return BadRequest();
-            
+
             var team = await _teamDao.GetById(id);
-            
+
             if (team.Value == null) return NotFound();
 
             team.Value.Name = editedTeam.Name;
@@ -80,7 +80,7 @@ namespace API.Controllers
         {
             var team = await _teamDao.GetById(id);
             if (team.Value == null) return NotFound();
-            
+
             _teamDao.Remove(team.Value);
             return Ok();
         }
@@ -92,14 +92,16 @@ namespace API.Controllers
             var role = await _roleDao.GetById(roleId);
             var team = await _teamDao.GetById(teamId);
             if (user.Value == null || role.Value == null || team.Value == null) return NotFound();
-            
+            if (team.Value.Members.Any(x => x.User.Id.Contains(userId)))
+                return BadRequest("User is already team member!");
+
             var teamMember = new TeamMember
             {
                 Role = role.Value,
                 Team = team.Value,
                 User = user.Value
-            };
-
+            }; 
+            
             await _teamMemberDao.Add(teamMember);
             return Ok(teamMember);
         }
@@ -109,7 +111,7 @@ namespace API.Controllers
         {
             var member = await _teamMemberDao.GetById(teamMemberId);
             if (member.Value == null) return NotFound();
-            
+
             _teamMemberDao.Remove(member.Value);
 
             return Ok();
@@ -122,7 +124,7 @@ namespace API.Controllers
             if (!ModelState.IsValid) return BadRequest();
 
             var team = await _teamDao.GetById(teamId);
-            
+
             if (team.Value == null) return NotFound();
 
             team.Value.Features.Add(feature);
@@ -137,7 +139,7 @@ namespace API.Controllers
         {
             var feature = await _featureDao.GetById(featureId);
             if (feature.Value == null) return NotFound();
-            
+
             _featureDao.Remove(feature.Value);
 
             return Ok();
@@ -149,21 +151,21 @@ namespace API.Controllers
             if (!ModelState.IsValid) return BadRequest();
             var oldFeature = await _featureDao.GetById(featureId);
             if (oldFeature.Value == null) return NotFound();
-            
+
             oldFeature.Value.Name = feature.Name;
             oldFeature.Value.URL = feature.URL;
 
             await _featureDao.Edit(oldFeature.Value);
             return Ok();
         }
-        
+
         [HttpPost("{id}/logo")]
         public async Task<ActionResult<Team>> AddLogo(Team teamWithLogo, int id)
         {
             if (!ModelState.IsValid) return BadRequest();
-            
+
             var team = await _teamDao.GetById(id);
-            
+
             if (team.Value == null) return NotFound();
 
             team.Value.Logo = teamWithLogo.Logo;
