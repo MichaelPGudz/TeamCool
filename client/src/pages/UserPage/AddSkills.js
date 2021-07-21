@@ -4,9 +4,9 @@ import { AddCircle } from "@material-ui/icons";
 import { Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField } from "@material-ui/core";
 import { UserContext } from "../../components/Store/Store";
 import { List, ListItem, ListItemSecondaryAction, ListItemText, Paper } from "@material-ui/core";
-import {Link} from "react-router-dom";
 
-export default function AddSkills() {
+
+export default function AddSkills({loadedUser, userSkills, setUserSkills}) {
 
     const [openDialog, setOpenDialog] = React.useState(false);
     const [skills, setSkills] = React.useState([]);
@@ -21,6 +21,16 @@ export default function AddSkills() {
         setOpenDialog(false);
     };
 
+    const addSkill = (skillId) => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+        };
+        fetch(`https://localhost:5001/api/user/${loadedUser.id}/skill/${skillId}`, requestOptions)
+        .then(response => response.json())
+        .then(data => {console.log(data); setUserSkills([...userSkills, data])})
+    }
+    
 
     const getSkills = (() => {
         const requestOptions = {
@@ -43,7 +53,7 @@ export default function AddSkills() {
             },
             body: JSON.stringify(event.target.value)
         };
-        fetch(`https://localhost:5001/api/user/search`, requestOptions)
+        fetch(`https://localhost:5001/api/skill/search`, requestOptions)
             .then(response => response.json())
             .then(data => {
                 setSkills(data);
@@ -76,8 +86,8 @@ export default function AddSkills() {
                             variant={'outlined'} />
                     </Grid>
                     <List>
-                        {skills.map(({ id, firstName, lastName, email }) =>
-                            <ListItem button key={id} component={Link} to={`/user/${id}`} onClick={handleClose}>
+                        {skills.map(({ id, firstName }) =>
+                            <ListItem button key={id} onClick={() => addSkill(id)}>
                                 <ListItemText primary={firstName}/>
                                 <ListItemSecondaryAction>
                                 </ListItemSecondaryAction>

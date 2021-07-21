@@ -71,7 +71,7 @@ namespace API.Controllers
             try
             {
                 _userDao.AddUserSkill(userId, skill.Result.Value);
-                return Ok();
+                return Ok(skill.Result.Value);
             }
             catch (Exception)
             {

@@ -13,7 +13,9 @@ const UserSkills = ({ loadedUser, skills, setSkills, loggedUser }) => {
     return (
         <List>
             <React.Fragment key={loadedUser.id}>
-                <AddSkills/>
+                {(loadedUser.id === loggedUser.id || loggedUser.globalRole === adminRole) ?
+                <AddSkills loadedUser={loadedUser} userSkills={skills} setUserSkills={setSkills}/>:
+                null }
                 <ListItem>
                     {skills.map(({ id, firstName }) =>
                         <React.Fragment key={id}>

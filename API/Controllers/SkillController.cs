@@ -91,5 +91,11 @@ namespace API.Controllers
         {
             return _skillDao.GetAll();
         }
+        
+        [HttpPost("search")]
+        public ICollection<Skill> SearchUsers([FromBody]string name)
+        {
+            return _skillDao.SearchUserByName(name);
+        }
     }
 }
