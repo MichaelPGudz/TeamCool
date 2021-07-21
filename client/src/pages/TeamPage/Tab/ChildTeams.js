@@ -5,10 +5,12 @@ import {Person} from "@material-ui/icons";
 import {makeStyles} from "@material-ui/core/styles";
 import {Link} from "react-router-dom";
 import {Image, Transformation} from "cloudinary-react";
+import AddChildTeam from "./AddChildTeam";
+
 
 const useStyles = makeStyles(() => ({
     shape: {
-        maxHeight: "75vh",
+        maxHeight: "80vh",
         overflow: "auto",
         overflowX: "hidden"
     },
@@ -21,6 +23,7 @@ export default function ChildTeams({childTeams, setChildTeams}) {
     return (
         <div>
             <List className={classes.shape}>
+                <AddChildTeam/>
                 {childTeams.map(({id, name, logo}) => (
                     <ListItem button key={id} component={Link} to={`/team/${id}`}>
                         <ListItemAvatar>

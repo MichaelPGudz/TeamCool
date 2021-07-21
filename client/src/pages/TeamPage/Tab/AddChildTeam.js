@@ -17,12 +17,11 @@ export default function AddChildTeam() {
     return (
         <div>
             <Button
-                variant="contained"
                 size={'large'}
-                endIcon={<AddCircle/>}
                 className={classes.shape}
+                fullWidth
             >
-                Add Child Team
+                <AddCircle/>
             </Button>
         </div>
     )

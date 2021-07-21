@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import {AddCircle, YoutubeSearchedFor} from "@material-ui/icons";
+import {PersonAdd, YoutubeSearchedFor} from "@material-ui/icons";
 import {makeStyles} from "@material-ui/core/styles";
 import {
     Dialog,
@@ -12,7 +12,7 @@ import {
     ListItemIcon, ListItemText,
     TextField
 } from "@material-ui/core";
-import UserListItem from "./UserListItem";
+import UserListItem from "../UserListItem";
 
 const useStyles = makeStyles(() => ({
     shape: {
@@ -58,13 +58,12 @@ export default function AddMember({team, setTeamMembers}) {
     return (
         <div>
             <Button
-                variant="contained"
                 size={'large'}
-                endIcon={<AddCircle/>}
+                fullWidth
                 className={classes.shape}
                 onClick={handleBtnClick}
             >
-                Add Member
+                <PersonAdd/>
             </Button>
             <Dialog
                 open={openDialog}

@@ -4,23 +4,25 @@ import Avatar from "@material-ui/core/Avatar";
 import { Person} from "@material-ui/icons";
 import {makeStyles} from "@material-ui/core/styles";
 import {Link} from "react-router-dom";
+import AddMember from "./AddMember";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     shape: {
-        maxHeight: "75vh",
+        maxHeight: "80vh",
         overflow: "auto",
         overflowX: "hidden"
     },
 
 }))
 
-export default function TeamMembers({members, setMembers}) {
+export default function TeamMembers({members, setMembers, team}) {
     const classes = useStyles();
 
 
     return (
         <div>
                 <List className={classes.shape}>
+                        <AddMember team={team} setTeamMembers={setMembers}/>
                     {members.map(({id, user, role}) => (
                         <ListItem button key={id} component={Link} to={`/user/${user.id}`} >
                             <ListItemAvatar>
