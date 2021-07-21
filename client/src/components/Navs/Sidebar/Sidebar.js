@@ -34,7 +34,9 @@ function Sidebar({ addedClasses, openDrawer, menuClick }) {
     }
 
     const handleMySettingsClick = () => {
-        menuClick();
+        if (!openDrawer){
+            menuClick();
+        }
         setOpenMySettings(!openMySettings);
     }
 
