@@ -5,7 +5,7 @@ import { Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField } fr
 import { UserContext } from "../../../Store/Store";
 import { List, ListItem, ListItemSecondaryAction, ListItemText, Paper } from "@material-ui/core";
 import DeleteUserBtn from "./DeleteUserBtn.js";
-
+import {Link} from "react-router-dom";
 
 export default function DeleteUserManager() {
 
@@ -78,7 +78,7 @@ export default function DeleteUserManager() {
                     </Grid>
                     <List>
                         {users.map(({ id, firstName, lastName, email }) =>
-                            <ListItem key={id}>
+                            <ListItem button key={id} component={Link} to={`/user/${id}`} onClick={handleClose}>
                                 <ListItemText primary={firstName + " " + lastName} secondary={email} />
                                 <ListItemSecondaryAction>
                                     <DeleteUserBtn setUsers={setUsers} users={users} userId={id} />
