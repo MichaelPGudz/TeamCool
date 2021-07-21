@@ -84,7 +84,8 @@ namespace API.Controllers
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = model.Email,
                 FirstName = model.FirstName,
-                LastName = model.LastName
+                LastName = model.LastName,
+                GlobalRole = UserRole
 
             };
             var result = await userManager.CreateAsync(user, model.Password);  
@@ -116,7 +117,8 @@ namespace API.Controllers
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = model.Email,
                 FirstName = model.FirstName,
-                LastName = model.LastName
+                LastName = model.LastName,
+                GlobalRole = AdminRole
 
             };
             var result = await userManager.CreateAsync(user, model.Password);  

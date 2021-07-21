@@ -51,7 +51,6 @@ export default function Login() {
                 window.localStorage.setItem('id', data.id);
                 dispatch({ type: 'SET_ROLE', payload: data.globalRole });
             })
-            .then(console.log(state))
             .catch((error) => { console.log(error); handleWrongLogin() })
     }
 
