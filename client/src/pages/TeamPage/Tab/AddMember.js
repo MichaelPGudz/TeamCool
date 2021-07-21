@@ -12,7 +12,7 @@ import {
     ListItemIcon, ListItemText,
     TextField
 } from "@material-ui/core";
-import UserListItem from "../UserListItem";
+import UserListItem from "./UserListItem";
 
 const useStyles = makeStyles(() => ({
     shape: {

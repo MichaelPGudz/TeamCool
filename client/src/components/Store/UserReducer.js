@@ -65,6 +65,13 @@ export const userReducer = (state, action) => {
                 } )
             }
                 ;
+        case 'addTeam':
+            console.log([...state.user.myTeams, ...action.payload])
+            return {
+                ...state,
+                user: {...state.user, myTeams: [...state.user.myTeams, ...action.payload]}
+            }
+                ;
         default:
             return state;
     }

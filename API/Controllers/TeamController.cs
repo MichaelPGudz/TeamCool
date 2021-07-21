@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using API.DAOs.Interfaces;
 using API.Entities;
@@ -9,6 +10,7 @@ using API.ViewModel;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -22,15 +24,17 @@ namespace API.Controllers
         private readonly ITeamMemberDao _teamMemberDao;
         private readonly IRoleDao _roleDao;
         private readonly IFeatureDao _featureDao;
+        private readonly UserManager<User> _userManager;
 
         public TeamController(ITeamDao teamDao, IUserDao userDao, ITeamMemberDao teamMemberDao, IRoleDao roleDao,
-            IFeatureDao featureDao)
+            IFeatureDao featureDao, UserManager<User> userManager)
         {
             _teamDao = teamDao;
             _userDao = userDao;
             _teamMemberDao = teamMemberDao;
             _roleDao = roleDao;
             _featureDao = featureDao;
+            _userManager = userManager;
         }
 
         [HttpGet("{id}")]
@@ -40,10 +44,23 @@ namespace API.Controllers
         public async Task<IActionResult> AddNewTeam(Team newTeam)
         {
             if (!ModelState.IsValid) return BadRequest();
+            
+            var currentUserName = User.Identity?.Name;
+            var user = await _userManager.FindByNameAsync(currentUserName);
+            var role =  await _roleDao.GetById(1);
 
+            var member = new TeamMember
+            {
+                User = user,
+                Role = role.Value,
+                Team = newTeam
+            };
             newTeam.Wall = new Wall();
+            
             await _teamDao.Add(newTeam);
-            return Ok(newTeam);
+            await _teamMemberDao.Add(member);
+            
+            return Ok(member);
         }
 
         [HttpPost("{parentId}")]

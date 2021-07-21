@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import { AddCircle } from "@material-ui/icons";
-import {UserContext} from "../../components/Store/Store";
+import {UserContext} from "../Store/Store";
 import {useHistory} from "react-router-dom";
 
 
@@ -14,6 +14,7 @@ export default function Logout() {
     const handleLogout = () => {
         window.localStorage.removeItem('token');
         window.localStorage.removeItem('id');
+        window.localStorage.clear();
         dispatch({type: 'LOGOUT'});
         history.push('/');
         window.location.reload();

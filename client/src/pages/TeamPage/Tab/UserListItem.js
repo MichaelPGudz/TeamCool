@@ -39,7 +39,6 @@ export default function UserListItem({user, team, setTeamMembers}) {
             .catch(error =>
                 error.json()
             .then(result => {
-                    console.log(result)
                     setAlert({severity: "error", message: `Error! ${result}`});
                     setOpen(true);
                 })
