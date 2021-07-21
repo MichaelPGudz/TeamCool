@@ -3,6 +3,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import SkillUsersModal from "./SkillUsersModal";
 import DeleteSkillBtn from './DeleteSkillBtn';
+import AddSkills from './AddSkills';
 
 
 const UserSkills = ({ loadedUser, skills, setSkills, loggedUser }) => {
@@ -12,6 +13,7 @@ const UserSkills = ({ loadedUser, skills, setSkills, loggedUser }) => {
     return (
         <List>
             <React.Fragment key={loadedUser.id}>
+                <AddSkills/>
                 <ListItem>
                     {skills.map(({ id, firstName }) =>
                         <React.Fragment key={id}>
