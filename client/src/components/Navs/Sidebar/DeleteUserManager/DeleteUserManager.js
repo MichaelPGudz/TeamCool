@@ -35,6 +35,23 @@ export default function DeleteUserManager() {
     })
 
 
+    const handleSearch = (event) => {
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + window.localStorage.getItem('token')
+            },
+            body: JSON.stringify(event.target.value)
+        };
+        fetch(`https://localhost:5001/api/user/search`, requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                setUsers(data);
+            })
+    }
+
+
     return (
         <div>
             <Button
@@ -50,16 +67,26 @@ export default function DeleteUserManager() {
                 onClose={handleClose}
                 aria-labelledby={"users-list"}>
                 <DialogTitle>Here you can delete users</DialogTitle>
-                <List>
-                    {users.map(({ id, firstName, lastName, email }) =>
-                        <ListItem key={id}>
-                            <ListItemText primary={firstName + " " + lastName} secondary={email} />
-                            <ListItemSecondaryAction>
-                                <DeleteUserBtn setUsers={setUsers} users={users} userId={id}/>
-                            </ListItemSecondaryAction>
-                        </ListItem>
-                    )}
-                </List>
+                <DialogContent>
+                    <Grid item>
+                        <TextField
+                            id={'name'}
+                            label={'Type name to search'}
+                            onChange={handleSearch}
+                            fullWidth
+                            variant={'outlined'} />
+                    </Grid>
+                    <List>
+                        {users.map(({ id, firstName, lastName, email }) =>
+                            <ListItem key={id}>
+                                <ListItemText primary={firstName + " " + lastName} secondary={email} />
+                                <ListItemSecondaryAction>
+                                    <DeleteUserBtn setUsers={setUsers} users={users} userId={id} />
+                                </ListItemSecondaryAction>
+                            </ListItem>
+                        )}
+                    </List>
+                </DialogContent>
             </Dialog>
         </div>
     )
