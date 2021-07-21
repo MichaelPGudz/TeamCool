@@ -1,10 +1,10 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import {AddCircle} from "@material-ui/icons";
+import {AddCircle, Link, Today} from "@material-ui/icons";
 import {Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField} from "@material-ui/core";
 
 
-export default function AddFeature({btnName, type, updateFeatures, updateCalendar, features, teamId}) {
+export default function AddFeature({btnName, type, updateFeatures, features, teamId}) {
 
     const [openDialog, setOpenDialog] = React.useState(false);
     const [name, setName] = React.useState();
@@ -49,8 +49,8 @@ export default function AddFeature({btnName, type, updateFeatures, updateCalenda
         };
         fetch(`https://localhost:5001/api/team/${teamId}/addFeature`, requestOptions)
             .then(response => response.json())
-            .then(data => type === 'calendar' ? updateCalendar([...features, data]) : updateFeatures([...features, data]))
-    }
+            .then(data => updateFeatures([...features, data]))
+    } 
 
 
     return (
@@ -58,7 +58,7 @@ export default function AddFeature({btnName, type, updateFeatures, updateCalenda
             <Button
                 variant="contained"
                 size={'large'}
-                endIcon={<AddCircle/>}
+                endIcon={type === 'calendar' ? <Today/> : <Link/>}
                 onClick={handleAddBtnClick}
             >
                 {btnName}
@@ -67,18 +67,18 @@ export default function AddFeature({btnName, type, updateFeatures, updateCalenda
                 open={openDialog}
                 onClose={handleClose}
                 aria-labelledby={"add-feature-form"}>
-                <DialogTitle id={"add-feature-form"}>Add feature</DialogTitle>
+                <DialogTitle id={"add-feature-form"}>{btnName}</DialogTitle>
                 <form onSubmit={handleSubmit}>
                     <DialogContent>
                         <Grid container spacing={2} direction={"column"}>
-                            <Grid item>
+                        {type !== 'calendar' && <Grid item>
                                 <TextField
                                     id={'name'}
                                     label={'Name'}
                                     onChange={e => setName(e.target.value)}
                                     fullWidth
                                     variant={'outlined'}/>
-                            </Grid>
+                            </Grid>}
                             <Grid item>
                                 <TextField
                                     id={'url'}

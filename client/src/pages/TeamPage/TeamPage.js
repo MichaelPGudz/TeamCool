@@ -31,7 +31,8 @@ export default function TeamPage() {
     const [childTeams, setChildTeams] = React.useState([]);
     const [team, setTeam] = React.useState({});
     const token = window.localStorage.getItem('token');
-    const [calendar, setCalendar] = React.useState([]);
+    // const [calendar, setCalendar] = React.useState([]);
+    const calendar = features.filter(feature => feature.type === 'calendar');
 
     useEffect(() => {
         const requestOptions = {
@@ -46,8 +47,8 @@ export default function TeamPage() {
             .then(response => response.json())
             .then(data => {
                 setTeam(data);
-                setFeatures(data.features.filter(feature => feature.type !== 'calendar'));
-                setCalendar(data.features.filter(feature => feature.type === 'calendar'));
+                setFeatures(data.features);
+                // setCalendar(data.features.filter(feature => feature.type === 'calendar'));
                 setWallId(data.wall.id);
                 setTeamMembers(data.members);
                 setChildTeams(data.childTeams);
@@ -86,9 +87,7 @@ export default function TeamPage() {
                             spacing={2}
                         >
                             <Grid item>
-                                {console.log(calendar)}
-                                {console.log(features)}
-                                <FeaturesList features={features} updateFeatures={setFeatures} teamId={teamId}/>
+                                <FeaturesList features={features.filter(feature => feature.type !== 'calendar')} updateFeatures={setFeatures} teamId={teamId}/>
                             </Grid>
                             <Grid item className={classes.center}>
                                 <AddFeature btnName="Add Feature" type="feature" updateFeatures={setFeatures} features={features} teamId={teamId}/>
@@ -98,9 +97,10 @@ export default function TeamPage() {
                 </Grid>
             </Grid>
             <Grid item className={`${classes.center} ${classes.shape}`}>
-                <AddFeature btnName="Add Calendar" type="calendar" updateFeatures={setFeatures} updateCalendar={setCalendar} features={features} teamId={teamId}/>
+                {calendar.length < 1 && <AddFeature btnName="Add Calendar" type="calendar" updateFeatures={setFeatures} features={features} teamId={teamId}/>}
                 <Grid item className={classes.shape}>
-                        <Calendar calendar={calendar} updateFeatures={setFeatures} teamId={teamId}/>
+                         {calendar.length > 0 ? <Calendar calendar={calendar} updateFeatures={setFeatures} teamId={teamId}/> : <h3>No calendars added for this team yet.</h3> }
+
                 </Grid>
             </Grid>
         </div>

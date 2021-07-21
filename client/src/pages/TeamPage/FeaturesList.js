@@ -8,7 +8,7 @@ import {
   Paper,
 } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
-import { GitHub } from '@material-ui/icons';
+import { GitHub, Link, People } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import DeleteFeatureBtn from './DeleteFeatureBtn';
 
@@ -31,7 +31,6 @@ export default function FeaturesList({ features, updateFeatures, teamId }) {
       <Paper className={classes.shape}>
         <List>
           {features
-            // .filter(feature => feature.type !== 'calendar')
             .map(({ id, name, url }) => (
               <ListItem
                 button
@@ -43,14 +42,12 @@ export default function FeaturesList({ features, updateFeatures, teamId }) {
               >
                 <ListItemAvatar>
                   <Avatar>
-                    <GitHub />
+                    {name.toLowerCase() === 'github' && <GitHub /> }
+                    {name.toLowerCase() === 'google meet' && <People /> }
+                    {(name.toLowerCase() !== 'google meet' && name.toLowerCase() !== 'github') && <Link /> }
                   </Avatar>
                 </ListItemAvatar>
-                {name == 'Calendar' ? (
-                  <iframe src={url} className={classes.calendar}></iframe>
-                ) : (
                   <ListItemText primary={name} />
-                )}
                 <ListItemSecondaryAction>
                   <DeleteFeatureBtn
                     teamId={teamId}

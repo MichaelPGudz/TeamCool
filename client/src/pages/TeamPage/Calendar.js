@@ -8,7 +8,7 @@ import {
   Paper,
 } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
-import { GitHub } from '@material-ui/icons';
+import { Schedule } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import DeleteFeatureBtn from './DeleteFeatureBtn';
 
@@ -23,42 +23,36 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function FeaturesList({ calendar, updateFeatures, teamId }) {
+export default function FeaturesList({ calendar, teamId }) {
   const classes = useStyles();
 
   return (
     <List>
-      {calendar
-        // .filter(feature => feature.type === 'calendar')
-        .map(({ id, name, url }) => (
-          <ListItem
-            button
-            key={id}
-            component="a"
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <ListItemAvatar>
-              <Avatar>
-                <GitHub />
-              </Avatar>
-            </ListItemAvatar>
-            {name == 'Calendar' ? (
-              <iframe src={url} className={classes.calendar}></iframe>
-            ) : (
-              <ListItemText primary={name} />
-            )}
-            <ListItemSecondaryAction>
-              <DeleteFeatureBtn
-                teamId={teamId}
-                updateFeatures={updateFeatures}
-                calendar={calendar}
-                featureId={id}
-              />
-            </ListItemSecondaryAction>
-          </ListItem>
-        ))}
+      {calendar.map(({ id, name, url }) => (
+        <ListItem
+          button
+          key={id}
+          component="a"
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <ListItemAvatar>
+            <Avatar>
+              <Schedule />
+            </Avatar>
+          </ListItemAvatar>
+            <iframe src={url} className={classes.calendar}></iframe>
+          <ListItemSecondaryAction>
+            <DeleteFeatureBtn
+              teamId={teamId}
+              // updateFeatures={updateFeatures}
+              calendar={calendar}
+              featureId={id}
+            />
+          </ListItemSecondaryAction>
+        </ListItem>
+      ))}
     </List>
   );
 }
