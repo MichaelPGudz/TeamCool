@@ -3,30 +3,30 @@ import Button from "@material-ui/core/Button";
 import {Card, CardActions, CardContent, CardHeader, Switch, TextField} from "@material-ui/core";
 import { AddCircle, RotateLeftSharp } from "@material-ui/icons";
 
-export default function AddRole({roles, setRoles}) {
+export default function AddSkill({skills, setSkills}) {
 
-    const [newRole, setNewRole] = React.useState();
+    const [newSkill, setNewSkill] = React.useState();
     const token = window.localStorage.getItem('token');
 
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        addRole();
+        addSkill();
     }
 
 
-    const addRole = () => {
+    const addSkill = () => {
         const requestOptions = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token
             },
-            body: JSON.stringify({ name: newRole })
+            body: JSON.stringify({ firstName: newSkill })
         };
-        fetch(`https://localhost:5001/api/role/add`, requestOptions)
+        fetch(`https://localhost:5001/api/skill/add`, requestOptions)
             .then(response => response.json())
-            .then(data => setRoles([...roles, data]))
+            .then(data => setSkills([...skills, data]))
     }
 
     return (
@@ -34,10 +34,10 @@ export default function AddRole({roles, setRoles}) {
             <form onSubmit={handleSubmit}>
                 <CardContent>
                     <TextField
-                        id="add-role"
+                        id="add-skill"
                         variant={'outlined'}
-                        onChange={e => setNewRole(e.target.value)}
-                        value={newRole}
+                        onChange={e => setNewSkill(e.target.value)}
+                        value={newSkill}
                         multiline
                         fullWidth
                     />
@@ -46,7 +46,7 @@ export default function AddRole({roles, setRoles}) {
                     <Button size="medium"
                         type={'submit'}
                         fullWidth>
-                        Add New Role
+                        Add New Skill
                     </Button>
                 </CardActions>
             </form>

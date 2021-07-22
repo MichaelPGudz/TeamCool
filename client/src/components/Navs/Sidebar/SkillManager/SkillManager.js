@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import { Dialog, DialogTitle } from "@material-ui/core";
 import { List, ListItem, ListItemSecondaryAction, ListItemText } from "@material-ui/core";
 import DeleteSkillBtn from "./DeleteSkillBtn";
+import AddSkill from "./AddSkill";
 
 
 
@@ -41,6 +42,7 @@ export default function SkillManager({openDialog, setOpenDialog}) {
                             </ListItemSecondaryAction>
                         </ListItem>
                     )}
+                    <AddSkill skills={skills} setSkills={setSkills}/>
                 </List>
             </Dialog>
         </div>

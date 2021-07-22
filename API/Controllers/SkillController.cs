@@ -18,14 +18,14 @@ namespace API.Controllers
             _skillDao = skillDao;
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Skill>> AddNewSkill(Skill skill)
+        [HttpPost("add")]
+        public async Task<ActionResult> AddNewSkill(Skill skill)
         {
             if (!ModelState.IsValid) return BadRequest();
             try
             {
                 await _skillDao.Add(skill);
-                return Ok();
+                return Ok(skill);
             }
             catch (Exception)
             {
