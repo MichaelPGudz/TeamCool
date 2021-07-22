@@ -1,8 +1,11 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
-import { AddCircle } from "@material-ui/icons";
+
+import {ExitToApp} from "@material-ui/icons";
 import {UserContext} from "../Store/Store";
 import {useHistory} from "react-router-dom";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
 
 
 export default function Logout() {
@@ -23,14 +26,12 @@ export default function Logout() {
 
     return (
         <div>
-            <Button
-                variant="contained"
-                size={'large'}
-                endIcon={<AddCircle />}
-                onClick={handleLogout}
-            >
-                Logout
-            </Button>
+            <ListItem button onClick={handleLogout}>
+                <ListItemIcon>
+                    <ExitToApp/>
+                </ListItemIcon>
+                <ListItemText primary={"Logout"}/>
+            </ListItem>
         </div>
     )
 }

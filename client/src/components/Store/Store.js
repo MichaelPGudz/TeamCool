@@ -1,5 +1,6 @@
 import React, {useEffect, useReducer} from "react";
 import {initialUserState, userReducer} from './UserReducer';
+import {useHistory} from "react-router-dom";
 
 export const UserContext = React.createContext({
     state: initialUserState,
@@ -10,14 +11,18 @@ export const UserContext = React.createContext({
 const Store = ({children}) => {
     const [state, dispatch] = useReducer(userReducer, initialUserState);
     const userId = window.localStorage.getItem('id');
-
-    useEffect( () => {
-            fetch(`https://localhost:5001/api/user/${userId}`)
-                .then(response => response.json())
-                .then(data => {
-                    dispatch({type: 'SET_USER', payload: data});
-                });
+    const history = useHistory();
+    useEffect(() => {
+        fetch(`https://localhost:5001/api/user/${userId}`)
+            .then(response => response.json())
+            .then(data => {
+                dispatch({type: 'SET_USER', payload: data});
+            });
     }, [userId])
+
+    useEffect(() => {
+        state.logged ? history.push('') : history.push('/login');
+    }, [state.logged])
 
 
     return (
