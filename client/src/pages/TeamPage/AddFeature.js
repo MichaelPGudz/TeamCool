@@ -21,9 +21,13 @@ export default function AddFeature({btnName, type, updateFeatures, features, tea
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const newFeature = {name: name, url: getValidUrl(url), type: type};
-        addFeature(newFeature);
-
+        if (type === 'calendar') {
+            const newFeature = {name: type, url: getValidUrl(url), type: type};
+            addFeature(newFeature);
+        } else {
+            const newFeature = {name: name, url: getValidUrl(url), type: type};
+            addFeature(newFeature);
+        }
     }
 
     const getValidUrl = (newUrl = "") => {

@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function FeaturesList({ calendar, teamId }) {
+export default function FeaturesList({ calendar, teamId, updateFeatures }) {
   const classes = useStyles();
 
   return (
@@ -46,7 +46,8 @@ export default function FeaturesList({ calendar, teamId }) {
           <ListItemSecondaryAction>
             <DeleteFeatureBtn
               teamId={teamId}
-              // updateFeatures={updateFeatures}
+              features = {calendar}
+              updateFeatures={updateFeatures}
               calendar={calendar}
               featureId={id}
             />
