@@ -19,7 +19,7 @@ export default function Filter({team}) {
     const [state, dispatch] = React.useContext(UserContext);
 
     useEffect(() => {
-        setSwitchOn(JSON.parse(window.localStorage.getItem(`showTeamPosts${team.id}`)));
+        setSwitchOn(JSON.parse(window.localStorage.getItem(`showTeamPosts${team.id}`)) ?? false);
     }, []);
 
     useEffect(() => {
