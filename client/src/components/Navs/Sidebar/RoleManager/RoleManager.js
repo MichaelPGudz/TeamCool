@@ -1,30 +1,19 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
-import { AddCircle } from "@material-ui/icons";
-import { Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField } from "@material-ui/core";
-import { UserContext } from "../../../Store/Store";
-import { List, ListItem, ListItemSecondaryAction, ListItemText, Paper } from "@material-ui/core";
+import React, {useEffect} from "react";
+import { Dialog, DialogTitle } from "@material-ui/core";
+import { List, ListItem, ListItemSecondaryAction, ListItemText } from "@material-ui/core";
 import AddRole from "./AddRole.js";
 import DeleteRoleBtn from "./DeleteRoleBtn.js";
 
 
-export default function RoleManager() {
+export default function RoleManager({openDialog, setOpenDialog}) {
 
-    const [openDialog, setOpenDialog] = React.useState(false);
     const [roles, setRoles] = React.useState([]);
-    const [state, dispatch] = React.useContext(UserContext);
-
-    const handleOpen = () => {
-        getRoles();
-        setOpenDialog(true)
-    }
 
     const handleClose = () => {
         setOpenDialog(false);
     };
 
-
-    const getRoles = (() => {
+    useEffect( () => {
         const requestOptions = {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
@@ -33,19 +22,11 @@ export default function RoleManager() {
             .then(response => response.json())
             .then(data => setRoles(data))
 
-    })
+    },[openDialog])
 
 
     return (
         <div>
-            <Button
-                variant="contained"
-                size={'large'}
-                endIcon={<AddCircle />}
-                onClick={handleOpen}
-            >
-                Manage Roles
-            </Button>
             <Dialog
                 open={openDialog}
                 onClose={handleClose}

@@ -1,29 +1,19 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
-import { AddCircle } from "@material-ui/icons";
-import { Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField } from "@material-ui/core";
-import { UserContext } from "../../../Store/Store";
-import { List, ListItem, ListItemSecondaryAction, ListItemText, Paper } from "@material-ui/core";
+import React, {useEffect} from "react";
+import { Dialog, DialogContent, DialogTitle, Grid, TextField } from "@material-ui/core";
+import { List, ListItem, ListItemSecondaryAction, ListItemText,} from "@material-ui/core";
 import DeleteUserBtn from "./DeleteUserBtn.js";
 import {Link} from "react-router-dom";
 
-export default function DeleteUserManager() {
+export default function DeleteUserManager({openDialog, setOpenDialog}) {
 
-    const [openDialog, setOpenDialog] = React.useState(false);
     const [users, setUsers] = React.useState([]);
-    const [state, dispatch] = React.useContext(UserContext);
-
-    const handleOpen = () => {
-        getUsers();
-        setOpenDialog(true)
-    }
 
     const handleClose = () => {
         setOpenDialog(false);
     };
 
 
-    const getUsers = (() => {
+    useEffect( () => {
         const requestOptions = {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
@@ -32,7 +22,7 @@ export default function DeleteUserManager() {
             .then(response => response.json())
             .then(data => setUsers(data))
 
-    })
+    }, [openDialog])
 
 
     const handleSearch = (event) => {
@@ -54,14 +44,6 @@ export default function DeleteUserManager() {
 
     return (
         <div>
-            <Button
-                variant="contained"
-                size={'large'}
-                endIcon={<AddCircle />}
-                onClick={handleOpen}
-            >
-                Delete Users
-            </Button>
             <Dialog
                 open={openDialog}
                 onClose={handleClose}

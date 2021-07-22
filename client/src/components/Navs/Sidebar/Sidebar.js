@@ -11,7 +11,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import {
-    AddCircle,
+    AddCircle, Delete,
     ExpandLess,
     ExpandMore,
     PeopleAlt,
@@ -36,13 +36,19 @@ function Sidebar({addedClasses, openDrawer, menuClick}) {
     const [state, dispatch] = React.useContext(UserContext);
     const AdminRole = "Admin";
     const [openAddTeam, setOpenAddTeam] = React.useState(false);
+    const [openRoleManger, setOpenRoleManager] = React.useState(false);
+    const [openDeleteUsers, setOpenDeleteUsers] = React.useState(false);
 
     const handleMyTeamsClick = () => {
         setOpenMyTeams(!openMyTeams);
     }
 
+    const handleRoleManagerClick = () => {
+        setOpenRoleManager(true);
+    }
+
     const handleMySettingsClick = () => {
-        if (!openDrawer){
+        if (!openDrawer) {
             menuClick();
         }
         setOpenMySettings(!openMySettings);
@@ -133,12 +139,28 @@ function Sidebar({addedClasses, openDrawer, menuClick}) {
                                 </ListItem> :
                                 ((state.globalRole === AdminRole && openDrawer) ?
                                     <List>
-                                        <ListItem button className={classes.nested}>
-                                            <RoleManager/>
+                                        <ListItem button className={classes.nested}
+                                                  key={"roleManager"}
+                                                  onClick={handleRoleManagerClick}>
+                                            <ListItemIcon>
+                                                <AddCircle/>
+                                            </ListItemIcon>
+                                            <ListItemText primary={"Role Manager"}/>
                                         </ListItem>
-                                        <ListItem button className={classes.nested}>
-                                            <DeleteUserManager/>
+                                        <RoleManager openDialog={openRoleManger}
+                                                     setOpenDialog={setOpenRoleManager}/>
+                                        <ListItem button
+                                                  onClick={() => {
+                                                      setOpenDeleteUsers(true)
+                                                  }}
+                                                  className={classes.nested}>
+                                            <ListItemIcon>
+                                                <Delete/>
+                                            </ListItemIcon>
+                                            <ListItemText primary={"Delete Users"}/>
                                         </ListItem>
+                                        <DeleteUserManager setOpenDialog={setOpenDeleteUsers}
+                                                           openDialog={openDeleteUsers}/>
                                     </List> : null)
                             }
                         </List>
