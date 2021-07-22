@@ -2,7 +2,7 @@ import React from 'react';
 import Login from "../../components/authentication/Login";
 import {makeStyles} from "@material-ui/core/styles";
 import {Button, Grid} from "@material-ui/core";
-import teamImg from "../../static/images/team.jpg"
+import teamImg from "../../static/images/team.png"
 import Register from "../../components/authentication/Register";
 
 const useStyles = makeStyles(() => ({

@@ -4,12 +4,23 @@ import {makeStyles, ThemeProvider, createMuiTheme} from "@material-ui/core/style
 import React from "react";
 import {CssBaseline, useMediaQuery} from "@material-ui/core";
 import {UserContext} from "../Store/Store";
+import teamImg from "../../static/images/team3.png";
 
 const drawerWidth = 210;
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: "flex",
+        height: "100vh",
+    },
+    image: {
+        backgroundImage: `url(${teamImg})`,
+        backgroundSize: "35em",
+        backgroundPosition: "95% 95%",
+        backgroundRepeat: "no-repeat",
+        position: "relative",
+        overflowX: "hidden",
+        overflowY: "hidden",
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
@@ -94,7 +105,7 @@ function Layout(props) {
     );
 
     return (
-        <div className={`${addedClasses.root}`}>
+        <div className={`${addedClasses.root} ${addedClasses.image} `}>
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
                 <Sidebar addedClasses={addedClasses} menuClick={handleMenuClick} openDrawer={openDrawer} userId={id}/>
