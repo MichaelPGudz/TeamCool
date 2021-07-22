@@ -93,9 +93,9 @@ namespace API.Controllers
         }
         
         [HttpPost("search")]
-        public ICollection<Skill> SearchUsers([FromBody]string name)
+        public ICollection<Skill> SearchSkills([FromBody]string name)
         {
-            return _skillDao.SearchUserByName(name);
+            return _skillDao.SearchSkillByName(name);
         }
     }
 }
