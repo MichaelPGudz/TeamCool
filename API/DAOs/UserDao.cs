@@ -38,6 +38,8 @@ namespace API.DAOs
 
         public void Remove(User toRemove)
         {
+            _dataContext.Posts.RemoveRange(_dataContext.Posts.Where(x => x.Author == toRemove));
+            _dataContext.TeamMembers.RemoveRange(_dataContext.TeamMembers.Where(x => x.User == toRemove));
             _dataContext.Users.Remove(toRemove);
             _dataContext.SaveChanges();
         }

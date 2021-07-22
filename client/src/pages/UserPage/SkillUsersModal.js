@@ -37,18 +37,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SimpleModal(props) {
-    useEffect(() => {
-        fetch(`https://localhost:5001/api/skill/${props.id}/users`)
-            .then(reponse => reponse.json())
-            .then(data => {
-                setIsLoading(false);
-                setLoadedUsers(data);
-            });
-    }, [props]);
+    const getSkills = () => {
+          fetch(`https://localhost:5001/api/skill/${props.id}/users`)
+    .then(reponse => reponse.json())
+    .then(data => {
+        setIsLoading(false);
+        setLoadedUsers(data);
+    });}
 
     const [isLoading, setIsLoading] = useState(true);
     const [loadedUsers, setLoadedUsers] = useState([]);
-
 
 
     const classes = useStyles();
@@ -57,6 +55,7 @@ export default function SimpleModal(props) {
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
+        getSkills();
         setOpen(true);
     };
 

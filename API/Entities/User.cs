@@ -12,6 +12,8 @@ namespace API.Entities
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
+        
+        public string GlobalRole { get; set; }
         public ICollection<TeamMember> MyTeams { get; set; }
         public ICollection<Skill> MySkills { get; set; }
     }

@@ -28,7 +28,7 @@ const UserPage = () => {
     var {id} = useParams();
     const [isLoading, setIsLoading] = useState(true);
     const [loadedUser, setLoadedUser] = useState([]);
-    const [loadedSkills, setLoadedSkills] = useState([]);
+    const [skills, setSkills] = useState([]);
     const [state, dispatch] = React.useContext(UserContext);
 
 
@@ -39,7 +39,7 @@ const UserPage = () => {
             .then(data => {
                 setIsLoading(false);
                 setLoadedUser(data);
-                setLoadedSkills(data.mySkills);
+                setSkills(data.mySkills);
             });
     },[id]);
 
@@ -81,7 +81,7 @@ const UserPage = () => {
                 Skills
             </Typography>
 
-            <UserSkills loadedUser={loadedUser} loadedSkills={loadedSkills} classes={classes} />
+            <UserSkills loadedUser={loadedUser} skills={skills} setSkills = {setSkills} classes={classes} loggedUser={state.user} />
 
         </div >
     )

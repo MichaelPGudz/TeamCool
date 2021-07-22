@@ -2,19 +2,18 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import { AddCircle } from "@material-ui/icons";
 import { Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField } from "@material-ui/core";
-import { UserContext } from "../../../Store/Store";
+import { UserContext } from "../../components/Store/Store";
 import { List, ListItem, ListItemSecondaryAction, ListItemText, Paper } from "@material-ui/core";
-import DeleteUserBtn from "./DeleteUserBtn.js";
-import {Link} from "react-router-dom";
 
-export default function DeleteUserManager() {
+
+export default function AddSkills({loadedUser, userSkills, setUserSkills}) {
 
     const [openDialog, setOpenDialog] = React.useState(false);
-    const [users, setUsers] = React.useState([]);
+    const [skills, setSkills] = React.useState([]);
     const [state, dispatch] = React.useContext(UserContext);
 
     const handleOpen = () => {
-        getUsers();
+        getSkills();
         setOpenDialog(true)
     }
 
@@ -22,15 +21,25 @@ export default function DeleteUserManager() {
         setOpenDialog(false);
     };
 
+    const addSkill = (skillId) => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+        };
+        fetch(`https://localhost:5001/api/user/${loadedUser.id}/skill/${skillId}`, requestOptions)
+        .then(response => response.json())
+        .then(data => {console.log(data); setUserSkills([...userSkills, data])})
+    }
+    
 
-    const getUsers = (() => {
+    const getSkills = (() => {
         const requestOptions = {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
         };
-        fetch(`https://localhost:5001/api/users`, requestOptions)
+        fetch(`https://localhost:5001/api/skills`, requestOptions)
             .then(response => response.json())
-            .then(data => setUsers(data))
+            .then(data => setSkills(data))
 
     })
 
@@ -44,10 +53,10 @@ export default function DeleteUserManager() {
             },
             body: JSON.stringify(event.target.value)
         };
-        fetch(`https://localhost:5001/api/user/search`, requestOptions)
+        fetch(`https://localhost:5001/api/skill/search`, requestOptions)
             .then(response => response.json())
             .then(data => {
-                setUsers(data);
+                setSkills(data);
             })
     }
 
@@ -60,13 +69,13 @@ export default function DeleteUserManager() {
                 endIcon={<AddCircle />}
                 onClick={handleOpen}
             >
-                Delete Users
+                Add Skills
             </Button>
             <Dialog
                 open={openDialog}
                 onClose={handleClose}
                 aria-labelledby={"users-list"}>
-                <DialogTitle>Here you can delete users</DialogTitle>
+                <DialogTitle>Click on skill to add</DialogTitle>
                 <DialogContent>
                     <Grid item>
                         <TextField
@@ -77,11 +86,10 @@ export default function DeleteUserManager() {
                             variant={'outlined'} />
                     </Grid>
                     <List>
-                        {users.map(({ id, firstName, lastName, email }) =>
-                            <ListItem button key={id} component={Link} to={`/user/${id}`} onClick={handleClose}>
-                                <ListItemText primary={firstName + " " + lastName} secondary={email} />
+                        {skills.map(({ id, firstName }) =>
+                            <ListItem button key={id} onClick={() => addSkill(id)}>
+                                <ListItemText primary={firstName}/>
                                 <ListItemSecondaryAction>
-                                    <DeleteUserBtn setUsers={setUsers} users={users} userId={id} />
                                 </ListItemSecondaryAction>
                             </ListItem>
                         )}

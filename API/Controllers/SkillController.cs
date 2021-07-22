@@ -85,5 +85,17 @@ namespace API.Controllers
         {
             return _skillDao.GetUsersForSkill(id);
         }
+
+        [HttpGet("~/api/skills")]
+        public ICollection<Skill> GetAll()
+        {
+            return _skillDao.GetAll();
+        }
+        
+        [HttpPost("search")]
+        public ICollection<Skill> SearchUsers([FromBody]string name)
+        {
+            return _skillDao.SearchUserByName(name);
+        }
     }
 }

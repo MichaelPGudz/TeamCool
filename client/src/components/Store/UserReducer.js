@@ -10,7 +10,8 @@ export const userReducer = (state, action) => {
                 ...state,
                 user: action.payload,
                 active: true,
-                logged: true
+                logged: true,
+                globalRole: action.payload.globalRole
             }
         case 'LOGOUT':
             return {

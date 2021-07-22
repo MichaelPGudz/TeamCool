@@ -48,5 +48,11 @@ namespace API.DAOs
                 {
                     return _dataContext.Skills.Where(skill => skill.Id == id).SelectMany(x => x.Users);
                 }
+
+        public ICollection<Skill> SearchUserByName(string name)
+        {
+            return _dataContext.Skills
+                .Where(x => x.FirstName.Contains(name)).ToList();
+        }
     }
 }

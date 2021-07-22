@@ -42,6 +42,9 @@ function Sidebar({addedClasses, openDrawer, menuClick}) {
     }
 
     const handleMySettingsClick = () => {
+        if (!openDrawer){
+            menuClick();
+        }
         setOpenMySettings(!openMySettings);
     }
 
@@ -128,7 +131,7 @@ function Sidebar({addedClasses, openDrawer, menuClick}) {
                                 <ListItem button className={classes.nested}>
                                     <Skeleton width={240} height={48} animation={'wave'}/>
                                 </ListItem> :
-                                (state.globalRole === AdminRole ?
+                                ((state.globalRole === AdminRole && openDrawer) ?
                                     <List>
                                         <ListItem button className={classes.nested}>
                                             <RoleManager/>
