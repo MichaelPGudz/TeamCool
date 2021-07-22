@@ -55,7 +55,6 @@ export default function Login() {
                 <Grid container
                       spacing={2}
                       direction={"column"}
-                      justifyContent="center"
                       alignItems="center"
                 >
                     {wrongLogin ?
