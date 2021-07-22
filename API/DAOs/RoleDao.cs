@@ -29,6 +29,7 @@ namespace API.DAOs
 
         public void Remove(Role toRemove)
         {
+            _dataContext.TeamMembers.RemoveRange(_dataContext.TeamMembers.Where(x => x.Role == toRemove));
             _dataContext.Roles.Remove(toRemove);
             _dataContext.SaveChanges();
         }

@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import {useTheme} from '@material-ui/core/styles';
+import { useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -18,17 +18,18 @@ import {
     PeopleAltOutlined,
     Settings
 } from "@material-ui/icons";
-import {Avatar, Collapse} from "@material-ui/core";
-import {Link} from "react-router-dom";
+import { Avatar, Collapse } from "@material-ui/core";
+import { Link } from "react-router-dom";
 import Skeleton from '@material-ui/lab/Skeleton'
-import {UserContext} from "../../Store/Store";
-import {Image, Transformation} from "cloudinary-react";
+import { UserContext } from "../../Store/Store";
+import { Image, Transformation } from "cloudinary-react";
 import RoleManager from './RoleManager/RoleManager';
 import DeleteUserManager from './DeleteUserManager/DeleteUserManager';
 import AddNewTeam from "../../AddNewTeam";
+import SkillManager from './SkillManager/SkillManager';
 
 
-function Sidebar({addedClasses, openDrawer, menuClick}) {
+function Sidebar({ addedClasses, openDrawer, menuClick }) {
     const classes = addedClasses;
     const theme = useTheme();
     const [openMyTeams, setOpenMyTeams] = React.useState(false);
@@ -38,6 +39,7 @@ function Sidebar({addedClasses, openDrawer, menuClick}) {
     const [openAddTeam, setOpenAddTeam] = React.useState(false);
     const [openRoleManger, setOpenRoleManager] = React.useState(false);
     const [openDeleteUsers, setOpenDeleteUsers] = React.useState(false);
+    const [openSkillManager, setOpenSkillManager] = React.useState(false);
 
     const handleMyTeamsClick = () => {
         setOpenMyTeams(!openMyTeams);
@@ -45,6 +47,10 @@ function Sidebar({addedClasses, openDrawer, menuClick}) {
 
     const handleRoleManagerClick = () => {
         setOpenRoleManager(true);
+    }
+
+    const handleSkillManagerClick = () => {
+        setOpenSkillManager(true);
     }
 
     const handleMySettingsClick = () => {
@@ -75,26 +81,26 @@ function Sidebar({addedClasses, openDrawer, menuClick}) {
             >
                 <div className={classes.toolbar}>
                     <IconButton onClick={menuClick}>
-                        {theme.direction === 'rtl' ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
+                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                     </IconButton>
                 </div>
-                <Divider/>
+                <Divider />
                 <List>
                     <ListItem button key={"My Teams"} onClick={handleMyTeamsClick}>
-                        <ListItemIcon><PeopleAlt/></ListItemIcon>
-                        <ListItemText primary={"My Teams"}/>
-                        {openMyTeams ? <ExpandLess/> : <ExpandMore/>}
+                        <ListItemIcon><PeopleAlt /></ListItemIcon>
+                        <ListItemText primary={"My Teams"} />
+                        {openMyTeams ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
                     <Collapse in={openMyTeams} timeout={"auto"} unmountOnExit>
                         <List>
                             {!state.active ?
                                 <ListItem button className={classes.nested}>
-                                    <Skeleton width={240} height={48} animation={'wave'}/>
+                                    <Skeleton width={240} height={48} animation={'wave'} />
                                 </ListItem>
                                 :
-                                state.user.myTeams.map(({id, role, team}) => (
+                                state.user.myTeams.map(({ id, role, team }) => (
                                     <ListItem button className={classes.nested} key={id} component={Link}
-                                              to={`/team/${team.id}`}>
+                                        to={`/team/${team.id}`}>
                                         {team.logo ?
                                             <ListItemIcon>
                                                 <Avatar style={{
@@ -102,65 +108,74 @@ function Sidebar({addedClasses, openDrawer, menuClick}) {
                                                     height: theme.spacing(3),
                                                 }}>
                                                     <Image publicId={team.logo}>
-                                                        <Transformation width="24" height="24" crop="fill"/>
+                                                        <Transformation width="24" height="24" crop="fill" />
                                                     </Image>
                                                 </Avatar>
                                             </ListItemIcon>
                                             :
                                             <ListItemIcon>
-                                                <PeopleAltOutlined/>
+                                                <PeopleAltOutlined />
                                             </ListItemIcon>
                                         }
-                                        <ListItemText primary={team.name} secondary={role.name}/>
+                                        <ListItemText primary={team.name} secondary={role.name} />
                                     </ListItem>
                                 ))}
                         </List>
                     </Collapse>
                     <ListItem button key={"addNewTeam"} onClick={handleAddTeamDialog}>
                         <ListItemIcon>
-                            <AddCircle/>
+                            <AddCircle />
                         </ListItemIcon>
-                        <ListItemText primary={"Add Team"}/>
+                        <ListItemText primary={"Add Team"} />
                     </ListItem>
-                    <AddNewTeam openDialog={openAddTeam} setOpenDialog={setOpenAddTeam}/>
+                    <AddNewTeam openDialog={openAddTeam} setOpenDialog={setOpenAddTeam} />
                 </List>
-                <Divider/>
+                <Divider />
                 <List>
                     <ListItem button key={"Settings"} onClick={handleMySettingsClick}>
-                        <ListItemIcon><Settings/></ListItemIcon>
-                        <ListItemText primary={"Settings"}/>
-                        {openMySettings ? <ExpandLess/> : <ExpandMore/>}
+                        <ListItemIcon><Settings /></ListItemIcon>
+                        <ListItemText primary={"Settings"} />
+                        {openMySettings ? <ExpandLess /> : <ExpandMore />}
                     </ListItem>
                     <Collapse in={openMySettings} timeout={"auto"} unmountOnExit>
                         <List>
                             {!state.active ?
                                 <ListItem button className={classes.nested}>
-                                    <Skeleton width={240} height={48} animation={'wave'}/>
+                                    <Skeleton width={240} height={48} animation={'wave'} />
                                 </ListItem> :
                                 ((state.globalRole === AdminRole && openDrawer) ?
                                     <List>
                                         <ListItem button className={classes.nested}
-                                                  key={"roleManager"}
-                                                  onClick={handleRoleManagerClick}>
+                                            key={"roleManager"}
+                                            onClick={handleRoleManagerClick}>
                                             <ListItemIcon>
-                                                <AddCircle/>
+                                                <AddCircle />
                                             </ListItemIcon>
-                                            <ListItemText primary={"Role Manager"}/>
+                                            <ListItemText primary={"Role Manager"} />
                                         </ListItem>
                                         <RoleManager openDialog={openRoleManger}
-                                                     setOpenDialog={setOpenRoleManager}/>
-                                        <ListItem button
-                                                  onClick={() => {
-                                                      setOpenDeleteUsers(true)
-                                                  }}
-                                                  className={classes.nested}>
+                                            setOpenDialog={setOpenRoleManager} />
+                                        <ListItem button className={classes.nested}
+                                            key={"skillManager"}
+                                            onClick={handleSkillManagerClick}>
                                             <ListItemIcon>
-                                                <Delete/>
+                                                <AddCircle />
                                             </ListItemIcon>
-                                            <ListItemText primary={"Delete Users"}/>
+                                            <ListItemText primary={"Skill Manager"} />
+                                        </ListItem>
+                                        <SkillManager openDialog={openSkillManager} setOpenDialog={setOpenSkillManager} />
+                                        <ListItem button
+                                            onClick={() => {
+                                                setOpenDeleteUsers(true)
+                                            }}
+                                            className={classes.nested}>
+                                            <ListItemIcon>
+                                                <Delete />
+                                            </ListItemIcon>
+                                            <ListItemText primary={"Delete Users"} />
                                         </ListItem>
                                         <DeleteUserManager setOpenDialog={setOpenDeleteUsers}
-                                                           openDialog={openDeleteUsers}/>
+                                            openDialog={openDeleteUsers} />
                                     </List> : null)
                             }
                         </List>

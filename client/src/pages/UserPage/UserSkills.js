@@ -2,8 +2,8 @@ import React from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import SkillUsersModal from "./SkillUsersModal";
-import DeleteSkillBtn from './DeleteSkillBtn';
-import AddSkills from './AddSkills';
+import DeleteSkillFromUserBtn from './DeleteSkillFromUserBtn';
+import AddSkillsToUser from './AddSkillsToUser';
 
 
 const UserSkills = ({ loadedUser, skills, setSkills, loggedUser }) => {
@@ -14,14 +14,14 @@ const UserSkills = ({ loadedUser, skills, setSkills, loggedUser }) => {
         <List>
             <React.Fragment key={loadedUser.id}>
                 {(loadedUser.id === loggedUser.id || loggedUser.globalRole === adminRole) ?
-                <AddSkills loadedUser={loadedUser} userSkills={skills} setUserSkills={setSkills}/>:
+                <AddSkillsToUser loadedUser={loadedUser} userSkills={skills} setUserSkills={setSkills}/>:
                 null }
                 <ListItem>
                     {skills.map(({ id, firstName }) =>
                         <React.Fragment key={id}>
                             <SkillUsersModal id={id} skillName={firstName} />
                             {(loadedUser.id === loggedUser.id || loggedUser.globalRole === adminRole) ?
-                                <DeleteSkillBtn setSkills={setSkills} skills={skills} skillId={id} userId={loadedUser.id} />
+                                <DeleteSkillFromUserBtn setSkills={setSkills} skills={skills} skillId={id} userId={loadedUser.id} />
                                 : null}
                         </React.Fragment>
                     )}

@@ -4,26 +4,25 @@ import {Delete} from "@material-ui/icons";
 
 
 
-export default function DeleteSkillBtn({setSkills, skills, skillId, userId}) {
+export default function DeleteSkillBtn({setSkills, skills, skillId}) {
 
     const handleDelete = () => {
-        deleteFromServer(userId, skillId);
+        deleteFromServer(skillId);
         setSkills(skills.filter((skill) => {
             return skill.id !== skillId
         }));
     }
 
-    const deleteFromServer = (userId, skillId) => {
+    const deleteFromServer = (skillId) => {
         const requestOptions = {
             method: 'DELETE',
             headers: {
                 'Content-type': 'application/json',
                 'Authorization': 'Bearer ' + window.localStorage.getItem('token')
             },
-            
             body: null
         };
-        fetch(`https://localhost:5001/api/user/${userId}/skill/${skillId}`, requestOptions)
+        fetch(`https://localhost:5001/api/skill/${skillId}`, requestOptions)
             .then(response => response)
     }
 

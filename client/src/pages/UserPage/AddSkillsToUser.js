@@ -7,7 +7,7 @@ import { List, ListItem, ListItemSecondaryAction, ListItemText, Snackbar } from 
 import { Alert } from "@material-ui/lab";
 
 
-export default function AddSkills({ loadedUser, userSkills, setUserSkills }) {
+export default function AddSkillsToUser({ loadedUser, userSkills, setUserSkills }) {
 
     const [openDialog, setOpenDialog] = React.useState(false);
     const [skills, setSkills] = React.useState([]);
