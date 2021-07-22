@@ -9,13 +9,14 @@ import {
 
 import Button from "@material-ui/core/Button";
 import {UserContext} from "./Store/Store";
+import {useHistory} from "react-router-dom";
 
 
 export default function AddNewTeam({openDialog, setOpenDialog}) {
 
     const [name, setName] = React.useState("");
     const [state, dispatch] = React.useContext(UserContext);
-
+    const history = useHistory();
     const handleClose = () => {
         setOpenDialog(false);
     }
@@ -39,12 +40,14 @@ export default function AddNewTeam({openDialog, setOpenDialog}) {
         fetch(`https://localhost:5001/api/team`, requestOptions)
             .then(response => response.json())
             .then(data => {
-                dispatch({type: "addTeam", payload: [data]})
+                dispatch({type: "addTeam", payload: [data]});
+                history.push(`/team/${data.team.id}`);
             })
     }
 
     return (
         <div>
+
             <Dialog
                 open={openDialog}
                 onClose={handleClose}

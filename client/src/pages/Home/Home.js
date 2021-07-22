@@ -39,6 +39,9 @@ const Home = () => {
                 <Grid container
                       spacing={2}
                 >
+                    <Grid item xs={2}>
+
+                    </Grid>
                     <Grid item xs={6}>
                         <Wall WallForUser newPosts={posts}/>
                     </Grid>
