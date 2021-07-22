@@ -4,13 +4,13 @@ import {
     ListItem,
     ListItemIcon, ListItemText, Snackbar,
 } from "@material-ui/core";
-import {Alert} from "@material-ui/lab";
+import { Alert } from "@material-ui/lab";
 
 
-export default function UserListItem({user, team, setTeamMembers}) {
+export default function UserListItem({ user, team, setTeamMembers }) {
 
     const [open, setOpen] = React.useState(false);
-    const [alert, setAlert] = React.useState({severity: "success", message: ""});
+    const [alert, setAlert] = React.useState({ severity: "success", message: "" });
 
     const handleAddMember = () => {
         const requestOptions = {
@@ -38,10 +38,10 @@ export default function UserListItem({user, team, setTeamMembers}) {
             })
             .catch(error =>
                 error.json()
-            .then(result => {
-                    setAlert({severity: "error", message: `Error! ${result}`});
-                    setOpen(true);
-                })
+                    .then(result => {
+                        setAlert({ severity: "error", message: `Error! ${result}` });
+                        setOpen(true);
+                    })
             )
     }
 
@@ -56,16 +56,16 @@ export default function UserListItem({user, team, setTeamMembers}) {
     return (
         <div>
             <ListItem button
-                      onClick={handleAddMember}>
+                onClick={handleAddMember}>
                 <ListItemIcon>
-                    <Avatar/>
+                    <Avatar />
                 </ListItemIcon>
                 <ListItemText>
                     {`${user.firstName} ${user.lastName}`}
                 </ListItemText>
             </ListItem>
             <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}
-                      anchorOrigin={{horizontal: "center", vertical: "top"}}>
+                anchorOrigin={{ horizontal: "center", vertical: "top" }}>
                 <Alert onClose={handleClose} severity={alert.severity} variant={"filled"}>
                     {alert.message}
                 </Alert>

@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.DAOs.Interfaces;
 using API.Entities;
+using FizzWare.NBuilder.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Query;
+using Newtonsoft.Json.Serialization;
 
 namespace API.Controllers
 {
@@ -64,14 +66,19 @@ namespace API.Controllers
         public IQueryable<ICollection<Skill>> GetSkillsForUser(string id) => _userDao.GetUserSkills(id);
 
         [HttpPost("{userId}/skill/{skillId}")]
-        public IActionResult AddSkillForUser(string userId, int skillId)
+        public async Task<IActionResult> AddSkillForUser(string userId, int skillId)
         {
-            var skill = _skillDao.GetById(skillId);
-            if (skill.Result.Value == null) return BadRequest();
+            var skill = await _skillDao.GetById(skillId);
+            var user = await _userDao.GetById(userId);
+            if (skill.Value == null) return BadRequest();
+            if (skill.Value.Users.Any(x => x.Id == userId))
+            {
+                return BadRequest("This user has that skill");
+            }
             try
             {
-                _userDao.AddUserSkill(userId, skill.Result.Value);
-                return Ok(skill.Result.Value);
+                _userDao.AddUserSkill(userId, skill.Value);
+                return Ok(skill.Value);
             }
             catch (Exception)
             {
