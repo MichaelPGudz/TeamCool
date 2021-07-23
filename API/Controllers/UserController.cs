@@ -63,7 +63,7 @@ namespace API.Controllers
         public async Task<ActionResult<User>> GetUserById(string id) => await _userDao.GetById(id);
         
         [HttpGet("{id}/skills")]
-        public IQueryable<ICollection<Skill>> GetSkillsForUser(string id) => _userDao.GetUserSkills(id);
+        public IQueryable<Skill> GetSkillsForUser(string id) => _userDao.GetUserSkills(id);
 
         [HttpPost("{userId}/skill/{skillId}")]
         public async Task<IActionResult> AddSkillForUser(string userId, int skillId)
