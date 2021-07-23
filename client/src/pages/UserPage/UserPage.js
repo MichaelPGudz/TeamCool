@@ -41,7 +41,7 @@ const UserPage = () => {
                 setLoadedUser(data);
                 setSkills(data.mySkills);
             });
-    },[id]);
+    },[id, state]);
 
 
     function createData(name, property) {
