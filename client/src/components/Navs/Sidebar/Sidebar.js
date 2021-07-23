@@ -15,7 +15,8 @@ import {
     ExpandMore, Home, Menu,
     PeopleAlt,
     PeopleAltOutlined,
-    Settings
+    Settings,
+    EmojiPeople
 } from "@material-ui/icons";
 import {Avatar, Collapse, Typography} from "@material-ui/core";
 import {Link, useHistory} from "react-router-dom";
@@ -27,6 +28,7 @@ import DeleteUserManager from './DeleteUserManager/DeleteUserManager';
 import AddNewTeam from "../../AddNewTeam";
 import SkillManager from './SkillManager/SkillManager';
 import Logout from "../../authentication/Logout";
+import UserPage from '../../../pages/UserPage/UserPage';
 
 
 function Sidebar({addedClasses, openDrawer, menuClick}) {
@@ -97,6 +99,12 @@ function Sidebar({addedClasses, openDrawer, menuClick}) {
                             <Home/>
                         </ListItemIcon>
                         <ListItemText primary={"Home"}/>
+                    </ListItem>
+                    <ListItem button key={"MyProfile"} onClick={() => {history.push(`/user/${state.user.id}`)}}>
+                        <ListItemIcon>
+                            <EmojiPeople/>
+                        </ListItemIcon>
+                        <ListItemText primary={"My Profile"}/>
                     </ListItem>
                     <ListItem button key={"My Teams"} onClick={handleMyTeamsClick}>
                         <ListItemIcon><PeopleAlt/></ListItemIcon>
