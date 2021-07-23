@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import SkillUsersModal from "./SkillUsersModal";
@@ -9,6 +10,14 @@ import AddSkillsToUser from './AddSkillsToUser';
 const UserSkills = ({ loadedUser, skills, setSkills, loggedUser }) => {
 
     var adminRole = "Admin"
+
+    useEffect(() => {
+        fetch(`https://localhost:5001/api/user/${loadedUser.id}/skills`)
+            .then(reponse => reponse.json())
+            .then(data => {
+                setSkills(data);
+            });
+    },[skills]);
     
     return (
         <List>
