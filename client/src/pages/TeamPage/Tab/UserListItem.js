@@ -21,7 +21,7 @@ export default function UserListItem({ user, team, setTeamMembers }) {
                 'Authorization': 'Bearer ' + window.localStorage.getItem('token')
             },
         };
-        fetch(`https://localhost:5001/api/team/${team.id}/AddTeamMember/${user.id}/${1}`, requestOptions)
+        fetch(`https://localhost:5001/api/team/${team.id}/AddTeamMember/${user.id}/${4}`, requestOptions)
             .then(response => {
                 if (response.ok) {
                     return response.json()

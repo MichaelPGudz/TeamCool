@@ -76,7 +76,7 @@ export default function Register({setOptionLogin, setSuccessfulRegister}) {
                             label={'First Name'}
                             onChange={e => setFirstName(e.target.value)}
                             fullWidth
-                            variant={'filled'}/>
+                            variant={'outlined'}/>
                         </Paper>
                     </Grid>
                     <Grid item>
@@ -86,7 +86,7 @@ export default function Register({setOptionLogin, setSuccessfulRegister}) {
                             label={'Last Name'}
                             onChange={e => setLastName(e.target.value)}
                             fullWidth
-                            variant={'filled'}/>
+                            variant={'outlined'}/>
                         </Paper>
                     </Grid>
                     <Grid item>
@@ -96,7 +96,7 @@ export default function Register({setOptionLogin, setSuccessfulRegister}) {
                             label={'E-mail'}
                             onChange={e => setEmail(e.target.value)}
                             fullWidth
-                            variant={'filled'}/>
+                            variant={'outlined'}/>
                         </Paper>
                     </Grid>
                     <Grid item>
@@ -107,7 +107,7 @@ export default function Register({setOptionLogin, setSuccessfulRegister}) {
                             type={'password'}
                             onChange={e => setPassword(e.target.value)}
                             fullWidth
-                            variant={'filled'}/>
+                            variant={'outlined'}/>
                         </Paper>
                     </Grid>
                     <Grid item>
