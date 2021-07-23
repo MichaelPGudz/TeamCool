@@ -20,6 +20,7 @@ const useStyles = makeStyles(() => ({
 const LoginPage = () => {
     const classes = useStyles();
     const [optionLogin, setOptionLogin] = React.useState(true)
+    const [successfulRegister, setSuccessfulRegister] = React.useState(false)
 
     return (
         <div className={classes.image}>
@@ -33,9 +34,9 @@ const LoginPage = () => {
             >
                 <Grid item>
                     {optionLogin?
-                        <Login/>
+                        <Login successfulRegister={successfulRegister} setSuccessfulRegister={setSuccessfulRegister}/>
                     :
-                       <Register/>}
+                       <Register setOptionLogin={setOptionLogin} setSuccessfulRegister={setSuccessfulRegister}/>}
                 </Grid>
                 <Grid item>
                     <Button variant={"contained"}

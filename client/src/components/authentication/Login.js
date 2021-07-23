@@ -1,11 +1,11 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import {Grid, TextField} from "@material-ui/core";
+import {Grid, Paper, Snackbar, TextField} from "@material-ui/core";
 import {UserContext} from "../Store/Store";
 import Alert from '@material-ui/lab/Alert';
 
 
-export default function Login() {
+export default function Login({setSuccessfulRegister, successfulRegister}) {
 
     const [email, setEmail] = React.useState();
     const [password, setPassword] = React.useState();
@@ -23,6 +23,13 @@ export default function Login() {
         Login(user)
     }
 
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setSuccessfulRegister(false);
+    };
 
     const Login = (user) => {
         const requestOptions = {
@@ -51,6 +58,12 @@ export default function Login() {
 
     return (
         <div>
+            <Snackbar open={successfulRegister} autoHideDuration={6000} onClose={handleClose}
+                      anchorOrigin={{horizontal: "center", vertical: "top"}}>
+                <Alert onClose={handleClose} severity="success" variant={"filled"}>
+                    You can login now!
+                </Alert>
+            </Snackbar>
             <form onSubmit={handleSubmit}>
                 <Grid container
                       spacing={2}
@@ -60,14 +73,17 @@ export default function Login() {
                     {wrongLogin ?
                         <Alert severity="error">Wrong data, try again!<br/></Alert> : null}
                     <Grid item>
+                        <Paper>
                         <TextField
                             id={'email'}
                             label={'E-mail'}
                             onChange={e => setEmail(e.target.value)}
                             fullWidth
                             variant={'outlined'}/>
+                        </Paper>
                     </Grid>
                     <Grid item>
+                        <Paper>
                         <TextField
                             id={'password'}
                             label={'Password'}
@@ -76,6 +92,7 @@ export default function Login() {
                             fullWidth
                             variant={'outlined'}
                         />
+                        </Paper>
                     </Grid>
                     <Grid item>
                         <Button

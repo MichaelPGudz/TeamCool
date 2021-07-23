@@ -1,10 +1,10 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import {Grid, Snackbar, TextField} from "@material-ui/core";
+import {Grid, Paper, Snackbar, TextField} from "@material-ui/core";
 import Alert from '@material-ui/lab/Alert';
 
 
-export default function Register() {
+export default function Register({setOptionLogin, setSuccessfulRegister}) {
 
     const [firstName, setFirstName] = React.useState();
     const [lastName, setLastName] = React.useState();
@@ -12,7 +12,7 @@ export default function Register() {
     const [password, setPassword] = React.useState();
     const [wrongRegister, setWrongRegister] = React.useState(false)
     const [errorMessage, setErrorMessage] = React.useState();
-    const [successfulRegister, setSuccessfulRegister] = React.useState(false)
+
 
 
     const handleWrongRegister = (message) => {
@@ -26,13 +26,6 @@ export default function Register() {
         RegisterUser(newUser);
     }
 
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setSuccessfulRegister(false);
-    };
 
 
     const RegisterUser = (newUser) => {
@@ -57,6 +50,7 @@ export default function Register() {
             .then((data) => {
                     console.log(data);
                     setSuccessfulRegister(true);
+                    setOptionLogin(true);
                 }
             )
             .catch((error) => {
@@ -75,37 +69,38 @@ export default function Register() {
                       alignItems="center">
                     {wrongRegister ?
                         <Alert severity="error">{errorMessage}</Alert> : null}
-                    <Snackbar open={successfulRegister} autoHideDuration={6000} onClose={handleClose}
-                              anchorOrigin={{horizontal: "center", vertical: "top"}}>
-                        <Alert onClose={handleClose} severity="success" variant={"filled"}>
-                            You can login now!
-                        </Alert>
-                    </Snackbar>
                     <Grid item>
+                        <Paper>
                         <TextField
                             id={'firstName'}
                             label={'First Name'}
                             onChange={e => setFirstName(e.target.value)}
                             fullWidth
                             variant={'filled'}/>
+                        </Paper>
                     </Grid>
                     <Grid item>
+                        <Paper>
                         <TextField
                             id={'lastName'}
                             label={'Last Name'}
                             onChange={e => setLastName(e.target.value)}
                             fullWidth
                             variant={'filled'}/>
+                        </Paper>
                     </Grid>
                     <Grid item>
+                        <Paper>
                         <TextField
                             id={'email'}
                             label={'E-mail'}
                             onChange={e => setEmail(e.target.value)}
                             fullWidth
                             variant={'filled'}/>
+                        </Paper>
                     </Grid>
                     <Grid item>
+                        <Paper>
                         <TextField
                             id={'password'}
                             label={'Password'}
@@ -113,6 +108,7 @@ export default function Register() {
                             onChange={e => setPassword(e.target.value)}
                             fullWidth
                             variant={'filled'}/>
+                        </Paper>
                     </Grid>
                     <Grid item>
                         <Button
