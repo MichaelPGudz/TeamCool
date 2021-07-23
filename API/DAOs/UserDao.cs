@@ -54,9 +54,9 @@ namespace API.DAOs
             return _dataContext.Users.ToList();
         }
 
-        public IQueryable<ICollection<Skill>> GetUserSkills(string id)
+        public IQueryable<Skill> GetUserSkills(string id)
         {
-            return _dataContext.Users.Where(user => user.Id == id).Select(c => c.MySkills);
+            return _dataContext.Users.Where(user => user.Id == id).SelectMany(c => c.MySkills);
         }
 
 
