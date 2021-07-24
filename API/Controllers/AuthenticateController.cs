@@ -105,13 +105,7 @@ namespace API.Controllers
                 await userManager.AddToRoleAsync(user, UserRole);
             }
 
-            var emailBody =
-                "Hi! It's TeamCool here. \n \nGood to see you in our community! \n" +
-                "We' ve currently registered user on this Email adress \n" +
-                "If you haven't registered account on our site, please contact with administrator on: \n \n" +
-                "TeamCoolJLRDMG@gmail.com \n \n" +
-                "Best regards!";
-            EmailService.SendEmailConfirmation(user.Email, emailBody);
+            EmailService.SendEmailConfirmation(user.Email, EmailHTMLTemplates.HtmlRegisterTemplate);
 
             return Ok(new Response {Status = "Success", Message = "User created successfully!"});
         }

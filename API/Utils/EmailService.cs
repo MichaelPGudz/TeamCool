@@ -12,7 +12,7 @@ namespace API.Utils
         {
             MailMessage message = new MailMessage("TeamCoolJLRDMG@gmail.com", clientEmail)
             {
-                Subject = "Register confirmation", Body = emailBody, IsBodyHtml = false,
+                Subject = "Register confirmation", Body = emailBody, IsBodyHtml = true,
             };
             SmtpClient client = new SmtpClient
             {
