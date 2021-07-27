@@ -7,7 +7,9 @@ import FeaturesList from "./FeaturesList";
 import AddFeature from "./AddFeature";
 import TeamPageTab from "./Tab/TeamPageTab";
 import Bar from "./BarComponents/Bar";
-import Calendar from './Calendar'
+import Calendar from './Calendar';
+import AddCalendar from './AddCalendar';
+import DeleteCalendar from './DeleteCalendar';
 
 const useStyles = makeStyles(() => ({
     main: {
@@ -32,7 +34,6 @@ export default function TeamPage() {
     const [team, setTeam] = React.useState({});
     const token = window.localStorage.getItem('token');
     const [calendar, setCalendar] = React.useState([]);
-    // const calendar = features.filter(feature => feature.type === 'calendar');
 
     useEffect(() => {
         const requestOptions = {
@@ -90,14 +91,14 @@ export default function TeamPage() {
                                 <FeaturesList features={features} updateFeatures={setFeatures} teamId={teamId}/>
                             </Grid>
                             <Grid item className={classes.center}>
-                                <AddFeature btnName="Add Feature" type="feature" updateFeatures={setFeatures} features={features} teamId={teamId}/>
+                                <AddFeature type="feature" updateFeatures={setFeatures} features={features} teamId={teamId}/>
                             </Grid>
                         </Grid>
                     }
                 </Grid>
             </Grid>
             <Grid item className={`${classes.center} ${classes.shape}`}>
-                {calendar.length < 1 && <AddFeature btnName="Add Calendar" type="calendar" updateFeatures={setCalendar} features={calendar} teamId={teamId}/>}
+                {calendar.length < 1 && <AddCalendar type="calendar" updateFeatures={setCalendar} features={calendar} teamId={teamId}/>}
                 <Grid item className={classes.shape}>
                          {calendar.length > 0 ? <Calendar calendar={calendar} updateFeatures={setCalendar} teamId={teamId}/> : <h3>No calendars added for this team yet.</h3> }
 

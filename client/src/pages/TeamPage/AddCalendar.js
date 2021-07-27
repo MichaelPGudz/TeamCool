@@ -1,10 +1,10 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import {AddCircle, Link, Today} from "@material-ui/icons";
+import { Today} from "@material-ui/icons";
 import {Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField} from "@material-ui/core";
 
 
-export default function AddFeature({type, updateFeatures, features, teamId}) {
+export default function AddCalendar({btnName, type, updateFeatures, features, teamId}) {
 
     const [openDialog, setOpenDialog] = React.useState(false);
     const [name, setName] = React.useState();
@@ -62,16 +62,16 @@ export default function AddFeature({type, updateFeatures, features, teamId}) {
             <Button
                 variant="contained"
                 size={'large'}
-                endIcon={type === 'calendar' ? <Today/> : <Link/>}
+                endIcon={<Today/>}
                 onClick={handleAddBtnClick}
             >
-                Add Feature
+                Add Calendar
             </Button>
             <Dialog
                 open={openDialog}
                 onClose={handleClose}
                 aria-labelledby={"add-feature-form"}>
-                <DialogTitle id={"add-feature-form"}>Add Feature</DialogTitle>
+                <DialogTitle id={"add-feature-form"}>Add Calendar</DialogTitle>
                 <form onSubmit={handleSubmit}>
                     <DialogContent>
                         <Grid container spacing={2} direction={"column"}>
