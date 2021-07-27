@@ -117,5 +117,19 @@ namespace API.Controllers
         {
             return _userDao.SearchUserByName(name);
         }
+        
+        [HttpPost("{id}/logo")]
+        public async Task<ActionResult<User>> AddLogo(User userWithLogo, string id)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+
+            var user = await _userDao.GetById(id);
+
+            if (user.Value == null) return NotFound();
+
+            user.Value.Logo = userWithLogo.Logo;
+            await _userDao.Edit(user.Value);
+            return user;
+        }
     }
 }

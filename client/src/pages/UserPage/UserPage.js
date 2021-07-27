@@ -8,7 +8,9 @@ import UserSkills from "./UserSkills";
 import { useParams } from 'react-router-dom';
 import Avatar from "@material-ui/core/Avatar";
 import image from '../../static/images/avatar.jpg'
-import {UserContext} from "../../components/Store/Store";
+import { Image, Transformation } from "cloudinary-react";
+import { UserContext } from "../../components/Store/Store";
+import EditUserLogo from './EditUserLogo';
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -25,7 +27,7 @@ const UserPage = () => {
 
 
     const classes = useStyles();
-    var {id} = useParams();
+    var { id } = useParams();
     const [isLoading, setIsLoading] = useState(true);
     const [loadedUser, setLoadedUser] = useState([]);
     const [skills, setSkills] = useState([]);
@@ -41,7 +43,7 @@ const UserPage = () => {
                 setLoadedUser(data);
                 setSkills(data.mySkills);
             });
-    },[id]);
+    }, [id]);
 
 
     function createData(name, property) {
@@ -73,7 +75,13 @@ const UserPage = () => {
                 User Page
             </Typography>
 
-            <Avatar src={image} className={classes.avatarSize} />
+            {state.user.logo ?
+                <Image publicId={state.user.logo} className={classes.avatarSize}>
+                </Image> :
+                <Avatar src={image} className={classes.avatarSize} />
+            }
+
+            <EditUserLogo />
 
             <UserDataTable rows={rows} classes={classes} />
 
@@ -81,7 +89,7 @@ const UserPage = () => {
                 Skills
             </Typography>
 
-            <UserSkills loadedUser={loadedUser} skills={skills} setSkills = {setSkills} classes={classes} loggedUser={state.user} />
+            <UserSkills loadedUser={loadedUser} skills={skills} setSkills={setSkills} classes={classes} loggedUser={state.user} />
 
         </div >
     )

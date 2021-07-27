@@ -25,6 +25,14 @@ export const userReducer = (state, action) => {
                 ...state,
                 active: true,
             }
+        case 'editUserLogo':
+            return {
+                ...state,
+                user: {
+                    ...state.user, 
+                    logo: action.payload.logo
+                    }
+                }
         case 'editTeamName':
             return {
                 ...state,
@@ -52,25 +60,25 @@ export const userReducer = (state, action) => {
         case 'addPost':
             return {
                 ...state,
-                posts: ([...state.posts, ...action.payload.post]).sort((a,b) => {
+                posts: ([...state.posts, ...action.payload.post]).sort((a, b) => {
                     return b.postTime - a.postTime;
-                } )
+                })
                 ,
             }
                 ;
         case 'deleteTeamPosts':
             return {
                 ...state,
-                posts: state.posts.filter( (post) => {
+                posts: state.posts.filter((post) => {
                     return post.teamId !== action.payload.teamId;
-                } )
+                })
             }
                 ;
         case 'addTeam':
             console.log([...state.user.myTeams, ...action.payload])
             return {
                 ...state,
-                user: {...state.user, myTeams: [...state.user.myTeams, ...action.payload]}
+                user: { ...state.user, myTeams: [...state.user.myTeams, ...action.payload] }
             }
                 ;
         default:

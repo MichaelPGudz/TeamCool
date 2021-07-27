@@ -19,5 +19,6 @@ namespace API.Entities
         public string GlobalRole { get; set; }
         public ICollection<TeamMember> MyTeams { get; set; }
         public ICollection<Skill> MySkills { get; set; }
+        public string Logo { get; set; }
     }
 }
