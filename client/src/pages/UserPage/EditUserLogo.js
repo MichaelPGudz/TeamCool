@@ -46,7 +46,6 @@ export default function EditUserLogo() {
         })
             .then(resp => resp.json())
             .then(data => {
-                console.log(data);
                 addLogoOnServer(data.public_id);
                 setSending(false);
                 setLogo("");
@@ -68,7 +67,6 @@ export default function EditUserLogo() {
         fetch(`https://localhost:5001/api/user/${state.user.id}/logo`, requestOptions)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
                 dispatch({type: "editUserLogo", payload: {id: data.id, logo: data.logo}})
             })
             .catch(err => console.log(err))
