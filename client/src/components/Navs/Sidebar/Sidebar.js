@@ -165,7 +165,8 @@ function Sidebar({ addedClasses, openDrawer, menuClick }) {
                                 <ListItem button className={classes.nested}>
                                     <Skeleton width={240} height={48} animation={'wave'} />
                                 </ListItem> :
-                                ((state.globalRole === AdminRole && openDrawer) ?
+                                openDrawer ? 
+                                ((state.globalRole === AdminRole) ?
                                     <List>
                                         <ListItem button className={classes.nested}
                                             key={"roleManager"}
@@ -212,7 +213,7 @@ function Sidebar({ addedClasses, openDrawer, menuClick }) {
                                             <ListItemText primary={"Delete My Account"} />
                                         </ListItem>
                                         <DeleteMyAccountDialog setOpenDialog={setOpenDeleteMyAccount} openDialog={openDeleteMyAccount} />
-                                    </List>)
+                                    </List>) : null
                             }
                         </List>
                     </Collapse>
