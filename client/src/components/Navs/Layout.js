@@ -6,7 +6,7 @@ import {CssBaseline, useMediaQuery} from "@material-ui/core";
 import {UserContext} from "../Store/Store";
 import teamImg from "../../static/images/team3.png";
 
-const drawerWidth = 210;
+const drawerWidth = 250;
 
 const useStyles = makeStyles((theme) => ({
     root: {
