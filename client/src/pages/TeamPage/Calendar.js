@@ -4,13 +4,11 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemSecondaryAction,
-  ListItemText,
-  Paper,
 } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import { Schedule } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
-import DeleteFeatureBtn from './DeleteFeatureBtn';
+import DeleteCalendar from './DeleteCalendar';
 
 const useStyles = makeStyles(() => ({
   shape: {
@@ -23,7 +21,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function FeaturesList({ calendar, teamId, updateFeatures }) {
+export default function FeaturesList({ calendar, teamId, updateCalendar }) {
   const classes = useStyles();
 
   return (
@@ -42,12 +40,12 @@ export default function FeaturesList({ calendar, teamId, updateFeatures }) {
               <Schedule />
             </Avatar>
           </ListItemAvatar>
-            <iframe src={url} className={classes.calendar}></iframe>
+          <iframe src={url} className={classes.calendar}></iframe>
           <ListItemSecondaryAction>
-            <DeleteFeatureBtn
+            <DeleteCalendar
               teamId={teamId}
-              features = {calendar}
-              updateFeatures={updateFeatures}
+              features={calendar}
+              updateCalendar={updateCalendar}
               calendar={calendar}
               featureId={id}
             />

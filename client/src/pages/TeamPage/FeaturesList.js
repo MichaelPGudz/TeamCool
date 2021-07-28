@@ -30,34 +30,34 @@ export default function FeaturesList({ features, updateFeatures, teamId }) {
     <div>
       <Paper className={classes.shape}>
         <List>
-          {features
-            .map(({ id, name, url }) => (
-              <ListItem
-                button
-                key={id}
-                component="a"
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <ListItemAvatar>
-                  <Avatar>
-                    {name.toLowerCase() === 'github' && <GitHub /> }
-                    {name.toLowerCase() === 'google meet' && <People /> }
-                    {(name.toLowerCase() !== 'google meet' && name.toLowerCase() !== 'github') && <Link /> }
-                  </Avatar>
-                </ListItemAvatar>
-                  <ListItemText primary={name} />
-                <ListItemSecondaryAction>
-                  <DeleteFeatureBtn
-                    teamId={teamId}
-                    updateFeatures={updateFeatures}
-                    features={features}
-                    featureId={id}
-                  />
-                </ListItemSecondaryAction>
-              </ListItem>
-            ))}
+          {features.map(({ id, name, url }) => (
+            <ListItem
+              button
+              key={id}
+              component="a"
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <ListItemAvatar>
+                <Avatar>
+                  {name.toLowerCase() === 'github' && <GitHub />}
+                  {name.toLowerCase() === 'google meet' && <People />}
+                  {name.toLowerCase() !== 'google meet' &&
+                    name.toLowerCase() !== 'github' && <Link />}
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={name} />
+              <ListItemSecondaryAction>
+                <DeleteFeatureBtn
+                  teamId={teamId}
+                  updateFeatures={updateFeatures}
+                  features={features}
+                  featureId={id}
+                />
+              </ListItemSecondaryAction>
+            </ListItem>
+          ))}
         </List>
       </Paper>
     </div>
