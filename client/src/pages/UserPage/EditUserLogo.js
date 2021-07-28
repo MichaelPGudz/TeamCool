@@ -15,7 +15,7 @@ import {UserContext} from "../../components/Store/Store";
 import IconButton from "@material-ui/core/IconButton";
 
 
-export default function EditUserLogo() {
+export default function EditUserLogo({setLoadedUser}) {
 
     const [openDialog, setOpenDialog] = React.useState(false);
     const [state, dispatch] = React.useContext(UserContext);
@@ -67,6 +67,7 @@ export default function EditUserLogo() {
         fetch(`https://localhost:5001/api/user/${state.user.id}/logo`, requestOptions)
             .then(response => response.json())
             .then(data => {
+                setLoadedUser(data);
                 dispatch({type: "editUserLogo", payload: {id: data.id, logo: data.logo}})
             })
             .catch(err => console.log(err))

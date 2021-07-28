@@ -75,14 +75,13 @@ const UserPage = () => {
                 User Page
             </Typography>
 
-            {state.user.logo ?
-                <Image publicId={state.user.logo} className={classes.avatarSize}>
+            {loadedUser.logo ?
+                <Image publicId={loadedUser.logo} className={classes.avatarSize}>
                 </Image> :
                 <Avatar src={image} className={classes.avatarSize} />
             }
-
-            <EditUserLogo />
-
+            {loadedUser.id === state.user.id ? <EditUserLogo setLoadedUser={setLoadedUser}/> : null}
+            
             <UserDataTable rows={rows} classes={classes} />
 
             <Typography variant="h4">

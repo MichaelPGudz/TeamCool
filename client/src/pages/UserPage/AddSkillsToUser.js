@@ -24,10 +24,7 @@ export default function AddSkillsToUser({ loadedUser, userSkills, setUserSkills 
         setOpenDialog(false);
     };
 
-    const handleCloseAlert = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
+    const handleCloseAlert = (event) => {
         setOpenAlert(false);
     };
 

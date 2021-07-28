@@ -30,7 +30,7 @@ const UserSkills = ({ loadedUser, skills, setSkills, loggedUser }) => {
                         <React.Fragment key={id}>
                             <SkillUsersModal id={id} skillName={firstName} />
                             {(loadedUser.id === loggedUser.id || loggedUser.globalRole === adminRole) ?
-                                <DeleteSkillFromUserBtn setSkills={setSkills} skills={skills} skillId={id} userId={loadedUser.id} />
+                                <DeleteSkillFromUserBtn skillId={id} userId={loadedUser.id} />
                                 : null}
                         </React.Fragment>
                     )}

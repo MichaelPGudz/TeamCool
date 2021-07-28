@@ -8,6 +8,9 @@ export default function DeleteSkillBtn({setSkills, skills, skillId}) {
 
     const handleDelete = () => {
         deleteFromServer(skillId);
+        setSkills(skills.filter((skill => {
+            return skill.id != skillId 
+        })))
     }
 
     const deleteFromServer = (skillId) => {
