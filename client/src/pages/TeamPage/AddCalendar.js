@@ -1,13 +1,13 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import { Today} from "@material-ui/icons";
+import {Today} from "@material-ui/icons";
 import {Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField} from "@material-ui/core";
 
 
-export default function AddCalendar({btnName, type, updateFeatures, features, teamId}) {
+export default function AddCalendar({calendar, updateFeatures, teamId}) {
 
     const [openDialog, setOpenDialog] = React.useState(false);
-    const [name, setName] = React.useState();
+    // const [name, setName] = React.useState();
     const [url, setUrl] = React.useState();
 
 
@@ -21,13 +21,8 @@ export default function AddCalendar({btnName, type, updateFeatures, features, te
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (type === 'calendar') {
-            const newFeature = {name: type, url: getValidUrl(url), type: type};
-            addFeature(newFeature);
-        } else {
-            const newFeature = {name: name, url: getValidUrl(url), type: type};
-            addFeature(newFeature);
-        }
+        const newFeature = {name: "calendar", url: getValidUrl(url), type: "calendar"};
+        addFeature(newFeature);
     }
 
     const getValidUrl = (newUrl = "") => {
@@ -53,7 +48,7 @@ export default function AddCalendar({btnName, type, updateFeatures, features, te
         };
         fetch(`https://localhost:5001/api/team/${teamId}/addFeature`, requestOptions)
             .then(response => response.json())
-            .then(data => updateFeatures([...features, data]))
+            .then(data => updateFeatures([...calendar, data]))
     } 
 
 
@@ -75,14 +70,6 @@ export default function AddCalendar({btnName, type, updateFeatures, features, te
                 <form onSubmit={handleSubmit}>
                     <DialogContent>
                         <Grid container spacing={2} direction={"column"}>
-                        {type !== 'calendar' && <Grid item>
-                                <TextField
-                                    id={'name'}
-                                    label={'Name'}
-                                    onChange={e => setName(e.target.value)}
-                                    fullWidth
-                                    variant={'outlined'}/>
-                            </Grid>}
                             <Grid item>
                                 <TextField
                                     id={'url'}
@@ -94,6 +81,12 @@ export default function AddCalendar({btnName, type, updateFeatures, features, te
                         </Grid>
                     </DialogContent>
                     <DialogActions>
+                        <Button onClick={handleClose}
+                                variant="contained"
+                                type={'button'}
+                                size={'large'}>
+                            Cancel
+                        </Button>
                         <Button onClick={handleClose}
                                 variant="contained"
                                 type={'submit'}

@@ -91,14 +91,14 @@ export default function TeamPage() {
                                 <FeaturesList features={features} updateFeatures={setFeatures} teamId={teamId}/>
                             </Grid>
                             <Grid item className={classes.center}>
-                                <AddFeature type="feature" updateFeatures={setFeatures} features={features} teamId={teamId}/>
+                                <AddFeature updateFeatures={setFeatures} features={features} teamId={teamId}/>
                             </Grid>
                         </Grid>
                     }
                 </Grid>
             </Grid>
             <Grid item className={`${classes.center} ${classes.shape}`}>
-                {calendar.length < 1 && <AddCalendar type="calendar" updateFeatures={setCalendar} features={calendar} teamId={teamId}/>}
+                {calendar.length < 1 && <AddCalendar calendar={calendar} updateFeatures={setCalendar}  teamId={teamId}/>}
                 <Grid item className={classes.shape}>
                          {calendar.length > 0 ? <Calendar calendar={calendar} updateFeatures={setCalendar} teamId={teamId}/> : <h3>No calendars added for this team yet.</h3> }
 
