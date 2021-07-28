@@ -20,7 +20,10 @@ export default function DeleteTeam({team}) {
     const deleteTeam = () => {
         const requestOptions = {
             method: "DELETE",
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + window.localStorage.getItem('token')
+            },
             body: null
         };
         fetch(`https://localhost:5001/api/team/${team.id}`, requestOptions)

@@ -1,16 +1,26 @@
-import Navbar from './Navbar/Navbar';
 import classes from './Layout.module.css';
 import Sidebar from "./Sidebar/Sidebar";
 import {makeStyles, ThemeProvider, createMuiTheme} from "@material-ui/core/styles";
 import React from "react";
 import {CssBaseline, useMediaQuery} from "@material-ui/core";
-import {UserContext} from "../../components/Store/Store";
+import {UserContext} from "../Store/Store";
+import teamImg from "../../static/images/team3.png";
 
-const drawerWidth = 240;
+const drawerWidth = 250;
 
 const useStyles = makeStyles((theme) => ({
-    root:{
+    root: {
         display: "flex",
+        height: "100vh",
+    },
+    image: {
+        backgroundImage: `url(${teamImg})`,
+        backgroundSize: "35em",
+        backgroundPosition: "95% 95%",
+        backgroundRepeat: "no-repeat",
+        position: "relative",
+        overflowX: "hidden",
+        overflowY: "hidden",
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
@@ -51,15 +61,15 @@ const useStyles = makeStyles((theme) => ({
             duration: theme.transitions.duration.leavingScreen,
         }),
         overflowX: 'hidden',
-        width: theme.spacing(7) + 1,
+        width: theme.spacing(6) + 1,
         [theme.breakpoints.up('sm')]: {
-            width: theme.spacing(9) + 1,
+            width: theme.spacing(8) + 1,
         },
     },
     toolbar: {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
         padding: theme.spacing(0, 1),
         // necessary for content to be below app bar
         ...theme.mixins.toolbar,
@@ -75,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Layout(props) {
     const addedClasses = useStyles();
-    const [openDrawer, setOpenDrawer] = React.useState(false);
+    const [openDrawer, setOpenDrawer] = React.useState(true);
     const [state, dispatch] = React.useContext(UserContext);
     var id = state.user?.id ?? null;
 
@@ -95,12 +105,11 @@ function Layout(props) {
     );
 
     return (
-        <div className={addedClasses.root}>
+        <div className={`${addedClasses.root} ${addedClasses.image} `}>
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
-            <Navbar addedClasses={addedClasses} menuClick={handleMenuClick} openDrawer={openDrawer} id={id}/>
-            <Sidebar addedClasses={addedClasses} menuClick={handleMenuClick} openDrawer={openDrawer} userId={id}/>
-            <main className={classes.main}>{props.children}</main>
+                <Sidebar addedClasses={addedClasses} menuClick={handleMenuClick} openDrawer={openDrawer} userId={id}/>
+                <main className={`${classes.main}`}>{props.children}</main>
             </ThemeProvider>
         </div>
     );

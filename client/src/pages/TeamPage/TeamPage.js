@@ -76,6 +76,7 @@ export default function TeamPage() {
               members={teamMembers}
               childTeams={childTeams}
               setChildTeams={setChildTeams}
+              team={team}
             />
           )}
         </Grid>

@@ -1,17 +1,37 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import SkillUsersModal from "./SkillUsersModal";
+import DeleteSkillFromUserBtn from './DeleteSkillFromUserBtn';
+import AddSkillsToUser from './AddSkillsToUser';
 
 
-const UserSkills = (props) => {
+const UserSkills = ({ loadedUser, skills, setSkills, loggedUser }) => {
+
+    var adminRole = "Admin"
+
+    useEffect(() => {
+        fetch(`https://localhost:5001/api/user/${loadedUser.id}/skills`)
+            .then(reponse => reponse.json())
+            .then(data => {
+                setSkills(data);
+            });
+    },[skills]);
+    
     return (
         <List>
-            <React.Fragment key={props.loadedUser.id}>
+            <React.Fragment key={loadedUser.id}>
+                {(loadedUser.id === loggedUser.id || loggedUser.globalRole === adminRole) ?
+                <AddSkillsToUser loadedUser={loadedUser} userSkills={skills} setUserSkills={setSkills}/>:
+                null }
                 <ListItem>
-                    {props.loadedSkills.map(({ id, firstName }) =>
+                    {skills.map(({ id, firstName }) =>
                         <React.Fragment key={id}>
                             <SkillUsersModal id={id} skillName={firstName} />
+                            {(loadedUser.id === loggedUser.id || loggedUser.globalRole === adminRole) ?
+                                <DeleteSkillFromUserBtn setSkills={setSkills} skills={skills} skillId={id} userId={loadedUser.id} />
+                                : null}
                         </React.Fragment>
                     )}
                 </ListItem>

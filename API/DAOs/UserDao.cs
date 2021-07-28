@@ -38,6 +38,8 @@ namespace API.DAOs
 
         public void Remove(User toRemove)
         {
+            _dataContext.Posts.RemoveRange(_dataContext.Posts.Where(x => x.Author == toRemove));
+            _dataContext.TeamMembers.RemoveRange(_dataContext.TeamMembers.Where(x => x.User == toRemove));
             _dataContext.Users.Remove(toRemove);
             _dataContext.SaveChanges();
         }
@@ -52,9 +54,9 @@ namespace API.DAOs
             return _dataContext.Users.ToList();
         }
 
-        public IQueryable<ICollection<Skill>> GetUserSkills(string id)
+        public IQueryable<Skill> GetUserSkills(string id)
         {
-            return _dataContext.Users.Where(user => user.Id == id).Select(c => c.MySkills);
+            return _dataContext.Users.Where(user => user.Id == id).SelectMany(c => c.MySkills);
         }
 
 
@@ -82,6 +84,12 @@ namespace API.DAOs
                 .Where(x => x.Id == id)
                 .SelectMany(x => x.MyTeams).Include(x => x.Team);
 
+        }
+
+        public ICollection<User> SearchUserByName(string name)
+        {
+            return _dataContext.Users
+                .Where(x => x.FirstName.Contains(name) || x.LastName.Contains(name)).ToList();
         }
     }
 }

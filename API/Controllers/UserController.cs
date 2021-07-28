@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.DAOs.Interfaces;
 using API.Entities;
+using FizzWare.NBuilder.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Query;
+using Newtonsoft.Json.Serialization;
 
 namespace API.Controllers
 {
@@ -61,17 +63,22 @@ namespace API.Controllers
         public async Task<ActionResult<User>> GetUserById(string id) => await _userDao.GetById(id);
         
         [HttpGet("{id}/skills")]
-        public IQueryable<ICollection<Skill>> GetSkillsForUser(string id) => _userDao.GetUserSkills(id);
+        public IQueryable<Skill> GetSkillsForUser(string id) => _userDao.GetUserSkills(id);
 
         [HttpPost("{userId}/skill/{skillId}")]
-        public IActionResult AddSkillForUser(string userId, int skillId)
+        public async Task<IActionResult> AddSkillForUser(string userId, int skillId)
         {
-            var skill = _skillDao.GetById(skillId);
-            if (skill.Result.Value == null) return BadRequest();
+            var skill = await _skillDao.GetById(skillId);
+            var user = await _userDao.GetById(userId);
+            if (skill.Value == null) return BadRequest();
+            if (skill.Value.Users.Any(x => x.Id == userId))
+            {
+                return BadRequest("This user has that skill");
+            }
             try
             {
-                _userDao.AddUserSkill(userId, skill.Result.Value);
-                return Ok();
+                _userDao.AddUserSkill(userId, skill.Value);
+                return Ok(skill.Value);
             }
             catch (Exception)
             {
@@ -101,5 +108,28 @@ namespace API.Controllers
         
         [HttpGet("{id}/posts")]
         public IOrderedQueryable<Post> GetPostsForUser(string id) => _teamMemberDao.GetPostsForTeamMember(id);
+
+        [HttpGet("~/api/users")]
+        public ICollection<User> GetAllUsers() => _userDao.GetAll();
+
+        [HttpPost("search")]
+        public ICollection<User> SearchUsers([FromBody]string name)
+        {
+            return _userDao.SearchUserByName(name);
+        }
+        
+        [HttpPost("{id}/logo")]
+        public async Task<ActionResult<User>> AddLogo(User userWithLogo, string id)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+
+            var user = await _userDao.GetById(id);
+
+            if (user.Value == null) return NotFound();
+
+            user.Value.Logo = userWithLogo.Logo;
+            await _userDao.Edit(user.Value);
+            return user;
+        }
     }
 }

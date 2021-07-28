@@ -10,7 +10,16 @@ export const userReducer = (state, action) => {
                 ...state,
                 user: action.payload,
                 active: true,
-                logged: true
+                logged: true,
+                globalRole: action.payload.globalRole
+            }
+        case 'DELETE_USER':
+            return {
+                ...state,
+                user: null,
+                active: false,
+                logged: false,
+                globalRole: null
             }
         case 'LOGOUT':
             return {
@@ -23,6 +32,14 @@ export const userReducer = (state, action) => {
             return {
                 ...state,
                 active: true,
+            }
+        case 'editUserLogo':
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    logo: action.payload.logo
+                }
             }
         case 'editTeamName':
             return {
@@ -51,18 +68,25 @@ export const userReducer = (state, action) => {
         case 'addPost':
             return {
                 ...state,
-                posts: ([...state.posts, ...action.payload.post]).sort((a,b) => {
+                posts: ([...state.posts, ...action.payload.post]).sort((a, b) => {
                     return b.postTime - a.postTime;
-                } )
+                })
                 ,
             }
                 ;
         case 'deleteTeamPosts':
             return {
                 ...state,
-                posts: state.posts.filter( (post) => {
+                posts: state.posts.filter((post) => {
                     return post.teamId !== action.payload.teamId;
-                } )
+                })
+            }
+                ;
+        case 'addTeam':
+            console.log([...state.user.myTeams, ...action.payload])
+            return {
+                ...state,
+                user: { ...state.user, myTeams: [...state.user.myTeams, ...action.payload] }
             }
                 ;
         default:

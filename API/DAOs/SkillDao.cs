@@ -6,6 +6,7 @@ using API.Data;
 using API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace API.DAOs
 {
@@ -48,5 +49,11 @@ namespace API.DAOs
                 {
                     return _dataContext.Skills.Where(skill => skill.Id == id).SelectMany(x => x.Users);
                 }
+
+        public ICollection<Skill> SearchSkillByName(string name)
+        {
+            return _dataContext.Skills
+                .Where(x => x.FirstName.Contains(name)).ToList();
+        }
     }
 }

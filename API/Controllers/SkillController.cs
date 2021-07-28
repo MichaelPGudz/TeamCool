@@ -18,14 +18,14 @@ namespace API.Controllers
             _skillDao = skillDao;
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Skill>> AddNewSkill(Skill skill)
+        [HttpPost("add")]
+        public async Task<ActionResult> AddNewSkill(Skill skill)
         {
             if (!ModelState.IsValid) return BadRequest();
             try
             {
                 await _skillDao.Add(skill);
-                return Ok();
+                return Ok(skill);
             }
             catch (Exception)
             {
@@ -84,6 +84,18 @@ namespace API.Controllers
         public IQueryable<User> GetUsersForSkills(int id)
         {
             return _skillDao.GetUsersForSkill(id);
+        }
+
+        [HttpGet("~/api/skills")]
+        public ICollection<Skill> GetAll()
+        {
+            return _skillDao.GetAll();
+        }
+        
+        [HttpPost("search")]
+        public ICollection<Skill> SearchSkills([FromBody]string name)
+        {
+            return _skillDao.SearchSkillByName(name);
         }
     }
 }

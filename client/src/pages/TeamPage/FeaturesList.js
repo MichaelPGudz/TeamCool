@@ -14,7 +14,7 @@ import DeleteFeatureBtn from './DeleteFeatureBtn';
 
 const useStyles = makeStyles(() => ({
   shape: {
-    maxHeight: '75vh',
+    maxHeight: '80vh',
     overflow: 'auto',
   },
   calendar: {

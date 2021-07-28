@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Menu, MenuList} from "@material-ui/core";
-import { Settings} from "@material-ui/icons";
+import {Settings} from "@material-ui/icons";
 import EditTeamName from "./EditTeamName";
 import DeleteTeam from "./DeleteTeam";
 import EditTeamLogo from "./EditTeamLogo";
@@ -24,7 +24,8 @@ export default function SettingsMenu({team, setTeam}) {
                 aria-haspopup="true"
                 size={"large"}
                 startIcon={<Settings/>}
-                onClick={handleClick}>
+                onClick={handleClick}
+                >
                 Settings
             </Button>
             <Menu
@@ -38,7 +39,7 @@ export default function SettingsMenu({team, setTeam}) {
                 transformOrigin={{vertical: "top", horizontal: "center"}}
             >
                 <MenuList>
-                <EditTeamName team={team} setTeam={setTeam}/>
+                    <EditTeamName team={team} setTeam={setTeam}/>
                 </MenuList>
                 <MenuList>
                     <EditTeamLogo team={team} setTeam={setTeam}/>

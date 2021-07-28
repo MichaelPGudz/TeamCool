@@ -1,9 +1,10 @@
 import React from "react";
-import {Card, CardActions, CardContent, CardHeader, Switch, TextField} from "@material-ui/core";
+import { Card, CardActions, CardContent, CardHeader, Switch, TextField } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
+import { Image, Transformation } from "cloudinary-react";
 import Button from "@material-ui/core/Button";
-import {UserContext} from "../Store/Store";
+import { UserContext } from "../Store/Store";
 
 
 const useStyles = makeStyles(() => ({
@@ -19,7 +20,7 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-export default function AddPost({wallId, posts, setPosts}) {
+export default function AddPost({ wallId, posts, setPosts }) {
     const classes = useStyles();
     const token = window.localStorage.getItem('token');
     const [state, dispatch] = React.useContext(UserContext);
@@ -48,7 +49,7 @@ export default function AddPost({wallId, posts, setPosts}) {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token
             },
-            body: JSON.stringify({postContent: postContent, author: user, postStatus: postStatus ? 2 : 0})
+            body: JSON.stringify({ postContent: postContent, author: user, postStatus: postStatus ? 2 : 0 })
         };
         fetch(`https://localhost:5001/api/wall/${wallId}`, requestOptions)
             .then(response => response.json())
@@ -73,7 +74,10 @@ export default function AddPost({wallId, posts, setPosts}) {
                 <CardHeader
                     avatar={
                         <Avatar>
-                            {state.user.firstName[0]}
+                            {state.user.logo ?
+                                <Image publicId={state.user.logo}>
+                                    <Transformation width="45" height="45" crop="fill" />
+                                </Image> : state.user.firstName[0]}
                         </Avatar>
                     }
                     title={`${state.user.firstName} ${state.user.lastName}`}
@@ -87,10 +91,10 @@ export default function AddPost({wallId, posts, setPosts}) {
                     className={classes.cardHeader}
                     action={
                         <Switch
-                        onChange={handlePostStatusSwitch}
-                        name="postStatus"
-                        checked={postStatus}
-                    />}
+                            onChange={handlePostStatusSwitch}
+                            name="postStatus"
+                            checked={postStatus}
+                        />}
                 />
                 <form onSubmit={handleSubmit}>
                     <CardContent>
@@ -105,8 +109,8 @@ export default function AddPost({wallId, posts, setPosts}) {
                     </CardContent>
                     <CardActions>
                         <Button size="medium"
-                                type={'submit'}
-                                fullWidth>
+                            type={'submit'}
+                            fullWidth>
                             Post
                         </Button>
                     </CardActions>

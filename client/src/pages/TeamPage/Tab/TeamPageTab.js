@@ -6,16 +6,17 @@ import TeamMembers from "./TeamMembers";
 import ChildTeams from "./ChildTeams";
 import SwipeableViews from "react-swipeable-views";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     shape: {
-        maxHeight: "75vh",
+        maxHeight: "80vh",
         overflow: "auto",
         overflowX: "hidden",
+        overflowY: "hidden",
     },
 
 }))
 
-export default function TeamPageTab({members, setMembers, childTeams, setChildTeams}) {
+export default function TeamPageTab({members, setMembers, childTeams, setChildTeams, team}) {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
@@ -23,7 +24,7 @@ export default function TeamPageTab({members, setMembers, childTeams, setChildTe
         setValue(newValue);
     };
     const handleChangeIndex = (index) => {
-        setValue(index)
+        setValue(index);
     }
     return (
         <div>
@@ -45,7 +46,7 @@ export default function TeamPageTab({members, setMembers, childTeams, setChildTe
                          aria-label="child-teams"/>
                 </Tabs>
                 <SwipeableViews onChangeIndex={handleChangeIndex} index={value}>
-                <TeamMembers index={0} members={members} setMembers={setMembers}/>
+                <TeamMembers index={0} members={members} setMembers={setMembers} team={team}/>
                 <ChildTeams index={1} childTeams={childTeams} setChildTeams={setChildTeams}/>
                 </SwipeableViews>
             </Paper>

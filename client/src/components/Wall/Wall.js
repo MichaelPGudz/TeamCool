@@ -10,7 +10,7 @@ import {UserContext} from "../Store/Store";
 
 const useStyles = makeStyles(() => ({
     shape: {
-        maxHeight: "75vh",
+        maxHeight: "80vh",
         height: '100%',
         overflow: "auto",
         overflowX: "hidden"

@@ -33,9 +33,6 @@ const Home = () => {
     if (state.active) {
         return (
             <div>
-                <Typography variant="h3">
-                    Welcome {state.user.firstName} {state.user.lastName}!
-                </Typography>
                 <Grid container
                       spacing={2}
                 >

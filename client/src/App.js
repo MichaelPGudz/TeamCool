@@ -6,6 +6,7 @@ import UserPage from './pages/UserPage/UserPage';
 import TeamPage from "./pages/TeamPage/TeamPage";
 import Store from "./components/Store/Store";
 import {CloudinaryContext} from "cloudinary-react";
+import LoginPage from "./pages/LoginPage/LoginPage";
 
 function App() {
     return (
@@ -13,30 +14,33 @@ function App() {
             <Router>
                 <Store>
                     <CloudinaryContext cloudName="teamcool" secure="true" upload_preset="teamlogo">
-                        <Layout>
                             <Switch>
-                                <Route path="/" exact>
-                                    <Home/>
+                                <Route path="/login" exact>
+                                    <LoginPage/>
                                 </Route>
-                                <Route path="/about" exact>
-                                    <Home/>
-                                </Route>
-                                <Route path="/contact" exact>
+                                <Layout>
+                                    <Route path="/" exact>
                                         <Home/>
-                                </Route>
-                                <Route path="/user/:id" exact>
-                                    <UserPage/>
-                                </Route>
-                                <Route path="/team/:teamId" exact>
-                                    <TeamPage/>
-                                </Route>
+                                    </Route>
+                                    <Route path="/about" exact>
+                                        <Home/>
+                                    </Route>
+                                    <Route path="/contact" exact>
+                                        <Home/>
+                                    </Route>
+                                    <Route path="/user/:id" exact>
+                                        <UserPage/>
+                                    </Route>
+                                    <Route path="/team/:teamId" exact>
+                                        <TeamPage/>
+                                    </Route>
+                                </Layout>
                             </Switch>
-                        </Layout>
                     </CloudinaryContext>
                 </Store>
             </Router>
         </div>
-    );
+);
 }
 
 export default App;
