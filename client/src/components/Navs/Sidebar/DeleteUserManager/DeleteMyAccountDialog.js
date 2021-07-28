@@ -25,7 +25,7 @@ export default function DeleteMyAccountDialog({ openDialog, setOpenDialog }) {
         deleteFromServer(userId);
         handleClose();
         window.localStorage.clear();
-        window.location.reload();
+        history.push('/');
     }
 
     const deleteFromServer = (userId) => {
@@ -35,11 +35,11 @@ export default function DeleteMyAccountDialog({ openDialog, setOpenDialog }) {
                 'Content-type': 'application/json',
                 'Authorization': 'Bearer ' + window.localStorage.getItem('token')
             },
-
             body: null
         };
         fetch(`https://localhost:5001/api/user/${userId}`, requestOptions)
             .then(response => response)
+            .then(dispatch({type: 'DELETE_USER'}))
     }
 
     return (

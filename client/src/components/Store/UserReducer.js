@@ -13,6 +13,14 @@ export const userReducer = (state, action) => {
                 logged: true,
                 globalRole: action.payload.globalRole
             }
+        case 'DELETE_USER':
+            return {
+                ...state,
+                user: null,
+                active: false,
+                logged: false,
+                globalRole: null
+            }
         case 'LOGOUT':
             return {
                 ...state,
@@ -29,10 +37,10 @@ export const userReducer = (state, action) => {
             return {
                 ...state,
                 user: {
-                    ...state.user, 
+                    ...state.user,
                     logo: action.payload.logo
-                    }
                 }
+            }
         case 'editTeamName':
             return {
                 ...state,
