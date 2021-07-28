@@ -17,7 +17,8 @@ const Store = ({children}) => {
             .then(response => response.json())
             .then(data => {
                 dispatch({type: 'SET_USER', payload: data});
-            });
+            })
+            .catch((error) => console.log(error));
     }, [userId])
 
     useEffect(() => {
