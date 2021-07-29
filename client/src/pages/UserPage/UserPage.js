@@ -10,7 +10,7 @@ import Avatar from "@material-ui/core/Avatar";
 import image from '../../static/images/avatar.jpg'
 import { Image, Transformation } from "cloudinary-react";
 import { UserContext } from "../../components/Store/Store";
-import EditUserLogo from './EditUserLogo';
+import UserPageBar from './UserPageBar';
 
 const useStyles = makeStyles((theme) => ({
     table: {
@@ -71,16 +71,13 @@ const UserPage = () => {
     return (
 
         <div>
-            <Typography variant="h3">
-                User Page
-            </Typography>
+            <UserPageBar loadedUser = {loadedUser} loggedUser = {state.user} setLoadedUser = {setLoadedUser}/>
 
             {loadedUser.logo ?
                 <Image publicId={loadedUser.logo} className={classes.avatarSize}>
                 </Image> :
                 <Avatar src={image} className={classes.avatarSize} />
             }
-            {loadedUser.id === state.user.id ? <EditUserLogo setLoadedUser={setLoadedUser}/> : null}
             
             <UserDataTable rows={rows} classes={classes} />
 
