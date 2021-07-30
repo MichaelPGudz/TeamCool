@@ -3,6 +3,7 @@ import Button from "@material-ui/core/Button";
 import {Grid, Paper, Snackbar, TextField} from "@material-ui/core";
 import {UserContext} from "../Store/Store";
 import Alert from '@material-ui/lab/Alert';
+import {useHistory} from "react-router-dom";
 
 
 export default function Login({setSuccessfulRegister, successfulRegister}) {
@@ -11,7 +12,7 @@ export default function Login({setSuccessfulRegister, successfulRegister}) {
     const [password, setPassword] = React.useState();
     const [state, dispatch] = React.useContext(UserContext);
     const [wrongLogin, setWrongLogin] = React.useState(false);
-
+    const history = useHistory();
 
     const handleWrongLogin = () => {
         setWrongLogin(true)
@@ -48,6 +49,7 @@ export default function Login({setSuccessfulRegister, successfulRegister}) {
                 window.localStorage.setItem('token', data.token);
                 window.localStorage.setItem('id', data.id);
                 dispatch({type: 'SET_ROLE', payload: data.globalRole});
+                history.push('');
             })
             .catch((error) => {
                 console.log(error);

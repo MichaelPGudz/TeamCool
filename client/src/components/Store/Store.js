@@ -12,6 +12,7 @@ const Store = ({children}) => {
     const [state, dispatch] = useReducer(userReducer, initialUserState);
     const userId = window.localStorage.getItem('id');
     const history = useHistory();
+
     useEffect(() => {
         fetch(`https://localhost:5001/api/user/${userId}`)
             .then(response => response.json())
@@ -22,7 +23,9 @@ const Store = ({children}) => {
     }, [userId])
 
     useEffect(() => {
-        state.logged ? history.push('') : history.push('/login');
+            if (!userId){
+                history.push('/login')
+            }
     }, [state.logged])
 
 

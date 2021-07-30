@@ -19,8 +19,7 @@ export default function Logout() {
         window.localStorage.removeItem('id');
         window.localStorage.clear();
         dispatch({type: 'LOGOUT'});
-        history.push('/');
-        window.location.reload();
+        history.push('/login');
     }
 
 
