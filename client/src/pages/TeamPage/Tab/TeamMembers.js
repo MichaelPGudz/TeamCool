@@ -4,7 +4,7 @@ import Avatar from "@material-ui/core/Avatar";
 import { Person } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
-import AddMember from "./AddMember";
+import AddMember from "../AddMember/AddMember";
 import { Image, Transformation } from "cloudinary-react";
 
 const useStyles = makeStyles(() => ({
