@@ -13,7 +13,8 @@ import {
     ListItemIcon, ListItemText,
     TextField
 } from "@material-ui/core";
-import NewMemberList from "./NewMemberList";
+import PotentialMembersList from "./PotentialMembersList";
+import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles(() => ({
     shape: {
@@ -24,6 +25,11 @@ const useStyles = makeStyles(() => ({
         maxWidth: '65%',
         maxHeight: '85%',
         height: '100%'
+    },
+    gridChildren: {
+        height: '100%',
+        maxHeight: '100%',
+        overflow: "auto"
     }
 
 }))
@@ -33,6 +39,7 @@ export default function AddMember({team, setTeamMembers}) {
     const [openDialog, setOpenDialog] = React.useState(false);
     const [users, setUsers] = React.useState([]);
     const [newMembers, setNewMembers] = React.useState([]);
+    const [addMember, setAddMember] = React.useState(false);
 
 
     const handleSearch = (event) => {
@@ -47,7 +54,7 @@ export default function AddMember({team, setTeamMembers}) {
         fetch(`https://localhost:5001/api/user/search`, requestOptions)
             .then(response => response.json())
             .then(data => {
-                setUsers(data);
+                handleSetUser(data);
             })
     }
 
@@ -57,7 +64,24 @@ export default function AddMember({team, setTeamMembers}) {
 
     const handleClose = () => {
         setOpenDialog(false);
+        setAddMember(false);
+        setNewMembers([]);
     };
+
+
+    // check if searched user is already in potential members, if true -> doesn't show in search column
+    const handleSetUser = (users) => {
+        setUsers(users.filter((user) => {
+            return !newMembers.some((member) => member.id === user.id);
+        }))
+    }
+
+    const handleUserClick = (addedUser) => {
+        setNewMembers([...newMembers, addedUser]);
+        setUsers(users.filter((user) => {
+            return user !== addedUser;
+        }))
+    }
 
     return (
         <div>
@@ -74,8 +98,8 @@ export default function AddMember({team, setTeamMembers}) {
                 onClose={handleClose}
                 aria-labelledby={"addMember"}
                 classes={{paper: classes.dialogSize}}>
-                <Grid container>
-                    <Grid item xs={4}>
+                <Grid container className={classes.gridChildren}>
+                    <Grid item xs={3} className={classes.gridChildren}>
                         <DialogTitle id={"addMember"}>Search members</DialogTitle>
                         <DialogContent>
                             <Grid container spacing={2} direction={"column"}>
@@ -101,7 +125,9 @@ export default function AddMember({team, setTeamMembers}) {
                                             :
                                             users.map((user) => (
                                                 <ListItem button key={user.id}
-                                                onClick={() => {setNewMembers([...newMembers, user])}}>
+                                                          onClick={() => {
+                                                              handleUserClick(user)
+                                                          }}>
                                                     <ListItemIcon>
                                                         <Avatar/>
                                                     </ListItemIcon>
@@ -114,9 +140,18 @@ export default function AddMember({team, setTeamMembers}) {
                                 </Grid>
                             </Grid>
                         </DialogContent>
+
                     </Grid>
-                    <Grid item xs={8}>
-                        <NewMemberList newMembers={newMembers}/>
+                    <Grid item xs={1}>
+                        <Divider orientation="vertical" flexItem className={classes.gridChildren}/>
+                    </Grid>
+                    <Grid item xs={8} className={classes.gridChildren}>
+                        <PotentialMembersList newMembers={newMembers}
+                                              addMember={addMember}
+                                              team={team}
+                                              setTeamMembers={setTeamMembers}
+                                              setAddMember={setAddMember}
+                                              setNewMembers={setNewMembers}/>
                     </Grid>
                 </Grid>
             </Dialog>

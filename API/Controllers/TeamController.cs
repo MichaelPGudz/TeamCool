@@ -101,7 +101,8 @@ namespace API.Controllers
             _teamDao.Remove(team.Value);
             return Ok();
         }
-
+        
+    // returns all team members
         [HttpPost("{teamId}/AddTeamMember/{userId}/{roleId}")]
         public async Task<IActionResult> AddTeamMember(int teamId, string userId, int roleId)
         {
@@ -110,7 +111,7 @@ namespace API.Controllers
             var team = await _teamDao.GetById(teamId);
             if (user.Value == null || role.Value == null || team.Value == null) return NotFound();
             if (team.Value.Members.Any(x => x.User.Id.Contains(userId)))
-                return BadRequest("User is already team member!");
+                return BadRequest($"{user.Value.FirstName} {user.Value.LastName} is already team member!");
 
             var teamMember = new TeamMember
             {
@@ -120,7 +121,7 @@ namespace API.Controllers
             }; 
             
             await _teamMemberDao.Add(teamMember);
-            return Ok(teamMember);
+            return Ok(team.Value.Members);
         }
 
         [HttpDelete("{teamId}/{teamMemberId}")]
