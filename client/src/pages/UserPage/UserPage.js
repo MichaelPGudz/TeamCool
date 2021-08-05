@@ -81,10 +81,6 @@ const UserPage = () => {
             
             <UserDataTable rows={rows} classes={classes} />
 
-            <Typography variant="h4">
-                Skills
-            </Typography>
-
             <UserSkills loadedUser={loadedUser} skills={skills} setSkills={setSkills} classes={classes} loggedUser={state.user} />
 
         </div >
