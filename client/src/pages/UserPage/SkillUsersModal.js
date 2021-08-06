@@ -96,7 +96,7 @@ export default function SimpleModal(props) {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <Button className={classes.margin} variant="contained" color="secondary" onClick={handleClose}>
+            <Button className={classes.margin} variant="contained" color="primary" onClick={handleClose}>
                 Close
             </Button>
         </div>
@@ -104,7 +104,7 @@ export default function SimpleModal(props) {
 
     return (
         <div  className={classes.margin}>
-            <Button variant="contained" color="secondary" onClick={handleOpen}>
+            <Button variant="contained" color="primary" onClick={handleOpen}>
                 {props.skillName}
             </Button>
             <Modal

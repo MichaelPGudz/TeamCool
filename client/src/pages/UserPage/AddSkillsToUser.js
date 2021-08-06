@@ -88,9 +88,10 @@ export default function AddSkillsToUser({ loadedUser, userSkills, setUserSkills 
     return (
         <div>
             <Button
-                variant="contained"
-                size={'large'}
-                endIcon={<AddCircle />}
+                aria-controls="add-skill"
+                aria-haspopup="true"
+                size={"large"}
+                startIcon={<AddCircle />}
                 onClick={handleOpen}
             >
                 Add Skills

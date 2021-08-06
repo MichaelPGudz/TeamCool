@@ -20,7 +20,7 @@ const UserSkills = ({ loadedUser, skills, setSkills, loggedUser }) => {
 
     return (
         <div>
-            <Paper>
+            <Paper elevation={3} style={{ marginTop: "1%", marginBottom: "1%", backgroundColor: "#696969", color: "white" }}>
                 <Grid container
                     spacing={1}
                     direction="row"
@@ -49,24 +49,27 @@ const UserSkills = ({ loadedUser, skills, setSkills, loggedUser }) => {
                 </Grid>
             </Paper>
 
-            <Grid container spacing={2}>
-
-
-                <React.Fragment key={loadedUser.id}>
-                    {skills.map(({ id, firstName }) =>
-                        <React.Fragment>
-                            <Grid item>
-                                <SkillUsersModal id={id} skillName={firstName} />
-                            </Grid>
-                            <Grid item>
-                                {(loadedUser.id === loggedUser.id || loggedUser.globalRole === adminRole) ?
-                                    <DeleteSkillFromUserBtn skillId={id} userId={loadedUser.id} />
-                                    : null}
-                            </Grid>
-                        </React.Fragment>
-                    )}
-                </React.Fragment>
-            </Grid>
+            <Paper>
+                <Grid container spacing={2}
+                    direction="row"
+                    justifyContent="center"
+                    alignItems="center">
+                    <React.Fragment key={loadedUser.id}>
+                        {skills.map(({ id, firstName }) =>
+                            <React.Fragment>
+                                <Grid item>
+                                    <SkillUsersModal id={id} skillName={firstName} />
+                                </Grid>
+                                <Grid item>
+                                    {(loadedUser.id === loggedUser.id || loggedUser.globalRole === adminRole) ?
+                                        <DeleteSkillFromUserBtn skillId={id} userId={loadedUser.id} />
+                                        : null}
+                                </Grid>
+                            </React.Fragment>
+                        )}
+                    </React.Fragment>
+                </Grid>
+            </Paper>
         </div>
     )
 }

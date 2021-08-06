@@ -9,7 +9,7 @@ export default function UserPageBar({loadedUser, loggedUser, setLoadedUser}) {
 
     return (
         <div>
-            <Paper>
+            <Paper style={{ marginTop: "1%", marginBottom: "1%", backgroundColor: "#696969", color: "white" }}>
                 <Grid container
                       spacing={1}
                       direction="row"
