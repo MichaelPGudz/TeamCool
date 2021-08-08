@@ -13,7 +13,7 @@ import IconButton from "@material-ui/core/IconButton";
 import {useSnackbar} from "notistack";
 
 
-export default function MemberRole({member, roles, addMember, team, setTeamMembers, newMembers, setNewMembers}) {
+export default function MemberRole({member, roles, addMember, team, setTeamMembers, newMembers, setNewMembers, setAddMember}) {
     const [role, setRole] = React.useState(roles[1].name);
     const { enqueueSnackbar } = useSnackbar();
 
@@ -49,6 +49,7 @@ export default function MemberRole({member, roles, addMember, team, setTeamMembe
                             enqueueSnackbar(`Error! ${result}`, {variant: "error"})
                         })
                 )
+            setAddMember(false);
         }
     }, [addMember])
 

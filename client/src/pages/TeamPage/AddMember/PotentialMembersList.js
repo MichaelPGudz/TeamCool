@@ -4,7 +4,14 @@ import {Button, List, ListItem, ListItemIcon, ListItemText} from "@material-ui/c
 import {PanTool} from "@material-ui/icons";
 
 
-export default function PotentialMembersList({newMembers, addMember, setAddMember, team, setTeamMembers, setNewMembers}) {
+export default function PotentialMembersList({
+                                                 newMembers,
+                                                 addMember,
+                                                 setAddMember,
+                                                 team,
+                                                 setTeamMembers,
+                                                 setNewMembers,
+                                             }) {
 
     const [roles, setRoles] = React.useState([]);
 
@@ -18,7 +25,6 @@ export default function PotentialMembersList({newMembers, addMember, setAddMembe
             .then(data => setRoles(data))
 
     }, [])
-
 
     return (
         <div>
@@ -40,7 +46,8 @@ export default function PotentialMembersList({newMembers, addMember, setAddMembe
                                     team={team}
                                     setTeamMembers={setTeamMembers}
                                     newMembers={newMembers}
-                        setNewMembers={setNewMembers}/>
+                                    setNewMembers={setNewMembers}
+                                    setAddMember={setAddMember}/>
                     ))}
             </List>
             {newMembers.length === 0 ?
@@ -49,7 +56,7 @@ export default function PotentialMembersList({newMembers, addMember, setAddMembe
                         fullWidth
                         disableElevation
                         onClick={() => {
-                            setAddMember(true)
+                            setAddMember(true);
                         }}>
                     Add new members
                 </Button>}

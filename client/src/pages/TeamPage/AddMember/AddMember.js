@@ -151,7 +151,8 @@ export default function AddMember({team, setTeamMembers}) {
                                               team={team}
                                               setTeamMembers={setTeamMembers}
                                               setAddMember={setAddMember}
-                                              setNewMembers={setNewMembers}/>
+                                              setNewMembers={setNewMembers}
+                                              />
                     </Grid>
                 </Grid>
             </Dialog>
