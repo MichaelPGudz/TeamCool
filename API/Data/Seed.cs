@@ -72,9 +72,13 @@ namespace API.Data
 
         public static ICollection<Role> GenerateRoles()
         {
-            return Builder<Role>.CreateListOfSize(roleAmount).All()
+            var roles = Builder<Role>.CreateListOfSize(roleAmount).All()
                 .With(role => role.Name = Faker.Name.Middle())
                 .Build();
+            
+            roles.Add(new Role{Id = roleAmount + 1, Name="Team Owner"});
+
+            return roles;
         }
 
         public static ICollection<Wall> GenerateWalls()

@@ -5,6 +5,7 @@ using API.DAOs.Interfaces;
 using API.Data;
 using API.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.DAOs
 {
@@ -19,6 +20,11 @@ namespace API.DAOs
         public async Task<ActionResult<Role>> GetById(int id)
         {
             return await _dataContext.Roles.FindAsync(id);
+        }
+
+        public async Task<ActionResult<Role>> GetByRoleName(string name)
+        {
+            return await _dataContext.Roles.FirstOrDefaultAsync(x => x.Name == name);
         }
 
         public async Task<int> Add(Role newOne)

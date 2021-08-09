@@ -25,6 +25,7 @@ namespace API.Controllers
         private readonly IRoleDao _roleDao;
         private readonly IFeatureDao _featureDao;
         private readonly UserManager<User> _userManager;
+        private readonly string teamOwnerName = "Team Owner";
 
         public TeamController(ITeamDao teamDao, IUserDao userDao, ITeamMemberDao teamMemberDao, IRoleDao roleDao,
             IFeatureDao featureDao, UserManager<User> userManager)
@@ -47,7 +48,7 @@ namespace API.Controllers
             
             var currentUserName = User.Identity?.Name;
             var user = await _userManager.FindByNameAsync(currentUserName);
-            var role =  await _roleDao.GetById(1);
+            var role = await _roleDao.GetByRoleName(teamOwnerName);
 
             var member = new TeamMember
             {
