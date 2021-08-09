@@ -7,7 +7,10 @@ import { UserContext } from "../../../components/Store/Store";
 
 
 export default function Bar({ team, setTeam, currentUser}) {
+
     const [state, dispatch] = React.useContext(UserContext);
+    var adminRole = "Admin";
+    var teamOwnerRole = "Team Owner";
     
     return (
         <div>
@@ -40,7 +43,7 @@ export default function Bar({ team, setTeam, currentUser}) {
                             </Grid>
                         </Grid>
                     </Grid>
-                    {(currentUser != null && currentUser.role.name == "Team Owner") ||  state.globalRole == "Admin" ?
+                    {(currentUser != null && currentUser.role.name == teamOwnerRole) ||  state.globalRole == adminRole ?
                         <Grid item>
                             <SettingsMenu team={team} setTeam={setTeam} />
                         </Grid> : null
