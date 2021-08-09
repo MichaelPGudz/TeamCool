@@ -61,16 +61,17 @@ export default function TeamPage() {
         setTeamMembers(data.members);
         setChildTeams(data.childTeams);
         setLoading(false);
-        setCurrentTeamMember(data.members.find(x => x.user.id === state.user.id))
+        if (state.active) { setCurrentTeamMember(data.members.find(x => x.user.id === state.user.id)) }
+
       });
-  }, [teamId, token]);
+  }, [teamId, token, state]);
 
 
   return (
     <div>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Bar team={team} setTeam={setTeam} currentUser = {currentTeamMember} />
+          <Bar team={team} setTeam={setTeam} currentUser={currentTeamMember} />
         </Grid>
         <Grid item xs={3} className={`${classes.center}`}>
           {loading ? (
