@@ -9,6 +9,7 @@ import TeamPageTab from './Tab/TeamPageTab';
 import Bar from './BarComponents/Bar';
 import Calendar from './Calendar';
 import AddCalendar from './AddCalendar';
+import { UserContext } from '../../components/Store/Store';
 import DeleteCalendar from './DeleteCalendar';
 
 const useStyles = makeStyles(() => ({
@@ -34,7 +35,9 @@ export default function TeamPage() {
   const [team, setTeam] = React.useState({});
   const token = window.localStorage.getItem('token');
   const [calendar, setCalendar] = React.useState([]);
+  const [currentTeamMember, setCurrentTeamMember] = React.useState();
   const calendarType = 'calendar';
+  const [state, dispatch] = React.useContext(UserContext);
 
   useEffect(() => {
     const requestOptions = {
@@ -58,14 +61,16 @@ export default function TeamPage() {
         setTeamMembers(data.members);
         setChildTeams(data.childTeams);
         setLoading(false);
+        setCurrentTeamMember(data.members.find(x => x.user.id === state.user.id))
       });
   }, [teamId, token]);
+
 
   return (
     <div>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Bar team={team} setTeam={setTeam} />
+          <Bar team={team} setTeam={setTeam} currentUser = {currentTeamMember} />
         </Grid>
         <Grid item xs={3} className={`${classes.center}`}>
           {loading ? (

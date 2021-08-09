@@ -52,7 +52,7 @@ const UserSkills = ({ loadedUser, skills, setSkills, loggedUser }) => {
             <Paper>
                 <Grid container spacing={2}
                     direction="row"
-                    justifyContent="center"
+                    justify="center"
                     alignItems="center">
                     <React.Fragment key={loadedUser.id}>
                         {skills.map(({ id, firstName }) =>
