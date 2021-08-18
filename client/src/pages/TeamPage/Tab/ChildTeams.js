@@ -5,7 +5,7 @@ import {Person} from "@material-ui/icons";
 import {makeStyles} from "@material-ui/core/styles";
 import {Link} from "react-router-dom";
 import {Image, Transformation} from "cloudinary-react";
-import AddChildTeam from "./AddChildTeam";
+import AddChildTeamDialog from "../ChildTeam/AddChildTeamDialog";
 
 
 const useStyles = makeStyles(() => ({
@@ -23,7 +23,7 @@ export default function ChildTeams({childTeams, setChildTeams}) {
     return (
         <div>
             <List className={classes.shape}>
-                <AddChildTeam/>
+                <AddChildTeamDialog/>
                 {childTeams.map(({id, name, logo}) => (
                     <ListItem button key={id} component={Link} to={`/team/${id}`}>
                         <ListItemAvatar>
