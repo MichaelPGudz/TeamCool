@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
 
 }))
 
-export default function TeamPageTab({members, setMembers, childTeams, setChildTeams, team}) {
+export default function TeamPageTab({members, setMembers, childTeams, setChildTeams, team, currentUser}) {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
@@ -46,7 +46,7 @@ export default function TeamPageTab({members, setMembers, childTeams, setChildTe
                          aria-label="child-teams"/>
                 </Tabs>
                 <SwipeableViews onChangeIndex={handleChangeIndex} index={value}>
-                <TeamMembers index={0} members={members} setMembers={setMembers} team={team}/>
+                <TeamMembers index={0} members={members} setMembers={setMembers} team={team} currentUser={currentUser}/>
                 <ChildTeams index={1} childTeams={childTeams} setChildTeams={setChildTeams}/>
                 </SwipeableViews>
             </Paper>

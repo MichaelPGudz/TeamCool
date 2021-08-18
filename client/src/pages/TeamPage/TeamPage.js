@@ -62,8 +62,7 @@ export default function TeamPage() {
         setChildTeams(data.childTeams);
         setLoading(false);
         if (state.active) { setCurrentTeamMember(data.members.find(x => x.user.id === state.user.id)) }
-
-      });
+      })
   }, [teamId, token, state]);
 
 
@@ -83,6 +82,7 @@ export default function TeamPage() {
               childTeams={childTeams}
               setChildTeams={setChildTeams}
               team={team}
+              currentUser = {currentTeamMember}
             />
           )}
         </Grid>
