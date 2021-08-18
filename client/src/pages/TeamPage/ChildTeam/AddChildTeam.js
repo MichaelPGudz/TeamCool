@@ -2,7 +2,7 @@ import React from "react";
 import {Grid, TextField} from "@material-ui/core";
 import AddMemberToChildTeam from "./AddMemberToChildTeam";
 
-export default function AddChildTeam() {
+export default function AddChildTeam({members}) {
     const [childTeamName, setChildTeamName] = React.useState("New Child Team Name");
 
 
@@ -19,7 +19,7 @@ export default function AddChildTeam() {
                     </TextField>
                 </Grid>
                 <Grid item>
-                    <AddMemberToChildTeam/>
+                    <AddMemberToChildTeam members={members}/>
                 </Grid>
             </Grid>
         </div>

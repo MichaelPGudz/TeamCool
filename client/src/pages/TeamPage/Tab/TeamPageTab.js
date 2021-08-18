@@ -39,15 +39,16 @@ export default function TeamPageTab({members, setMembers, childTeams, setChildTe
                     // scrollButtons={'auto'}
                 >
                     <Tab icon={<People/>}
-                         style={{minWidth:"50%"}}
+                         style={{minWidth: "50%"}}
                          aria-label="members"/>
                     <Tab icon={<AccountTree/>}
-                         style={{minWidth:"50%"}}
+                         style={{minWidth: "50%"}}
                          aria-label="child-teams"/>
                 </Tabs>
                 <SwipeableViews onChangeIndex={handleChangeIndex} index={value}>
-                <TeamMembers index={0} members={members} setMembers={setMembers} team={team} currentUser={currentUser}/>
-                <ChildTeams index={1} childTeams={childTeams} setChildTeams={setChildTeams}/>
+                    <TeamMembers index={0} members={members} setMembers={setMembers} team={team}
+                                 currentUser={currentUser}/>
+                    <ChildTeams index={1} childTeams={childTeams} setChildTeams={setChildTeams} members={members}/>
                 </SwipeableViews>
             </Paper>
         </div>

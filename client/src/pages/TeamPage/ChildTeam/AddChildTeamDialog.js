@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
     }
 }))
 
-export default function AddChildTeamDialog() {
+export default function AddChildTeamDialog({members}) {
     const classes = useStyles();
     const [openDialog, setOpenDialog] = React.useState(false);
     const [nbOfNewChildTeam, setNbOfNewChildTeam] = React.useState([{id: 1, ready: false}]);
@@ -64,9 +64,9 @@ export default function AddChildTeamDialog() {
                 <DialogContent>
                     <Grid container className={classes.gridChildren} spacing={1} direction={"row"}>
                         {nbOfNewChildTeam.map(() => (
-                            <React.Fragment>
+                            <React.Fragment key={'addNewChildTeams'}>
                                 <Grid item className={classes.gridChildren} xs>
-                                    <AddChildTeam/>
+                                    <AddChildTeam members={members}/>
                                 </Grid>
                                 <Grid item>
                                     <Divider orientation="vertical" flexItem className={classes.gridChildren}/>
@@ -78,7 +78,6 @@ export default function AddChildTeamDialog() {
                                 <Grid
                                     container
                                     direction="row"
-                                    justifyContent="center"
                                     alignItems="center"
                                     className={classes.gridChildren}
                                 >
