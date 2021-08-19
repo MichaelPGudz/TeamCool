@@ -63,8 +63,8 @@ export default function AddChildTeamDialog({members}) {
                 </DialogTitle>
                 <DialogContent>
                     <Grid container className={classes.gridChildren} spacing={1} direction={"row"}>
-                        {nbOfNewChildTeam.map(() => (
-                            <React.Fragment key={'addNewChildTeams'}>
+                        {nbOfNewChildTeam.map((childTeam) => (
+                            <React.Fragment key={'addNewChildTeams' + childTeam.id}>
                                 <Grid item className={classes.gridChildren} xs>
                                     <AddChildTeam members={members}/>
                                 </Grid>

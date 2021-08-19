@@ -2,7 +2,8 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import {PersonAdd} from "@material-ui/icons";
 import {makeStyles} from "@material-ui/core/styles";
-import {Avatar, Dialog, Grid, List, ListItem, ListItemIcon, ListItemText} from "@material-ui/core";
+import {Dialog, Grid, List} from "@material-ui/core";
+import MemberListItem from "./MemberListItem";
 
 const useStyles = makeStyles(() => ({
     shape: {
@@ -10,9 +11,15 @@ const useStyles = makeStyles(() => ({
     },
 }))
 
-export default function AddMemberToChildTeam({members}) {
+export default function AddMemberToChildTeam({members, setChildTeamMembers, childTeamMembers}) {
     const classes = useStyles();
     const [openDialog, setOpenDialog] = React.useState(false);
+    const [membersToAdd, setMembersToAdd] = React.useState(
+        members.map((member) => {
+            return member.user
+        })
+    );
+
 
     const handleClose = () => {
         setOpenDialog(false);
@@ -38,15 +45,13 @@ export default function AddMemberToChildTeam({members}) {
                 <Grid container spacing={2} direction={"column"}>
                     <Grid item>
                         <List>
-                            {members.map((member) => (
-                                <ListItem button key={member.user.id}>
-                                    <ListItemIcon>
-                                        <Avatar/>
-                                    </ListItemIcon>
-                                    <ListItemText>
-                                        {`${member.user.firstName} ${member.user.lastName}`}
-                                    </ListItemText>
-                                </ListItem>
+                            {membersToAdd.map((member) => (
+                                <MemberListItem key={member.id}
+                                                member={member}
+                                                setChildTeamMembers={setChildTeamMembers}
+                                                childTeamMembers={childTeamMembers}
+                                                membersToAdd={membersToAdd}
+                                                setMembersToAdd={setMembersToAdd}/>
                             ))}
                         </List>
                     </Grid>
