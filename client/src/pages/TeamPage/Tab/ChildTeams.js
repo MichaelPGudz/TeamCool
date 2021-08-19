@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
 
 }))
 
-export default function ChildTeams({childTeams, setChildTeams, members}) {
+export default function ChildTeams({childTeams,  setChildTeams, members}) {
     const classes = useStyles();
 
     return (
