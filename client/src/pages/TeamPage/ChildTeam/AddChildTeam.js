@@ -38,6 +38,7 @@ export default function AddChildTeam({
                 })
                 .then(data => {
                     enqueueSnackbar(`Team ${data.name} created successfully!`, {variant: "success"});
+                    addChildTeamMembers(data);
                     setChildTeams([...childTeams, data]);
                     setReadyToGo();
                 })
@@ -54,11 +55,44 @@ export default function AddChildTeam({
     const setReadyToGo = () => {
         setNbOfNewChildTeam(nbOfNewChildTeam.map((newChildTeam) => {
             if (newChildTeam.id === childTeam.id) {
-                return newChildTeam.ready = true;
+                return {id: childTeam.id, ready: true};
             } else {
-                return newChildTeam
+                return newChildTeam;
             }
         }));
+    }
+
+    const addChildTeamMembers = (childTeam) => {
+        childTeamMembers.forEach((member) => {
+            addTeamMemberFetch(member, childTeam)
+        })
+    }
+
+    const addTeamMemberFetch = (member, childTeam) => {
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': 'Bearer ' + window.localStorage.getItem('token')
+            },
+        };
+        fetch(`https://localhost:5001/api/team/${childTeam.id}/AddTeamMember/${member.id}/6`, requestOptions)
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                }
+                return Promise.reject(response)
+            })
+            .then(data => {
+                enqueueSnackbar(`${member.firstName} ${member.lastName} added to ${childTeam.name}!`, {variant: "success"});
+            })
+            .catch(error =>
+                error.json()
+                    .then(result => {
+                        enqueueSnackbar(`Error! ${result}`, {variant: "error"})
+                    })
+            )
     }
 
     return (

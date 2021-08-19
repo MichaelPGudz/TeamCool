@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Button from "@material-ui/core/Button";
 import {AddCircle} from "@material-ui/icons";
 import {makeStyles} from "@material-ui/core/styles";
@@ -47,6 +47,14 @@ export default function AddChildTeamDialog({members, setChildTeams, team, childT
     const handleOkClick = () => {
         setStartFetch(true);
     }
+
+    useEffect(() => {
+        if (nbOfNewChildTeam.some((team) => {
+             return team.ready;
+        })) {
+            handleClose();
+        }
+    }, [nbOfNewChildTeam])
 
     return (
         <div>

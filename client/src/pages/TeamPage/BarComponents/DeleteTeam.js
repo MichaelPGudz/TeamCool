@@ -8,7 +8,6 @@ import {Delete} from "@material-ui/icons";
 import Avatar from "@material-ui/core/Avatar";
 
 
-
 export default function DeleteTeam({team}) {
 
 
@@ -22,13 +21,13 @@ export default function DeleteTeam({team}) {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json',
+                'Accept': 'application/json',
                 'Authorization': 'Bearer ' + window.localStorage.getItem('token')
             },
             body: null
         };
         fetch(`https://localhost:5001/api/team/${team.id}`, requestOptions)
             .then(response => response.json())
-
     }
 
     return (
