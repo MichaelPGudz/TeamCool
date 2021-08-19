@@ -27,18 +27,25 @@ const useStyles = makeStyles(() => ({
     }
 }))
 
-export default function AddChildTeamDialog({members}) {
+export default function AddChildTeamDialog({members, setChildTeams, team, childTeams}) {
     const classes = useStyles();
     const [openDialog, setOpenDialog] = React.useState(false);
     const [nbOfNewChildTeam, setNbOfNewChildTeam] = React.useState([{id: 1, ready: false}]);
+    const [startFetch, setStartFetch] = React.useState(false);
 
     const handleClose = () => {
         setOpenDialog(false);
+        setStartFetch(false);
+        setNbOfNewChildTeam([{id: 1, ready: false}]);
     };
 
     const handleAddOneMoreTeam = () => {
         let newId = nbOfNewChildTeam.length + 1;
         setNbOfNewChildTeam([...nbOfNewChildTeam, {id: newId, ready: false}]);
+    }
+
+    const handleOkClick = () => {
+        setStartFetch(true);
     }
 
     return (
@@ -66,7 +73,14 @@ export default function AddChildTeamDialog({members}) {
                         {nbOfNewChildTeam.map((childTeam) => (
                             <React.Fragment key={'addNewChildTeams' + childTeam.id}>
                                 <Grid item className={classes.gridChildren} xs>
-                                    <AddChildTeam members={members}/>
+                                    <AddChildTeam members={members}
+                                                  nbOfNewChildTeam={nbOfNewChildTeam}
+                                                  setNbOfNewChildTeam={setNbOfNewChildTeam}
+                                                  childTeam={childTeam}
+                                                  startFetch={startFetch}
+                                                  team={team}
+                                                  setChildTeams={setChildTeams}
+                                                  childTeams={childTeams}/>
                                 </Grid>
                                 <Grid item>
                                     <Divider orientation="vertical" flexItem className={classes.gridChildren}/>
@@ -105,7 +119,7 @@ export default function AddChildTeamDialog({members}) {
                         Cancel
                     </Button>
                     <Button
-                        onClick={handleClose}
+                        onClick={handleOkClick}
                         variant="contained"
                         size={'large'}
                     >

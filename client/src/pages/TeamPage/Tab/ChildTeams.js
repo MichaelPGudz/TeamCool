@@ -17,14 +17,17 @@ const useStyles = makeStyles(() => ({
 
 }))
 
-export default function ChildTeams({childTeams,  setChildTeams, members}) {
+export default function ChildTeams({childTeams, setChildTeams, members, team}) {
     const classes = useStyles();
 
     return (
         <div>
             <List className={classes.shape}>
                 <AddChildTeamDialog members={members}
-                                    key={'addNewChildTeams'}/>
+                                    key={'addNewChildTeams'}
+                                    childTeams={childTeams}
+                                    setChildTeams={setChildTeams}
+                                    team={team}/>
                 {childTeams.map(({id, name, logo}) => (
                     <ListItem button key={id} component={Link} to={`/team/${id}`}>
                         <ListItemAvatar>

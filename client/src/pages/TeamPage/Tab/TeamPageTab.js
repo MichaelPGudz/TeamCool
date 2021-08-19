@@ -48,7 +48,7 @@ export default function TeamPageTab({members, setMembers, childTeams, setChildTe
                 <SwipeableViews onChangeIndex={handleChangeIndex} index={value}>
                     <TeamMembers index={0} members={members} setMembers={setMembers} team={team}
                                  currentUser={currentUser}/>
-                    <ChildTeams index={1} childTeams={childTeams} setChildTeams={setChildTeams} members={members}/>
+                    <ChildTeams index={1} childTeams={childTeams} setChildTeams={setChildTeams} members={members} team={team}/>
                 </SwipeableViews>
             </Paper>
         </div>
