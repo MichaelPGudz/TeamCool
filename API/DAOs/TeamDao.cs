@@ -22,6 +22,7 @@ namespace API.DAOs
         public async Task<ActionResult<Team>> GetById(int id)
         {
             var team = await _dataContext.Teams
+                .Include(p => p.ParentTeam)
                 .Include(t => t.Wall)
                 .Include(m => m.Members)
                 .ThenInclude(m => m.User)

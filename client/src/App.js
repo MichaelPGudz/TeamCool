@@ -7,6 +7,7 @@ import TeamPage from "./pages/TeamPage/TeamPage";
 import Store from "./components/Store/Store";
 import {CloudinaryContext} from "cloudinary-react";
 import LoginPage from "./pages/LoginPage/LoginPage";
+import TeamTree from "./pages/TeamTree/TeamTree";
 
 function App() {
     return (
@@ -33,6 +34,9 @@ function App() {
                                     </Route>
                                     <Route path="/team/:teamId" exact>
                                         <TeamPage/>
+                                    </Route>
+                                    <Route path="/team/:teamId/tree" exact>
+                                        <TeamTree/>
                                     </Route>
                                 </Layout>
                             </Switch>

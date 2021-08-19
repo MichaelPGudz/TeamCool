@@ -5,7 +5,6 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -28,7 +27,7 @@ import DeleteUserManager from './DeleteUserManager/DeleteUserManager';
 import AddNewTeam from "../../AddNewTeam";
 import SkillManager from './SkillManager/SkillManager';
 import Logout from "../../authentication/Logout";
-import UserPage from '../../../pages/UserPage/UserPage';
+
 import DeleteMyAccountDialog from './DeleteUserManager/DeleteMyAccountDialog';
 
 

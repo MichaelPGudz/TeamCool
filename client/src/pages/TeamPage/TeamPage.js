@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { CircularProgress, Grid, Typography } from '@material-ui/core';
+import { CircularProgress, Grid} from '@material-ui/core';
 import Wall from '../../components/Wall/Wall';
 import FeaturesList from './FeaturesList';
 import AddFeature from './AddFeature';
@@ -10,7 +10,6 @@ import Bar from './BarComponents/Bar';
 import Calendar from './Calendar';
 import AddCalendar from './AddCalendar';
 import { UserContext } from '../../components/Store/Store';
-import DeleteCalendar from './DeleteCalendar';
 
 const useStyles = makeStyles(() => ({
   main: {
