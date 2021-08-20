@@ -3,7 +3,7 @@ import {useHistory, useParams} from 'react-router-dom';
 import Tree from "react-d3-tree";
 import {makeStyles} from "@material-ui/core/styles";
 import {useCenteredTree} from "./helpers";
-
+import {Button} from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
     shape: {
@@ -15,10 +15,12 @@ const useStyles = makeStyles(() => ({
 
 export default function TeamTree() {
     const {teamId} = useParams();
-    const [team, setTeam] = React.useState([]);
     const classes = useStyles();
     const [translate, containerRef] = useCenteredTree();
     const history = useHistory();
+    const [teamTree, setTeamTree] = React.useState({});
+    const nodeSize = {x: 200, y: 200};
+    const foreignObjectProps = {width: nodeSize.x, height: nodeSize.y, x: -nodeSize.x / 2, y: -5};
 
 
     useEffect(() => {
@@ -32,29 +34,47 @@ export default function TeamTree() {
         fetch(`https://localhost:5001/api/team/${teamId}`, requestOptions)
             .then(response => response.json())
             .then(data => {
-                setTeam(data);
+                if (data.parentTeam) {
+                    setTeamTree({...data.parentTeam, children: [{...data, children: data.childTeams}]})
+                } else {
+                    setTeamTree({...data, children: data.childTeams})
+                }
             })
     }, [teamId]);
 
-    const [teamTree, setTeamTree] = React.useState({})
+    const TreeNode = ({
+                          nodeDatum,
+                          foreignObjectProps,
 
-    useEffect(() => {
-        if (team !== []) {
-            setTeamTree({
-                id: team.id,
-                name: team.name,
-                children: team.childTeams
-            })
-        }
-    }, [team])
+                      }) => (
+        <foreignObject {...foreignObjectProps}>
+            <div>
+                <Button onClick={() => {
+                    history.push(`/team/${nodeDatum.id}`)
+                }}
+                variant={"contained"}>
+                    {nodeDatum.name}
+                </Button>
+
+            </div>
+        </foreignObject>
+    )
+
 
     return (
         <div id="treeWrapper" className={classes.shape} ref={containerRef}>
             <Tree data={teamTree}
                   translate={translate}
-                  pathFunc={"step"}
-                  onNodeClick={(node) => {history.push(`/team/${node.data.id}`)}}
-                  orientation={"vertical"}/>
+                  onNodeClick={(node) => {
+                      history.push(`/team/${node.data.id}`)
+                  }}
+                  orientation={"vertical"}
+                  nodeSize={nodeSize}
+                  renderCustomNodeElement=
+                      {
+                          (rd3tNodeProps) => TreeNode({...rd3tNodeProps, foreignObjectProps,})
+                      }
+            />
         </div>
     );
 }
