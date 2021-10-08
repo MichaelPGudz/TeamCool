@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import {Avatar, Grid, List, ListItem, ListItemIcon, ListItemText, TextField} from "@material-ui/core";
 import AddMemberToChildTeam from "./AddMemberToChildTeam";
 import {useSnackbar} from "notistack";
+import {Image, Transformation} from "cloudinary-react";
 
 export default function AddChildTeam({
                                          members,
@@ -116,7 +117,13 @@ export default function AddChildTeam({
                             {childTeamMembers.map((member) => (
                                 <ListItem button key={member.id}>
                                     <ListItemIcon>
-                                        <Avatar/>
+                                        {member.logo ? <Avatar>
+                                                <Image publicId={member.logo}>
+                                                    <Transformation width="45" height="45" crop="fill"/>
+                                                </Image>
+                                            </Avatar>
+                                            :
+                                            <Avatar/>}
                                     </ListItemIcon>
                                     <ListItemText>
                                         {`${member.firstName} ${member.lastName}`}

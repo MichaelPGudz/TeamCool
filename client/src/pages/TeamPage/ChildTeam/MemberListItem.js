@@ -1,5 +1,6 @@
 import React from "react";
 import {Avatar, ListItem, ListItemIcon, ListItemText} from "@material-ui/core";
+import {Image, Transformation} from "cloudinary-react";
 
 
 export default function MemberListItem({member, setChildTeamMembers, childTeamMembers, membersToAdd, setMembersToAdd}) {
@@ -19,7 +20,13 @@ export default function MemberListItem({member, setChildTeamMembers, childTeamMe
                       key={member.id}
                       onClick={handleMemberClick}>
                 <ListItemIcon>
-                    <Avatar/>
+                    {member.logo ? <Avatar>
+                            <Image publicId={member.logo}>
+                                <Transformation width="45" height="45" crop="fill"/>
+                            </Image>
+                        </Avatar>
+                        :
+                        <Avatar/>}
                 </ListItemIcon>
                 <ListItemText>
                     {`${member.firstName} ${member.lastName}`}

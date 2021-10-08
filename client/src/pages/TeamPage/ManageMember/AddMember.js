@@ -15,6 +15,7 @@ import {
 } from "@material-ui/core";
 import PotentialMembersList from "./PotentialMembersList";
 import Divider from "@material-ui/core/Divider";
+import {Image, Transformation} from "cloudinary-react";
 
 const useStyles = makeStyles(() => ({
     shape: {
@@ -129,7 +130,13 @@ export default function AddMember({team, setTeamMembers}) {
                                                               handleUserClick(user)
                                                           }}>
                                                     <ListItemIcon>
-                                                        <Avatar/>
+                                                        {user.logo ? <Avatar>
+                                                                <Image publicId={user.logo}>
+                                                                    <Transformation width="45" height="45" crop="fill"/>
+                                                                </Image>
+                                                            </Avatar>
+                                                            :
+                                                            <Avatar/>}
                                                     </ListItemIcon>
                                                     <ListItemText>
                                                         {`${user.firstName} ${user.lastName}`}
@@ -152,7 +159,7 @@ export default function AddMember({team, setTeamMembers}) {
                                               setTeamMembers={setTeamMembers}
                                               setAddMember={setAddMember}
                                               setNewMembers={setNewMembers}
-                                              />
+                        />
                     </Grid>
                 </Grid>
             </Dialog>
