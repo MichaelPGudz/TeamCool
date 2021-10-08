@@ -39,7 +39,7 @@ export default function TeamMembers({members, setMembers, team, currentUser}) {
                                     {user.logo ?
                                         <Avatar>
                                             <Image publicId={user.logo}>
-                                                <Transformation width="45" height="45" crop="fill"/>
+                                                <Transformation  gravity="face" width="45" height="45" crop="fill"/>
                                             </Image>
                                         </Avatar>
                                         :

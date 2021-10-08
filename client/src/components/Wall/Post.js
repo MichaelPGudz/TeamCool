@@ -30,7 +30,7 @@ export default function Post({ post }) {
                         <Avatar>
                             {post.author.logo ?
                                 <Image publicId={post.author.logo}>
-                                    <Transformation width="45" height="45" crop="fill" />
+                                    <Transformation gravity="face" width="45" height="45" crop="fill" />
                                 </Image> : post.author.firstName[0]}
                         </Avatar>
                     }

@@ -1,15 +1,15 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import { CircularProgress } from "@material-ui/core";
+import {makeStyles} from '@material-ui/core/styles';
+import {CircularProgress} from "@material-ui/core";
 import UserDataTable from "./UserDataTable";
 import UserSkills from "./UserSkills";
-import { useParams } from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import Avatar from "@material-ui/core/Avatar";
 import image from '../../static/images/avatar.jpg'
-import { Image, Transformation } from "cloudinary-react";
-import { UserContext } from "../../components/Store/Store";
+import {Image, Transformation} from "cloudinary-react";
+import {UserContext} from "../../components/Store/Store";
 import UserPageBar from './UserPageBar';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,7 +27,7 @@ const UserPage = () => {
 
 
     const classes = useStyles();
-    var { id } = useParams();
+    var {id} = useParams();
     const [isLoading, setIsLoading] = useState(true);
     const [loadedUser, setLoadedUser] = useState([]);
     const [skills, setSkills] = useState([]);
@@ -47,7 +47,7 @@ const UserPage = () => {
 
 
     function createData(name, property) {
-        return { name, property };
+        return {name, property};
     }
 
     const rows = [
@@ -62,7 +62,7 @@ const UserPage = () => {
             <div>
                 <Typography variant="h4" gutterBottom>
                     User Page Loading...
-                    <CircularProgress />
+                    <CircularProgress/>
                 </Typography>
             </div>
         );
@@ -71,19 +71,23 @@ const UserPage = () => {
     return (
 
         <div>
-            <UserPageBar loadedUser = {loadedUser} loggedUser = {state.user} setLoadedUser = {setLoadedUser}/>
+            <UserPageBar loadedUser={loadedUser} loggedUser={state.user} setLoadedUser={setLoadedUser}/>
 
             {loadedUser.logo ?
-                <Image publicId={loadedUser.logo} className={classes.avatarSize}>
-                </Image> :
-                <Avatar src={image} className={classes.avatarSize} />
+                <Avatar className={classes.avatarSize}>
+                    <Image publicId={loadedUser.logo}>
+                        <Transformation gravity="face" height="200" width="200" crop="fill" />
+                    </Image>
+                </Avatar>
+                :
+                <Avatar src={image} className={classes.avatarSize}/>
             }
-            
-            <UserDataTable rows={rows} classes={classes} />
+            <UserDataTable rows={rows} classes={classes}/>
 
-            <UserSkills loadedUser={loadedUser} skills={skills} setSkills={setSkills} classes={classes} loggedUser={state.user} />
+            <UserSkills loadedUser={loadedUser} skills={skills} setSkills={setSkills} classes={classes}
+                        loggedUser={state.user}/>
 
-        </div >
+        </div>
     )
 }
 

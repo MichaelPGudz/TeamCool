@@ -22,7 +22,7 @@ export default function MemberListItem({member, setChildTeamMembers, childTeamMe
                 <ListItemIcon>
                     {member.logo ? <Avatar>
                             <Image publicId={member.logo}>
-                                <Transformation width="45" height="45" crop="fill"/>
+                                <Transformation gravity="face" width="45" height="45" crop="fill"/>
                             </Image>
                         </Avatar>
                         :
