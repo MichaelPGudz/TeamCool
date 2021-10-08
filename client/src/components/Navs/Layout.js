@@ -2,7 +2,7 @@ import classes from './Layout.module.css';
 import Sidebar from "./Sidebar/Sidebar";
 import {makeStyles, ThemeProvider, createMuiTheme} from "@material-ui/core/styles";
 import React from "react";
-import {CssBaseline, useMediaQuery} from "@material-ui/core";
+import {CssBaseline} from "@material-ui/core";
 import {UserContext} from "../Store/Store";
 import teamImg from "../../static/images/team3.png";
 
@@ -86,19 +86,20 @@ const useStyles = makeStyles((theme) => ({
 function Layout(props) {
     const addedClasses = useStyles();
     const [openDrawer, setOpenDrawer] = React.useState(true);
+    const [prefersDarkMode, setPrefersDarkMode] = React.useState('false');
     const [state, dispatch] = React.useContext(UserContext);
-    var id = state.user?.id ?? null;
+    let id = state.user?.id ?? null;
 
     const handleMenuClick = () => {
         setOpenDrawer(!openDrawer);
     };
-    const prefersDarkMode = useMediaQuery('(prefers-color-scheme: light)');
+
 
     const theme = React.useMemo(
         () =>
             createMuiTheme({
                 palette: {
-                    type: prefersDarkMode ? 'dark' : 'light',
+                    type: prefersDarkMode ? 'light' : 'dark',
                 },
             }),
         [prefersDarkMode],
@@ -108,7 +109,12 @@ function Layout(props) {
         <div className={`${addedClasses.root} ${addedClasses.image} `}>
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
-                <Sidebar addedClasses={addedClasses} menuClick={handleMenuClick} openDrawer={openDrawer} userId={id}/>
+                <Sidebar addedClasses={addedClasses}
+                         menuClick={handleMenuClick}
+                         openDrawer={openDrawer}
+                         userId={id}
+                         prefersDarkMode={prefersDarkMode}
+                         setPrefersDarkMode={setPrefersDarkMode}/>
                 <main className={`${classes.main}`}>{props.children}</main>
             </ThemeProvider>
         </div>
